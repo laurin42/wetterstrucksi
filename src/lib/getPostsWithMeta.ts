@@ -18,7 +18,7 @@ export async function getPostsWithMeta(): Promise<PostWithMeta[]> {
   }
 
   const posts = await api.posts.browse({
-    include: ["tags", "authors"],
+    include: ["tags", "authors", "feature_image", "og_image"],
     limit: "all",
     order: "published_at DESC",
   });

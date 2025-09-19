@@ -1,7 +1,7 @@
 import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['http://192.168.178.67:3000'],
+  allowedDevOrigins: ['http://192.168.178.67:3000', 'https://192.168.178.67:3000' ],
   images: {
     remotePatterns: [
 {
@@ -16,14 +16,8 @@ const nextConfig: NextConfig = {
 },
 {
   protocol: "http",
-  hostname: "ghost-2368-aks0og0w48s88o4cccw4wog0.152.53.139.218.sslip.io",
+  hostname: "ghost-d8o044w8wgsc0c4w0gg4ks4g.152.53.139.218.sslip.io",
   pathname: "/**",
-},
-{ 
-  protocol: "http",
-  hostname: "192.168.178.67",
-  port: "2368",
-  pathname: "/content/images/**",
 },
   ],
   },

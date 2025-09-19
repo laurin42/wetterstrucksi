@@ -6,6 +6,7 @@ export const revalidate = 300;
 
 export default async function WeatherOverviewPage() {
   const posts: PostWithMeta[] = await getPostsWithMeta();
+  console.log(posts);
 
   return <WeatherOverviewClient posts={posts} />;
 }
