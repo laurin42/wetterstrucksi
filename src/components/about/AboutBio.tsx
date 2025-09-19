@@ -1,16 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
 import { FaUniversity, FaPodcast } from "react-icons/fa";
 import { FaTemperatureFull, FaRadio } from "react-icons/fa6";
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
-  }),
-};
 
 export function AboutBio() {
   const items = [
@@ -82,20 +72,12 @@ export function AboutBio() {
         Wichtigste Eckdaten
       </h2>
       {items.map((item, i) => (
-        <motion.div
-          key={i}
-          className="flex items-center space-x-4"
-          custom={i}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeIn}
-        >
+        <div key={i}>
           <div className="p-4 bg-accent/20 rounded-full text-accent shadow-md">
             {item.icon}
           </div>
           <p>{item.text}</p>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

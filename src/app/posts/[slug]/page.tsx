@@ -6,10 +6,9 @@ import { getPostsWithMeta } from "@/lib/getPostsWithMeta";
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
-
+  const slug = (await params).slug;
   const posts: PostWithMeta[] = await getPostsWithMeta();
   const post = posts.find((p) => p.slug === slug);
 
