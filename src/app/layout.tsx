@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,13 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <meta
-        name="viewport"
-        content="bg-gradient-background dark:bg-background"
-      ></meta>
-      <body className="bg-[var(--background)]">
-        <LayoutWrapper>{children}</LayoutWrapper>
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <meta name="viewport" content="width=device-width, inital-scale=1"></meta>
+      <body className="md:bg-background sm:bg-foreground h-full">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
