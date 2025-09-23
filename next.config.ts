@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
   hostname: "ghost-d8o044w8wgsc0c4w0gg4ks4g.152.53.139.218.sslip.io",
   pathname: "/**",
 },
+{
+  protocol: "https",
+  hostname: "cms.wetterstrucksi.de",
+  pathname: "/**"
+},
   ],
   },
 };
