@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/fixImageUrl";
 import Divider from "../ui/Divider";
 
@@ -12,6 +12,20 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const [formattedDate, setFormattedDate] = useState("");
+
+  useEffect(() => {
+    if (post.published_at) {
+      const date = new Date(post.published_at);
+      const options: Intl.DateTimeFormatOptions = {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      };
+      setFormattedDate(date.toLocaleDateString("de-DE", options));
+    }
+  }, [post.published_at]);
+
   const imageSrc =
     fixImageUrl(post.feature_image) || "/images/weatherFeatureImageDefault.jpg";
 
@@ -79,16 +93,8 @@ export default function Post({ post }: PostProps) {
 
   return (
     <section className="">
-      <article className="max-w-4xl mx-auto p-6 sm:p-8 bg-card/40 backdrop-blur-md rounded-md shadow-xl">
-        {post.published_at && (
-          <p className="text-sm font-extralight text-text mb-2">
-            {new Date(post.published_at).toLocaleDateString("de-DE", {
-              day: "2-digit",
-              month: "long",
-              year: "numeric",
-            })}
-          </p>
-        )}
+      <article className="p-6 sm:p-8 bg-foreground-secondary/40 shadow-xl">
+        {formattedDate && <p className="text-sm font-extralight text-text"></p>}
 
         <h1 className="text-3xl sm:text-4xl font-light text-text mb-8">
           {post.title}
@@ -96,7 +102,7 @@ export default function Post({ post }: PostProps) {
 
         <div className="mb-8">
           {post.feature_image && (
-            <div className="float-left w-full md:w-1/2 mr-12 mb-4">
+            <div className="justify-center w-full md:w-3/4 mx-auto mt-auto mb-8">
               <Image
                 src={imageSrc}
                 alt={post.title || "Feature Image"}

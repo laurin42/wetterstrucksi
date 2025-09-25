@@ -1,31 +1,20 @@
-import GhostContentAPI from "@tryghost/content-api";
-import { PostWithMeta } from "@tryghost/content-api";
+import GhostContentAPI, {  PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "./fixImageUrl";
 
-
 const api = new GhostContentAPI({
-  url: process.env.NEXT_PUBLIC_GHOST_API_URL as string, 
-  key: process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY as string, 
+  url: process.env.NEXT_PUBLIC_GHOST_API_URL as string,
+  key: process.env.NEXT_PUBLIC_GHOST_CONTENT_API_KEY as string,
   version: "v5.0",
 });
-type Post = Omit<PostWithMeta, "tags"> & { tags: string[] };
 
-let cache: { posts: Post[]; timestamp: number } | null = null;
+const cache: { [key: string]: { posts: PostWithMeta[]; timestamp: number } } = {};
 
-export async function getPostsWithMeta(): Promise<Post[]> {
-  const now = Date.now();
 
-  if (cache && now - cache.timestamp < 60_000) {
-    return cache.posts;
-  }
 
-  const posts = await api.posts.browse({
-    include: ["tags", "authors", "feature_image", "og_image"],
-    limit: "all",
-    order: "published_at DESC",
-  });
 
-  const mergedPosts: Post[] = posts.map((post) => ({
+
+function normalizePosts(posts: PostWithMeta[]): PostWithMeta[] {
+  return posts.map((post) => ({
     ...post,
     feature_image:
       fixImageUrl(post.feature_image) ||
@@ -34,10 +23,93 @@ export async function getPostsWithMeta(): Promise<Post[]> {
       null,
     og_image: fixImageUrl(post.og_image) || null,
     twitter_image: fixImageUrl(post.twitter_image) || null,
-    tags: post.tags?.map((t) => t.name.toLowerCase()) || [],
+    tags:
+      post.tags?.map((tag) => ({
+        id: tag.id,
+        name: tag.name,
+        slug: tag.slug.toLowerCase(),
+      })) ?? [],
   }));
-
-  cache = { posts: mergedPosts, timestamp: now };
-
-  return mergedPosts;
 }
+
+
+
+
+
+export async function getPostsWithMeta(limit = 24): Promise<PostWithMeta[]> {
+  const cacheKey = `latest-${limit}`;
+  const now = Date.now();
+
+  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
+    return cache[cacheKey].posts;
+  }
+
+  const posts = await api.posts.browse({
+    include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+    limit,
+    order: "published_at DESC",
+  });
+
+  const merged = normalizePosts(posts);
+  cache[cacheKey] = { posts: merged, timestamp: now };
+  return merged;
+}
+
+export async function getPostsPage(
+  page: number,
+  limit = 24
+): Promise<PostWithMeta[]> {
+  const cacheKey = `page-${page}-${limit}`;
+  const now = Date.now();
+
+  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
+    return cache[cacheKey].posts;
+  }
+
+  const posts = await api.posts.browse({
+    include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+    limit,
+    page,
+    order: "published_at DESC",
+  });
+
+  const merged = normalizePosts(posts);
+  cache[cacheKey] = { posts: merged, timestamp: now };
+  return merged;
+}
+
+
+
+
+export async function getPostsWithTags(tagsToFilter: string | string[], limit = 24): Promise<PostWithMeta[]> {
+  const tags = Array.isArray(tagsToFilter) 
+    ? tagsToFilter.map(t => t.toLowerCase()) 
+    : [tagsToFilter.toLowerCase()];
+
+  const cacheKey = `tags-${tags.join(",")}-${limit}`;
+  const now = Date.now();
+
+  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
+    return cache[cacheKey].posts;
+  }
+  
+  const allPosts = await api.posts.browse({
+    include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+    limit: "all", // alle laden
+    order: "published_at DESC",
+  });
+
+  
+  const normalized = normalizePosts(allPosts);
+
+  
+  const filtered = normalized
+    .filter(post =>
+      post.tags?.some(tag => tags.includes(tag.slug.toLowerCase()))
+    )
+    .slice(0, limit); 
+
+  cache[cacheKey] = { posts: filtered, timestamp: now };
+  return filtered;
+}
+

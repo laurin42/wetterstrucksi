@@ -5,7 +5,7 @@ import { FaTemperatureFull, FaRadio } from "react-icons/fa6";
 export function AboutBio() {
   const items = [
     {
-      icon: <FaUniversity className="text-2xl" />,
+      icon: <FaUniversity className="text-xl md:text-2xl" />,
       text: (
         <>
           <span className="font-semibold">Studium:</span> Sportwissenschaften
@@ -14,7 +14,7 @@ export function AboutBio() {
       ),
     },
     {
-      icon: <FaPodcast className="text-2xl" />,
+      icon: <FaPodcast className="text-xl md:text-2xl" />,
       text: (
         <>
           <span className="font-semibold">Podcast:</span>{" "}
@@ -31,7 +31,7 @@ export function AboutBio() {
       ),
     },
     {
-      icon: <FaTemperatureFull className="text-2xl" />,
+      icon: <FaTemperatureFull className="text-xl md:text-2xl" />,
       text: (
         <>
           <span className="font-semibold">Hobby-Meteorologie:</span>{" "}
@@ -48,7 +48,7 @@ export function AboutBio() {
       ),
     },
     {
-      icon: <FaRadio className="text-2xl" />,
+      icon: <FaRadio className="text-xl md:text-2xl" />,
       text: (
         <>
           <span className="font-semibold">Wetter-Experte:</span>{" "}
@@ -67,18 +67,18 @@ export function AboutBio() {
   ];
 
   return (
-    <div className="space-y-6 px-3">
-      <h2 className="text-3xl font-light text-text text-center">
-        Wichtigste Eckdaten
-      </h2>
-      {items.map((item, i) => (
-        <div key={i}>
-          <div className="p-4 bg-accent/20 rounded-full text-accent shadow-md">
-            {item.icon}
-          </div>
-          <p>{item.text}</p>
-        </div>
-      ))}
+    <div className="flex flex-col md:justify-center px-4 pt-8 pb-4 md:p-16 relative items-center  w-full h-[60vh] md:h-[70vh] bg-foreground-secondary">
+      <h2 className="text-3xl text-text text-left mb-8">Wichtigste Eckdaten</h2>
+      <ul className="space-y-4 text-xl font-thin">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-center space-x-4">
+            <div className="flex-shrink-0 p-3 bg-accent/20 rounded-full text-accent shadow-md">
+              {item.icon}
+            </div>
+            <p className="text-text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

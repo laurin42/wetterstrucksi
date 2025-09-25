@@ -4,12 +4,8 @@ interface DividerProps {
 
 export default function Divider({ className }: DividerProps) {
   return (
-    <div
-      className={`relative max-w-prose mx-auto my-8 md:my-12 ${
-        className ?? ""
-      }`}
-    >
-      <div className="h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+    <div className={`relative max-w-6/8 mx-auto my-8 ${className ?? ""}`}>
+      <div className="border-b border-accent/8"></div>
     </div>
   );
 }

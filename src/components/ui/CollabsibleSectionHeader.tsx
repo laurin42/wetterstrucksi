@@ -16,7 +16,7 @@ export function CollapsibleSectionHeader({
 }: CollapsibleSectionHeaderProps) {
   return (
     <div
-      className="bg-card-transparent rounded-t-md text-2xl text-text-white font-thin p-4 lg:h-16 flex items-center justify-between cursor-pointer select-none"
+      className="px-4 py-4 bg-card-transparent/60 text-2xl text-text-white lg:h-16 flex items-center justify-between cursor-pointer select-none md:p-8"
       onClick={onToggle}
     >
       <span>{title}</span>

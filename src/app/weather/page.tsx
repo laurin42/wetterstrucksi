@@ -1,11 +1,32 @@
-import { getPostsWithMeta } from "@/lib/getPostsWithMeta";
-import { PostWithMeta } from "@tryghost/admin-api";
 import { WeatherOverviewClient } from "@/components/weather/WeatherOverviewClient";
+import { getPostsWithTags } from "@/lib/getPostsWithMeta";
 
 export const revalidate = 300;
 
 export default async function WeatherOverviewPage() {
-  const posts: PostWithMeta[] = await getPostsWithMeta();
+  const rueckblicke = await getPostsWithTags("rueckblick");
+  const updates = await getPostsWithTags("warnlage");
+  const vorhersagen = await getPostsWithTags([
+    "wetter",
+    "wetterprognose",
+    "wetter kurz und kompakt",
+    "wetteraussichten",
+    "aussichten",
+  ]);
+  const biowetter = await getPostsWithTags(["biowetter"]);
+  const presseschau = await getPostsWithTags(["presseschau"]);
+  const privates = await getPostsWithTags(["privates"]);
 
-  return <WeatherOverviewClient posts={posts} />;
+  return (
+    <WeatherOverviewClient
+      posts={{
+        rueckblicke,
+        updates,
+        vorhersagen,
+        biowetter,
+        presseschau,
+        privates,
+      }}
+    />
+  );
 }

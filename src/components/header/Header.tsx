@@ -69,14 +69,14 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     return (
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 bg-foreground-secondary text-text transition-transform duration-300 shadow-md
+        className={`fixed top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md items-center
         ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}
-        max-h-[100px]
+        max-h-[100px] sm:h-32
       `}
       >
-        <div className="flex justify-between items-center px-4">
-          <section className="flex flex-nowrap items-center space-x-4">
-            <Link href="/">
+        <div className="flex justify-between items-center h-full">
+          <section className="flex flex-nowrap items-center">
+            <Link href="/" className="flex-shrink-0">
               {mounted && (
                 <Image
                   src={
@@ -84,44 +84,35 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                       ? "/images/heroImageDark.png"
                       : "/images/heroImageLight.png"
                   }
-                  width={124}
-                  height={124}
+                  width={128}
+                  height={128}
                   alt="wetterstrucksi logo"
+                  className="w-auto my-auto md:p-8 xl:p-16 object-contain"
                   priority
                 />
               )}
             </Link>
-            <div className="hidden sm:flex flex-row whitespace-nowrap">
-              <Link
-                href="/about"
-                className="font-bold hover:text-accent cursor-pointer transition-colors duration-420 ease-in-out"
-              >
-                Jens Strucks
-              </Link>
-              <p className="px-2">|</p>
-              <p>Dein Ort für Wetter in Düsseldorf</p>
-            </div>
           </section>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 px-4">
             <div className="hidden md:flex items-center space-x-6">
               {mainMenu.map((item) => (
                 <NavigationMenu key={item.title}>
                   <NavigationMenuList>
                     <NavigationMenuItem>
                       <Link href={item.href}>
-                        <NavigationMenuTrigger className="inline-flex items-center px-4 py-6 text-text text-lg rounded-md bg-foreground-secondary hover:cursor-pointer transition-colors duration-420 ease-in-out">
+                        <NavigationMenuTrigger className="inline-flex items-center px-4 py-6 text-text text-xl bg-transparent hover:cursor-pointer transition-colors duration-420 ease-in-out">
                           {item.title}
                         </NavigationMenuTrigger>
                       </Link>
                       {item.subItems.length > 0 && (
-                        <NavigationMenuContent className="p-4 rounded-md shadow-lg w-[300px] bg-foreground text-text">
+                        <NavigationMenuContent className="py-4 pr-8 shadow-lg w-[420px] bg-foreground">
                           <ul className="grid gap-3 w-50">
                             {item.subItems.map((sub) => (
                               <li key={sub.title}>
                                 <NavigationMenuLink
                                   href={sub.href}
-                                  className="block px-3 py-2 rounded-md hover:bg-accent-dim transition-colors duration-420 ease-in-out"
+                                  className="block p-4 hover:bg-accent-dim transition-colors duration-420 ease-in-out text-lg"
                                 >
                                   {sub.title}
                                 </NavigationMenuLink>
@@ -138,7 +129,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             <button
               onClick={toggleTheme}
               aria-label="Theme wechseln"
-              className="transition-colors duration-420 ease-in-out hover:cursor-pointer"
+              className="transition-colors duration-420 ease-in-out hover:cursor-pointer hover:text-accent"
             >
               {theme === "dark" ? (
                 <MdLightMode size={32} />
@@ -158,43 +149,53 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         </div>
 
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-foreground-secondary text-text z-50 p-4 flex flex-col space-y-4 md:hidden shadow-md">
-            <Accordion type="single" collapsible className="w-full space-y-2">
-              {mainMenu.map((item) =>
-                item.subItems.length > 0 ? (
-                  <AccordionItem key={item.title} value={item.title}>
-                    <AccordionTrigger className="w-full text-left px-4 py-2 rounded-md bg-foreground-secondary hover:bg-muted flex justify-between items-center transition-colors duration-420 ease-in-out">
-                      <Link
-                        href={item.href}
-                        className="flex-grow text-left text-2xl font-light"
-                      >
-                        {item.title}
-                      </Link>
-                    </AccordionTrigger>
-                    <AccordionContent className="flex flex-col space-y-2 mt-2">
-                      {item.subItems.map((sub) => (
+          <>
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setMenuOpen(false)}
+            />
+
+            <div className="absolute top-full left-0 w-full bg-foreground text-text z-50 p-4 flex flex-col space-y-4 md:hidden shadow-md">
+              <Accordion type="single" collapsible className="w-full space-y-2">
+                {mainMenu.map((item) =>
+                  item.subItems.length > 0 ? (
+                    <AccordionItem key={item.title} value={item.title}>
+                      <AccordionTrigger className="w-full text-left px-4 py-2 rounded-md bg-transparent hover:bg-muted flex justify-between items-center transition-colors duration-420 ease-in-out">
                         <Link
-                          key={sub.title}
-                          href={sub.href}
-                          className="px-8 py-2 rounded hover:bg-muted transition-colors duration-420 ease-in-out text-xl font-extralight"
+                          href={item.href}
+                          className="flex-grow text-left text-2xl font-light"
+                          onClick={() => setMenuOpen(false)}
                         >
-                          {sub.title}
+                          {item.title}
                         </Link>
-                      ))}
-                    </AccordionContent>
-                  </AccordionItem>
-                ) : (
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className="block px-4 py-2 rounded-md hover:bg-muted transition-colors duration-420 ease-in-out text-2xl font-light"
-                  >
-                    {item.title}
-                  </Link>
-                )
-              )}
-            </Accordion>
-          </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="flex flex-col space-y-2 mt-2">
+                        {item.subItems.map((sub) => (
+                          <Link
+                            key={sub.title}
+                            href={sub.href}
+                            className="px-8 py-2 rounded hover:bg-muted transition-colors duration-420 ease-in-out text-xl font-extralight"
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {sub.title}
+                          </Link>
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ) : (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="block px-4 py-2 rounded-md hover:bg-muted transition-colors duration-420 ease-in-out text-2xl font-light"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  )
+                )}
+              </Accordion>
+            </div>
+          </>
         )}
       </header>
     );

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AboutHero } from "@/components/about/AboutHero";
+import AboutHero from "./AboutHero";
 import { AboutBio } from "@/components/about/AboutBio";
 import { AboutStory } from "./AboutStory";
 import { FaqAccordion } from "@/components/about/FaqAccordeon";
@@ -21,24 +21,21 @@ export default function AboutPageClient() {
   return (
     <>
       <motion.section
-        className="max-w-7xl mx-auto grid grid-cols-1 gap-12 items-center md:grid-cols-2 md:my-16"
+        className="max-w-7xl mx-auto grid grid-cols-1 items-start md:grid-cols-2"
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
         viewport={{ once: true, amount: 0.1 }}
       >
         <motion.div
-          className="h-[80vh] sm:h-screen md:h-full"
+          className="h-6/8"
           variants={sectionAnimation}
           viewport={{ once: true, amount: 0.2 }}
         >
           <AboutHero />
         </motion.div>
 
-        <motion.div
-          className="flex flex-col justify-start mx-auto min-h-[32vh] md:h-full md:justify-center"
-          variants={sectionAnimation}
-        >
+        <motion.div className="h-6/8" variants={sectionAnimation}>
           <AboutBio />
         </motion.div>
       </motion.section>

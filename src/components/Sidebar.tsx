@@ -1,78 +1,67 @@
-import Link from "next/link";
+interface SidebarProps {
+  onCategorySelect: (category: string | null) => void;
+  selectedCategory: string | null;
+  categories: Record<string, string>;
+  sortOrder: "newest" | "oldest";
+  onSortChange: (order: "newest" | "oldest") => void;
+}
 
-export function Sidebar() {
+export function Sidebar({
+  onCategorySelect,
+  selectedCategory,
+  categories,
+  sortOrder,
+  onSortChange,
+}: SidebarProps) {
   return (
-    <aside className="p-4 shadow-md rounded-md space-y-6 text-text-white">
+    <aside className="p-4 shadow-md space-y-6 text-text-white bg-foreground-secondary">
       <section>
-        <h3 className="mb-2 text-text text-lg">Datum</h3>
-        <ul className="space-y-1 px-3 mb-2">
-          <li>
-            <Link href="/archiv/2025" className="hover:underline">
-              Neuste
-            </Link>
-          </li>
-          <li>
-            <Link href="/archiv/2024" className="hover:underline">
-              Älteste
-            </Link>
-          </li>
-        </ul>
-
-        <h3 className="mb-2 text-text text-lg">Beiträge aus dem Jahr</h3>
-        <ul className="space-y-1 px-3 mb-2">
-          <li>
-            <Link href="/archiv/2025" className="hover:underline">
-              2025
-            </Link>
-          </li>
-          <li>
-            <Link href="/archiv/2024" className="hover:underline">
-              2024
-            </Link>
-          </li>
-        </ul>
-
         <h3 className="mb-2 text-text text-lg">Kategorien</h3>
         <ul className="space-y-1 px-3 mb-2">
           <li>
-            <Link href="/category/vorhersagen" className="hover:underline">
-              Vorhersagen
-            </Link>
+            <button
+              onClick={() => onCategorySelect(null)}
+              className={`hover:underline ${
+                selectedCategory === null ? "font-bold" : ""
+              }`}
+            >
+              Alle
+            </button>
           </li>
-          <li>
-            <Link href="/category/rueckblicke" className="hover:underline">
-              Rückblicke
-            </Link>
-          </li>
-          <li>
-            <Link href="/category/allgemeines" className="hover:underline">
-              Allgemeines
-            </Link>
-          </li>
+          {Object.entries(categories).map(([key, label]) => (
+            <li key={key}>
+              <button
+                onClick={() => onCategorySelect(key)}
+                className={`hover:underline ${
+                  selectedCategory === key ? "font-bold" : ""
+                }`}
+              >
+                {label}
+              </button>
+            </li>
+          ))}
         </ul>
-
-        <h3 className="mb-2 text-text text-lg">Tags</h3>
-        <ul className="space-y-1 px-3 mb-2">
+        <h3 className="mb-2 text-text text-lg">Sortierung</h3>
+        <ul className="space-y-1 px-3 mb-4">
           <li>
-            <Link href="/tag/regen" className="text-text-white hover:underline">
-              Regen
-            </Link>
+            <button
+              onClick={() => onSortChange("newest")}
+              className={`hover:underline ${
+                sortOrder === "newest" ? "font-bold" : ""
+              }`}
+            >
+              Neueste zuerst
+            </button>
           </li>
           <li>
-            <Link
-              href="/tag/sommer"
-              className="text-text-white hover:underline"
+            <button
+              onClick={() => onSortChange("oldest")}
+              className={`hover:underline ${
+                sortOrder === "oldest" ? "font-bold" : ""
+              }`}
             >
-              Sommer
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/tag/kaelte"
-              className="text-text-white hover:underline"
-            >
-              Kälte
-            </Link>
+              Älteste zuerst
+            </button>
           </li>
         </ul>
       </section>

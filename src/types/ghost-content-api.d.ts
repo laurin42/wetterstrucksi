@@ -82,7 +82,6 @@ export interface GhostAuthor {
   bio?: string;
 }
 
-  
   export interface GhostContentAPIOptions {
     url: string;
     key: string;
