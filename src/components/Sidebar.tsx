@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/Accordion";
+} from "@/components/ui/accordion";
 import { CategoryKey } from "./archive/ArchiveOverviewClient";
 import { Calendar, Layers, SortDesc } from "lucide-react";
 

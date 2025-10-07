@@ -19,7 +19,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/Accordion";
+} from "@/components/ui/accordion";
 import { mainMenu } from "@/data/navigation";
 
 interface HeaderProps {
