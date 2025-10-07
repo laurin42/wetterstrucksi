@@ -67,7 +67,7 @@ export function AboutBio() {
   ];
 
   return (
-    <div className="flex flex-col md:justify-center px-4 pt-8 pb-4 md:p-16 relative items-center  w-full h-[60vh] md:h-[70vh] bg-foreground-secondary">
+    <div className="flex flex-col md:justify-center px-4 pt-8 pb-4 md:p-16 relative items-center  w-full min-h-[70vh] bg-foreground-secondary">
       <h2 className="text-3xl text-text text-left mb-8">Wichtigste Eckdaten</h2>
       <ul className="space-y-4 text-xl font-thin">
         {items.map((item, i) => (

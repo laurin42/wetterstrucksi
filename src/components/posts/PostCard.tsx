@@ -6,6 +6,7 @@ import { PostWithMeta } from "@tryghost/content-api";
 
 interface PostCardProps {
   post: PostWithMeta;
+  className?: string;
 }
 
 function truncateWords(text?: string, maxWords?: number) {
@@ -23,23 +24,24 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Link
       href={`/posts/${post.slug}`}
-      className="block h-[380px] md:h-[500px] overflow-hidden border border-border shadow-md"
+      className="group block w-full overflow-hidden bg-foreground 
+             transition-all duration-420 hover:bg-header-background/60 hover h-full"
     >
-      <div className="bg-foreground-secondary h-full flex flex-col justify-start hover:bg-accent-dim/40 transition">
-        <div className="relative w-full h-1/2 overflow-hidden">
-          <Image
-            src={imageSrc}
-            alt={post.title || "Feature Image"}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-black/10"></div>
-        </div>
-        <div className="py-2 px-6">
+      <div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-center">
+        <Image
+          src={imageSrc}
+          alt={post.title || "Feature Image"}
+          fill
+          className="object-cover object-center transition-transform duration-500 group-hover:scale-104"
+        />
+
+        <div className="absolute inset-0 bg-black/10"></div>
+      </div>
+
+      <div className="flex flex-row md:flex-col gap-4 p-4 md:p-5 h-full">
+        <div className="flex-1 flex flex-col justify-start">
           {post.published_at && (
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-xs text-muted-foreground mb-1 font-thin">
               {new Date(post.published_at).toLocaleDateString("de-DE", {
                 day: "2-digit",
                 month: "short",
@@ -48,15 +50,26 @@ export function PostCard({ post }: PostCardProps) {
             </p>
           )}
 
-          <h2 className="text-lg font-semibold text-text mb-2 line-clamp-2 leading-snug">
-            {truncateWords(post.title, 10)}
+          <h2 className="text-base text-text mb-1 line-clamp-2 leading-snug md:text-lg font-semibold">
+            {truncateWords(post.title, 12)}
           </h2>
 
           {post.og_description && (
-            <p className="text-sm text-text-muted leading-relaxed">
+            <p className="text-sm text-text font-thin line-clamp-3 md:line-clamp-3 md:font-normal">
               {truncateWords(post.og_description, 20)}
             </p>
           )}
+        </div>
+
+        <div className="w-24 md:w-full h-24 md:h-auto relative flex-shrink-0">
+          <Image
+            src={imageSrc}
+            alt={post.title || "Feature Image"}
+            fill
+            className="object-cover rounded-md"
+            sizes="(max-width: 768px) 6rem, 33vw"
+            loading="lazy"
+          />
         </div>
       </div>
     </Link>

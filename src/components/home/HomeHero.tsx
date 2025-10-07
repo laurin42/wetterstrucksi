@@ -15,7 +15,7 @@ export default function HomeHero() {
 
   return (
     <motion.section
-      className="relative w-full px-8 py-16 mb-2 md:flex md:justify-between md:mb-4"
+      className="relative w-full px-4 md:px-8 py-8 rounded-t-sm min-h-[200px] mb-2 md:flex justify-center md:justify-between"
       initial="hidden"
       animate="visible"
       style={{
@@ -24,18 +24,17 @@ export default function HomeHero() {
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/60 z-0" />
+      <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
 
       <motion.div className="relative z-10">
-        <div className="font-light text-text-white text-center md:text-left mb-4 md:mb-0 md:max-w-6/8">
-          <h1 className="text-4xl mb-1 md:text-5xl md:mb-2">Wetterstrucksi</h1>
-          <h2 className="text-2xl pt-2 font-semibold text-center">
+        <div className="font-semibold text-text-white text-center md:text-left mb-4 md:mb-0 md:max-w-6/8">
+          <h1 className="text-4xl pt-2 mt-4">
             Dein Ort für Wetter in Düsseldorf
-          </h2>
+          </h1>
         </div>
       </motion.div>
 
-      <div className="flex items-end relative z-10">
+      <div className="flex items-center relative z-10">
         <motion.div className="flex flex-col items-center text-text-white font-semibold text-center">
           <p>Urlaubszeiten:</p>
           <p>1. September – 5. Oktober</p>

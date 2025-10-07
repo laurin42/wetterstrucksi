@@ -1,30 +1,82 @@
 "use client";
 
 import React from "react";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import { FaAngleUp, FaAngleDown, FaFilter } from "react-icons/fa6";
 
 interface CollapsibleSectionHeaderProps {
   title: string;
   isOpen: boolean;
   onToggle: () => void;
+  isContentCollabsible?: boolean;
+  onFilterToggle?: () => void;
+  mobileOpen?: boolean;
 }
 
 export function CollapsibleSectionHeader({
   title,
   isOpen,
   onToggle,
+  isContentCollabsible = true,
+  onFilterToggle,
+  mobileOpen = false,
 }: CollapsibleSectionHeaderProps) {
   return (
-    <div
-      className="px-4 py-4 bg-card-transparent/60 text-2xl text-text-white lg:h-16 flex items-center justify-between cursor-pointer select-none md:p-8"
-      onClick={onToggle}
-    >
-      <span>{title}</span>
-      {isOpen ? (
-        <FaAngleUp size={24} className="text-text-white" />
-      ) : (
-        <FaAngleDown size={24} className="text-text-white" />
-      )}
+    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm rounded-t-sm flex items-center justify-between select-none">
+      <span className="text-xl md:text-2xl font-semibold tracking-wide">
+        {title}
+      </span>
+
+      <div className="flex items-center gap-3">
+        {onFilterToggle && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onFilterToggle();
+            }}
+            className="flex items-center gap-2 cursor-pointer py-1 rounded-full"
+          >
+            <FaFilter
+              size={22}
+              className="hover:text-accent-dim transition-colors duration-420"
+            />
+            <motion.div
+              key={mobileOpen ? "up" : "down"}
+              initial={{ rotate: mobileOpen ? -180 : 180 }}
+              animate={{ rotate: mobileOpen ? 0 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {mobileOpen ? (
+                <FaAngleUp
+                  size={22}
+                  className="hover:text-accent-dim transition-colors duration-420"
+                />
+              ) : (
+                <FaAngleDown
+                  size={22}
+                  className="hover:text-accent-dim transition-colors duration-420"
+                />
+              )}
+            </motion.div>
+          </button>
+        )}
+
+        {isContentCollabsible && (
+          <button
+            onClick={onToggle}
+            className="p-1 rounded-full hover:bg-accent-dim transition-colors"
+          >
+            <motion.div
+              key={isOpen ? "up" : "down"}
+              initial={{ rotate: isOpen ? -180 : 180 }}
+              animate={{ rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isOpen ? <FaAngleUp size={22} /> : <FaAngleDown size={22} />}
+            </motion.div>
+          </button>
+        )}
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function AboutPageClient() {
   return (
     <>
       <motion.section
-        className="max-w-7xl mx-auto grid grid-cols-1 items-start md:grid-cols-2"
+        className="max-w-7xl mx-auto grid grid-cols-1 items-start md:items-center md:grid-cols-2 "
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}

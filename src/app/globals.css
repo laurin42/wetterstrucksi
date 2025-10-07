@@ -15,23 +15,26 @@
   --color-card: var(--card);
   --color-card-transparent: var(--card-transparent);
   --color-text-white: var(--text-white);
+  --color-text-white-transparent: var(--text-white-transparent);
   --bg: var(--background-gradient);
   --animate-shineDiagonal: shineDiagonal 1s linear forwards;
+  --color-header-background: var(--header-background);
 }
 
 :root {
-  --background: #e7dede;
-  --foreground: hsla(0, 0%, 88%);
+  --background: hsl(0, 16%, 89%);
+  --foreground: hsl(10, 0%, 88%);
   --foreground-secondary: hsla(0, 0%, 86%, 0.8);
-  --border: rgba(107, 183, 211, 0.6);
-  --text: #313131;
-  --text-white: #dfdede;
-  --muted: rgba(107, 183, 211, 0.7);
-  --accent: rgb(56, 138, 168);
-  --accent-dim: rgba(107, 183, 211, 0.6);
-  --accent-secondary: rgba(250, 250, 250, 0.4);
-  --card: rgb(212, 212, 212);
-  --card-transparent: rgba(55, 73, 92, 0.4);
+  --border: hsla(196, 54%, 62%, 0.6);
+  --text: hsl(0, 0%, 19%);
+  --text-white: hsl(0, 2%, 87%);
+  --text-white-transparent: hsla(0, 2%, 87%, 0.6);
+  --muted: hsla(196, 54%, 62%, 0.7);
+  --accent: hsl(196, 50%, 44%);
+  --accent-dim: hsla(196, 54%, 62%, 0.6);
+  --accent-secondary: hsla(0, 0%, 98%, 0.4);
+  --card: hsl(0, 0%, 83%);
+  --card-transparent: hsla(211, 25%, 29%, 0.4);
   --background-gradient: linear-gradient(
     to bottom,
     hsla(198, 52%, 63%, 0.8),
@@ -40,22 +43,29 @@
     hsla(196, 54%, 62%, 0.8) 67%,
     hsla(196, 54%, 62%, 0.8)
   );
+  --header-background: hsla(195, 56%, 28%, 0.8);
 }
 
 .dark {
-  --background: #171717;
-  --foreground: #292929;
-  --foreground-secondary: #2e2e2e;
-  --border: rgba(107, 183, 211, 0.2);
-  --text: #dfdede;
-  --text-white: #dfdede;
-  --muted: #383838;
-  --accent: rgba(107, 183, 211, 0.8);
-  --accent-dim: rgba(31, 90, 110, 0.8);
-  --accent-secondary: rgba(31, 90, 110, 0.8);
-  --card: rgba(51, 51, 51, 0.8);
-  --card-transparent: rgba(87, 87, 87, 0.4);
-  --background-gradient: linear-gradient(to bottom, #222222, #222222);
+  --background: hsl(0, 0%, 9%);
+  --foreground: hsl(0, 0%, 16%);
+  --foreground-secondary: hsl(0, 0%, 18%);
+  --border: hsla(196, 54%, 62%, 0.2);
+  --text: hsl(0, 2%, 87%);
+  --text-white: hsl(0, 2%, 87%);
+  --text-white-transparent: hsla(0, 2%, 87%, 0.6);
+  --muted: hsl(0, 0%, 22%);
+  --accent: hsla(196, 54%, 62%, 0.8);
+  --accent-dim: hsla(195, 56%, 28%, 0.8);
+  --accent-secondary: hsla(195, 56%, 28%, 0.8);
+  --card: hsla(0, 0%, 20%, 0.8);
+  --card-transparent: hsla(0, 0%, 34%, 0.4);
+  --background-gradient: linear-gradient(
+    to bottom,
+    hsl(0, 0%, 13%),
+    hsl(0, 0%, 13%)
+  );
+  --header-background: hsla(195, 56%, 28%, 0.8);
 }
 
 .main {

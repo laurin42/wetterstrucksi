@@ -7,23 +7,22 @@ export default function WeatherHero() {
 
   return (
     <motion.section
-      className="relative w-full p-8 mb-2 md:flex md:justify-between md:mb-4"
-      initial="hidden"
-      animate="visible"
+      className="relative w-full rounded-t-sm px-4 md:px-8 pt-6 pb-4 flex flex-col justify-center mb-2 overflow-hidden"
       style={{
+        minHeight: "80px",
+        height: "auto",
         backgroundImage: backgroundImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/60 z-0" />
+      <div className="absolute inset-0 bg-black/66 z-0 rounded-t-sm" />
 
       <motion.div className="relative z-10">
-        <div className="font-light text-text-white text-center md:text-left mb-4 md:mb-0 md:max-w-6/8">
-          <h1 className="text-4xl mb-1 md:text-5xl md:mb-2">Wetterbereich</h1>
-          <h2 className="text-xl pt-2 font-thin text-left">
-            Hier findet Ihr die neusten Beiträge, Updates, Rückblicke und
-            persönliche Postiungs
+        <div className="font-light text-text-white text-left mb-4 md:mb-0 md:max-w-6/8">
+          <h1 className="text-3xl font-semibold md:text-5xl md:mb-2">Wetter</h1>
+          <h2 className="text-xl pt-0.5 md:pt-2 font-thin text-left">
+            Neuste Beiträge, Updates, Rückblicke & Persönliches
           </h2>
         </div>
       </motion.div>

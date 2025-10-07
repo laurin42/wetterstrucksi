@@ -19,7 +19,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/Accordion";
 import { mainMenu } from "@/data/navigation";
 
 interface HeaderProps {
@@ -69,39 +69,47 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     return (
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md items-center
+        className={`fixed top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md
         ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}
-        max-h-[100px] sm:h-32
+        h-16
       `}
       >
         <div className="flex justify-between items-center h-full">
-          <section className="flex flex-nowrap items-center">
-            <Link href="/" className="flex-shrink-0">
+          <section className="flex items-center h-full px-2 md:px-8 lg:px-16">
+            <Link
+              href="/"
+              className="flex items-center h-full md:pl-12 md:pr-4 xl:px-0"
+            >
               {mounted && (
                 <Image
                   src={
                     theme === "dark"
-                      ? "/images/heroImageDark.png"
-                      : "/images/heroImageLight.png"
+                      ? "/images/wetterstrucksiLogoDark.png"
+                      : "/images/wetterstrucksiLogoLight.png"
                   }
-                  width={128}
-                  height={128}
                   alt="wetterstrucksi logo"
-                  className="w-auto my-auto md:p-8 xl:p-16 object-contain"
+                  width={120}
+                  height={120}
+                  className="h-12 w-auto object-contain"
                   priority
                 />
               )}
             </Link>
+            <div>
+              <h1 className="text-xl pl-8 md:pl-4 md:text-2xl font-semibold">
+                Wetterstrucksi.de
+              </h1>
+            </div>
           </section>
 
-          <div className="flex items-center space-x-4 px-4">
+          <div className="flex items-center space-x-4 px-4 md:px-8">
             <div className="hidden md:flex items-center space-x-6">
               {mainMenu.map((item) => (
                 <NavigationMenu key={item.title}>
                   <NavigationMenuList>
                     <NavigationMenuItem>
                       <Link href={item.href}>
-                        <NavigationMenuTrigger className="inline-flex items-center px-4 py-6 text-text text-xl bg-transparent hover:cursor-pointer transition-colors duration-420 ease-in-out">
+                        <NavigationMenuTrigger className="inline-flex items-center px-4 py-6 text-text text-lg bg-transparent hover:cursor-pointer transition-colors duration-420 ease-in-out">
                           {item.title}
                         </NavigationMenuTrigger>
                       </Link>
@@ -126,15 +134,16 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 </NavigationMenu>
               ))}
             </div>
+
             <button
               onClick={toggleTheme}
               aria-label="Theme wechseln"
               className="transition-colors duration-420 ease-in-out hover:cursor-pointer hover:text-accent"
             >
               {theme === "dark" ? (
-                <MdLightMode size={32} />
+                <MdLightMode size={28} />
               ) : (
-                <MdDarkMode size={32} />
+                <MdDarkMode size={28} />
               )}
             </button>
 
@@ -143,7 +152,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               aria-label="Menü öffnen/schließen"
               className="md:hidden"
             >
-              {menuOpen ? <MdClose size={42} /> : <MdMenu size={42} />}
+              {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
             </button>
           </div>
         </div>
