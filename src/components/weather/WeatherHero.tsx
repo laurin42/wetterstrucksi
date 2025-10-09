@@ -7,7 +7,7 @@ export default function WeatherHero() {
 
   return (
     <motion.section
-      className="relative w-full rounded-t-sm px-4 md:px-8 pt-6 pb-4 flex flex-col justify-center mb-2 overflow-hidden"
+      className="relative w-full rounded-t-sm px-4 py-2 md:px-8 md:pt-6 md:pb-4 flex flex-col justify-center mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",
@@ -19,9 +19,9 @@ export default function WeatherHero() {
       <div className="absolute inset-0 bg-black/66 z-0 rounded-t-sm" />
 
       <motion.div className="relative z-10">
-        <div className="font-light text-text-white text-left mb-4 md:mb-0 md:max-w-6/8">
+        <div className="font-light text-text-white text-left md:mb-0 md:max-w-6/8">
           <h1 className="text-3xl font-semibold md:text-5xl md:mb-2">Wetter</h1>
-          <h2 className="text-xl pt-0.5 md:pt-2 font-thin text-left">
+          <h2 className="text-xl font-thin text-left">
             Neuste Beiträge, Updates, Rückblicke & Persönliches
           </h2>
         </div>

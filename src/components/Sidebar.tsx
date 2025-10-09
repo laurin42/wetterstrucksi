@@ -7,23 +7,15 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { CategoryKey } from "./archive/ArchiveOverviewClient";
-import { Calendar, Layers, SortDesc } from "lucide-react";
+import { Calendar, SortDesc } from "lucide-react";
 
 interface SidebarProps {
-  categories: Record<CategoryKey, string>;
-  selectedCategory: CategoryKey | null;
-  onCategorySelect: (category: CategoryKey | null) => void;
-
   selectedMonth: string | null;
   onMonthSelect: (month: string | null) => void;
-
   selectedYear: number | null;
   onYearSelect: (year: number | null) => void;
-
   sortOrder: "newest" | "oldest";
   onSortChange: (order: "newest" | "oldest") => void;
-
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
 }
@@ -46,9 +38,6 @@ const months = [
 const years = [2022, 2023, 2024, 2025];
 
 export function Sidebar({
-  categories,
-  selectedCategory,
-  onCategorySelect,
   selectedMonth,
   onMonthSelect,
   selectedYear,
@@ -56,10 +45,8 @@ export function Sidebar({
   sortOrder,
   onSortChange,
   sidebarOpen,
-  setSidebarOpen,
 }: SidebarProps) {
   const resetAll = () => {
-    onCategorySelect(null);
     onMonthSelect(null);
     onYearSelect(null);
     onSortChange("newest");
@@ -76,53 +63,9 @@ export function Sidebar({
       className="overflow-hidden bg-card backdrop-blur-md shadow-inner-sm pl-4 pr-3 md:px-7 mb-2"
     >
       <Accordion type="single" collapsible className="space-y-1">
-        {/* Kategorien */}
-        <AccordionItem value="categories">
-          <AccordionTrigger className="text-xl font-normal cursor-pointer md:mt-4">
-            <div className="flex items-center gap-2">
-              <Layers className="w-5 h-5 text-accent" />
-              <span>Kategorien</span>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <motion.ul
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: { staggerChildren: 0.04 },
-                },
-              }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 px-2 py-2 md:px-4 border-b border-t border-accent/40"
-            >
-              {Object.entries(categories).map(([key, label]) => (
-                <motion.li
-                  key={key}
-                  variants={{
-                    hidden: { opacity: 0, y: -5 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                >
-                  <button
-                    onClick={() => onCategorySelect(key as CategoryKey)}
-                    className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
-                      selectedCategory === key
-                        ? "bg-accent-dim text-text-white"
-                        : "hover:bg-accent/20 text-text hover:text-text-white"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </AccordionContent>
-        </AccordionItem>
-
         {/* Monate */}
         <AccordionItem value="months">
-          <AccordionTrigger className="text-xl font-normal cursor-pointer">
+          <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-accent" />
               <span>Monat</span>
@@ -164,7 +107,7 @@ export function Sidebar({
 
         {/* Jahre */}
         <AccordionItem value="years">
-          <AccordionTrigger className="text-xl font-normal cursor-pointer">
+          <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-accent" />
               <span>Jahr</span>
@@ -206,7 +149,7 @@ export function Sidebar({
 
         {/* Sortierung */}
         <AccordionItem value="sort">
-          <AccordionTrigger className="text-xl font-normal cursor-pointer">
+          <AccordionTrigger className="text-md font-normal cursor-pointer py-2 mb-4 md:pt-0 md:pb-2 md:mt-4">
             <div className="flex items-center gap-2">
               <SortDesc className="w-5 h-5 text-accent" />
               <span>Sortierung</span>
@@ -240,7 +183,7 @@ export function Sidebar({
       </Accordion>
 
       {/* Reset Button */}
-      <div className="flex items-center justify-center mx-4 mb-4 border-t-[1px] border-accent/40 pt-4">
+      <div className="flex items-center justify-center md:justify-start mx-4 mb-4 border-t-[1px] border-accent/40 pt-4">
         <button
           onClick={resetAll}
           className="text-sm font-semibold px-6 py-2 bg-accent cursor-pointer hover:bg-accent/80 text-text-white transition rounded-sm"

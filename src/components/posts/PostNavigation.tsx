@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPostsWithMeta } from "@/lib/getPostsWithMeta";
+import { getPostsWithMeta } from "@/app/api/posts/getPostsWithMeta";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
@@ -15,7 +15,7 @@ export default async function PostNavigation({ slug }: { slug: string }) {
         {prev ? (
           <Link
             href={`/posts/${prev.slug}`}
-            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-accent-secondary rounded-l-lg text-center w-full hover:bg-accent-dim hover:underline transition duration-300"
+            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-header-background/44 rounded-l-md text-center w-full hover:bg-accent-dim transition duration-300"
           >
             <MdOutlineKeyboardDoubleArrowLeft className="text-2xl md:text-3xl flex-shrink-0" />
             <span className="line-clamp-2 md:line-clamp-none">
@@ -31,7 +31,7 @@ export default async function PostNavigation({ slug }: { slug: string }) {
         {next ? (
           <Link
             href={`/posts/${next.slug}`}
-            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-accent-secondary rounded-r-lg text-center w-full hover:bg-accent-dim hover:underline transition duration-300"
+            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-header-background/44 rounded-r-md text-center w-full hover:bg-accent-dim transition duration-300"
           >
             <span className="line-clamp-2 md:line-clamp-none">
               {next.title}

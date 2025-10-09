@@ -40,7 +40,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-foreground-secondary/44 pb-4 pt-2"
+            className="bg-foreground-secondary/44 pb-4"
           >
             {posts.length === 0 ? (
               <p className="text-muted-foreground px-4">

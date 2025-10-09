@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { fixImageUrl } from "@/lib/fixImageUrl";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 
 interface PostCardProps {
   post: PostWithMeta;
@@ -41,7 +41,7 @@ export function PostCard({ post }: PostCardProps) {
       <div className="flex flex-row md:flex-col gap-4 p-4 md:p-5 h-full">
         <div className="flex-1 flex flex-col justify-start">
           {post.published_at && (
-            <p className="text-xs text-muted-foreground mb-1 font-thin">
+            <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin">
               {new Date(post.published_at).toLocaleDateString("de-DE", {
                 day: "2-digit",
                 month: "short",
@@ -50,18 +50,18 @@ export function PostCard({ post }: PostCardProps) {
             </p>
           )}
 
-          <h2 className="text-base text-text mb-1 line-clamp-2 leading-snug md:text-lg font-semibold">
+          <h2 className="text-base text-text mb-2 line-clamp-2 leading-snug md:text-lg font-bold">
             {truncateWords(post.title, 12)}
           </h2>
 
           {post.og_description && (
-            <p className="text-sm text-text font-thin line-clamp-3 md:line-clamp-3 md:font-normal">
+            <p className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal">
               {truncateWords(post.og_description, 20)}
             </p>
           )}
         </div>
 
-        <div className="w-24 md:w-full h-24 md:h-auto relative flex-shrink-0">
+        <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}

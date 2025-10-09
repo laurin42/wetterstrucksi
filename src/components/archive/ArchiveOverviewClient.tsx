@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
@@ -8,77 +8,39 @@ import ArchiveHero from "./ArchiveHero";
 import { Sidebar } from "@/components/Sidebar";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 
-interface ArchivePageProps {
-  posts: {
-    rueckblicke: PostWithMeta[];
-    updates: PostWithMeta[];
-    vorhersagen: PostWithMeta[];
-    biowetter: PostWithMeta[];
-    privates: PostWithMeta[];
-    presseschau: PostWithMeta[];
-  };
-}
-
-export type CategoryKey =
-  | "rueckblicke"
-  | "updates"
-  | "vorhersagen"
-  | "biowetter"
-  | "privates"
-  | "presseschau";
-
 type SortOrder = "newest" | "oldest";
 
-export function ArchiveOverviewClient({ posts }: ArchivePageProps) {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(
-    null
-  );
+interface ArchiveOverviewClientProps {
+  posts: PostWithMeta[];
+}
+
+export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
+  const [allPosts, setAllPosts] = useState<PostWithMeta[]>([]);
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Default geöffnet
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const categories: Record<CategoryKey, string> = {
-    vorhersagen: "Vorhersagen",
-    updates: "Updates",
-    rueckblicke: "Rückblicke",
-    biowetter: "Biowetter",
-    privates: "Privates",
-    presseschau: "Presseschau",
-  };
-
-  const months = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember",
-  ];
-
-  const allPosts = Object.entries(posts).flatMap(([cat, arr]) =>
-    arr.map((p) => ({ ...p, category: cat as CategoryKey }))
-  );
+  useEffect(() => {
+    const uniquePosts = Array.from(
+      new Map(posts.map((p) => [p.id, p])).values()
+    );
+    setAllPosts(uniquePosts);
+  }, [posts]);
 
   const filteredPosts = allPosts
-    .filter((p) => {
-      const postDate = new Date(p.published_at);
-      const matchCategory = selectedCategory
-        ? p.category === selectedCategory
-        : true;
+    .filter((post) => {
+      const postDate = new Date(post.published_at);
+
       const matchMonth =
         selectedMonth !== null
           ? postDate.getMonth().toString() === selectedMonth
           : true;
+
       const matchYear =
         selectedYear !== null ? postDate.getFullYear() === selectedYear : true;
-      return matchCategory && matchMonth && matchYear;
+
+      return matchMonth && matchYear;
     })
     .sort((a, b) => {
       const timeA = new Date(a.published_at).getTime();
@@ -86,17 +48,12 @@ export function ArchiveOverviewClient({ posts }: ArchivePageProps) {
       return sortOrder === "newest" ? timeB - timeA : timeA - timeB;
     });
 
-  const headerTitle =
-    `${selectedCategory ? categories[selectedCategory] : "Alle Beiträge"}` +
-    (selectedMonth !== null ? ` im ${months[parseInt(selectedMonth)]}` : "") +
-    (selectedYear !== null ? ` ${selectedYear}` : "");
-
   return (
     <motion.section className="max-w-4xl md:max-w-6xl mx-auto">
       <ArchiveHero />
 
       <CollapsibleSectionHeader
-        title={headerTitle}
+        title="Alle Beiträge"
         isOpen={true}
         onToggle={() => {}}
         isContentCollabsible={false}
@@ -105,9 +62,6 @@ export function ArchiveOverviewClient({ posts }: ArchivePageProps) {
       />
 
       <Sidebar
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategorySelect={setSelectedCategory}
         selectedMonth={selectedMonth}
         onMonthSelect={setSelectedMonth}
         selectedYear={selectedYear}
@@ -123,11 +77,8 @@ export function ArchiveOverviewClient({ posts }: ArchivePageProps) {
           {filteredPosts.length === 0 ? (
             <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
           ) : (
-            filteredPosts.map((post) => (
-              <motion.div
-                key={`${post.category}-${post.id}`}
-                className="flex flex-col"
-              >
+            filteredPosts.map((post, idx) => (
+              <motion.div key={`${post.id}-${idx}`} className="flex flex-col">
                 <PostCard post={post} />
               </motion.div>
             ))

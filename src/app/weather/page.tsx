@@ -1,5 +1,5 @@
 import { WeatherOverviewClient } from "@/components/weather/WeatherOverviewClient";
-import { getPostsWithTags } from "@/lib/getPostsWithMeta";
+import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
 
 export const revalidate = 300;
 

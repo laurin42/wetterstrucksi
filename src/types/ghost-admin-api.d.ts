@@ -46,7 +46,7 @@ export interface PostWithMeta {
   created_at: string;
   updated_at: string;
   published_at: string;
-  custom_excerpt: string;
+  custom_excerpt: string | null;
   canonical_url: string | null;
   url: string;
   plaintext: string;

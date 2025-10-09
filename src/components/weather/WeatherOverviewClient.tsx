@@ -52,7 +52,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-foreground-secondary/44 pb-2 pt-2 md:pb-4 md:mb-2"
+              className="bg-foreground-secondary/44 pb-2 md:pb-4 md:mb-2"
             >
               <div className="grid grid-cols-1 px-1 md:hidden">
                 {gridPosts.map((post) => (

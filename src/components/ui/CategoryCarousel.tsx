@@ -62,7 +62,7 @@ export function CategoryCarousel({ posts }: CategoryCarouselProps) {
       <div ref={emblaRef} className="overflow-hidden cursor-grab">
         <div className="flex">
           {slides.map((group, index) => (
-            <div key={index} className="flex w-full px-7 py-2">
+            <div key={index} className="flex w-full pb-2">
               {group.map((post) => (
                 <div key={post.id} className="w-1/3">
                   <PostCard post={post} />

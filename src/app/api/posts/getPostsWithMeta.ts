@@ -1,5 +1,5 @@
 import GhostContentAPI, {  PostWithMeta } from "@tryghost/content-api";
-import { fixImageUrl } from "./fixImageUrl";
+import { fixImageUrl } from "@/lib/fixImageUrl";
 
 const api = new GhostContentAPI({
   url: process.env.NEXT_PUBLIC_GHOST_API_URL as string,
@@ -8,8 +8,6 @@ const api = new GhostContentAPI({
 });
 
 const cache: { [key: string]: { posts: PostWithMeta[]; timestamp: number } } = {};
-
-
 
 
 
@@ -31,9 +29,6 @@ function normalizePosts(posts: PostWithMeta[]): PostWithMeta[] {
       })) ?? [],
   }));
 }
-
-
-
 
 
 export async function getPostsWithMeta(limit = 24): Promise<PostWithMeta[]> {
@@ -81,7 +76,9 @@ export async function getPostsPage(
 
 
 
-export async function getPostsWithTags(tagsToFilter: string | string[], limit = 24): Promise<PostWithMeta[]> {
+export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000
+
+): Promise<PostWithMeta[]> {
   const tags = Array.isArray(tagsToFilter) 
     ? tagsToFilter.map(t => t.toLowerCase()) 
     : [tagsToFilter.toLowerCase()];
@@ -95,7 +92,7 @@ export async function getPostsWithTags(tagsToFilter: string | string[], limit = 
   
   const allPosts = await api.posts.browse({
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
-    limit: "all", // alle laden
+    limit: "all", 
     order: "published_at DESC",
   });
 

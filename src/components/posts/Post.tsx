@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 import { fixImageUrl } from "@/lib/fixImageUrl";
 import Divider from "../ui/Divider";
 
@@ -42,7 +42,7 @@ export default function Post({ post }: PostProps) {
             alt={alt}
             width={800}
             height={500}
-            className="object-contain rounded-md"
+            className="object-contain rounded-md w-full h-auto"
           />
         );
       }
@@ -50,7 +50,7 @@ export default function Post({ post }: PostProps) {
       if (domNode.name === "h3") {
         const children = domNode.children ?? [];
         return (
-          <h3 className="text-3xl font-light leading-relaxed my-4">
+          <h3 className="text-3xl font-light leading-relaxed my-2 md:mt-8">
             {domToReact(children as DOMNode[], options)}
           </h3>
         );
@@ -59,7 +59,7 @@ export default function Post({ post }: PostProps) {
       if (domNode.name === "p") {
         const children = domNode.children ?? [];
         return (
-          <p className="my-4 leading-relaxed">
+          <p className="leading-relaxed">
             {domToReact(children as DOMNode[], options)}
           </p>
         );
@@ -75,13 +75,13 @@ export default function Post({ post }: PostProps) {
       }
 
       if (domNode.name === "hr") {
-        return <Divider className="clear-both" />;
+        return <hr className="border-b border-accent/8 my-6" />;
       }
 
       if (domNode.name === "li") {
         const children = domNode.children ?? [];
         return (
-          <li className="my-4 md:ml-8 leading-relaxed list-disc">
+          <li className="ml-6 leading-relaxed list-disc">
             {domToReact(children as DOMNode[], options)}
           </li>
         );
@@ -92,30 +92,45 @@ export default function Post({ post }: PostProps) {
   };
 
   return (
-    <section className="">
-      <article className="p-6 sm:p-8 bg-foreground-secondary/40 shadow-xl">
-        {formattedDate && <p className="text-sm font-extralight text-text"></p>}
+    <section className="max-w-4xl md:max-w-6xl mx-auto">
+      <article className="p-4 md:px-16 bg-foreground-secondary/40 shadow-xl max-w-6xl mx-auto text-text">
+        {/* Row 1: Title + Date (top-right) */}
+        <div className="flex justify-start mb-10">
+          <div>
+            {formattedDate && (
+              <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground">
+                {formattedDate}
+              </p>
+            )}
+            <h1 className="tracking-wide text-4xl md:text-5xl font-light">
+              {post.title}
+            </h1>
+          </div>
+        </div>
 
-        <h1 className="text-3xl sm:text-4xl font-light text-text mb-8">
-          {post.title}
-        </h1>
-
-        <div className="mb-8">
+        {/* Content: image is floated on md+ so text will wrap around it */}
+        <div className="prose prose-invert prose-lg">
           {post.feature_image && (
-            <div className="justify-center w-full md:w-3/4 mx-auto mt-auto mb-8">
+            <div className="md:float-left md:w-2/4 md:mr-16 mb-8">
               <Image
                 src={imageSrc}
                 alt={post.title || "Feature Image"}
                 width={800}
-                height={500}
-                className="object-contain rounded-md"
+                height={800}
+                className="object-contain rounded-md w-full h-auto"
               />
             </div>
           )}
 
-          <div className="prose prose-invert prose-lg prose-headings:font-light text-text max-w-none">
-            {parse(post.html, options)}
-          </div>
+          {typeof post.html === "string" && post.html.trim().length > 0 ? (
+            parse(post.html, options)
+          ) : (
+            <p className="italic text-muted-foreground">
+              Kein Inhalt verfügbar.
+            </p>
+          )}
+
+          <div className="clear-both" />
         </div>
       </article>
     </section>

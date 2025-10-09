@@ -15,10 +15,11 @@ export default function HomeHero() {
 
   return (
     <motion.section
-      className="relative w-full px-4 md:px-8 py-8 rounded-t-sm min-h-[200px] mb-2 md:flex justify-center md:justify-between"
+      className="relative w-full px-4 md:px-8 py-4 rounded-t-sm mb-2 md:flex justify-center md:justify-between"
       initial="hidden"
       animate="visible"
       style={{
+        minHeight: "80px",
         backgroundImage: backgroundImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -27,10 +28,8 @@ export default function HomeHero() {
       <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
 
       <motion.div className="relative z-10">
-        <div className="font-semibold text-text-white text-center md:text-left mb-4 md:mb-0 md:max-w-6/8">
-          <h1 className="text-4xl pt-2 mt-4">
-            Dein Ort für Wetter in Düsseldorf
-          </h1>
+        <div className="font-semibold text-text-white text-center md:text-left md:max-w-6/8">
+          <h1 className="text-4xl pt-2">Dein Ort für Wetter in Düsseldorf</h1>
         </div>
       </motion.div>
 
