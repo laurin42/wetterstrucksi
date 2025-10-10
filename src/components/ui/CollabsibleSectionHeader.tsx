@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaAngleUp, FaAngleDown, FaFilter } from "react-icons/fa6";
+import { useMotionVariants } from "@/lib/useMotionVariants";
 
 interface CollapsibleSectionHeaderProps {
   title: string;
@@ -21,20 +22,30 @@ export function CollapsibleSectionHeader({
   onFilterToggle,
   mobileOpen = false,
 }: CollapsibleSectionHeaderProps) {
+  const { fadeInVariant } = useMotionVariants();
+
   return (
     <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm rounded-t-sm flex items-center justify-between select-none">
-      <span className="text-xl md:text-2xl font-semibold tracking-wide">
+      <motion.span
+        className="text-xl md:text-2xl font-semibold tracking-wide"
+        variants={fadeInVariant}
+        initial="hidden"
+        animate="visible"
+      >
         {title}
-      </span>
+      </motion.span>
 
       <div className="flex items-center gap-3">
         {onFilterToggle && (
-          <button
+          <motion.button
             onClick={(e) => {
               e.stopPropagation();
               onFilterToggle();
             }}
             className="flex items-center gap-2 cursor-pointer py-1 rounded-full"
+            variants={fadeInVariant}
+            initial="hidden"
+            animate="visible"
           >
             <FaFilter
               size={22}
@@ -58,13 +69,16 @@ export function CollapsibleSectionHeader({
                 />
               )}
             </motion.div>
-          </button>
+          </motion.button>
         )}
 
         {isContentCollabsible && (
-          <button
+          <motion.button
             onClick={onToggle}
             className="p-1 rounded-full hover:bg-accent-dim transition-colors"
+            variants={fadeInVariant}
+            initial="hidden"
+            animate="visible"
           >
             <motion.div
               key={isOpen ? "up" : "down"}
@@ -74,7 +88,7 @@ export function CollapsibleSectionHeader({
             >
               {isOpen ? <FaAngleUp size={22} /> : <FaAngleDown size={22} />}
             </motion.div>
-          </button>
+          </motion.button>
         )}
       </div>
     </div>
