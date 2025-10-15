@@ -7,7 +7,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="main pt-16 md:pt-20">{children}</main>
+      <main className="main mt-16 md:mt-20">{children}</main>
     </>
   );
 }

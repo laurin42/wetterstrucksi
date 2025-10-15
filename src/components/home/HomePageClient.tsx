@@ -28,7 +28,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const { containerVariants } = useMotionVariants();
+  const { sectionAnimation } = useMotionVariants();
 
   const normalizedPosts = posts.map((post) => ({
     ...post,
@@ -45,7 +45,10 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   if (!hydrated) return null;
 
   return (
-    <motion.section className="md:max-w-6xl mx-auto">
+    <motion.section
+      variants={sectionAnimation}
+      className="md:max-w-6xl mx-auto"
+    >
       <HomeHero posts={normalizedPosts} />
 
       <CollapsibleSectionHeader
@@ -56,7 +59,8 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       />
 
       {openSections.neusteBeitraege && (
-        <div
+        <motion.div
+          variants={sectionAnimation}
           key="neusteBeitraege"
           className="md:bg-foreground/44 md:py-2 md:mb-4"
         >
@@ -67,19 +71,25 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           ) : (
             <>
               {isMobile && (
-                <div className="grid grid-cols-1 px-0">
+                <motion.div
+                  variants={sectionAnimation}
+                  className="grid grid-cols-1 px-0"
+                >
                   {normalizedPosts.slice(3, 9).map((post) => (
                     <PostCard key={post.id} post={post} />
                   ))}
-                </div>
+                </motion.div>
               )}
 
               {!isMobile && (
-                <div className="hidden md:block">
+                <motion.div
+                  variants={sectionAnimation}
+                  className="hidden md:block"
+                >
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
-                </div>
+                </motion.div>
               )}
-              <div className="py-4 bg-foreground md:bg-transparent">
+              <div className="pt-8 pb-6 bg-foreground md:bg-transparent">
                 <MorePostsLink
                   href="/weather"
                   label="weiterführende Artikel »"
@@ -87,7 +97,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
               </div>
             </>
           )}
-        </div>
+        </motion.div>
       )}
 
       <div>

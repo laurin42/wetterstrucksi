@@ -9,7 +9,7 @@ export function AboutShort() {
   return (
     <motion.section
       className="relative w-full flex flex-col items-center 
-      justify-start bg-foreground/44
+      justify-start bg-foreground
       h-[calc(100vh-4rem)] md:h-[70vh]"
       initial="hidden"
       whileInView="visible"
@@ -43,7 +43,7 @@ export function AboutShort() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="mt-16 md:mt-8"
+        className="mt-16 md:mt-16"
       >
         <MorePostsLink href="/about" label="Erfahre hier mehr über mich »" />
       </motion.div>

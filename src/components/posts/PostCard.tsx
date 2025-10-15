@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { PostWithMeta } from "@tryghost/admin-api";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostCardProps {
   post: PostWithMeta;
@@ -21,8 +23,14 @@ export function PostCard({ post, className }: PostCardProps) {
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.jpg";
 
+  const { sectionAnimation, containerVariants, fadeInVariantSlow } =
+    useMotionVariants();
+
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      variants={containerVariants}
       className={`group block md:flex md:flex-col md:aspect-[3/4] w-full ... ${className}`}
     >
       <Link
@@ -30,7 +38,12 @@ export function PostCard({ post, className }: PostCardProps) {
         className="group block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 hover h-full"
       >
-        <div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch"
+        >
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -39,7 +52,7 @@ export function PostCard({ post, className }: PostCardProps) {
           />
 
           <div className="absolute inset-0 bg-black/10"></div>
-        </div>
+        </motion.div>
 
         <div className="flex flex-row md:flex-col gap-4 px-4 py-4 md:p-5 h-full">
           <div className="flex-1 flex flex-col justify-start">
@@ -58,13 +71,18 @@ export function PostCard({ post, className }: PostCardProps) {
             </h2>
 
             {post.og_description && (
-              <p className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal">
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
+                variants={fadeInVariantSlow}
+                className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal"
+              >
                 {truncateWords(post.og_description, 20)}
-              </p>
+              </motion.p>
             )}
           </div>
 
-          <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
+          <motion.div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
             <Image
               src={imageSrc}
               alt={post.title || "Feature Image"}
@@ -73,9 +91,9 @@ export function PostCard({ post, className }: PostCardProps) {
               sizes="(max-width: 768px) 6rem, 33vw"
               loading="lazy"
             />
-          </div>
+          </motion.div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

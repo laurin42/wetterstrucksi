@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import type { EmblaCarouselType } from "embla-carousel";
@@ -8,6 +9,7 @@ import { PostCard } from "@/components/posts/PostCard";
 import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import clsx from "clsx";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostCarouselProps {
   posts: PostWithMeta[];
@@ -23,6 +25,8 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
     },
     [WheelGesturesPlugin()]
   );
+
+  const { sectionAnimation, containerVariants } = useMotionVariants();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -63,11 +67,25 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className={clsx("relative", className)}>
-      <div ref={emblaRef} className="overflow-hidden cursor-grab">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      variants={containerVariants}
+      className={clsx("relative", className)}
+    >
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={sectionAnimation}
+        ref={emblaRef}
+        className="overflow-hidden cursor-grab"
+      >
         <div className="flex">
           {normalizedPosts.map((post) => (
-            <div
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionAnimation}
               key={post.id}
               className={clsx(
                 "flex-shrink-0 px-1",
@@ -79,10 +97,10 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
               ) : (
                 <PostCard post={post} />
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <button
         onClick={scrollPrev}
@@ -107,7 +125,7 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
       </button>
 
       {!isMobile && (
-        <div className="flex justify-center mt-4 space-x-2">
+        <div className="flex justify-center mt-8 space-x-2">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
@@ -121,6 +139,6 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

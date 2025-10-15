@@ -38,7 +38,7 @@ export function PostCardMobileCarousel({
     flex-shrink-0
     rounded-lg
     overflow-hidden
-    bg-foreground-secondary/80
+    bg-foreground-secondary/80 
     shadow-md
     ${className}
   `}

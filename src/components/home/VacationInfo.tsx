@@ -24,7 +24,7 @@ export default function VacationInfo() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex flex-col items-center mx-8 md:mx-0 justify-center p-12  text-text text-center bg-foreground-secondary/44 z-1 rounded-sm"
+        className="flex flex-col items-center mx-8 md:mx-0 justify-center p-12  text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
         <p className="font-thin text-2xl tracking-wider pb-2 border-b-[1px]">
           Urlaubszeiten:

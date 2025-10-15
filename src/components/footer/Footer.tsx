@@ -10,7 +10,7 @@ export default function Footer() {
         w-full bg-header-background text-text
         px-6 py-8 md:px-12 md:mt-4 md:py-10
         flex flex-col md:flex-row justify-between items-center gap-6
-        md:rounded-sm
+        md:rounded-sm 
       "
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
