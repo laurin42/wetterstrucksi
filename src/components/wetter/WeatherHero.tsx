@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 
 export default function WeatherHero() {
-  const backgroundImage = `url("/images/weatherHeroLight.jpg")`;
+  const backgroundImage = `url("/images/wetter/weatherHero.jpg")`;
 
   return (
     <motion.section
-      className="relative w-full rounded-t-sm px-4 py-2 md:px-8 md:pt-6 md:pb-4 flex flex-col justify-center mb-4 overflow-hidden"
+      className="relative w-full rounded-t-sm px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",

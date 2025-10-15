@@ -9,13 +9,13 @@ export default function ArchiveHero() {
   const mounted = useMounted();
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/archiveHeroDark.jpg")`
-      : `url("/images/archiveHeroLight.jpg")`
+      ? `url("/images/archiv/archiveHeroDark.jpg")`
+      : `url("/images/archiv/archiveHeroLight.jpg")`
     : undefined;
 
   return (
     <motion.section
-      className="relative w-full rounded-t-sm px-4 py-2 md:px-8 md:pt-6 md:pb-4 flex flex-col justify-center mb-4 overflow-hidden"
+      className="relative w-full rounded-t-sm px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       initial="hidden"
       animate="visible"
       style={{

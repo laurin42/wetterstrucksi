@@ -12,6 +12,7 @@
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
   --color-accent-secondary: var(--accent-secondary);
+  --color-accent-dark: var(--accent-dark);
   --color-card: var(--card);
   --color-card-transparent: var(--card-transparent);
   --color-text-white: var(--text-white);
@@ -26,13 +27,14 @@
   --foreground: hsl(10, 0%, 88%);
   --foreground-secondary: hsla(0, 0%, 86%, 0.8);
   --border: hsla(196, 54%, 62%, 0.6);
-  --text: hsl(0, 0%, 19%);
+  --text: hsl(0, 82%, 2%);
   --text-white: hsl(0, 2%, 87%);
   --text-white-transparent: hsla(0, 2%, 87%, 0.6);
   --muted: hsla(196, 54%, 62%, 0.7);
   --accent: hsl(196, 50%, 44%);
   --accent-dim: hsla(196, 54%, 62%, 0.6);
   --accent-secondary: hsla(0, 0%, 98%, 0.4);
+  --accent-dark: rgb(16, 44, 53);
   --card: hsl(0, 0%, 83%);
   --card-transparent: hsla(211, 25%, 29%, 0.4);
   --background-gradient: linear-gradient(
@@ -58,6 +60,7 @@
   --accent: hsla(196, 54%, 62%, 0.8);
   --accent-dim: hsla(195, 56%, 28%, 0.8);
   --accent-secondary: hsla(195, 56%, 28%, 0.8);
+  --accent-dark: hsla(196, 54%, 62%, 0.8);
   --card: hsla(0, 0%, 20%, 0.8);
   --card-transparent: hsla(0, 0%, 34%, 0.4);
   --background-gradient: linear-gradient(
@@ -69,27 +72,64 @@
 }
 
 .main {
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
   padding-bottom: 0.8rem;
   background: var(--background-gradient);
   min-height: 100dvh;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   .main {
     padding-left: 0.8rem;
     padding-right: 0.8rem;
-    padding-bottom: 0.8rem;
   }
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
 @keyframes shineDiagonal {
   0% {
     transform: translate(-100%, -100%) rotate(12deg);
   }
   100% {
     transform: translate(100%, 100%) rotate(12deg);
+  }
+}
+
+@media (max-height: 568) {
+  .postcard-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 160px;
+  }
+  .hide-feature-image {
+    display: none;
+  }
+  .carousel-padding {
+    padding-top: 4rem;
+  }
+}
+
+@media (min-height: 568px) and (max-height: 667px) {
+  .postcard-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 160px; /* optional, to prevent huge cards */
+  }
+}
+
+/* For normal mobile screens (iPhone 8+, ~568px+) */
+@media (min-height: 667) and (max-height: 736px) {
+  .postcard-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 240px; /* optional, to prevent huge cards */
+  }
+}
+
+/* fallback for larger screens, desktop handled by Tailwind default */
+@media (min-height: 736px) {
+  .postcard-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 360px;
   }
 }
 

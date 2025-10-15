@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaAngleUp, FaAngleDown, FaFilter } from "react-icons/fa6";
-import { useMotionVariants } from "@/lib/useMotionVariants";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface CollapsibleSectionHeaderProps {
   title: string;
@@ -22,13 +22,13 @@ export function CollapsibleSectionHeader({
   onFilterToggle,
   mobileOpen = false,
 }: CollapsibleSectionHeaderProps) {
-  const { fadeInVariant } = useMotionVariants();
+  const { fadeInVariantSlow } = useMotionVariants();
 
   return (
-    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm rounded-t-sm flex items-center justify-between select-none">
+    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm md:rounded-t-sm flex items-center justify-between select-none">
       <motion.span
         className="text-xl md:text-2xl font-semibold tracking-wide"
-        variants={fadeInVariant}
+        variants={fadeInVariantSlow}
         initial="hidden"
         animate="visible"
       >
@@ -43,7 +43,7 @@ export function CollapsibleSectionHeader({
               onFilterToggle();
             }}
             className="flex items-center gap-2 cursor-pointer py-1 rounded-full"
-            variants={fadeInVariant}
+            variants={fadeInVariantSlow}
             initial="hidden"
             animate="visible"
           >
@@ -76,7 +76,7 @@ export function CollapsibleSectionHeader({
           <motion.button
             onClick={onToggle}
             className="p-1 rounded-full hover:bg-accent-dim transition-colors"
-            variants={fadeInVariant}
+            variants={fadeInVariantSlow}
             initial="hidden"
             animate="visible"
           >

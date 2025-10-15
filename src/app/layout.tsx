@@ -14,11 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-      ></meta>
+    <html lang="de" className="h-full" suppressHydrationWarning>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
+      </head>
       <body className="md:bg-background sm:bg-foreground h-full">
         <ThemeProvider
           attribute="class"

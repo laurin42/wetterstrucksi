@@ -1,63 +1,90 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
-import { useMotionVariants } from "@/lib/useMotionVariants";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import { PostCarousel } from "../posts/PostCarousel";
+import { PostWithMeta } from "@tryghost/content-api";
+import { useViewportHeight } from "@/lib/useViewportHeight";
 
-export default function HomeHero() {
+interface HomeHeroProps {
+  posts: PostWithMeta[];
+}
+
+export default function HomeHero({ posts }: HomeHeroProps) {
   const { theme } = useTheme();
   const mounted = useMounted();
-  const { containerVariants, fadeInVariant } = useMotionVariants();
+  const { containerVariantsSync, fadeInVariant, fadeInVariantVerySlow } =
+    useMotionVariants();
+  const [mobileSectionOpen, setMobileSectionOpen] = useState(true);
+
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/homeHeroDark.jpg")`
-      : `url("/images/homeHeroLight.jpg")`
+      ? `url("/images/home/homeHeroDark.jpg")`
+      : `url("/images/home/homeHeroLight.jpg")`
     : undefined;
 
-  return (
-    <motion.section
-      className="relative w-full px-4 md:px-8 py-4 rounded-t-sm mb-3 md:flex justify-center md:justify-between"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      style={{
-        minHeight: "80px",
-        backgroundImage,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
+  const vh = useViewportHeight();
 
-      <motion.div
-        className="relative z-10 md:max-w-6/8 text-center md:text-left pt-2"
-        variants={fadeInVariant}
+  return (
+    <>
+      <motion.section
+        className="
+    relative w-full flex flex-col items-center 
+    md:flex-row md:justify-between 
+    px-0 pt-8 md:pb-8 md:px-8 rounded-t-sm md:mb-2
+    h-[calc(100vh-4rem)] md:h-auto
+    bg-cover bg-center
+  "
+        style={{ backgroundImage }}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariantsSync}
       >
-        <h1 className="text-4xl font-semibold text-white">
-          Dein Ort für Wetter
-        </h1>
+        <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
+
+        <motion.div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+          <motion.h1
+            variants={fadeInVariant}
+            className="text-4xl font-thin md:font-semibold text-white"
+          >
+            <motion.em
+              variants={fadeInVariantVerySlow}
+              className="font-semibold"
+            >
+              Dein
+            </motion.em>{" "}
+            Ort für Wetter
+          </motion.h1>
+          <motion.div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+            <motion.h2
+              variants={fadeInVariant}
+              className="text-4xl font-thin md:font-semibold text-white"
+            >
+              in{" "}
+              <motion.em
+                variants={fadeInVariantVerySlow}
+                className="font-semibold"
+              >
+                Düsseldorf
+              </motion.em>
+            </motion.h2>
+          </motion.div>
+        </motion.div>
+
         <motion.div
-          className="relative z-10 md:max-w-6/8 text-center md:text-left pt-2"
+          className="md:hidden w-full relative z-10 pt-8 carousel-padding"
           variants={fadeInVariant}
         >
-          <h2 className="text-4xl font-semibold text-white">in Düsseldorf</h2>
+          {mobileSectionOpen && (
+            <div className="block sm:hidden">
+              <PostCarousel posts={posts.slice(0, 3)} />
+            </div>
+          )}
         </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="flex items-center relative z-10"
-        variants={fadeInVariant}
-      >
-        <div className="flex flex-col items-center text-white font-semibold text-center">
-          <p>Urlaubszeiten:</p>
-          <p>1. September – 5. Oktober</p>
-          <p>12. Dezember – 8. Januar</p>
-          <p className="font-normal">
-            (in diesen Zeiträumen kommen die Berichte unregelmäßig)
-          </p>
-        </div>
-      </motion.div>
-    </motion.section>
+      </motion.section>
+    </>
   );
 }

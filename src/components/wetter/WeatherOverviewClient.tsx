@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { CollapsibleSectionHeader } from "@/components/ui/CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import WeatherHero from "./WeatherHero";
-import { CategoryCarousel } from "../ui/CategoryCarousel";
+import { PostCarousel } from "../posts/PostCarousel";
 
 interface WeatherOverviewClientProps {
   posts: {
@@ -37,50 +36,42 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
     const gridPosts = posts[key].slice(0, 3);
 
     return (
-      <>
+      <div key={key} className="mb-6">
         <CollapsibleSectionHeader
           title={title}
           isOpen={openSections[key]}
           onToggle={() => toggleSection(key)}
           isContentCollabsible={false}
         />
-        <AnimatePresence initial={false}>
-          {openSections[key] && (
-            <motion.div
-              key={key}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-foreground-secondary/44 pb-2 md:pb-4 md:mb-2"
-            >
-              <div className="grid grid-cols-1 px-1 md:hidden">
-                {gridPosts.map((post) => (
-                  <PostCard key={post.id} post={post} />
-                ))}
-              </div>
 
-              <div className="hidden md:block">
-                <CategoryCarousel posts={posts[key]} />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </>
+        {openSections[key] && (
+          <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
+            <div className="grid grid-cols-1 md:hidden px-1">
+              {gridPosts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+
+            <div className="hidden md:block">
+              <PostCarousel posts={posts[key]} />
+            </div>
+          </div>
+        )}
+      </div>
     );
   };
 
   return (
-    <motion.section className="max-w-4xl md:max-w-6xl mx-auto">
+    <section className="max-w-4xl md:max-w-6xl mx-auto">
       <WeatherHero />
-      <motion.section className="max-w-4xl md:max-w-6xl mx-auto grid grid-cols-1">
+      <div className="grid grid-cols-1 max-w-4xl md:max-w-6xl mx-auto">
         {renderPosts("vorhersagen", "Vorhersagen")}
         {renderPosts("updates", "Updates")}
         {renderPosts("rueckblicke", "Rückblicke")}
         {renderPosts("biowetter", "Biowetter")}
         {renderPosts("privates", "Privates")}
         {renderPosts("presseschau", "Presseschau")}
-      </motion.section>
-    </motion.section>
+      </div>
+    </section>
   );
 }

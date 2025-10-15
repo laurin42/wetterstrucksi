@@ -1,5 +1,6 @@
-import { WeatherOverviewClient } from "@/components/weather/WeatherOverviewClient";
+import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
 import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
+import { SkeletonWrapper } from "@/components/SkeletonWrapper";
 
 export const revalidate = 300;
 
@@ -17,16 +18,18 @@ export default async function WeatherOverviewPage() {
   const presseschau = await getPostsWithTags(["presseschau"]);
   const privates = await getPostsWithTags(["privates"]);
 
+  const posts = {
+    rueckblicke,
+    updates,
+    vorhersagen,
+    biowetter,
+    presseschau,
+    privates,
+  };
+
   return (
-    <WeatherOverviewClient
-      posts={{
-        rueckblicke,
-        updates,
-        vorhersagen,
-        biowetter,
-        presseschau,
-        privates,
-      }}
-    />
+    <SkeletonWrapper data={Object.values(posts).flat()} minDuration={200}>
+      <WeatherOverviewClient posts={posts} />
+    </SkeletonWrapper>
   );
 }

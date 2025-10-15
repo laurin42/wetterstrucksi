@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
 import { PostWithMeta } from "@tryghost/admin-api";
-import { fixImageUrl } from "@/lib/fixImageUrl";
+import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import Divider from "../ui/Divider";
 
 interface PostProps {

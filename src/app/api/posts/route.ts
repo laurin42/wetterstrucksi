@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import ContentAPI, { GhostPost, PostWithMeta, GhostTag } from "@tryghost/content-api";
-import { fixImageUrl } from "@/lib/fixImageUrl";
+import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 
 const api = new ContentAPI({
   url: process.env.NEXT_PUBLIC_GHOST_API_URL!,

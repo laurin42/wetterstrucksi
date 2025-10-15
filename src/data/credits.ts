@@ -11,4 +11,16 @@ export const credits = [
     author: "unkown",
     platform: "Pixabay"
   },
+      {
+    title: "nebel-blau-pause-morgenstimmung",
+    url: "https://pixabay.com/de/photos/nebel-blau-pause-morgenstimmung-618483/",
+    author: "Jörg Peter",
+    platform: "Pixabay"
+  },
+        {
+    title: "hände-freundschaft-freunde-kinder",
+    url: "https://pixabay.com/de/photos/h%C3%A4nde-freundschaft-freunde-kinder-2847508/",
+    author: "Michael Jarmoluk",
+    platform: "Pixabay"
+  },
 ];
