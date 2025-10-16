@@ -111,9 +111,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       <div className="md:mt-4">
         <DonateBox />
       </div>
-      <div>
-        <Footer />
-      </div>
     </motion.section>
   );
 }

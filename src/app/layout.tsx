@@ -21,7 +21,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1"
         ></meta>
       </head>
-      <body className="md:bg-background sm:bg-foreground h-full">
+      <body className="overflow-y-scroll md:bg-background sm:bg-foreground h-full">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

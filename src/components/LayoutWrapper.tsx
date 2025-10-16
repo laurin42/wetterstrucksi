@@ -2,12 +2,16 @@
 
 import { ReactNode } from "react";
 import Header from "@/components/header/Header";
+import Footer from "./footer/Footer";
 
 export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="main mt-16 md:mt-20">{children}</main>
+      <div className="scroll-container h-[100vh] overflow-y-auto">
+        <main className="main">{children}</main>
+      </div>
+      <Footer />
     </>
   );
 }
