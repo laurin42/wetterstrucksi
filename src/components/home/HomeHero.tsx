@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import { useIsMobile } from "@/lib/useIsMobile";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
-import { useViewportHeight } from "@/lib/useViewportHeight";
+import VacationInfo from "./VacationInfo";
 
 interface HomeHeroProps {
   posts: PostWithMeta[];
@@ -18,7 +19,6 @@ export default function HomeHero({ posts }: HomeHeroProps) {
   const mounted = useMounted();
   const { containerVariantsSync, fadeInVariant, fadeInVariantVerySlow } =
     useMotionVariants();
-  const [mobileSectionOpen, setMobileSectionOpen] = useState(true);
 
   const backgroundImage = mounted
     ? theme === "dark"
@@ -26,7 +26,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
       : `url("/images/home/homeHeroLight.jpg")`
     : undefined;
 
-  const vh = useViewportHeight();
+  const isMobile = useIsMobile();
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     md:flex-row md:justify-between 
     px-0 pt-8 md:pb-8 md:px-8 rounded-t-sm md:mb-2
     h-[calc(100vh-4rem)] md:h-auto
-    bg-cover bg-center
+    bg-cover bg-center header-padding
   "
         style={{ backgroundImage }}
         initial="hidden"
@@ -78,11 +78,15 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           className="md:hidden w-full relative z-10 pt-8 carousel-padding"
           variants={fadeInVariant}
         >
-          {mobileSectionOpen && (
-            <div className="block sm:hidden">
+          {isMobile && (
+            <div className="block md:hidden">
               <PostCarousel posts={posts.slice(0, 3)} />
             </div>
           )}
+        </motion.div>
+
+        <motion.div className="hidden md:block">
+          <VacationInfo />
         </motion.div>
       </motion.section>
     </>

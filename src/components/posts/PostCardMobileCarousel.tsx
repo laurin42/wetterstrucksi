@@ -38,7 +38,7 @@ export function PostCardMobileCarousel({
     flex-shrink-0
     rounded-lg
     overflow-hidden
-    bg-foreground-secondary/80 
+    bg-foreground-secondary/44 backdrop-blur-sm
     shadow-md
     ${className}
   `}
@@ -51,7 +51,7 @@ export function PostCardMobileCarousel({
     hover:bg-header-background/60
   "
       >
-        <div className="relative w-full xs:h-0 postcard-aspect hide-feature-image">
+        <div className="relative w-full postcard-aspect carousel-padding">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}

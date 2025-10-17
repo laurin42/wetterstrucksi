@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -12,7 +13,7 @@ export default function DonateBox() {
     process.env.NEXT_PUBLIC_PAYPAL_LINK ||
     "https://www.paypal.com/paypalme/jstrucks";
 
-  const backgroundImage = `url("/images/donationInfo/donationHero.jpg")`;
+  const backgroundImage = `url("/images/donationInfo/donationHeroLight.jpg")`;
   const { sectionAnimation } = useMotionVariants();
 
   return (
@@ -20,7 +21,7 @@ export default function DonateBox() {
       className="
         relative w-full flex flex-col items-center 
         md:flex-row justify-center 
-        h-[calc(100vh-4rem)] md:h-[80vh]
+        h-[94vh] md:h-[80vh]
         bg-cover bg-center md:bg-center md:rounded-sm
       "
       style={{ backgroundImage }}
@@ -34,13 +35,13 @@ export default function DonateBox() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex flex-col items-center mx-8 md:mx-0 justify-center p-12 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
+        className="flex flex-col items-center mx-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
-        <h3 className="font-thin text-2xl tracking-wider pb-2 border-b-[1px] border-accent/40">
+        <h3 className="font-thin text-4xl tracking-wider pb-2 border-b-[1px] border-text/40">
           Deine Spende für mich
         </h3>
 
-        <p className="text-md text-left mb-4 max-w-md py-4 md:pb-8 font-normal">
+        <p className="text-md text-left mb-4 max-w-md pt-4 px-4 pb-4 md:px-8 md:pb-8 font-normal">
           Wenn dir meine Wetterseite gefällt und du sie unterstützen möchtest,
           kannst du mir über PayPal gerne eine kleine Spende hinterlassen 🙂
         </p>
@@ -53,12 +54,12 @@ export default function DonateBox() {
               min="1"
               onChange={(e) => setAmount(e.target.value)}
               className="
-                w-24 text-center px-3 py-2 rounded-md 
+                w-24 md:w-32 text-center px-3 py-2 rounded-md 
                 bg-card/60 text-text border border-border/60
                 focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent/70
                 transition-all duration-300 ease-in-out 
                 shadow-inner hover:shadow-md hover:border-accent/40
-                backdrop-blur-sm
+                backdrop-blur-2xl
               "
             />
             <span className="absolute -right-10 top-2.5 text-sm text-text-white-transparent select-none">
@@ -72,13 +73,22 @@ export default function DonateBox() {
           target="_blank"
           rel="noopener noreferrer"
           className="
-            inline-block bg-accent text-white font-semibold 
-            px-12 py-3 rounded-md hover:bg-accent/80
-            transition-all duration-300 ease-in-out 
-            shadow-md hover:shadow-lg active:scale-[0.98]
+            inline-flex items-center justify-center gap-2
+    bg-accent text-white font-semibold 
+    px-10 py-3 rounded-md hover:bg-accent/80
+    transition-all duration-300 ease-in-out 
+    shadow-md hover:shadow-lg active:scale-[0.98]
+  
           "
         >
-          Jetzt spenden
+          <span>mit</span>
+          <Image
+            src="/images/donationInfo/payPalLogo.svg"
+            alt="PayPal Logo"
+            width={100}
+            height={100}
+          />{" "}
+          <span>bezahlen</span>
         </Link>
       </motion.div>
     </motion.section>

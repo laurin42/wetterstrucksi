@@ -8,7 +8,7 @@ export function useIsMobile() {
 
   useEffect(() => {
     setHydrated(true); 
-    const mql = window.matchMedia("(max-width: 639px)"); 
+    const mql = window.matchMedia("(max-width: 776px)"); 
     const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     setIsMobile(mql.matches);
     mql.addEventListener("change", handleChange);

@@ -8,9 +8,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <div className="scroll-container h-[100vh] overflow-y-auto">
-        <main className="main">{children}</main>
-      </div>
+      <main className="main md:pt-8 md:pb-8">{children}</main>
       <Footer />
     </>
   );

@@ -66,6 +66,10 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
     });
   }, [emblaApi, onSelect]);
 
+  useEffect(() => {
+    if (emblaApi) emblaApi.reInit();
+  }, [isMobile, emblaApi]);
+
   return (
     <motion.div
       initial="hidden"
@@ -83,9 +87,6 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
         <div className="flex">
           {normalizedPosts.map((post) => (
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              variants={sectionAnimation}
               key={post.id}
               className={clsx(
                 "flex-shrink-0 px-1",
@@ -125,7 +126,7 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
       </button>
 
       {!isMobile && (
-        <div className="flex justify-center mt-8 space-x-2">
+        <div className="flex justify-center mt-8 md:mb-4 space-x-2">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}

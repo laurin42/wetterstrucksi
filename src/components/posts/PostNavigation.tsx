@@ -10,12 +10,12 @@ export default async function PostNavigation({ slug }: { slug: string }) {
   const next = index < posts.length - 1 ? posts[index + 1] : null;
 
   return (
-    <div className="grid grid-cols-2 gap-2 mt-4 max-w-4xl mx-auto">
+    <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:pb-0 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent ">
       <div className="flex justify-end">
         {prev ? (
           <Link
             href={`/posts/${prev.slug}`}
-            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-header-background/44 rounded-l-md text-center w-full hover:bg-accent-dim transition duration-300"
+            className="flex justify-center items-center gap-2 px-4 py-3 bg-accent/80 rounded-l-sm w-full hover:bg-accent transition duration-300"
           >
             <MdOutlineKeyboardDoubleArrowLeft className="text-2xl md:text-3xl flex-shrink-0" />
             <span className="line-clamp-2 md:line-clamp-none">
@@ -26,12 +26,11 @@ export default async function PostNavigation({ slug }: { slug: string }) {
           <span />
         )}
       </div>
-
       <div className="flex justify-end">
         {next ? (
           <Link
             href={`/posts/${next.slug}`}
-            className="flex items-center justify-center gap-2 px-4 py-3 md:px-6 md:py-4 bg-header-background/44 rounded-r-md text-center w-full hover:bg-accent-dim transition duration-300"
+            className="flex justify-center items-center gap-2 px-4 py-3 bg-accent/80 rounded-r-sm w-full hover:bg-accent transition duration-300"
           >
             <span className="line-clamp-2 md:line-clamp-none">
               {next.title}

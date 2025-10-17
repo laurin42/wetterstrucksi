@@ -23,32 +23,27 @@ export function PostCard({ post, className }: PostCardProps) {
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.jpg";
 
-  const { sectionAnimation, containerVariants, fadeInVariantSlow } =
-    useMotionVariants();
+  const { sectionAnimation, viewportOnce } = useMotionVariants();
 
   return (
     <motion.div
+      viewport={viewportOnce}
       initial="hidden"
       whileInView="visible"
-      variants={containerVariants}
-      className={`group block md:flex md:flex-col md:aspect-[3/4] w-full ... ${className}`}
+      variants={sectionAnimation}
+      className={`block md:flex md:flex-col md:aspect-[3/4] w-full  ... ${className}`}
     >
       <Link
         href={`/posts/${post.slug}`}
-        className="group block w-full overflow-hidden bg-foreground 
+        className="block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 hover h-full"
       >
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionAnimation}
-          className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch"
-        >
+        <motion.div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
             fill
-            className="object-cover object-center transition-transform duration-500 group-hover:scale-104"
+            className="object-cover object-center transition-transform duration-500"
           />
 
           <div className="absolute inset-0 bg-black/10"></div>
@@ -71,12 +66,7 @@ export function PostCard({ post, className }: PostCardProps) {
             </h2>
 
             {post.og_description && (
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                variants={fadeInVariantSlow}
-                className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal"
-              >
+              <motion.p className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal">
                 {truncateWords(post.og_description, 20)}
               </motion.p>
             )}

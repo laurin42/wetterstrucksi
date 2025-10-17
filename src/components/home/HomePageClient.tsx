@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
@@ -9,11 +9,9 @@ import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsMobile } from "@/lib/useIsMobile";
-import VacationInfo from "./VacationInfo";
 import MorePostsLink from "../posts/MorePostsLink";
 import { AboutShort } from "../about/AboutShort";
 import DonateBox from "./Donation";
-import Footer from "../footer/Footer";
 
 interface HomePageClientProps {
   posts: PostWithMeta[];
@@ -60,9 +58,8 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
 
       {openSections.neusteBeitraege && (
         <motion.div
-          variants={sectionAnimation}
           key="neusteBeitraege"
-          className="md:bg-foreground/44 md:py-2 md:mb-4"
+          className="md:bg-foreground/44 backdrop-blur-sm md:py-2 md:mb-4"
         >
           {normalizedPosts.length === 0 ? (
             <p className="text-muted-foreground px-4">
@@ -71,10 +68,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           ) : (
             <>
               {isMobile && (
-                <motion.div
-                  variants={sectionAnimation}
-                  className="grid grid-cols-1 px-0"
-                >
+                <motion.div className="grid grid-cols-1 px-0">
                   {normalizedPosts.slice(3, 9).map((post) => (
                     <PostCard key={post.id} post={post} />
                   ))}
@@ -89,7 +83,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </motion.div>
               )}
-              <div className="pt-8 pb-6 bg-foreground md:bg-transparent">
+              <div className="block md:hidden pt-8 pb-6 bg-foreground backdrop-blur-sm md:bg-transparent">
                 <MorePostsLink
                   href="/weather"
                   label="weiterführende Artikel »"
@@ -99,10 +93,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           )}
         </motion.div>
       )}
-
-      <div>
-        <VacationInfo />
-      </div>
 
       <div className="md:mt-4">
         <AboutShort />

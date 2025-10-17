@@ -60,6 +60,8 @@ export function useMotionVariants() {
     },
   };
 
+
+
   const sectionAnimation: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -69,6 +71,8 @@ export function useMotionVariants() {
     closed: { height: 0, opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
     open: { height: "auto", opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
   };
+
+  const viewportOnce = { once: true, amount: 0.2 };
 
   return {
     containerVariants,
@@ -80,5 +84,6 @@ export function useMotionVariants() {
     slideInLeftVariant,
     sectionAnimation,
     sidebarVariants,
+    viewportOnce
   };
 }

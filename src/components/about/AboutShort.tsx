@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import MorePostsLink from "../posts/MorePostsLink";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export function AboutShort() {
@@ -9,8 +8,9 @@ export function AboutShort() {
   return (
     <motion.section
       className="relative w-full flex flex-col items-center 
-      justify-start bg-foreground
-      h-[calc(100vh-4rem)] md:h-[70vh]"
+      justify-center bg-foreground-secondary/44 backdrop-blur-sm
+        h-[94vh] md:h-auto
+      "
       initial="hidden"
       whileInView="visible"
       variants={sectionAnimation}
@@ -19,13 +19,13 @@ export function AboutShort() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex flex-col items-center mx-8 md:mx-0 justify-center pt-16 md:py-12 md:px-32"
+        className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-12 md:px-32"
       >
-        <h2 className="text-4xl font-thin tracking-wide text-center text-text mb-16">
+        <h2 className="text-4xl font-thin tracking-wide text-left text-text">
           Über wetterstrucksi.de
         </h2>
 
-        <p className="leading-relaxed mb-8">
+        <p className="leading-relaxed">
           Ich bin Jens Strucks und u. a. Hobby-Meteorologe. Auf Facebook und
           Instagram verfolgen mehr als 10.000 Menschen seit 2011 meine täglichen
           Vorhersagen sowie sachlichen Auseinandersetzungen zum Wetter. Dabei
@@ -38,14 +38,6 @@ export function AboutShort() {
           Wohlfühloase zu schaffen, bei der sich ausgelassen über das Wetter
           unterhalten werden kann.
         </p>
-      </motion.div>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        variants={sectionAnimation}
-        className="mt-16 md:mt-16"
-      >
-        <MorePostsLink href="/about" label="Erfahre hier mehr über mich »" />
       </motion.div>
     </motion.section>
   );

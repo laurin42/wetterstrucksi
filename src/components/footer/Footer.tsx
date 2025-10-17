@@ -2,21 +2,21 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function Footer() {
+  const { sectionAnimation, viewportOnce } = useMotionVariants();
+
   return (
-    <motion.footer
-      className="
-        w-full mx-auto text-text py-8 bg-accent
-        flex flex-col md:flex-row justify-between items-center gap-6
-      "
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      {/* Links */}
-      <motion.section className="flex md:w-6xl mx-auto">
-        <div className="w-full flex flex-row gap-4 text-text-white md:gap-6 items-center">
+    <footer className="w-full mx-auto text-text py-6 bg-footer flex flex-col md:flex-row justify-between items-center gap-6">
+      <motion.section
+        variants={sectionAnimation}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="flex flex-col md:flex-row md:w-6xl md:mx-auto"
+      >
+        <div className="w-full flex justify-center md:justify-start flex-row gap-4 text-text-white md:gap-6 items-center">
           <Link
             href="/impressum"
             className="hover:text-header-background hover:scale-[1.01] transition-all duration-200"
@@ -32,7 +32,7 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div className="w-full justify-end flex flex-col md:flex-row gap-x-2 text-sm text-text-white">
+        <div className="w-full justify-end items-center flex flex-col md:flex-row gap-x-2 text-sm text-text-white">
           <p>
             © 2025{" "}
             <Link
@@ -46,6 +46,6 @@ export default function Footer() {
           <p>Webdesign & Umsetzung: Laurin Schmidt</p>
         </div>
       </motion.section>
-    </motion.footer>
+    </footer>
   );
 }
