@@ -1,6 +1,6 @@
 import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
 import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { SkeletonWrapper } from "@/components/SkeletonWrapper";
 
 export const revalidate = 60;

@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { PostCard } from "@/components/posts/PostCard";
 import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";

@@ -6,7 +6,7 @@ import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { PostCarousel } from "../posts/PostCarousel";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
 
 interface HomeHeroProps {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostCardMobileCarouselProps {

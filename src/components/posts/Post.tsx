@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 

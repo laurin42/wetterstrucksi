@@ -1,6 +1,6 @@
 import PostNavigation from "@/components/posts/PostNavigation";
 import Post from "@/components/posts/Post";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { getPostsWithMeta } from "@/app/api/posts/getPostsWithMeta";
 
 export default async function PostPage({

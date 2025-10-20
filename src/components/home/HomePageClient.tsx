@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
-import { PostWithMeta } from "@tryghost/admin-api";
+import { PostWithMeta } from "@tryghost/content-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
