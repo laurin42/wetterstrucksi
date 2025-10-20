@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { FaAngleUp, FaAngleDown, FaFilter } from "react-icons/fa6";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import { ResetFilter } from "../posts/filter/ResetFilter";
 
 interface CollapsibleSectionHeaderProps {
   title: string;
@@ -12,6 +13,10 @@ interface CollapsibleSectionHeaderProps {
   isContentCollabsible?: boolean;
   onFilterToggle?: () => void;
   mobileOpen?: boolean;
+
+  onMonthSelect?: (month: string | null) => void;
+  onYearSelect?: (year: number | null) => void;
+  onSortChange?: (order: "newest" | "oldest") => void;
 }
 
 export function CollapsibleSectionHeader({
@@ -21,11 +26,14 @@ export function CollapsibleSectionHeader({
   isContentCollabsible = true,
   onFilterToggle,
   mobileOpen = false,
+  onMonthSelect,
+  onYearSelect,
+  onSortChange,
 }: CollapsibleSectionHeaderProps) {
   const { fadeInVariantSlow } = useMotionVariants();
 
   return (
-    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm md:rounded-t-sm flex items-center justify-between select-none">
+    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none">
       <motion.span
         className="text-xl md:text-2xl font-semibold tracking-wide"
         variants={fadeInVariantSlow}
@@ -35,7 +43,14 @@ export function CollapsibleSectionHeader({
         {title}
       </motion.span>
 
-      <div className="flex items-center gap-3">
+      <div className="flex justify-end">
+        {onMonthSelect && onYearSelect && onSortChange && (
+          <ResetFilter
+            onMonthSelect={onMonthSelect}
+            onYearSelect={onYearSelect}
+            onSortChange={onSortChange}
+          />
+        )}
         {onFilterToggle && (
           <motion.button
             onClick={(e) => {
@@ -47,10 +62,6 @@ export function CollapsibleSectionHeader({
             initial="hidden"
             animate="visible"
           >
-            <FaFilter
-              size={22}
-              className="hover:text-accent-dim transition-colors duration-420"
-            />
             <motion.div
               key={mobileOpen ? "up" : "down"}
               initial={{ rotate: mobileOpen ? -180 : 180 }}

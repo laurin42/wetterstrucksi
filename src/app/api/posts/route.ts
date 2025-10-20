@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import ContentAPI, { GhostPost, PostWithMeta, GhostTag } from "@tryghost/content-api";
+import ContentAPI, { GhostPost, PostWithMeta, GhostTag } from "@tryghost/admin-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 
 const api = new ContentAPI({

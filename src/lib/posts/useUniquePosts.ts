@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 
 export function useUniquePosts(posts: PostWithMeta[]) {
   const [uniquePosts, setUniquePosts] = useState<PostWithMeta[]>([]);

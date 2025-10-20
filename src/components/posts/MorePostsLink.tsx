@@ -22,7 +22,7 @@ export default function MorePostsLink({ href, label }: MorePostsLinkProps) {
     >
       <Link
         href={href}
-        className="inline-flex items-center gap-2 px-4 py-3 rounded-md bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+        className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
       >
         {label}
       </Link>

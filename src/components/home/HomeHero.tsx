@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { PostCarousel } from "../posts/PostCarousel";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 import VacationInfo from "./VacationInfo";
 
 interface HomeHeroProps {

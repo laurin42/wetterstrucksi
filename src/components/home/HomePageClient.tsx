@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
@@ -12,6 +12,7 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import MorePostsLink from "../posts/MorePostsLink";
 import { AboutShort } from "../about/AboutShort";
 import DonateBox from "./Donation";
+import { Contact } from "../Contact";
 
 interface HomePageClientProps {
   posts: PostWithMeta[];
@@ -83,11 +84,8 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </motion.div>
               )}
-              <div className="block md:hidden pt-8 pb-6 bg-foreground backdrop-blur-sm md:bg-transparent">
-                <MorePostsLink
-                  href="/weather"
-                  label="weiterführende Artikel »"
-                />
+              <div className="block md:hidden pt-8 pb-16 bg-foreground backdrop-blur-sm md:bg-transparent">
+                <MorePostsLink href="/weather" label="weiterlesen »" />
               </div>
             </>
           )}
@@ -100,6 +98,10 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
 
       <div className="md:mt-4">
         <DonateBox />
+      </div>
+
+      <div className="md:mt-4">
+        <Contact />
       </div>
     </motion.section>
   );

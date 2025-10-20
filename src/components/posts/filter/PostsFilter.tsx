@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { MonthsFilter } from "./MonthsFilter";
 import { YearsFilter } from "./YearsFilter";
 import { SortFilter } from "./SortFilter";
-import { ResetFilter } from "./ResetFilter";
 import { FilterHeader } from "./FilterHeader";
 import {
   Accordion,
@@ -14,6 +13,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Calendar, SortDesc } from "lucide-react";
+import { IoCalendar } from "react-icons/io5";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface FilterCallbacks {
@@ -39,8 +39,6 @@ export function PostsFilter({
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const { sidebarVariants } = useMotionVariants();
 
-  const callbacks = { onMonthSelect, onYearSelect, onSortChange };
-
   return (
     <>
       <FilterHeader
@@ -50,6 +48,9 @@ export function PostsFilter({
         onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
         isOpen={true}
         mobileOpen={sidebarOpen}
+        onMonthSelect={onMonthSelect}
+        onYearSelect={onYearSelect}
+        onSortChange={onSortChange}
       />
 
       <motion.div
@@ -62,7 +63,7 @@ export function PostsFilter({
           <AccordionItem value="months">
             <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-accent" />
+                <IoCalendar className="w-5 h-5 text-accent" />
                 <span>Monat</span>
               </div>
             </AccordionTrigger>
@@ -101,8 +102,6 @@ export function PostsFilter({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-
-        <ResetFilter {...callbacks} />
       </motion.div>
     </>
   );

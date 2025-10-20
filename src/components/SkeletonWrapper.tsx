@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Skeleton } from "./Skeleton";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 
 interface SkeletonWrapperProps {
   data: PostWithMeta[] | null;

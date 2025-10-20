@@ -11,6 +11,7 @@ import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 interface PostCardMobileCarouselProps {
   post: PostWithMeta;
   className?: string;
+  isNewest?: boolean;
 }
 
 function truncateWords(text?: string, maxWords?: number) {
@@ -23,6 +24,7 @@ function truncateWords(text?: string, maxWords?: number) {
 export function PostCardMobileCarousel({
   post,
   className,
+  isNewest,
 }: PostCardMobileCarouselProps) {
   const feature_image_url = fixImageUrl(post.feature_image);
   const imageSrc =
@@ -59,6 +61,11 @@ export function PostCardMobileCarousel({
             className="object-cover object-center transition-transform duration-500 hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/20" />
+          {isNewest && (
+            <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+              Neuster Beitrag
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col p-3 gap-1 min-h-0">

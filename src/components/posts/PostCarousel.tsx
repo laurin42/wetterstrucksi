@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 import { PostCard } from "@/components/posts/PostCard";
 import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
@@ -14,6 +14,7 @@ import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 interface PostCarouselProps {
   posts: PostWithMeta[];
   className?: string;
+  isNewest?: boolean;
 }
 
 export function PostCarousel({ posts, className }: PostCarouselProps) {
@@ -82,10 +83,10 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
         whileInView="visible"
         variants={sectionAnimation}
         ref={emblaRef}
-        className="overflow-hidden cursor-grab"
+        className="overflow-hidden cursor-grab md:px-1"
       >
         <div className="flex">
-          {normalizedPosts.map((post) => (
+          {normalizedPosts.map((post, index) => (
             <motion.div
               key={post.id}
               className={clsx(
@@ -94,9 +95,13 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
               )}
             >
               {isMobile ? (
-                <PostCardMobileCarousel post={post} className="mx-auto" />
+                <PostCardMobileCarousel
+                  post={post}
+                  className="mx-auto"
+                  isNewest={index === 0}
+                />
               ) : (
-                <PostCard post={post} />
+                <PostCard post={post} isNewest={index === 0} />
               )}
             </motion.div>
           ))}

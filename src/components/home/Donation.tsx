@@ -37,7 +37,7 @@ export default function DonateBox() {
         variants={sectionAnimation}
         className="flex flex-col items-center mx-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
-        <h3 className="font-thin text-4xl tracking-wider pb-2 border-b-[1px] border-text/40">
+        <h3 className="font-thin text-3xl tracking-wider pb-2 border-b-[1px] border-text/40">
           Deine Spende für mich
         </h3>
 
@@ -75,7 +75,7 @@ export default function DonateBox() {
           className="
             inline-flex items-center justify-center gap-2
     bg-accent text-white font-semibold 
-    px-10 py-3 rounded-md hover:bg-accent/80
+    px-10 py-3 rounded-full hover:bg-accent/80
     transition-all duration-300 ease-in-out 
     shadow-md hover:shadow-lg active:scale-[0.98]
   

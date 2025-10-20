@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CollapsibleSectionHeader } from "@/components/ui/CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
-import { PostWithMeta } from "@tryghost/content-api";
+import { PostWithMeta } from "@tryghost/admin-api";
 import WeatherHero from "./WeatherHero";
 import { PostCarousel } from "../posts/PostCarousel";
 

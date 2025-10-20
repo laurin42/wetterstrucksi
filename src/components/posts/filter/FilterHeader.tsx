@@ -9,6 +9,9 @@ interface FilterHeaderProps {
   onFilterToggle?: () => void;
   isOpen?: boolean;
   mobileOpen?: boolean;
+  onMonthSelect: (month: string | null) => void;
+  onYearSelect: (year: number | null) => void;
+  onSortChange: (order: "newest" | "oldest") => void;
 }
 
 const monthLabels = [
@@ -33,15 +36,18 @@ export function FilterHeader({
   onFilterToggle,
   isOpen = true,
   mobileOpen,
+  onMonthSelect,
+  onSortChange,
+  onYearSelect,
 }: FilterHeaderProps) {
   const title =
     selectedMonth || selectedYear
-      ? `Alle Beiträge${
+      ? `Filter | Beiträge${
           selectedMonth !== null
             ? ` im ${monthLabels[parseInt(selectedMonth, 10)]}`
             : ""
         }${selectedYear !== null ? ` ${selectedYear}` : ""}`
-      : "Alle Beiträge";
+      : "Filter | Alle Beiträge";
 
   return (
     <CollapsibleSectionHeader
@@ -51,6 +57,9 @@ export function FilterHeader({
       isContentCollabsible={false}
       onFilterToggle={onFilterToggle}
       mobileOpen={mobileOpen}
+      onMonthSelect={onMonthSelect}
+      onYearSelect={onYearSelect}
+      onSortChange={onSortChange}
     />
   );
 }

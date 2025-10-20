@@ -67,6 +67,39 @@ export interface PostWithMeta {
   authors?: GhostAuthor[];
 }
 
+
+export interface GhostTag {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+}
+
+export interface GhostAuthor {
+  id: string;
+  name: string;
+  slug: string;
+  profile_image?: string;
+  bio?: string;
+}
+
+  export interface GhostContentAPIOptions {
+    url: string;
+    key: string;
+    version: string;
+  }
+
+  export interface GhostPage {
+    id: string;
+    title: string;
+    slug: string;
+    html?: string;
+    plaintext?: string;
+    created_at: string;
+    updated_at?: string;
+    published_at?: string;
+  }
+
 export interface LocalPostWithMeta {
   id: string;
   title: string;

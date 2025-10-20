@@ -19,14 +19,14 @@ export default function Footer() {
         <div className="w-full flex justify-center md:justify-start flex-row gap-4 text-text-white md:gap-6 items-center">
           <Link
             href="/impressum"
-            className="hover:text-header-background hover:scale-[1.01] transition-all duration-200"
+            className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
           >
             Impressum
           </Link>
           <span>|</span>
           <Link
             href="/datenschutz"
-            className="hover:text-header-background hover:scale-[1.01] transition-all duration-200"
+            className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
           >
             Datenschutz
           </Link>
@@ -37,7 +37,7 @@ export default function Footer() {
             © 2025{" "}
             <Link
               href="/about"
-              className="hover:text-header-background hover:scale-[1.01] transition-all duration-200"
+              className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
             >
               Jens Strucks
             </Link>{" "}

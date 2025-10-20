@@ -9,6 +9,7 @@ import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 interface PostCardProps {
   post: PostWithMeta;
   className?: string;
+  isNewest?: boolean;
 }
 
 function truncateWords(text?: string, maxWords?: number) {
@@ -18,7 +19,7 @@ function truncateWords(text?: string, maxWords?: number) {
   return words.slice(0, maxWords).join(" ") + "...";
 }
 
-export function PostCard({ post, className }: PostCardProps) {
+export function PostCard({ post, className, isNewest }: PostCardProps) {
   const feature_image_url = fixImageUrl(post.feature_image);
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.jpg";
@@ -46,7 +47,13 @@ export function PostCard({ post, className }: PostCardProps) {
             className="object-cover object-center transition-transform duration-500"
           />
 
-          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="absolute inset-0 bg-black/10">
+            {isNewest && (
+              <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+                Neuster Beitrag
+              </span>
+            )}
+          </div>
         </motion.div>
 
         <div className="flex flex-row md:flex-col gap-4 px-4 py-4 md:p-5 h-full">

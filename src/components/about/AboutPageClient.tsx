@@ -7,6 +7,7 @@ import { AboutStory } from "./AboutStory";
 import { FaqAccordion } from "@/components/about/FaqAccordeon";
 import Divider from "../ui/Divider";
 import { faqItems } from "@/lib/faq";
+import { Contact } from "../Contact";
 
 export default function AboutPageClient() {
   const sectionAnimation = {
@@ -81,25 +82,7 @@ export default function AboutPageClient() {
         </h2>
         <FaqAccordion items={faqItems} />
       </motion.section>
-
-      <Divider />
-
-      <motion.section
-        className="flex flex-col justify-start text-center mx-auto min-h-[24vh]"
-        variants={sectionAnimation}
-        initial="hidden"
-        whileInView="visible"
-      >
-        <h2 className="text-3xl font-light text-text mb-6">
-          Lust, in Kontakt zu treten?
-        </h2>
-        <a
-          href="/contact"
-          className="mx-auto px-6 py-3 rounded-full bg-accent text-text-white font-medium shadow-md hover:bg-accent-dim transition max-w-[240px]"
-        >
-          Schreib mir eine Nachricht
-        </a>
-      </motion.section>
+      <Contact />
     </>
   );
 }
