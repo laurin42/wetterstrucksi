@@ -16,16 +16,16 @@ export default function Impressum() {
         </h2>
         <p className="flex flex-col max-w-xs">
           Jens Strucks Pestalozzistraße 3 52134 Herzogenrath{" "}
-          <p>Telefon: +49 (0) 152 24 14 38 26 </p>
-          <p>E-Mail: kontakt@wetterstrucksi.de</p>
         </p>
+        <p>Telefon: +49 (0) 152 24 14 38 26 </p>
+        <p>E-Mail: kontakt@wetterstrucksi.de</p>
         <p className="flex flex-col max-w-xs">
           Handelsregister: reiche ich nach Registergericht: Amtsgericht
           Bielefeld
-          <p>
-            Umsatzsteuer-ID Umsatzsteuer-Identifikationsnummer gemäß § 27 a
-            Umsatzsteuergesetz: reiche ich nach
-          </p>
+        </p>
+        <p>
+          Umsatzsteuer-ID Umsatzsteuer-Identifikationsnummer gemäß § 27 a
+          Umsatzsteuergesetz: reiche ich nach
         </p>
         <p>
           Redaktionell Verantwortlicher Jens Strucks Kreuzberger Str. 13 33619
@@ -34,7 +34,8 @@ export default function Impressum() {
         <p>
           EU-Streitschlichtung Die Europäische Kommission stellt eine{" "}
           <Link
-            href="https://ec.europa.eu/consumers/odr"
+            href="https://consumer-redress.ec.europa.eu/index_de"
+            target="_blank"
             className="underline text-accent"
           >
             Plattform{" "}
