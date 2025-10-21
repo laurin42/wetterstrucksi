@@ -1,15 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = `url("/images/bioHero.jpg")`;
+  const backgroundImage = `url("/images/about/bioHero.jpg")`;
+
+  const { sectionAnimation, fadeInVariantVerySlow, viewportOnce } =
+    useMotionVariants();
 
   return (
-    <motion.section
-      className="relative w-full h-[60vh] md:h-[70vh] mb-8 md:mb-12 flex items-end"
-      initial="hidden"
-      animate="visible"
+    <div
+      className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[60vh] flex items-end md:pb-0"
       style={{
         backgroundImage,
         backgroundSize: "cover",
@@ -18,12 +20,27 @@ export default function AboutHero() {
     >
       <div className="absolute inset-0 bg-black/60 z-0" />
 
-      <motion.div className="relative z-10 p-6 md:p-12">
-        <h1 className="text-4xl mb-1 md:text-5xl text-text-white">Über mich</h1>
-        <h2 className="text-xl font-thin text-text-white">
-          Jens Strucks alias Wetterstrucksi
-        </h2>
-      </motion.div>
-    </motion.section>
+      <div className="relative z-10 px-4 md:px-32">
+        <motion.h1
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-5xl mb-2 md:text-5xl font-thin text-text-white tracking-wide"
+        >
+          <em>Über mich</em>
+        </motion.h1>
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInVariantVerySlow}
+          viewport={viewportOnce}
+          className="text-2xl text-text-white font-thin text-left pb-2 mb-4 border-b-[1px] border-text-white/40 md:border-none"
+        >
+          <span className="tracking-wide">Jens Strucks </span>alias
+          Wetterstrucksi
+        </motion.h2>
+      </div>
+    </div>
   );
 }

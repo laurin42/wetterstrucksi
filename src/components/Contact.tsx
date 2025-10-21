@@ -8,35 +8,58 @@ import {
 } from "react-icons/fa6";
 
 export function Contact() {
-  const { sectionAnimation } = useMotionVariants();
+  const { sectionAnimation, viewportOnce } = useMotionVariants();
   return (
-    <motion.section
-      className="flex flex-col justify-center bg-foreground-secondary/44 backdrop-blur-sm text-left mx-auto min-h-[94vh] md:min-h-auto"
-      variants={sectionAnimation}
-      initial="hidden"
-      whileInView="visible"
-    >
+    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/44 backdrop-blur-sm text-left mx-auto min-h-[94vh] md:min-h-auto md:mt-2">
       <div className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-12 md:px-32">
-        <h2 className="text-3xl font-light text-text tracking-wider mb-6 pb-2 border-b-[1px] border-text/40">
+        <motion.h2
+          variants={sectionAnimation}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="text-3xl font-light text-text tracking-wider mb-6 pb-2 border-b-[1px] border-text/40"
+        >
           Lasst uns Kontakt aufnehmen
-        </h2>
-        <p className="leading-relaxed">
+        </motion.h2>
+        <motion.p
+          variants={sectionAnimation}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
           Mir ist eine übersichtliche und strukturierte Reise durch die
           verschiedenen Bereiche meine Homepage sehr wichtig. Neben den
           inhaltlich qualitativen Berichte zum Wetter wünsche ich mir, dass ihr
           euch hier wohl fühlt und euch gut und gerne zurechtfindet.
-        </p>
+        </motion.p>
         <div className="flex flex-col items-center justify-around gap-y-12 pt-6">
-          <a
+          <motion.a
+            variants={sectionAnimation}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
             href="/contact"
             className="max-w-xl inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
           >
             Schreibt mir
-          </a>
-          <p className="text-2xl font-thin tracking-wide">
+          </motion.a>
+          <motion.p
+            variants={sectionAnimation}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="text-2xl font-thin tracking-wide"
+          >
             oder folgt mir auf:
-          </p>
-          <div className="flex items-center gap-6 text-3xl text-accent">
+          </motion.p>
+          <motion.div
+            variants={sectionAnimation}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="flex items-center gap-6 text-3xl text-accent"
+          >
             <a
               href="https://www.facebook.com/jensstrucks/"
               target="_blank"
@@ -74,9 +97,9 @@ export function Contact() {
             >
               <FaLinkedin className="hover:text-accent/80 transition-colors" />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

@@ -1,130 +1,253 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const sectionAnimation = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export function AboutStory() {
+  const { sectionAnimation, viewportOnce } = useMotionVariants();
+
   return (
-    <motion.section
-      className="max-w-6xl mx-auto bg-card/40 backdrop-blur-md p-6 rounded-md space-y-8 min-h-[80vh] sm:min-h-screen md:my-16"
-      initial="hidden"
-      whileInView="visible"
-      variants={sectionAnimation}
-    >
-      <h2 className="text-4xl font-light text-center text-text mb-8 md:mb-12">
-        Wie alles begann
-      </h2>
+    <section className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-4 space-y-8 h-auto">
+      <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
+        <motion.h2
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-4xl font-light text-left md:text-center text-text mb-8"
+        >
+          Wie alles begann
+        </motion.h2>
 
-      <p className="leading-relaxed">
-        Ich bin Jens Strucks und u. a. Hobby-Meteorologe. Auf Facebook und
-        Instagram verfolgen mehr als 10.000 Menschen seit 2011 meine täglichen
-        Vorhersagen sowie sachlichen Auseinandersetzungen zum Wetter. Dabei ist
-        es mir wichtig, einen Wetterdienst zur Verfügung zu stellen, der
-        unabhängig arbeitet und die beste Vorhersage für deine Stadt bietet.
-      </p>
-      <p className="leading-relaxed">
-        Mit diesem Vertrauen arbeite ich seit mehr als 10 Jahren sehr
-        leidenschaftlich und seriös. Mein Ziel ist es, mit dieser Seite eine
-        Wohlfühloase zu schaffen, bei der sich ausgelassen über das Wetter
-        unterhalten werden kann.
-      </p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
+          Meine Leidenschaft für das Wetter begann 2005. Im zarten Alter von 11
+          erzählte ich meiner Tante davon, wie faszinierend die Wolken sind und
+          um welche Wolke es sich handelt, die ich in einem Buch entdeckt habe.
+          Zuerst habe ich Wolkenformationen mit Radarbilden abgeglichen – so
+          erkannte ich schnell Muster, die mir verrieten, ob es bald regnen
+          könnte.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Später beschäftigte ich mich mit Modellberechnungen der Wettermodelle
+          und analysierte diese. So konnte ich mich im Bereich der
+          Wetterprognosen für die kommenden Tage spezialisieren.
+        </motion.p>
 
-      <p className="leading-relaxed">
-        Meine Leidenschaft für das Wetter begann 2005. Im zarten Alter von 11
-        erzählte ich meiner Tante davon, wie faszinierend die Wolken sind und um
-        welche Wolke es sich handelt, die ich in einem Buch entdeckt habe.
-        Zuerst habe ich Wolkenformationen mit Radarbilden abgeglichen – so
-        erkannte ich schnell Muster, die mir verrieten, ob es bald regnen
-        könnte.
-      </p>
-      <p className="leading-relaxed md:mb-12">
-        Später beschäftigte ich mich mit Modellberechnungen der Wettermodelle
-        und analysierte diese. So konnte ich mich im Bereich der Wetterprognosen
-        für die kommenden Tage spezialisieren.
-      </p>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+        >
+          Der Start von „Wetterstrucksi“
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
+          2010 kam mir die Idee, meine Prognosen nicht nur mit Freunden und
+          Familie zu teilen, sondern einer breiteren Masse zugänglich zu machen.
+          2011 entstand dann die Seite „Wetterstrucksi Düsseldorf“ – heute mit
+          über 10.000 Followern.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Durch meine Verbundenheit im Handballverein SG Unterrath in Düsseldorf
+          konnte ich von Anfang an auf eine gewisse Reichweite bauen. Aus
+          anfänglich 500 Menschen wuchs schnell eine lebendige Community.
+        </motion.p>
 
-      <h3 className="text-2xl font-light text-center text-text">
-        Der Start von „Wetterstrucksi“
-      </h3>
-      <p className="leading-relaxed">
-        2010 kam mir die Idee, meine Prognosen nicht nur mit Freunden und
-        Familie zu teilen, sondern einer breiteren Masse zugänglich zu machen.
-        2011 entstand dann die Seite „Wetterstrucksi Düsseldorf“ – heute mit
-        über 10.000 Followern.
-      </p>
-      <p className="leading-relaxed md:mb-12">
-        Durch meine Verbundenheit im Handballverein SG Unterrath in Düsseldorf
-        konnte ich von Anfang an auf eine gewisse Reichweite bauen. Aus
-        anfänglich 500 Menschen wuchs schnell eine lebendige Community.
-      </p>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+        >
+          Medien & öffentliche Auftritte
+        </motion.h3>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={sectionAnimation}
+          className="pb-8"
+        >
+          <div className="mx-auto mt-2 aspect-video rounded-md max-w-2xl h-5xl md:max-h-3xl">
+            <video
+              src="/videos/wdrInterview.mp4"
+              title="Interview WDR"
+              controls
+              className="w-full h-full"
+            />
+            <em>Im Gespräch mit dem WDR</em>
+          </div>
+        </motion.div>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          2016 porträtierte mich die Rheinische Post erstmals, weitere
+          Interviews mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast
+          folgten. Von September 2022 bis Juli 2024 war ich offizieller
+          Wetterexperte bei Antenne Düsseldorf und versorgte die Region mit
+          Prognosen.
+        </motion.p>
 
-      <h3 className="text-2xl font-light text-center text-text">
-        Medien & öffentliche Auftritte
-      </h3>
-      <p className="leading-relaxed md:mb-12">
-        2016 porträtierte mich die Rheinische Post erstmals, weitere Interviews
-        mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast folgten. Von
-        September 2022 bis Juli 2024 war ich offizieller Wetterexperte bei
-        Antenne Düsseldorf und versorgte die Region mit Prognosen.
-      </p>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+        >
+          Studium & persönlicher Weg
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
+          Aktuell studiere ich Sportwissenschaften mit Schwerpunkt Psychologie
+          in Bielefeld, mit dem Ziel, Sportpsychologe zu werden. Das Wetter hat
+          mit meinem Studium zwar nur am Rande zu tun, dennoch spielen präzise
+          Prognosen gerade für Leichtathleten, Segler oder Skifahrer eine
+          wichtige Rolle.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Meteorologie wollte ich bewusst nicht studieren – das Hobby soll ein
+          Hobby bleiben dürfen.
+        </motion.p>
 
-      <h3 className="text-2xl font-light text-center text-text">
-        Studium & persönlicher Weg
-      </h3>
-      <p className="leading-relaxed">
-        Aktuell studiere ich Sportwissenschaften mit Schwerpunkt Psychologie in
-        Bielefeld, mit dem Ziel, Sportpsychologe zu werden. Das Wetter hat mit
-        meinem Studium zwar nur am Rande zu tun, dennoch spielen präzise
-        Prognosen gerade für Leichtathleten, Segler oder Skifahrer eine wichtige
-        Rolle.
-      </p>
-      <p className="leading-relaxed md:mb-12">
-        Meteorologie wollte ich bewusst nicht studieren – das Hobby soll ein
-        Hobby bleiben dürfen.
-      </p>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+        >
+          Mein Alltag mit dem Wetter
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
+          Meine Wetterkanäle sind ein wichtiger Teil meines Lebens. Täglich
+          widme ich ihnen 30 Minuten bis mehrere Stunden: Datenanalysen,
+          Vergleich von Modellen, Erstellen von Grafiken, Pflege der Community
+          oder auch Live-Ticker bei brisanten Wetterlagen.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Gerade in einer Zeit, die von Reichweite lebt, lege ich Wert auf einen
+          sachlich-nüchternen Ansatz. Dadurch konnte ich mir das Vertrauen
+          vieler Menschen erarbeiten, die meine Prognosen oft als wichtigste
+          Informationsquelle nutzen.
+        </motion.p>
 
-      <h3 className="text-2xl font-light text-center text-text">
-        Mein Alltag mit dem Wetter
-      </h3>
-      <p className="leading-relaxed">
-        Meine Wetterkanäle sind ein wichtiger Teil meines Lebens. Täglich widme
-        ich ihnen 30 Minuten bis mehrere Stunden: Datenanalysen, Vergleich von
-        Modellen, Erstellen von Grafiken, Pflege der Community oder auch
-        Live-Ticker bei brisanten Wetterlagen.
-      </p>
-      <p className="leading-relaxed md:mb-12">
-        Gerade in einer Zeit, die von Reichweite lebt, lege ich Wert auf einen
-        sachlich-nüchternen Ansatz. Dadurch konnte ich mir das Vertrauen vieler
-        Menschen erarbeiten, die meine Prognosen oft als wichtigste
-        Informationsquelle nutzen.
-      </p>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-12 font-light text-left md:text-center text-text"
+        >
+          Community & Qualität
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Der lokale Bezug auf Düsseldorf und die persönliche Auseinandersetzung
+          mit den Wetterkarten unterscheidet mich von klassischen Apps oder
+          Portalen. Unterstützung durch Sponsoring und Spenden meiner Community
+          motiviert mich sehr – an dieser Stelle ein herzliches DANKE.
+        </motion.p>
 
-      <h3 className="text-2xl font-light text-center text-text">
-        Community & Qualität
-      </h3>
-      <p className="leading-relaxed">
-        Der lokale Bezug auf Düsseldorf und die persönliche Auseinandersetzung
-        mit den Wetterkarten unterscheidet mich von klassischen Apps oder
-        Portalen. Unterstützung durch Sponsoring und Spenden meiner Community
-        motiviert mich sehr – an dieser Stelle ein herzliches DANKE.
-      </p>
-
-      <h3 className="text-2xl font-light text-center text-text">Ausblick</h3>
-      <p className="leading-relaxed">
-        Mein Ziel bleibt, eine Plattform für hochwertigen Austausch rund ums
-        Wetter zu schaffen. Der Schritt von Facebook hin zu einer eigenen
-        Homepage war für mich ein entscheidender. Seit über 10 Jahren investiere
-        ich viel Herzblut in die bestmöglichen Prognosen für Düsseldorf – und
-        ich bin noch lange nicht müde.
-      </p>
-      <p className="leading-relaxed md:mb-12">
-        Ich freue mich auf euch – bei gutem wie bei schlechtem Wetter.
-      </p>
-      <p className="leading-relaxed font-semibold">In Liebe, Jens</p>
-    </motion.section>
+        <motion.h3
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+        >
+          Ausblick
+        </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed"
+        >
+          Mein Ziel bleibt, eine Plattform für hochwertigen Austausch rund ums
+          Wetter zu schaffen. Der Schritt von Facebook hin zu einer eigenen
+          Homepage war für mich ein entscheidender. Seit über 10 Jahren
+          investiere ich viel Herzblut in die bestmöglichen Prognosen für
+          Düsseldorf – und ich bin noch lange nicht müde.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed mb-12"
+        >
+          Ich freue mich auf euch – bei gutem wie bei schlechtem Wetter.
+        </motion.p>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed font-semibold text-xl pt-4"
+        >
+          In Liebe, Jens
+        </motion.p>
+      </div>
+    </section>
   );
 }

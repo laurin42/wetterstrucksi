@@ -36,7 +36,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
     const gridPosts = posts[key].slice(0, 3);
 
     return (
-      <div key={key} className="mb-6">
+      <div key={key}>
         <CollapsibleSectionHeader
           title={title}
           isOpen={openSections[key]}

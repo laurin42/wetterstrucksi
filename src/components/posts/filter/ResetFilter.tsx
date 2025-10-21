@@ -24,7 +24,7 @@ export function ResetFilter({
     <motion.div className="flex">
       <button
         onClick={handleReset}
-        className="text-text-white pr-3 my-auto cursor-pointer"
+        className="text-text-white hover:text-accent-dim pr-3 my-auto cursor-pointer"
       >
         {" "}
         <RxReset />

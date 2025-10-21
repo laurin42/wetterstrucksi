@@ -1,6 +1,8 @@
 "use client";
+import { motion } from "framer-motion";
 import { FaUniversity, FaPodcast } from "react-icons/fa";
 import { FaTemperatureFull, FaRadio } from "react-icons/fa6";
+import Interview from "./Interview";
 
 export function AboutBio() {
   const items = [
@@ -20,7 +22,7 @@ export function AboutBio() {
           <span className="font-semibold">Podcast:</span>{" "}
           <a
             href="https://open.spotify.com/show/6BznGy28h8iGQSSIpxQCfs"
-            className="text-accent hover:text-accent-secondary"
+            className="text-accent hover:text-accent-dim"
             target="_blank"
             rel="noreferrer"
           >
@@ -37,7 +39,7 @@ export function AboutBio() {
           <span className="font-semibold">Hobby-Meteorologie:</span>{" "}
           <a
             href="https://www.facebook.com/WetterstrucksiD"
-            className="text-accent hover:text-accent-secondary"
+            className="text-accent hover:text-accent-dim"
             target="_blank"
             rel="noreferrer"
           >
@@ -54,7 +56,7 @@ export function AboutBio() {
           <span className="font-semibold">Wetter-Experte:</span>{" "}
           <a
             href="https://www.antenneduesseldorf.de/"
-            className="text-accent hover:text-accent-secondary"
+            className="text-accent hover:text-accent-dim"
             target="_blank"
             rel="noreferrer"
           >
@@ -67,18 +69,20 @@ export function AboutBio() {
   ];
 
   return (
-    <div className="flex flex-col md:justify-center px-4 pt-8 pb-4 md:p-16 relative items-center  w-full min-h-[70vh] bg-foreground-secondary">
-      <h2 className="text-3xl text-text text-left mb-8">Wichtigste Eckdaten</h2>
-      <ul className="space-y-4 text-xl font-thin">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-center space-x-4">
-            <div className="flex-shrink-0 p-3 bg-accent/20 rounded-full text-accent shadow-md">
-              {item.icon}
-            </div>
-            <p className="text-text">{item.text}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <motion.section className="flex flex-col justify-center relative max-w-6xl mx-auto py-8 h-[calc(100svh-64px)] md:h-auto md:bg-foreground-secondary/44">
+      <div className="px-4">
+        <ul className="space-y-2 text-xl font-thin">
+          {items.map((item, i) => (
+            <li key={i} className="flex items-center space-x-4">
+              <motion.div className="flex-shrink-0 p-3 bg-accent/10 rounded-md text-accent shadow-md">
+                {item.icon}
+              </motion.div>
+              <motion.p className="text-text">{item.text}</motion.p>
+            </li>
+          ))}
+        </ul>
+        <Interview />
+      </div>
+    </motion.section>
   );
 }

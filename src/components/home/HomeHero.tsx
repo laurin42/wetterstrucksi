@@ -34,8 +34,8 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     relative w-full flex flex-col items-center 
     md:flex-row md:justify-between 
     px-0 pt-8 md:pb-8 md:px-8 rounded-t-sm md:mb-2
-    h-[calc(100vh-4rem)] md:h-auto
-    bg-cover bg-center header-padding
+    h-[calc(100svh-64px)] md:h-auto
+    bg-cover bg-center
   "
         style={{ backgroundImage }}
         initial="hidden"

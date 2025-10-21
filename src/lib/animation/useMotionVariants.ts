@@ -34,12 +34,8 @@ export function useMotionVariants() {
   };
 
   const fadeInVariantVerySlow: Variants = {
-    hidden: { opacity: 0, y: 0 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 2.4, ease: "easeOut" },
-    },
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.2 } },
   };
 
     const fadeInVariantExtremeSlow: Variants = {
