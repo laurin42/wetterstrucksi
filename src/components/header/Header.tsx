@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useRef, forwardRef } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
 import { mainMenu } from "@/data/navigation";
 import { useMounted } from "@/lib/useMounted";
@@ -21,7 +21,7 @@ const Header = forwardRef<HTMLElement>(() => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { fadeInVariantVerySlow } = useMotionVariants();
+  const { fadeInVariant, mobileMenuVariants } = useMotionVariants();
 
   const menuLinkClasses =
     "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:cursor-pointer hover:text-accent transition-colors duration-300 ease-in-out";
@@ -70,7 +70,7 @@ const Header = forwardRef<HTMLElement>(() => {
         </div>
 
         <motion.div
-          variants={fadeInVariantVerySlow}
+          variants={fadeInVariant}
           initial="hidden"
           animate="visible"
           className="mx-auto w-full max-w-6xl flex items-center justify-start"
@@ -83,7 +83,7 @@ const Header = forwardRef<HTMLElement>(() => {
         </motion.div>
 
         <motion.div
-          variants={fadeInVariantVerySlow}
+          variants={fadeInVariant}
           initial="hidden"
           animate="visible"
           className="absolute right-4 md:right-8 flex items-center space-x-4"
@@ -127,27 +127,55 @@ const Header = forwardRef<HTMLElement>(() => {
           </button>
         </motion.div>
       </section>
-
-      {menuOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40 bg-black/30"
-            onClick={() => setMenuOpen(false)}
-          />
-          <nav className="absolute top-full left-0 w-full bg-foreground text-text z-50 p-8 md:p-4 flex flex-col space-y-4 md:hidden shadow-md">
-            {mainMenu.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className={menuLinkClasses}
-                onClick={() => setMenuOpen(false)}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.nav
+              initial="closed"
+              animate="open"
+              variants={mobileMenuVariants}
+              exit="closed"
+              className="absolute top-[61px] left-0 w-full bg-foreground text-text z-50 p-8 md:p-4 flex flex-col space-y-4 md:hidden shadow-md"
+            >
+              {mainMenu.map((item) => (
+                <motion.div key={item.title} variants={fadeInVariant}>
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className={menuLinkClasses}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.title}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                className="flex flex-col space-y-4"
+                variants={fadeInVariant}
               >
-                {item.title}
-              </Link>
-            ))}
-          </nav>
-        </>
-      )}
+                <Link
+                  href="/kontakt"
+                  onClick={() => setMenuOpen(false)}
+                  className={menuLinkClasses}
+                >
+                  Kontakt
+                </Link>
+                <Link
+                  href="/impressum"
+                  onClick={() => setMenuOpen(false)}
+                  className={menuLinkClasses}
+                >
+                  Impressum
+                </Link>
+              </motion.div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 });

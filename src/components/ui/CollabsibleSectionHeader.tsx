@@ -8,8 +8,8 @@ import { ResetFilter } from "../posts/filter/ResetFilter";
 
 interface CollapsibleSectionHeaderProps {
   title: string;
-  isOpen: boolean;
-  onToggle: () => void;
+  isOpen?: boolean;
+  onToggle?: () => void;
   isContentCollabsible?: boolean;
   onFilterToggle?: () => void;
   mobileOpen?: boolean;
@@ -30,13 +30,13 @@ export function CollapsibleSectionHeader({
   onYearSelect,
   onSortChange,
 }: CollapsibleSectionHeaderProps) {
-  const { fadeInVariantSlow } = useMotionVariants();
+  const { slideInLeftVariant, fadeInVariant } = useMotionVariants();
 
   return (
-    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none">
+    <div className="mx-1 px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none">
       <motion.span
         className="text-xl md:text-2xl font-semibold tracking-wide"
-        variants={fadeInVariantSlow}
+        variants={slideInLeftVariant}
         initial="hidden"
         animate="visible"
       >
@@ -58,7 +58,7 @@ export function CollapsibleSectionHeader({
               onFilterToggle();
             }}
             className="flex items-center gap-2 cursor-pointer py-1 rounded-full"
-            variants={fadeInVariantSlow}
+            variants={fadeInVariant}
             initial="hidden"
             animate="visible"
           >
@@ -87,7 +87,7 @@ export function CollapsibleSectionHeader({
           <motion.button
             onClick={onToggle}
             className="p-1 rounded-full hover:bg-accent-dim transition-colors"
-            variants={fadeInVariantSlow}
+            variants={fadeInVariant}
             initial="hidden"
             animate="visible"
           >

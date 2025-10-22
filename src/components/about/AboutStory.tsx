@@ -8,13 +8,13 @@ export function AboutStory() {
 
   return (
     <section className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-4 space-y-8 h-auto">
-      <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
+      <div className="max-w-4xl mx-auto flex flex-col justify-center">
         <motion.h2
           initial="hidden"
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-4xl font-light text-left md:text-center text-text mb-8"
+          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-8 mt-16 md:mt-8"
         >
           Wie alles begann
         </motion.h2>
@@ -38,7 +38,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Später beschäftigte ich mich mit Modellberechnungen der Wettermodelle
           und analysierte diese. So konnte ich mich im Bereich der
@@ -50,7 +50,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Der Start von „Wetterstrucksi“
         </motion.h3>
@@ -71,7 +71,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Durch meine Verbundenheit im Handballverein SG Unterrath in Düsseldorf
           konnte ich von Anfang an auf eine gewisse Reichweite bauen. Aus
@@ -83,7 +83,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Medien & öffentliche Auftritte
         </motion.h3>
@@ -109,7 +109,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           2016 porträtierte mich die Rheinische Post erstmals, weitere
           Interviews mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast
@@ -123,7 +123,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Studium & persönlicher Weg
         </motion.h3>
@@ -145,7 +145,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Meteorologie wollte ich bewusst nicht studieren – das Hobby soll ein
           Hobby bleiben dürfen.
@@ -156,7 +156,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Mein Alltag mit dem Wetter
         </motion.h3>
@@ -177,7 +177,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Gerade in einer Zeit, die von Reichweite lebt, lege ich Wert auf einen
           sachlich-nüchternen Ansatz. Dadurch konnte ich mir das Vertrauen
@@ -190,7 +190,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-12 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-12 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Community & Qualität
         </motion.h3>
@@ -199,7 +199,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Der lokale Bezug auf Düsseldorf und die persönliche Auseinandersetzung
           mit den Wetterkarten unterscheidet mich von klassischen Apps oder
@@ -212,7 +212,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-3xl mb-6 font-light text-left md:text-center text-text"
+          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Ausblick
         </motion.h3>
@@ -234,7 +234,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed mb-12"
+          className="leading-relaxed md:mb-12 mb-24"
         >
           Ich freue mich auf euch – bei gutem wie bei schlechtem Wetter.
         </motion.p>

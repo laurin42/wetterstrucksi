@@ -50,13 +50,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
     >
       <HomeHero posts={normalizedPosts} />
 
-      <CollapsibleSectionHeader
-        title={isMobile ? "Weitere Beiträge" : "Neueste Beiträge"}
-        isOpen={openSections.neusteBeitraege}
-        onToggle={() => toggleSection("neusteBeitraege")}
-        isContentCollabsible={false}
-      />
-
       {openSections.neusteBeitraege && (
         <motion.div
           key="neusteBeitraege"
@@ -69,11 +62,19 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           ) : (
             <>
               {isMobile && (
-                <motion.div className="grid grid-cols-1 px-0">
-                  {normalizedPosts.slice(3, 9).map((post) => (
-                    <PostCard key={post.id} post={post} />
-                  ))}
-                </motion.div>
+                <>
+                  <CollapsibleSectionHeader
+                    title={isMobile ? "Weitere Beiträge" : "Neueste Beiträge"}
+                    isOpen={openSections.neusteBeitraege}
+                    onToggle={() => toggleSection("neusteBeitraege")}
+                    isContentCollabsible={false}
+                  />
+                  <motion.div className="grid grid-cols-1 px-0">
+                    {normalizedPosts.slice(3, 9).map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
+                  </motion.div>
+                </>
               )}
 
               {!isMobile && (

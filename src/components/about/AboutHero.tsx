@@ -6,7 +6,7 @@ import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 export default function AboutHero() {
   const backgroundImage = `url("/images/about/bioHero.jpg")`;
 
-  const { sectionAnimation, fadeInVariantVerySlow, viewportOnce } =
+  const { sectionAnimation, slideInLeftVariant, viewportOnce } =
     useMotionVariants();
 
   return (
@@ -33,7 +33,7 @@ export default function AboutHero() {
         <motion.h2
           initial="hidden"
           whileInView="visible"
-          variants={fadeInVariantVerySlow}
+          variants={slideInLeftVariant}
           viewport={viewportOnce}
           className="text-2xl text-text-white font-thin text-left pb-2 mb-4 border-b-[1px] border-text-white/40 md:border-none"
         >

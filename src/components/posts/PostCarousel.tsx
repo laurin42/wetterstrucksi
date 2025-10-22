@@ -72,19 +72,8 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
   }, [isMobile, emblaApi]);
 
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      variants={containerVariants}
-      className={clsx("relative", className)}
-    >
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        variants={sectionAnimation}
-        ref={emblaRef}
-        className="overflow-hidden cursor-grab md:px-1"
-      >
+    <div className={clsx("relative", className)}>
+      <div ref={emblaRef} className="overflow-hidden cursor-grab md:px-1">
         <div className="flex">
           {normalizedPosts.map((post, index) => (
             <motion.div
@@ -106,7 +95,7 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       <button
         onClick={scrollPrev}
@@ -129,22 +118,6 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
           className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
         />
       </button>
-
-      {!isMobile && (
-        <div className="flex justify-center mt-8 md:mb-4 space-x-2">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`cursor-pointer w-3 h-3 rounded-full transition-colors duration-300 ${
-                index === selectedIndex
-                  ? "bg-accent"
-                  : "bg-muted hover:bg-accent/60"
-              }`}
-            />
-          ))}
-        </div>
-      )}
-    </motion.div>
+    </div>
   );
 }

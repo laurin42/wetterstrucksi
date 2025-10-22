@@ -1,4 +1,4 @@
-import { Variants } from "framer-motion";
+import {  Easing, Variants } from "framer-motion";
 
 export function useMotionVariants() {
   const containerVariants: Variants = {
@@ -16,36 +16,19 @@ export function useMotionVariants() {
   };
 
   const fadeInVariant: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+  hidden: (custom: { y?: number } = {}) => ({
+    opacity: 0,
+    y: custom.y ?? 20, 
+  }),
+  visible: (custom: { duration?: number; ease?: Easing } = {}) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: custom.duration ?? 0.6,
+      ease: custom.ease ?? "easeOut",
     },
-  };
-
-  const fadeInVariantSlow: Variants = {
-    hidden: { opacity: 0, y: 0 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 1.2, ease: "easeOut" },
-    },
-  };
-
-  const fadeInVariantVerySlow: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1.2 } },
-  };
-
-    const fadeInVariantExtremeSlow: Variants = {
-    hidden: { opacity: 0, y: 0 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 4.2, ease: "easeIn" },
-    },
-  };
+  }),
+};
 
   const slideInLeftVariant: Variants = {
     hidden: { opacity: 0, x: -40 },
@@ -68,18 +51,40 @@ export function useMotionVariants() {
     open: { height: "auto", opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
   };
 
+  const mobileMenuVariants: Variants = {
+        closed: { 
+            height: 0, 
+            opacity: 0, 
+            transition: { 
+                duration: 0.1, 
+                ease: "easeOut",
+                when: "afterChildren", 
+            } 
+        },
+        open: { 
+            height: "auto", 
+            opacity: 1, 
+            transition: {
+                duration: 0.1, 
+                ease: "easeIn",
+                when: "beforeChildren",
+                
+                staggerChildren: 0.15,
+                delayChildren: 0.1, 
+            } 
+        },
+    };
+
   const viewportOnce = { once: true, amount: 0.2 };
 
   return {
     containerVariants,
     containerVariantsSync,
     fadeInVariant,
-    fadeInVariantSlow,
-    fadeInVariantVerySlow,
-    fadeInVariantExtremeSlow,
     slideInLeftVariant,
     sectionAnimation,
     sidebarVariants,
-    viewportOnce
+    viewportOnce,
+    mobileMenuVariants,
   };
 }

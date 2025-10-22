@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { CollapsibleSectionHeader } from "@/components/ui/CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
@@ -19,44 +18,24 @@ interface WeatherOverviewClientProps {
 }
 
 export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
-  const [openSections, setOpenSections] = useState({
-    vorhersagen: true,
-    updates: true,
-    rueckblicke: true,
-    biowetter: true,
-    privates: true,
-    presseschau: true,
-  });
-
-  const toggleSection = (key: keyof typeof openSections) => {
-    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
   const renderPosts = (key: keyof typeof posts, title: string) => {
     const gridPosts = posts[key].slice(0, 3);
 
     return (
-      <div key={key}>
-        <CollapsibleSectionHeader
-          title={title}
-          isOpen={openSections[key]}
-          onToggle={() => toggleSection(key)}
-          isContentCollabsible={false}
-        />
+      <div>
+        <CollapsibleSectionHeader title={title} isContentCollabsible={false} />
 
-        {openSections[key] && (
-          <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
-            <div className="grid grid-cols-1 md:hidden px-1">
-              {gridPosts.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-
-            <div className="hidden md:block">
-              <PostCarousel posts={posts[key]} />
-            </div>
+        <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
+          <div className="grid grid-cols-1 md:hidden px-1">
+            {gridPosts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
           </div>
-        )}
+
+          <div className="hidden md:block">
+            <PostCarousel posts={posts[key]} />
+          </div>
+        </div>
       </div>
     );
   };

@@ -16,8 +16,7 @@ interface HomeHeroProps {
 export default function HomeHero({ posts }: HomeHeroProps) {
   const { theme } = useTheme();
   const mounted = useMounted();
-  const { containerVariantsSync, fadeInVariant, fadeInVariantVerySlow } =
-    useMotionVariants();
+  const { containerVariantsSync, fadeInVariant } = useMotionVariants();
 
   const backgroundImage = mounted
     ? theme === "dark"
@@ -44,49 +43,50 @@ export default function HomeHero({ posts }: HomeHeroProps) {
       >
         <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
 
-        <motion.div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+        <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
           <motion.h1
             variants={fadeInVariant}
+            custom={{ y: 40, duration: 1.2 }}
             className="text-4xl font-thin md:font-semibold text-white"
           >
             <motion.em
-              variants={fadeInVariantVerySlow}
+              variants={fadeInVariant}
+              custom={{ y: 40, duration: 1.2 }}
               className="font-semibold"
             >
               Dein
             </motion.em>{" "}
             Ort für Wetter
           </motion.h1>
-          <motion.div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+          <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
             <motion.h2
               variants={fadeInVariant}
+              custom={{ y: 40, duration: 1.2 }}
               className="text-4xl font-thin md:font-semibold text-white"
             >
               in{" "}
               <motion.em
-                variants={fadeInVariantVerySlow}
+                variants={fadeInVariant}
+                custom={{ y: 40, duration: 1.2 }}
                 className="font-semibold"
               >
                 Düsseldorf
               </motion.em>
             </motion.h2>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          className="md:hidden w-full relative z-10 pt-8 carousel-padding"
-          variants={fadeInVariant}
-        >
+        <div className="md:hidden w-full relative z-10 pt-8 carousel-padding">
           {isMobile && (
             <div className="block md:hidden">
               <PostCarousel posts={posts.slice(0, 3)} />
             </div>
           )}
-        </motion.div>
+        </div>
 
-        <motion.div className="hidden md:block">
+        <div className="hidden md:block">
           <VacationInfo />
-        </motion.div>
+        </div>
       </motion.section>
     </>
   );
