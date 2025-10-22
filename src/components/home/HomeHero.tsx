@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsMobile } from "@/lib/useIsMobile";
+import { useIsVacationTime } from "@/lib/useIsVacationTime";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
@@ -25,6 +26,8 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     : undefined;
 
   const isMobile = useIsMobile();
+
+  const isVacationTime = useIsVacationTime();
 
   return (
     <>
@@ -83,9 +86,8 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             </div>
           )}
         </div>
-
         <div className="hidden md:block">
-          <VacationInfo />
+          {isVacationTime && <VacationInfo />}
         </div>
       </motion.section>
     </>
