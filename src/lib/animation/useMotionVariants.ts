@@ -35,7 +35,7 @@ export function useMotionVariants() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.7, ease: "easeIn", delay: 1.4 },
+      transition: { duration: 0.7, ease: "easeIn", delay: 1.2 },
     },
   };
 
@@ -75,7 +75,7 @@ export function useMotionVariants() {
         },
     };
 
-  const viewportOnce = { once: true, amount: 0.2 };
+  const viewportOnce = { once: true, amount: 0.4 };
 
   return {
     containerVariants,

@@ -73,6 +73,7 @@ const Header = forwardRef<HTMLElement>(() => {
           variants={fadeInVariant}
           initial="hidden"
           animate="visible"
+          custom={{ y: 0, duration: 0.4 }}
           className="mx-auto w-full max-w-6xl flex items-center justify-start"
         >
           <Link href="/">
@@ -86,6 +87,7 @@ const Header = forwardRef<HTMLElement>(() => {
           variants={fadeInVariant}
           initial="hidden"
           animate="visible"
+          custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
           <nav className="hidden md:flex items-center space-x-6">

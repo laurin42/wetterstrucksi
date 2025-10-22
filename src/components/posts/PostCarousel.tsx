@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import type { EmblaCarouselType } from "embla-carousel";
@@ -9,7 +8,6 @@ import { PostCard } from "@/components/posts/PostCard";
 import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import clsx from "clsx";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostCarouselProps {
   posts: PostWithMeta[];
@@ -26,8 +24,6 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
     },
     [WheelGesturesPlugin()]
   );
-
-  const { sectionAnimation, containerVariants } = useMotionVariants();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -76,7 +72,7 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
       <div ref={emblaRef} className="overflow-hidden cursor-grab md:px-1">
         <div className="flex">
           {normalizedPosts.map((post, index) => (
-            <motion.div
+            <div
               key={post.id}
               className={clsx(
                 "flex-shrink-0 px-1",
@@ -92,7 +88,7 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
               ) : (
                 <PostCard post={post} isNewest={index === 0} />
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -118,6 +114,22 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
           className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
         />
       </button>
+
+      {!isMobile && (
+        <div className="flex justify-center mt-8 md:mb-4 space-x-2">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={`cursor-pointer w-3 h-3 rounded-full transition-colors duration-300 ${
+                index === selectedIndex
+                  ? "bg-accent"
+                  : "bg-muted hover:bg-accent/60"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

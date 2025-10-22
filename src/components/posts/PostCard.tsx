@@ -24,14 +24,8 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.jpg";
 
-  const { sectionAnimation, viewportOnce } = useMotionVariants();
-
   return (
-    <motion.div
-      viewport={viewportOnce}
-      initial="hidden"
-      whileInView="visible"
-      variants={sectionAnimation}
+    <div
       className={`block md:flex md:flex-col md:aspect-[3/4] w-full  ... ${className}`}
     >
       <Link
@@ -39,7 +33,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
         className="block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 hover h-full"
       >
-        <motion.div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
+        <div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -54,7 +48,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
               </span>
             )}
           </div>
-        </motion.div>
+        </div>
 
         <div className="flex flex-row md:flex-col gap-4 px-4 py-4 md:p-5 h-full">
           <div className="flex-1 flex flex-col justify-start">
@@ -68,18 +62,18 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
               </p>
             )}
 
-            <h2 className="text-base text-text mb-2 line-clamp-2 leading-snug md:text-lg font-bold">
+            <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold">
               {truncateWords(post.title, 12)}
             </h2>
 
             {post.og_description && (
-              <motion.p className="md:text-sm text-text line-clamp-3 md:line-clamp-3 md:font-normal">
-                {truncateWords(post.og_description, 20)}
-              </motion.p>
+              <p className="md:text-sm text-text line-clamp-3 md:line-clamp-5 md:font-normal">
+                {truncateWords(post.og_description, 42)}
+              </p>
             )}
           </div>
 
-          <motion.div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
+          <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
             <Image
               src={imageSrc}
               alt={post.title || "Feature Image"}
@@ -88,9 +82,9 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
               sizes="(max-width: 768px) 6rem, 33vw"
               loading="lazy"
             />
-          </motion.div>
+          </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

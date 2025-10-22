@@ -11,14 +11,14 @@ export default function AboutHero() {
 
   return (
     <div
-      className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[60vh] flex items-end md:pb-0"
+      className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[64vh] flex items-end md:pb-0 rounded-t-md"
       style={{
         backgroundImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/60 z-0" />
+      <div className="absolute inset-0 bg-black/60 z-0 rounded-t-md" />
 
       <div className="relative z-10 px-4 md:px-32">
         <motion.h1
@@ -26,7 +26,7 @@ export default function AboutHero() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="text-5xl mb-2 md:text-5xl font-thin text-text-white tracking-wide"
+          className="text-5xl mb-1 md:text-5xl font-thin text-text-white tracking-wide"
         >
           <em>Über mich</em>
         </motion.h1>

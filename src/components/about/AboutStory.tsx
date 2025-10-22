@@ -14,7 +14,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-8 mt-16 md:mt-8"
+          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-8 md:mb-16 mt-16"
         >
           Wie alles begann
         </motion.h2>

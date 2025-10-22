@@ -6,23 +6,35 @@ export const revalidate = 300;
 
 export default async function WeatherOverviewPage() {
   const rueckblicke = await getPostsWithTags("rueckblick");
-  const updates = await getPostsWithTags("warnlage");
-  const vorhersagen = await getPostsWithTags([
+  const updates = await getPostsWithTags([
+    "warnlage",
+    "warntrend",
+    "live-ticker-zu-unwetterlagen",
+  ]);
+  const wetter = await getPostsWithTags([
     "wetter",
+    "aktuelles-wetter",
     "wetterprognose",
-    "wetter kurz und kompakt",
+    "wetter-kurz-und-kompakt",
     "wetteraussichten",
     "aussichten",
+    "biowetter",
+    "mittelfrist",
+    "monats-aussichten",
+    "astronomisches",
   ]);
-  const biowetter = await getPostsWithTags(["biowetter"]);
-  const presseschau = await getPostsWithTags(["presseschau"]);
-  const privates = await getPostsWithTags(["privates"]);
+  const presseschau = await getPostsWithTags([
+    "presseschau",
+    "studien",
+    "spekulatives",
+    "situation",
+  ]);
+  const privates = await getPostsWithTags(["privates", "allgemein"]);
 
   const posts = {
     rueckblicke,
     updates,
-    vorhersagen,
-    biowetter,
+    wetter,
     presseschau,
     privates,
   };

@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsMobile } from "@/lib/useIsMobile";
 import MorePostsLink from "../posts/MorePostsLink";
 import { AboutShort } from "../about/AboutShort";
@@ -27,8 +25,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
     setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const { sectionAnimation } = useMotionVariants();
-
   const normalizedPosts = posts.map((post) => ({
     ...post,
     id: post.id || post.uuid || crypto.randomUUID(),
@@ -44,14 +40,11 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   if (!hydrated) return null;
 
   return (
-    <motion.section
-      variants={sectionAnimation}
-      className="md:max-w-6xl mx-auto"
-    >
+    <section className="md:max-w-6xl mx-auto">
       <HomeHero posts={normalizedPosts} />
 
       {openSections.neusteBeitraege && (
-        <motion.div
+        <div
           key="neusteBeitraege"
           className="md:bg-foreground/44 backdrop-blur-sm md:py-2 md:mb-4"
         >
@@ -69,28 +62,25 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                     onToggle={() => toggleSection("neusteBeitraege")}
                     isContentCollabsible={false}
                   />
-                  <motion.div className="grid grid-cols-1 px-0">
+                  <div className="grid grid-cols-1 px-0">
                     {normalizedPosts.slice(3, 9).map((post) => (
                       <PostCard key={post.id} post={post} />
                     ))}
-                  </motion.div>
+                  </div>
                 </>
               )}
 
               {!isMobile && (
-                <motion.div
-                  variants={sectionAnimation}
-                  className="hidden md:block"
-                >
+                <div className="hidden md:block">
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
-                </motion.div>
+                </div>
               )}
               <div className="block md:hidden pt-8 pb-16 bg-foreground backdrop-blur-sm md:bg-transparent">
                 <MorePostsLink href="/weather" label="weiterlesen »" />
               </div>
             </>
           )}
-        </motion.div>
+        </div>
       )}
 
       <div className="md:mt-4">
@@ -104,6 +94,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       <div className="md:mt-4">
         <Contact />
       </div>
-    </motion.section>
+    </section>
   );
 }

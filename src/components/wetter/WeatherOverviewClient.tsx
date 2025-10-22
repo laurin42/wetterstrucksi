@@ -5,13 +5,13 @@ import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import WeatherHero from "./WeatherHero";
 import { PostCarousel } from "../posts/PostCarousel";
+import { LazyRender } from "../LazyRender";
 
 interface WeatherOverviewClientProps {
   posts: {
     rueckblicke: PostWithMeta[];
     updates: PostWithMeta[];
-    vorhersagen: PostWithMeta[];
-    biowetter: PostWithMeta[];
+    wetter: PostWithMeta[];
     privates: PostWithMeta[];
     presseschau: PostWithMeta[];
   };
@@ -33,7 +33,9 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
           </div>
 
           <div className="hidden md:block">
-            <PostCarousel posts={posts[key]} />
+            <LazyRender>
+              <PostCarousel posts={posts[key].slice(0, 6)} />
+            </LazyRender>
           </div>
         </div>
       </div>
@@ -44,12 +46,11 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
     <section className="max-w-4xl md:max-w-6xl mx-auto">
       <WeatherHero />
       <div className="grid grid-cols-1 max-w-4xl md:max-w-6xl mx-auto">
-        {renderPosts("vorhersagen", "Vorhersagen")}
+        {renderPosts("wetter", "Vorhersagen")}
         {renderPosts("updates", "Updates")}
         {renderPosts("rueckblicke", "Rückblicke")}
-        {renderPosts("biowetter", "Biowetter")}
+        {renderPosts("presseschau", "Presseschau & Studien")}
         {renderPosts("privates", "Privates")}
-        {renderPosts("presseschau", "Presseschau")}
       </div>
     </section>
   );

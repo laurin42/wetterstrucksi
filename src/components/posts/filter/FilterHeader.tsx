@@ -42,12 +42,12 @@ export function FilterHeader({
 }: FilterHeaderProps) {
   const title =
     selectedMonth || selectedYear
-      ? `Filter: Beiträge${
+      ? `Beiträge${
           selectedMonth !== null
             ? ` im ${monthLabels[parseInt(selectedMonth, 10)]}`
             : ""
         }${selectedYear !== null ? ` ${selectedYear}` : ""}`
-      : "Filter: Alle Beiträge";
+      : "Alle Beiträge";
 
   return (
     <CollapsibleSectionHeader

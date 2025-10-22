@@ -18,4 +18,9 @@ export const mainMenu = [
     href: "/about",
     subItems: [],
   },
+  {
+    title: "Kontakt",
+    href: "/kontakt",
+    subItems: [],
+  }
 ];

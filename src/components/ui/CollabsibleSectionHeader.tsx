@@ -33,7 +33,7 @@ export function CollapsibleSectionHeader({
   const { slideInLeftVariant, fadeInVariant } = useMotionVariants();
 
   return (
-    <div className="mx-1 px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none">
+    <div className="px-4 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none">
       <motion.span
         className="text-xl md:text-2xl font-semibold tracking-wide"
         variants={slideInLeftVariant}
