@@ -10,6 +10,7 @@ import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
 import { mainMenu } from "@/data/navigation";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const Header = forwardRef<HTMLElement>(() => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -22,6 +23,8 @@ const Header = forwardRef<HTMLElement>(() => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const { fadeInVariant, mobileMenuVariants } = useMotionVariants();
+
+  const isMobile = useIsMobile();
 
   const menuLinkClasses =
     "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:cursor-pointer hover:text-accent transition-colors duration-300 ease-in-out";
@@ -90,7 +93,7 @@ const Header = forwardRef<HTMLElement>(() => {
           custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden tablet-hidden md:flex items-center space-x-6">
             {mainMenu.map((item) => (
               <Link
                 key={item.title}
@@ -119,14 +122,11 @@ const Header = forwardRef<HTMLElement>(() => {
               )}
             </span>
           </button>
-
-          <button
-            onClick={toggleMenu}
-            aria-label="Menü öffnen/schließen"
-            className="md:hidden"
-          >
-            {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
-          </button>
+          {isMobile && (
+            <button onClick={toggleMenu} aria-label="Menü öffnen/schließen">
+              {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
+            </button>
+          )}
         </motion.div>
       </section>
       <AnimatePresence>

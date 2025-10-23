@@ -157,6 +157,44 @@ body {
   }
 }
 
+@media (min-width: 768px) and (max-width: 918px) {
+  .postcard-tablet-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 180px;
+  }
+  .home-hero-carousel {
+    display: block;
+  }
+  .show-burger {
+    display: block;
+  }
+  .tablet-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 918px) and (max-width: 1118px) {
+  .postcard-tablet-aspect {
+    aspect-ratio: 3 / 4;
+    max-height: 200px;
+  }
+  .home-hero-carousel {
+    display: block;
+  }
+  .show-burger {
+    display: block;
+  }
+  .tablet-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1118px) {
+  .tablet-hidden {
+    display: none;
+  }
+}
+
 @keyframes blink {
   0%,
   50% {

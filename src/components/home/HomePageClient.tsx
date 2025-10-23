@@ -71,7 +71,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    className="grid grid-cols-1 px-0"
+                    className="grid grid-cols-1 px-0 md:grid-cols-3 md:gap-2"
                   >
                     {normalizedPosts.slice(3, 9).map((post) => (
                       <motion.div
@@ -90,7 +90,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
               )}
 
               {!isMobile && (
-                <div className="hidden md:block ">
+                <div className="hidden md:block home-hero-carousel">
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </div>
               )}

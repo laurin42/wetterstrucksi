@@ -33,7 +33,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
         className="block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 active:scale-95 active:bg-accent h-full"
       >
-        <div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
+        <div className="hidden md:block relative w-full h-72 postcard-tablet-aspect aspect-[16/9] overflow-hidden items-stretch">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -68,7 +68,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
 
             {post.og_description && (
               <p className="md:text-sm text-text line-clamp-3 md:line-clamp-5 md:font-normal">
-                {truncateWords(post.og_description, 42)}
+                {truncateWords(post.og_description, 120)}
               </p>
             )}
           </div>

@@ -81,7 +81,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
 
         <div className="md:hidden w-full relative z-10 pt-8 carousel-padding">
           {isMobile && (
-            <div className="block md:hidden">
+            <div className="">
               <PostCarousel posts={posts.slice(0, 3)} />
             </div>
           )}
