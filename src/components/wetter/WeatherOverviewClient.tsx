@@ -26,7 +26,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
         <CollapsibleSectionHeader title={title} isContentCollabsible={false} />
 
         <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
-          <div className="grid grid-cols-1 md:hidden px-1">
+          <div className="grid grid-cols-1 md:hidden">
             {gridPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}

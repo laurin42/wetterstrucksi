@@ -155,17 +155,7 @@ const Header = forwardRef<HTMLElement>(() => {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                className="flex flex-col space-y-4"
-                variants={fadeInVariant}
-              >
-                <Link
-                  href="/kontakt"
-                  onClick={() => setMenuOpen(false)}
-                  className={menuLinkClasses}
-                >
-                  Kontakt
-                </Link>
+              <motion.div variants={fadeInVariant}>
                 <Link
                   href="/impressum"
                   onClick={() => setMenuOpen(false)}

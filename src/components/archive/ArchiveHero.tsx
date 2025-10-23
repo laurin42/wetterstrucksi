@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function ArchiveHero() {
   const { theme } = useTheme();
@@ -13,11 +14,15 @@ export default function ArchiveHero() {
       : `url("/images/archiv/archiveHeroLight.jpg")`
     : undefined;
 
+  const { slideInLeftVariant, fadeInVariant } = useMotionVariants();
+
   return (
     <motion.section
-      className="relative w-full rounded-t-sm px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
+      variants={fadeInVariant}
       initial="hidden"
       animate="visible"
+      custom={{ y: 0, duration: 1.2 }}
+      className="relative w-full rounded-t-sm px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",
@@ -28,17 +33,26 @@ export default function ArchiveHero() {
     >
       <div className="absolute inset-0 bg-black/72 z-0 rounded-t-sm" />
 
-      <motion.div className="relative z-10">
+      <div className="relative z-10">
         <div className="font-light text-text-white text-left md:max-w-6/8">
-          <h1 className="text-3xl font-semibold md:text-5xl">Archiv</h1>
-          <h2 className="text-xl font-thin text-left">
+          <motion.h1
+            variants={fadeInVariant}
+            initial="hidden"
+            animate="visible"
+            custom={{ y: 0, duration: 1.6 }}
+            className="text-3xl font-semibold md:text-5xl"
+          >
+            Archiv
+          </motion.h1>
+          <motion.h2
+            variants={slideInLeftVariant}
+            initial="hidden"
+            animate="visible"
+            className="text-xl font-thin text-left"
+          >
             Stöbere durch Beiträge aus den letzten Jahren
-          </h2>
+          </motion.h2>
         </div>
-      </motion.div>
-
-      <div className="flex items-end relative z-10">
-        <motion.div className="flex flex-col items-center text-text-white font-semibold text-center"></motion.div>
       </div>
     </motion.section>
   );

@@ -46,7 +46,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       {openSections.neusteBeitraege && (
         <div
           key="neusteBeitraege"
-          className="md:bg-foreground/44 backdrop-blur-sm md:py-2 md:mb-4"
+          className="md:bg-foreground-secondary/44 backdrop-blur-sm md:py-2 md:mb-4"
         >
           {normalizedPosts.length === 0 ? (
             <p className="text-muted-foreground px-4">
@@ -71,7 +71,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
               )}
 
               {!isMobile && (
-                <div className="hidden md:block">
+                <div className="hidden md:block ">
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </div>
               )}

@@ -6,11 +6,15 @@ import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 export default function AboutHero() {
   const backgroundImage = `url("/images/about/bioHero.jpg")`;
 
-  const { sectionAnimation, slideInLeftVariant, viewportOnce } =
+  const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
     useMotionVariants();
 
   return (
-    <div
+    <motion.div
+      variants={fadeInVariant}
+      initial="hidden"
+      animate="visible"
+      custom={{ y: 0, duration: 1.2 }}
       className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[64vh] flex items-end md:pb-0 rounded-t-md"
       style={{
         backgroundImage,
@@ -41,6 +45,6 @@ export default function AboutHero() {
           Wetterstrucksi
         </motion.h2>
       </div>
-    </div>
+    </motion.div>
   );
 }

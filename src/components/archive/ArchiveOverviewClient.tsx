@@ -78,10 +78,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
             <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
           ) : (
             currentPosts.map((post, idx) => (
-              <motion.div
-                key={`${post.id}-${idx}`}
-                className="flex flex-col px-1"
-              >
+              <motion.div key={`${post.id}-${idx}`} className="flex flex-col">
                 <PostCard post={post} />
               </motion.div>
             ))

@@ -14,7 +14,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <div
       style={{ width, height }}
-      className={`bg-card-transparent/40 animate-pulse rounded ${className}`}
+      className={`md:bg-transparent animate-pulse rounded ${className}`}
     />
   );
 };

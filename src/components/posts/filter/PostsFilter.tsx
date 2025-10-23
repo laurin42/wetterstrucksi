@@ -57,9 +57,9 @@ export function PostsFilter({
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm pl-4 pr-3 md:px-7"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm pl-4 pr-3 md:px-7 mb-1 md:mb-0"
       >
-        <Accordion type="single" collapsible className="space-y-1">
+        <Accordion type="single" collapsible className="space-y-1 py-2">
           <AccordionItem value="months">
             <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
               <div className="flex items-center gap-2">

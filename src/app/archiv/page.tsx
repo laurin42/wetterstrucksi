@@ -31,7 +31,7 @@ export default async function ArchiveOverviewPage() {
   ]);
 
   return (
-    <SkeletonWrapper data={allPosts}>
+    <SkeletonWrapper data={allPosts} layoutType="archive" minDuration={200}>
       <ArchiveOverviewClient posts={allPosts} />
     </SkeletonWrapper>
   );

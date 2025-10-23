@@ -12,7 +12,7 @@ export default async function Home() {
   }
 
   return (
-    <SkeletonWrapper data={posts} minDuration={500}>
+    <SkeletonWrapper data={posts} minDuration={500} layoutType="home">
       {posts && <HomePageClient posts={posts} />}
     </SkeletonWrapper>
   );

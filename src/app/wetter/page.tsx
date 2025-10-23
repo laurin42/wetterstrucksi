@@ -40,7 +40,11 @@ export default async function WeatherOverviewPage() {
   };
 
   return (
-    <SkeletonWrapper data={Object.values(posts).flat()} minDuration={200}>
+    <SkeletonWrapper
+      data={Object.values(posts).flat()}
+      minDuration={200}
+      layoutType="weather"
+    >
       <WeatherOverviewClient posts={posts} />
     </SkeletonWrapper>
   );
