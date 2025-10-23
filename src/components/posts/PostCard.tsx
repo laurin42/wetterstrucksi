@@ -1,10 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { PostWithMeta } from "@tryghost/content-api";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostCardProps {
   post: PostWithMeta;
@@ -24,12 +22,14 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.jpg";
 
+  const href = post.slug ? `/posts/${post.slug}` : "#";
+
   return (
     <div
       className={`block md:flex md:flex-col md:aspect-[3/4] w-full  ... ${className}`}
     >
       <Link
-        href={`/posts/${post.slug}`}
+        href={href}
         className="block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 hover h-full"
       >

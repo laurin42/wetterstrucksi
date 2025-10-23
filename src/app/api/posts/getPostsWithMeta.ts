@@ -81,6 +81,23 @@ export async function getPostsPage(
 
 
 
+export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> {
+
+  try {
+    const post = await api.posts.read({
+      slug: slug,}, {
+      include: ["tags", "authors"]
+    });
+    const normalized = normalizePosts([post]);
+    return normalized.length > 0 ? normalized[0] : null;
+  } catch (error) {
+    console.error(`Error fetching post with slug ${slug}`, error);
+    return null;
+  }
+
+
+}
+
 
 export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000
 

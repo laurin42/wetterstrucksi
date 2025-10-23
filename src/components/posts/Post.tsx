@@ -2,19 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
 import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface PostProps {
   post: PostWithMeta;
 }
 
 export default function Post({ post }: PostProps) {
-  const { viewportOnce, sectionAnimation, fadeInVariantVerySlow } =
-    useMotionVariants();
   const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
@@ -96,20 +92,8 @@ export default function Post({ post }: PostProps) {
 
   return (
     <section className="max-w-4xl md:max-w-6xl mx-auto">
-      <motion.article
-        variants={sectionAnimation}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-        className="p-4 md:px-16 bg-foreground-secondary/40 max-w-6xl mx-auto text-text"
-      >
-        <motion.div
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="flex justify-start mb-10"
-        >
+      <article className="p-4 md:px-16 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
+        <div className="flex justify-start mb-10">
           <div>
             {formattedDate && (
               <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground">
@@ -120,15 +104,9 @@ export default function Post({ post }: PostProps) {
               {post.title}
             </h1>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeInVariantVerySlow}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="prose prose-invert prose-lg"
-        >
+        <div className="prose prose-invert prose-lg">
           {post.feature_image && (
             <div className="md:float-left md:w-2/4 md:mr-16 mb-8">
               <Image
@@ -150,8 +128,8 @@ export default function Post({ post }: PostProps) {
           )}
 
           <div className="clear-both" />
-        </motion.div>
-      </motion.article>
+        </div>
+      </article>
     </section>
   );
 }
