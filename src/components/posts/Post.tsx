@@ -26,7 +26,8 @@ export default function Post({ post }: PostProps) {
   }, [post.published_at]);
 
   const imageSrc =
-    fixImageUrl(post.feature_image) || "/images/weatherFeatureImageDefault.jpg";
+    fixImageUrl(post.feature_image) ||
+    "/images/weatherFeatureImageDefault.webp";
 
   const options = {
     replace: (domNode: DOMNode) => {

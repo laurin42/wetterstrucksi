@@ -13,7 +13,7 @@ export default function DonateBox() {
     process.env.NEXT_PUBLIC_PAYPAL_LINK ||
     "https://www.paypal.com/paypalme/jstrucks";
 
-  const backgroundImage = `url("/images/donationInfo/donationHeroLight.jpg")`;
+  const backgroundImage = `url("/images/donationInfo/donationHeroLight.webp")`;
   const { sectionAnimation } = useMotionVariants();
 
   return (

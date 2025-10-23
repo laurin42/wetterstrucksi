@@ -20,7 +20,7 @@ function truncateWords(text?: string, maxWords?: number) {
 export function PostCard({ post, className, isNewest }: PostCardProps) {
   const feature_image_url = fixImageUrl(post.feature_image);
   const imageSrc =
-    feature_image_url || "/images/weatherFeatureImageDefault.jpg";
+    feature_image_url || "/images/weatherFeatureImageDefault.webp";
 
   const href = post.slug ? `/posts/${post.slug}` : "#";
 

@@ -191,7 +191,7 @@ body {
 
 @media (min-width: 1118px) {
   .tablet-hidden {
-    display: none;
+    display: flex;
   }
 }
 

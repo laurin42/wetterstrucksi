@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = `url("/images/about/bioHero.jpg")`;
+  const backgroundImage = `url("/images/about/bioHero.webp")`;
 
   const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
     useMotionVariants();

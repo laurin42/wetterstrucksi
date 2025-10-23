@@ -21,8 +21,8 @@ export default function HomeHero({ posts }: HomeHeroProps) {
 
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/home/homeHeroDark.jpg")`
-      : `url("/images/home/homeHeroLight.jpg")`
+      ? `url("/images/home/homeHeroDark.webp")`
+      : `url("/images/home/homeHeroLight.webp")`
     : undefined;
 
   const isMobile = useIsMobile();

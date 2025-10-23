@@ -1,21 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function Footer() {
-  const { sectionAnimation, viewportOnce } = useMotionVariants();
-
   return (
     <footer className="w-full mx-auto text-text py-6 bg-footer flex flex-col md:flex-row justify-between items-center gap-6">
-      <motion.section
-        variants={sectionAnimation}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-        className="flex flex-col md:flex-row md:w-6xl md:mx-auto"
-      >
+      <section className="flex flex-col md:flex-row md:w-6xl md:mx-auto">
         <div className="w-full flex justify-center md:justify-start flex-row gap-4 text-text-white md:gap-6 items-center">
           <Link
             href="/impressum"
@@ -45,7 +35,7 @@ export default function Footer() {
           <span className="hidden md:block">|</span>
           <p>Webdesign & Umsetzung: Laurin Schmidt</p>
         </div>
-      </motion.section>
+      </section>
     </footer>
   );
 }

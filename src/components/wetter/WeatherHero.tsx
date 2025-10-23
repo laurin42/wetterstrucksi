@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function WeatherHero() {
-  const backgroundImage = `url("/images/wetter/weatherHero.jpg")`;
+  const backgroundImage = `url("/images/wetter/weatherHero.webp")`;
 
   const { fadeInVariant, slideInLeftVariant } = useMotionVariants();
 

@@ -57,8 +57,8 @@ const Header = forwardRef<HTMLElement>(() => {
               <Image
                 src={
                   displayTheme === "dark"
-                    ? "/images/logo/wetterstrucksiLogoDark.png"
-                    : "/images/logo/wetterstrucksiLogoLight.png"
+                    ? "/images/logo/wetterstrucksiLogoDark.webp"
+                    : "/images/logo/wetterstrucksiLogoLight.webp"
                 }
                 alt="wetterstrucksi logo"
                 width={120}

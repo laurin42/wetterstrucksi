@@ -10,8 +10,8 @@ export default function ArchiveHero() {
   const mounted = useMounted();
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/archiv/archiveHeroDark.jpg")`
-      : `url("/images/archiv/archiveHeroLight.jpg")`
+      ? `url("/images/archiv/archiveHeroDark.webp")`
+      : `url("/images/archiv/archiveHeroLight.webp")`
     : undefined;
 
   const { slideInLeftVariant, fadeInVariant } = useMotionVariants();
