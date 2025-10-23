@@ -3,6 +3,8 @@ import { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['http://192.168.178.67:3000', 'https://192.168.178.67:3000' ],
   images: {
+    loader: "custom",
+    loaderFile: "./src/lib/ghostImageLoader.js",
     remotePatterns: [
 {
   protocol: "https",
