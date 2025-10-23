@@ -34,15 +34,37 @@ export function MonthsFilter({
         hidden: {},
         visible: { transition: { staggerChildren: 0.04 } },
       }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 px-2 py-2 md:px-4 border-b border-t border-accent/40"
+      className="grid grid-cols-2 gap-x-4 gap-y-2 py-2 px-2 w-full scrollbar-hide 
+					   md:flex md:overflow-x-auto md:gap-2 md:px-0 md:whitespace-nowrap"
     >
+      <motion.li
+        key="clear"
+        variants={{
+          hidden: { opacity: 0, x: -5 },
+          visible: { opacity: 1, x: 0 },
+        }}
+        className="col-span-2 md:col-span-none flex-shrink-0"
+      >
+        <button
+          onClick={() => onMonthSelect(null)}
+          className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
+            selectedMonth === null
+              ? "bg-accent text-text-white/98"
+              : "hover:bg-accent/60 text-text hover:text-text-white"
+          }`}
+        >
+          Alle Monate
+        </button>
+      </motion.li>
       {months.map((m) => (
         <motion.li
           key={m.value}
+          data-month={m.value}
           variants={{
-            hidden: { opacity: 0, y: -5 },
-            visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, x: -5 },
+            visible: { opacity: 1, x: 0 },
           }}
+          className="flex-shrink-0"
         >
           <button
             onClick={() => onMonthSelect(m.value)}

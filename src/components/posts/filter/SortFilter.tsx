@@ -7,29 +7,43 @@ interface SortFilterProps {
   onSortChange: (order: "newest" | "oldest") => void;
 }
 
+const sortOptions = [
+  { key: "newest", label: "Neueste zuerst" },
+  { key: "oldest", label: "Älteste zuerst" },
+];
+
 export function SortFilter({ sortOrder, onSortChange }: SortFilterProps) {
   return (
-    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 px-2 pt-4 md:px-4 border-t-[1px] border-accent/40">
-      <button
-        onClick={() => onSortChange("newest")}
-        className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
-          sortOrder === "newest"
-            ? "bg-accent text-text-white/98"
-            : "hover:bg-accent/60 text-text hover:text-text-white"
-        }`}
-      >
-        Neueste zuerst
-      </button>
-      <button
-        onClick={() => onSortChange("oldest")}
-        className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
-          sortOrder === "oldest"
-            ? "bg-accent text-text-white/98"
-            : "hover:bg-accent/60 text-text hover:text-text-white"
-        }`}
-      >
-        Älteste zuerst
-      </button>
-    </motion.div>
+    <motion.ul
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.04 } },
+      }}
+      className="grid grid-cols-2 gap-x-4 gap-y-2 py-2 px-2 w-full"
+    >
+      {sortOptions.map((option) => (
+        <motion.li
+          key={option.key}
+          variants={{
+            hidden: { opacity: 0, x: -5 },
+            visible: { opacity: 1, x: 0 },
+          }}
+          className="flex-shrink-0"
+        >
+          <button
+            onClick={() => onSortChange(option.key as "newest" | "oldest")}
+            className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
+              sortOrder === option.key
+                ? "bg-accent text-text-white/98"
+                : "hover:bg-accent/60 text-text hover:text-text-white"
+            }`}
+          >
+            {option.label}
+          </button>
+        </motion.li>
+      ))}
+    </motion.ul>
   );
 }

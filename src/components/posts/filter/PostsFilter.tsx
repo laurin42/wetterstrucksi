@@ -12,9 +12,10 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Calendar, SortDesc } from "lucide-react";
+import { Calendar, SortDesc, ChevronUp, ChevronDown } from "lucide-react";
 import { IoCalendar } from "react-icons/io5";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import clsx from "clsx";
 
 interface FilterCallbacks {
   onMonthSelect: (month: string | null) => void;
@@ -41,30 +42,22 @@ export function PostsFilter({
 
   return (
     <>
-      <FilterHeader
-        selectedMonth={selectedMonth}
-        selectedYear={selectedYear}
-        onToggle={() => {}}
-        onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
-        isOpen={true}
-        mobileOpen={sidebarOpen}
-        onMonthSelect={onMonthSelect}
-        onYearSelect={onYearSelect}
-        onSortChange={onSortChange}
-      />
-
       <motion.div
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm pl-4 pr-3 md:px-7 mb-1 md:mb-0"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0"
       >
-        <Accordion type="single" collapsible className="space-y-1 py-2">
+        <Accordion
+          type="single"
+          collapsible
+          className="space-y-1 pt-2 px-4 md:px-8"
+        >
           <AccordionItem value="months">
             <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
               <div className="flex items-center gap-2">
                 <IoCalendar className="w-5 h-5 text-accent" />
-                <span>Monat</span>
+                <span>Monat auswählen</span>
               </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -79,7 +72,7 @@ export function PostsFilter({
             <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-accent" />
-                <span>Jahr</span>
+                <span>Jahr auswählen</span>
               </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -91,7 +84,7 @@ export function PostsFilter({
           </AccordionItem>
 
           <AccordionItem value="sort">
-            <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 md:pb-2 md:mt-4">
+            <AccordionTrigger className="text-lg font-normal cursor-pointer py-2 md:pt-0 pb-4 md:pb-6 md:mt-4">
               <div className="flex items-center gap-2">
                 <SortDesc className="w-5 h-5 text-accent" />
                 <span>Sortierung</span>
@@ -102,6 +95,17 @@ export function PostsFilter({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+        <FilterHeader
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+          onToggle={() => {}}
+          onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
+          isOpen={true}
+          mobileOpen={sidebarOpen}
+          onMonthSelect={onMonthSelect}
+          onYearSelect={onYearSelect}
+          onSortChange={onSortChange}
+        />
       </motion.div>
     </>
   );
