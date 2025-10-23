@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export function AboutShort() {
-  const { sectionAnimation } = useMotionVariants();
+  const { sectionAnimation, fadeInVariant } = useMotionVariants();
   return (
     <motion.section
       className="relative w-full flex flex-col items-center 
@@ -39,12 +39,20 @@ export function AboutShort() {
           Wohlfühloase zu schaffen, bei der sich ausgelassen über das Wetter
           unterhalten werden kann.
         </p>
-        <Link
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
-          href="/about"
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInVariant}
+          custom={{ y: 0, duration: 1.8 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          Mehr erfahren »
-        </Link>
+          <Link
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+            href="/about"
+          >
+            Mehr erfahren »
+          </Link>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

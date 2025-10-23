@@ -31,7 +31,13 @@ export default function ArchiveHero() {
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/72 z-0 rounded-t-sm" />
+      <motion.div
+        variants={fadeInVariant}
+        initial="hidden"
+        animate="visible"
+        custom={{ y: 0, duration: 1.6 }}
+        className="absolute inset-0 bg-black/72 z-0 rounded-t-sm"
+      />
 
       <div className="relative z-10">
         <div className="font-light text-text-white text-left md:max-w-6/8">

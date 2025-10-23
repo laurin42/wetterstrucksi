@@ -44,7 +44,13 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         animate="visible"
         variants={containerVariantsSync}
       >
-        <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
+        <motion.div
+          variants={fadeInVariant}
+          initial="hidden"
+          animate="visible"
+          custom={{ y: 0, duration: 1.6 }}
+          className="absolute inset-0 bg-black/60 z-0 rounded-t-sm"
+        />
 
         <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
           <motion.h1

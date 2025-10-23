@@ -4,17 +4,24 @@ import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export function AboutStory() {
-  const { sectionAnimation, viewportOnce } = useMotionVariants();
+  const { sectionAnimation, viewportOnce, fadeInVariant } = useMotionVariants();
 
   return (
-    <section className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-4 space-y-8 h-auto">
+    <motion.section
+      variants={fadeInVariant}
+      initial="hidden"
+      animate="visible"
+      custom={{ y: 0, duration: 1.6 }}
+      className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-4 space-y-8 h-auto"
+    >
       <div className="max-w-4xl mx-auto flex flex-col justify-center">
         <motion.h2
           initial="hidden"
-          whileInView="visible"
-          variants={sectionAnimation}
-          viewport={viewportOnce}
-          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-8 md:mb-16 mt-16"
+          animate="visible"
+          variants={fadeInVariant}
+          custom={{ y: 0, duration: 1.6 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-16 mt-16"
         >
           Wie alles begann
         </motion.h2>
@@ -248,6 +255,6 @@ export function AboutStory() {
           In Liebe, Jens
         </motion.p>
       </div>
-    </section>
+    </motion.section>
   );
 }

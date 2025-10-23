@@ -53,7 +53,7 @@ const HomeSkeleton: React.FC = () => (
 );
 
 const WeatherSkeleton: React.FC = () => (
-  <motion.section className="max-w-4xl md:max-w-6xl mx-auto pt-4">
+  <motion.section className="max-w-4xl md:max-w-6xl mx-auto">
     <div className="flex justify-between items-center mb-6 p-4 bg-foreground-secondary/44 rounded-lg">
       <Skeleton
         width="400px"
@@ -88,7 +88,7 @@ const WeatherSkeleton: React.FC = () => (
 );
 
 const ArchiveSkeleton: React.FC = () => (
-  <motion.section className="max-w-4xl md:max-w-6xl mx-auto pt-4">
+  <motion.section className="max-w-4xl md:max-w-6xl mx-auto">
     <div className="flex justify-between items-center mb-6 p-4 bg-foreground-secondary/44 rounded-lg">
       <Skeleton width="200px" height={134} className="rounded-t-sm pb-2" />
     </div>

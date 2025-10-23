@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
 import { useIsMobile } from "@/lib/useIsMobile";
-import MorePostsLink from "../posts/MorePostsLink";
 import { AboutShort } from "../about/AboutShort";
 import DonateBox from "./Donation";
 import { Contact } from "../Contact";
@@ -75,8 +75,10 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </div>
               )}
-              <div className="block md:hidden pt-8 pb-16 bg-foreground backdrop-blur-sm md:bg-transparent">
-                <MorePostsLink href="/weather" label="weiterlesen »" />
+              <div className="flex md:hidden py-8 items-center justify-center text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
+                <Link className="underline" href="/wetter">
+                  Alle Beiträge entdecken »
+                </Link>
               </div>
             </>
           )}

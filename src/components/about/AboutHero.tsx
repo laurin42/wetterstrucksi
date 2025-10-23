@@ -22,7 +22,13 @@ export default function AboutHero() {
         backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/60 z-0 rounded-t-md" />
+      <motion.div
+        variants={fadeInVariant}
+        initial="hidden"
+        animate="visible"
+        custom={{ y: 0, duration: 1.6 }}
+        className="absolute inset-0 bg-black/60 z-0 rounded-t-md"
+      />
 
       <div className="relative z-10 px-4 md:px-32">
         <motion.h1

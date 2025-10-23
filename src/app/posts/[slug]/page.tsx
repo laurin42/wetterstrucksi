@@ -17,7 +17,7 @@ export default async function PostPage({
   return (
     <div>
       <Post post={post} />
-      <PostNavigation slug={slug} />
+      <PostNavigation slug={slug} publishedAt={post.published_at} />
     </div>
   );
 }
