@@ -33,25 +33,28 @@ export function PostCardMobileCarousel({
 
   return (
     <motion.div
+      initial="hidden"
+      whileInView="visible"
       variants={fadeInVariant}
+      custom={{ y: 0, duration: 2.0 }}
       className={`
-    mx-2
-    w-[80vw] xs:w-[70vw] sm:w-[66vw]
-    flex-shrink-0
-    rounded-lg
-    overflow-hidden
-    bg-foreground-secondary/44 backdrop-blur-sm
-    shadow-md
-    ${className}
-  `}
+      mx-2
+      w-[80vw] xs:w-[70vw] sm:w-[66vw]
+      flex-shrink-0
+      rounded-lg
+      overflow-hidden
+      bg-foreground-secondary/44 backdrop-blur-sm
+      shadow-md
+      ${className}
+    `}
     >
       <Link
         href={`/posts/${post.slug}`}
         className="
-    group block w-full
-    overflow-hidden transition-all duration-300
-    hover:bg-header-background/60
-  "
+        group block w-full
+        overflow-hidden transition-all duration-300
+        hover:bg-header-background/60 active:scale-95 active:bg-accent
+      "
       >
         <div className="relative w-full postcard-aspect carousel-padding">
           <Image

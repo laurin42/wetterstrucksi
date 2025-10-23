@@ -1,12 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 export default function Datenschutz() {
   return (
     <motion.section>
-      <motion.div className="flex flex-col gap-y-2 max-w-6xl mx-auto bg-foreground-secondary/44 p-4">
+      <motion.div className="flex flex-col gap-y-2 max-w-6xl mx-auto bg-foreground-secondary/44 p-4 md:p-16">
         <h1 className="text-4xl font-thin tracking-wider pb-2 mb-4 md:mb-8">
           Datenschutzerklärung
         </h1>

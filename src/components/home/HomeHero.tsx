@@ -44,23 +44,17 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         animate="visible"
         variants={containerVariantsSync}
       >
-        <motion.div
-          variants={fadeInVariant}
-          initial="hidden"
-          animate="visible"
-          custom={{ y: 0, duration: 1.6 }}
-          className="absolute inset-0 bg-black/60 z-0 rounded-t-sm"
-        />
+        <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
 
         <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
           <motion.h1
             variants={fadeInVariant}
-            custom={{ y: 40, duration: 1.2 }}
+            custom={{ y: 40, duration: 1.6 }}
             className="text-4xl font-thin md:font-semibold text-white"
           >
             <motion.em
               variants={fadeInVariant}
-              custom={{ y: 40, duration: 1.2 }}
+              custom={{ y: 40, duration: 1.6 }}
               className="font-semibold"
             >
               Dein
@@ -70,13 +64,13 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
             <motion.h2
               variants={fadeInVariant}
-              custom={{ y: 40, duration: 1.2 }}
+              custom={{ y: -40, duration: 1.6 }}
               className="text-4xl font-thin md:font-semibold text-white"
             >
               in{" "}
               <motion.em
                 variants={fadeInVariant}
-                custom={{ y: 40, duration: 1.2 }}
+                custom={{ y: -40, duration: 1.6 }}
                 className="font-semibold"
               >
                 Düsseldorf

@@ -39,7 +39,7 @@ export function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            href="/contact"
+            href="/kontakt"
             className="max-w-xl inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
           >
             Schreibt mir

@@ -31,7 +31,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
       <Link
         href={href}
         className="block w-full overflow-hidden bg-foreground 
-             transition-all duration-420 hover:bg-header-background/60 hover h-full"
+             transition-all duration-420 hover:bg-header-background/60 active:scale-95 active:bg-accent h-full"
       >
         <div className="hidden md:block relative w-full h-72 aspect-[16/9] overflow-hidden items-stretch">
           <Image

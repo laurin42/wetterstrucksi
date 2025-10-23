@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
 import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostCard } from "@/components/posts/PostCard";
 import { useIsMobile } from "@/lib/useIsMobile";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { AboutShort } from "../about/AboutShort";
 import DonateBox from "./Donation";
 import { Contact } from "../Contact";
@@ -32,6 +34,9 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
 
   const isMobile = useIsMobile();
   const [hydrated, setHydrated] = useState(false);
+
+  const { fadeInVariant, containerVariants, viewportOnce } =
+    useMotionVariants();
 
   useEffect(() => {
     setHydrated(true);
@@ -62,11 +67,25 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                     onToggle={() => toggleSection("neusteBeitraege")}
                     isContentCollabsible={false}
                   />
-                  <div className="grid grid-cols-1 px-0">
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    className="grid grid-cols-1 px-0"
+                  >
                     {normalizedPosts.slice(3, 9).map((post) => (
-                      <PostCard key={post.id} post={post} />
+                      <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportOnce}
+                        variants={fadeInVariant}
+                        custom={{ y: 0, duration: 0.8 }}
+                        key={post.id}
+                      >
+                        <PostCard post={post} />
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </>
               )}
 
@@ -75,11 +94,11 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
                   <PostCarousel posts={normalizedPosts.slice(0, 6)} />
                 </div>
               )}
-              <div className="flex md:hidden py-8 items-center justify-center text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
-                <Link className="underline" href="/wetter">
+              <motion.div className="flex md:hidden py-8 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
+                <Link className="underline text-accent-dark" href="/wetter">
                   Alle Beiträge entdecken »
                 </Link>
-              </div>
+              </motion.div>
             </>
           )}
         </div>

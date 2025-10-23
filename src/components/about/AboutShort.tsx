@@ -44,7 +44,7 @@ export function AboutShort() {
           whileInView="visible"
           variants={fadeInVariant}
           custom={{ y: 0, duration: 1.8 }}
-          viewport={{ once: true, amount: 0.1 }}
+          className="pt-16"
         >
           <Link
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"

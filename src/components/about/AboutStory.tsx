@@ -12,7 +12,7 @@ export function AboutStory() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.6 }}
-      className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-4 space-y-8 h-auto"
+      className="max-w-6xl mx-auto bg-foreground-secondary/44 backdrop-blur-md pt-8 pb-16 px-8 space-y-8 h-auto"
     >
       <div className="max-w-4xl mx-auto flex flex-col justify-center">
         <motion.h2
@@ -45,7 +45,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Später beschäftigte ich mich mit Modellberechnungen der Wettermodelle
           und analysierte diese. So konnte ich mich im Bereich der
@@ -78,7 +78,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Durch meine Verbundenheit im Handballverein SG Unterrath in Düsseldorf
           konnte ich von Anfang an auf eine gewisse Reichweite bauen. Aus
@@ -116,7 +116,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           2016 porträtierte mich die Rheinische Post erstmals, weitere
           Interviews mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast
@@ -152,7 +152,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Meteorologie wollte ich bewusst nicht studieren – das Hobby soll ein
           Hobby bleiben dürfen.
@@ -184,7 +184,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Gerade in einer Zeit, die von Reichweite lebt, lege ich Wert auf einen
           sachlich-nüchternen Ansatz. Dadurch konnte ich mir das Vertrauen
@@ -206,7 +206,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Der lokale Bezug auf Düsseldorf und die persönliche Auseinandersetzung
           mit den Wetterkarten unterscheidet mich von klassischen Apps oder
@@ -241,7 +241,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-24"
+          className="leading-relaxed md:mb-12 mb-8"
         >
           Ich freue mich auf euch – bei gutem wie bei schlechtem Wetter.
         </motion.p>
