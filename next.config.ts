@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
 },
 {
   protocol: "https",
+  hostname: "wetterstrucksi.de",
+  pathname: "/content/images/**"
+},
+{
+  protocol: "https",
+  hostname: "wetterstrucksi.de",
+  pathname: "/**"
+},
+{
+  protocol: "https",
   hostname: "static.ghost.org",
   pathname: "/**",
 },

@@ -1,19 +1,33 @@
-
-const GHOST_API_URL = process.env.NEXT_PUBLIC_GHOST_API_URL || '';
-
-const GHOST_BASE_URL = GHOST_API_URL.replace(/\/cms.*$/, '/cms');
-
-
 export function fixImageUrl(url?: string | null): string | null {
-  if (!url || !GHOST_BASE_URL) return null;
-  if (url.startsWith('http')) {
-    if (url.startsWith(process.env.NEXT_PUBLIC_SITE_URL || '')) {
+  if (!url) return null;
 
-        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wetterstrucksi.de';
-        return url.replace(siteUrl, GHOST_BASE_URL.replace('/cms', ''));
-    }
-    return url;
-  }
+  let cleanedUrl = url;
+
+  cleanedUrl = cleanedUrl.replace('https://wetterstrucksi.de', '');
+  cleanedUrl = cleanedUrl.replace('http://wetterstrucksi.de', '');
   
-  return `${GHOST_BASE_URL}${url}`;
+  cleanedUrl = cleanedUrl.replace('/jensstrucks-blog/wp-content/uploads', '');
+  cleanedUrl = cleanedUrl.replace('/wp-content/uploads', '');
+  cleanedUrl = cleanedUrl.replace('/content/images', '');
+  cleanedUrl = cleanedUrl.replace('content/images', '');
+  cleanedUrl = cleanedUrl.replace('-2368', '');
+  
+
+  cleanedUrl = cleanedUrl.replace('cms', '');
+
+  cleanedUrl = cleanedUrl.replace(/^\/+/g, '');
+  
+ 
+  const finalPath = `/content/images/${cleanedUrl}`;
+
+  let finalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${finalPath}`;
+  
+
+  finalUrl = finalUrl.replace(/([^:]\/)\/+/g, '$1');
+
+  if (finalUrl.includes('#')) {
+    return finalUrl.split('#')[0];
+  }
+
+  return finalUrl;
 }
