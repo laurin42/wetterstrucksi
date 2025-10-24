@@ -3,16 +3,17 @@ import Post from "@/components/posts/Post";
 import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 import { Metadata } from "next";
 
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
-  if (!post) {
-    return {};
-  }
+  if (!post) return {};
 
   const ogImageUrl = post.og_image || post.feature_image;
 
@@ -23,17 +24,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const slug = params.slug;
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
-    return <div>Beitrag nicht gefunden</div>;
-  }
+  if (!post) return <div>Beitrag nicht gefunden</div>;
 
   return (
     <div>
