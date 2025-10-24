@@ -1,18 +1,34 @@
 import PostNavigation from "@/components/posts/PostNavigation";
 import Post from "@/components/posts/Post";
 import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
+import { Metadata } from "next";
 
-export default async function PostPage({
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}) {
-  const slug = params.slug;
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
-    return <div>Beitrag nicht gefunden</div>;
-  }
+  if (!post) return {};
+
+  const ogImageUrl = post.og_image || post.feature_image;
+
+  return {
+    openGraph: {
+      images: ogImageUrl ? [ogImageUrl] : [],
+    },
+  };
+}
+
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) return <div>Beitrag nicht gefunden</div>;
 
   return (
     <div>
