@@ -19,10 +19,10 @@ function truncateWords(text?: string, maxWords?: number) {
 
 export function PostCard({ post, className, isNewest }: PostCardProps) {
   const feature_image_url = fixImageUrl(post.feature_image);
-  const imageSrc =
-    feature_image_url || "/images/weatherFeatureImageDefault.webp";
 
   const href = post.slug ? `/posts/${post.slug}` : "#";
+
+  const imageSrc = fixImageUrl(post.feature_image);
 
   return (
     <div
@@ -33,22 +33,25 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
         className="block w-full overflow-hidden bg-foreground 
              transition-all duration-420 hover:bg-header-background/60 active:scale-95 active:bg-accent h-full"
       >
-        <div className="hidden md:block relative w-full h-72 postcard-tablet-aspect aspect-[16/9] overflow-hidden items-stretch">
-          <Image
-            src={imageSrc}
-            alt={post.title || "Feature Image"}
-            fill
-            className="object-cover object-center transition-transform duration-500"
-          />
+        {imageSrc && (
+          <div className="hidden md:block relative w-full h-72 postcard-tablet-aspect aspect-[16/9] overflow-hidden items-stretch">
+            <Image
+              src={imageSrc}
+              overrideSrc={imageSrc}
+              alt={post.title || "Feature Image"}
+              fill
+              className="object-cover object-center transition-transform duration-500"
+            />
 
-          <div className="absolute inset-0 bg-black/10">
-            {isNewest && (
-              <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
-                Neuster Beitrag
-              </span>
-            )}
+            <div className="absolute inset-0 bg-black/10">
+              {isNewest && (
+                <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+                  Neuster Beitrag
+                </span>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex flex-row md:flex-col gap-4 px-4 py-4 md:p-5 h-full">
           <div className="flex-1 flex flex-col justify-start">
@@ -72,18 +75,20 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
               </p>
             )}
           </div>
-
-          <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
-            <Image
-              src={imageSrc}
-              alt={post.title || "Feature Image"}
-              fill
-              className="object-cover rounded-md"
-              sizes="(max-width: 768px) 6rem, 33vw"
-              loading="lazy"
-              unoptimized={true}
-            />
-          </div>
+          {imageSrc && (
+            <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
+              <Image
+                src={imageSrc}
+                overrideSrc={imageSrc}
+                alt={post.title || "Feature Image"}
+                fill
+                className="object-cover rounded-md"
+                sizes="(max-width: 768px) 6rem, 33vw"
+                loading="lazy"
+                unoptimized={true}
+              />
+            </div>
+          )}
         </div>
       </Link>
     </div>
