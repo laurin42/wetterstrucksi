@@ -12,8 +12,12 @@ const cache: { [key: string]: { posts: PostWithMeta[]; timestamp: number } } = {
 
 
 
-function normalizePosts(posts: PostWithMeta[]): PostWithMeta[] {
-  return posts.map((post) => {
+function normalizePosts(posts: PostWithMeta[] | undefined | null): PostWithMeta[] {
+    if (!posts || !Array.isArray(posts)) {
+        return [];
+    }
+
+    return posts.map((post) => {
     const uniqueId = post.id || post.uuid || uuidv4();
 
     return {
@@ -99,37 +103,44 @@ export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> 
 }
 
 
-export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000
+export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
+    const tags = Array.isArray(tagsToFilter)
+        ? tagsToFilter.map(t => t.toLowerCase())
+        : [tagsToFilter.toLowerCase()];
 
-): Promise<PostWithMeta[]> {
-  const tags = Array.isArray(tagsToFilter) 
-    ? tagsToFilter.map(t => t.toLowerCase()) 
-    : [tagsToFilter.toLowerCase()];
+    const cacheKey = `tags-${tags.join(",")}-${limit}`;
+    const now = Date.now();
 
-  const cacheKey = `tags-${tags.join(",")}-${limit}`;
-  const now = Date.now();
+    if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
+        return cache[cacheKey].posts;
+    }
 
-  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
-    return cache[cacheKey].posts;
-  }
-  
-  const allPosts = await api.posts.browse({
-    include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
-    limit: "all", 
-    order: "published_at DESC",
-  });
+    try {
+        const allPosts = await api.posts.browse({
+            include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+            limit: "all",
+            order: "published_at DESC",
+        });
 
-  
-  const normalized = normalizePosts(allPosts);
+        if (!allPosts) {
+            console.warn("Ghost API returned no posts (null/undefined). Returning empty array.");
+            return [];
+        }
 
-  
-  const filtered = normalized
-    .filter(post =>
-      post.tags?.some(tag => tags.includes(tag.slug.toLowerCase()))
-    )
-    .slice(0, limit); 
+        const normalized = normalizePosts(allPosts);
 
-  cache[cacheKey] = { posts: filtered, timestamp: now };
-  return filtered;
+        const filtered = normalized
+            .filter(post =>
+                post.tags?.some(tag => tags.includes(tag.slug.toLowerCase()))
+            )
+            .slice(0, limit);
+
+        cache[cacheKey] = { posts: filtered, timestamp: now };
+        return filtered;
+        
+    } catch (error) {
+        console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
+        return []; 
+    }
 }
 

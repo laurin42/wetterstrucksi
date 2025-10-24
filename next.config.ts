@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
   pathname: "/**"
 },
   ],
+
+  unoptimized: false,
   },
 };
 
