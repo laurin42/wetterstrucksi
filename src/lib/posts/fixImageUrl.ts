@@ -1,21 +1,34 @@
 export function fixImageUrl(url?: string | null): string | null {
   if (!url) return null;
 
-  let fixedUrl: string;
-  try {
-    fixedUrl = new URL(url, process.env.NEXT_PUBLIC_SITE_URL).toString();
-  } catch {
-    return null;
-  }
+  let cleanedUrl = url;
+
+  cleanedUrl = cleanedUrl.replace('https://wetterstrucksi.de', '');
+  cleanedUrl = cleanedUrl.replace('http://wetterstrucksi.de', '');
+  
+  cleanedUrl = cleanedUrl.replace('/jensstrucks-blog/wp-content/uploads', '');
+  cleanedUrl = cleanedUrl.replace('/wp-content/uploads', '');
+  cleanedUrl = cleanedUrl.replace('/content/images', '');
+  cleanedUrl = cleanedUrl.replace('content/images', '');
+  cleanedUrl = cleanedUrl.replace('-2368', '');
   
 
-  const extRegex = /\.(png|jpe?g)$/i;
+  cleanedUrl = cleanedUrl.replace('/cms', ''); 
+  cleanedUrl = cleanedUrl.replace('cms', '');
+
+  cleanedUrl = cleanedUrl.replace(/^\/+/g, '');
   
-  if (extRegex.test(fixedUrl)) {
-      fixedUrl = fixedUrl.replace(extRegex, '.webp');
+ 
+  const finalPath = `/content/images/${cleanedUrl}`;
+
+  let finalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${finalPath}`;
+  
+
+  finalUrl = finalUrl.replace(/([^:]\/)\/+/g, '$1');
+
+  if (finalUrl.includes('#')) {
+    return finalUrl.split('#')[0];
   }
 
-  fixedUrl = fixedUrl.replace("-2368", ""); 
-  
-  return fixedUrl;
+  return finalUrl;
 }

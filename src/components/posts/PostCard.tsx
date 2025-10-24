@@ -81,6 +81,7 @@ export function PostCard({ post, className, isNewest }: PostCardProps) {
               className="object-cover rounded-md"
               sizes="(max-width: 768px) 6rem, 33vw"
               loading="lazy"
+              unoptimized={true}
             />
           </div>
         </div>
