@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
 {
   protocol: "https",
   hostname: "wetterstrucksi.de",
-  pathname: "/**"
+  pathname: "/cms/content/images/**"
 },
 {
   protocol: "https",
