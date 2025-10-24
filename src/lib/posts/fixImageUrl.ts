@@ -29,5 +29,7 @@ export function fixImageUrl(url?: string | null): string | null {
     return finalUrl.split('#')[0];
   }
 
+console.log('Final Image URL:', finalUrl); 
+
   return finalUrl;
 }
