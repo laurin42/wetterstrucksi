@@ -5,9 +5,9 @@ import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const slug = (await params).slug;
+  const slug = params.slug;
   const post = await getPostBySlug(slug);
 
   if (!post) {
