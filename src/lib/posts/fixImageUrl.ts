@@ -1,35 +1,23 @@
 export function fixImageUrl(url?: string | null): string | null {
   if (!url) return null;
 
-  let cleanedUrl = url;
+  let cleanedUrl = url.trim();
 
-  cleanedUrl = cleanedUrl.replace('https://wetterstrucksi.de', '');
-  cleanedUrl = cleanedUrl.replace('http://wetterstrucksi.de', '');
-  
-  cleanedUrl = cleanedUrl.replace('/jensstrucks-blog/wp-content/uploads', '');
-  cleanedUrl = cleanedUrl.replace('/wp-content/uploads', '');
-  cleanedUrl = cleanedUrl.replace('/content/images', '');
-  cleanedUrl = cleanedUrl.replace('content/images', '');
-  cleanedUrl = cleanedUrl.replace('-2368', '');
-  
+  cleanedUrl = cleanedUrl.replace(/^https?:\/\/(cms\.)?wetterstrucksi\.de\/?/, '');
 
-  cleanedUrl = cleanedUrl.replace('cms', '');
+  cleanedUrl = cleanedUrl.replace("jensstrucks-blog", "");
+  cleanedUrl = cleanedUrl.replace("wp-content", "");
+  cleanedUrl = cleanedUrl.replace("uploads", "");
 
-  cleanedUrl = cleanedUrl.replace(/^\/+/g, '');
-  
- 
-  const finalPath = `/cms/content/images/${cleanedUrl}`;
 
-  let finalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${finalPath}`;
-  
 
-  finalUrl = finalUrl.replace(/([^:]\/)\/+/g, '$1');
+  cleanedUrl = cleanedUrl.replace(/^\/+/, '').replace(/\/+$/, '');
 
-  if (finalUrl.includes('#')) {
-    return finalUrl.split('#')[0];
+  if (!cleanedUrl.startsWith('cms/')) {
+    cleanedUrl = `/${cleanedUrl}`;
   }
 
-console.log('Final Image URL:', finalUrl); 
+  const finalUrl = `https://cms.wetterstrucksi.de/${cleanedUrl}`.replace(/([^:]\/)\/+/g, '$1');
 
   return finalUrl;
 }
