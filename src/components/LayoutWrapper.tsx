@@ -8,7 +8,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className="main md:pt-8 md:pb-8">{children}</main>
+      <main className="main md:pb-8">{children}</main>
       <Footer />
     </>
   );

@@ -61,7 +61,7 @@ export interface PostWithMeta {
   twitter_title: string | null;
   twitter_description: string | null;
   meta_title: string | null;
-  meta_description: string | null;
+  meta_description: string | undefined;
 
   tags?: GhostTag[];
   authors?: GhostAuthor[];

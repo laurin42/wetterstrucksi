@@ -25,28 +25,28 @@ export default function HomeHero({ posts }: HomeHeroProps) {
       : `url("/images/home/homeHeroLight.webp")`
     : undefined;
 
-  const isMobile = useIsMobile();
-
   const isVacationTime = useIsVacationTime();
 
   return (
     <>
       <motion.section
         className="
-    relative w-full flex flex-col items-center 
-    md:flex-row md:justify-between 
-    px-0 pt-8 md:pb-8 md:px-8 rounded-t-sm md:mb-2
-    h-[calc(100svh-64px)] md:h-auto
-    bg-cover bg-center
-  "
-        style={{ backgroundImage }}
+          relative w-full flex flex-col items-center
+          md:flex-row md:justiy-center
+          px-0 pt-8 md:px-8 rounded-t-sm md:mb-2
+          min-h-[calc(100svh-64px)]
+          bg-cover bg-center
+        "
+        style={{
+          backgroundImage: backgroundImage,
+        }}
         initial="hidden"
         animate="visible"
         variants={containerVariantsSync}
       >
         <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
 
-        <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+        <div className="relative z-10 text-left">
           <motion.h1
             variants={fadeInVariant}
             custom={{ y: 40, duration: 1.6 }}
@@ -61,7 +61,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             </motion.em>{" "}
             Ort für Wetter
           </motion.h1>
-          <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+          <div className="relative z-10 text-left">
             <motion.h2
               variants={fadeInVariant}
               custom={{ y: -40, duration: 1.6 }}
@@ -79,12 +79,10 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           </div>
         </div>
 
-        <div className="md:hidden w-full relative z-10 pt-8 carousel-padding">
-          {isMobile && (
-            <div className="">
-              <PostCarousel posts={posts.slice(0, 3)} />
-            </div>
-          )}
+        <div className="w-full relative z-10 pt-8">
+          <div className="">
+            <PostCarousel posts={posts.slice(0, 3)} />
+          </div>
         </div>
         <div className="hidden md:block">
           {isVacationTime && <VacationInfo />}

@@ -32,7 +32,6 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
     id: post.id || post.uuid || crypto.randomUUID(),
   }));
 
-  const isMobile = useIsMobile();
   const [hydrated, setHydrated] = useState(false);
 
   const { fadeInVariant, containerVariants, viewportOnce } =
@@ -45,76 +44,52 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   if (!hydrated) return null;
 
   return (
-    <section className="md:max-w-6xl mx-auto">
+    <>
       <HomeHero posts={normalizedPosts} />
-
-      {openSections.neusteBeitraege && (
-        <div
-          key="neusteBeitraege"
-          className="md:bg-foreground-secondary/44 backdrop-blur-sm md:py-2 md:mb-4"
-        >
-          {normalizedPosts.length === 0 ? (
-            <p className="text-muted-foreground px-4">
-              Keine Beiträge gefunden.
-            </p>
-          ) : (
-            <>
-              {isMobile && (
+      <div className="md:max-w-6xl tablet-xs:pt-16 mx-auto">
+        {openSections.neusteBeitraege && (
+          <div key="neusteBeitraege">
+            {normalizedPosts.length === 0 ? (
+              <p className="text-muted-foreground px-4">
+                Keine Beiträge gefunden.
+              </p>
+            ) : (
+              <>
                 <>
                   <CollapsibleSectionHeader
-                    title={isMobile ? "Weitere Beiträge" : "Neueste Beiträge"}
+                    title={"Weitere Beiträge"}
                     isOpen={openSections.neusteBeitraege}
                     onToggle={() => toggleSection("neusteBeitraege")}
                     isContentCollabsible={false}
                   />
-                  <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    className="grid grid-cols-1 px-0 md:grid-cols-3 md:gap-2"
-                  >
-                    {normalizedPosts.slice(3, 9).map((post) => (
-                      <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={viewportOnce}
-                        variants={fadeInVariant}
-                        custom={{ y: 0, duration: 0.8 }}
-                        key={post.id}
-                      >
-                        <PostCard post={post} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
+
+                  {normalizedPosts.slice(3, 9).map((post) => (
+                    <PostCard key={post.id} post={post} />
+                  ))}
                 </>
-              )}
 
-              {!isMobile && (
-                <div className="hidden md:block home-hero-carousel">
-                  <PostCarousel posts={normalizedPosts.slice(0, 6)} />
-                </div>
-              )}
-              <motion.div className="flex md:hidden py-8 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
-                <Link className="underline text-accent-dark" href="/wetter">
-                  Alle Beiträge entdecken »
-                </Link>
-              </motion.div>
-            </>
-          )}
+                <motion.div className="flex py-8 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
+                  <Link className="underline text-accent-dark" href="/wetter">
+                    Alle Beiträge entdecken »
+                  </Link>
+                </motion.div>
+              </>
+            )}
+          </div>
+        )}
+
+        <div className="md:mt-4">
+          <AboutShort />
         </div>
-      )}
 
-      <div className="md:mt-4">
-        <AboutShort />
-      </div>
+        <div className="md:mt-4">
+          <DonateBox />
+        </div>
 
-      <div className="md:mt-4">
-        <DonateBox />
+        <div className="md:mt-4">
+          <Contact />
+        </div>
       </div>
-
-      <div className="md:mt-4">
-        <Contact />
-      </div>
-    </section>
+    </>
   );
 }

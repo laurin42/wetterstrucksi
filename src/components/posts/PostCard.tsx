@@ -17,76 +17,61 @@ function truncateWords(text?: string, maxWords?: number) {
   return words.slice(0, maxWords).join(" ") + "...";
 }
 
-export function PostCard({ post, className, isNewest }: PostCardProps) {
+export function PostCard({ post, isNewest }: PostCardProps) {
   const href = post.slug ? `/posts/${post.slug}` : "#";
 
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div
-      className={`block md:flex md:flex-col md:aspect-[3/4] w-full  ... ${className}`}
-    >
+    <div className="block w-full tablet-xs:pb-4 border-b border-accent/40 py-2 transition duration-240">
       <Link
         href={href}
-        className="block w-full overflow-hidden bg-foreground 
-             transition-all duration-420 hover:bg-header-background/60 active:scale-95 active:bg-accent h-full"
+        className="block overflow-hidden transition-transform duration-240 hover:scale-[0.99] transform-gpu will-change-transform backface-hidden"
       >
-        {imageSrc && (
-          <div className="hidden md:block relative w-full h-72 postcard-tablet-aspect aspect-[16/9] overflow-hidden items-stretch">
-            <Image
-              src={imageSrc}
-              overrideSrc={imageSrc}
-              alt={post.title || "Feature Image"}
-              fill
-              className="object-cover object-center transition-transform duration-500"
-            />
+        <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
+          <div className="flex md:pr-8 h-full">
+            <div className="flex-1 flex flex-col justify-start">
+              {post.published_at && (
+                <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin">
+                  {new Date(post.published_at).toLocaleDateString("de-DE", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </p>
+              )}
 
-            <div className="absolute inset-0 bg-black/10">
-              {isNewest && (
-                <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
-                  Neuster Beitrag
-                </span>
+              <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold">
+                {truncateWords(post.title, 12)}
+              </h2>
+
+              {post.og_description && (
+                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
+                  {truncateWords(post.meta_description, 120)}
+                </p>
               )}
             </div>
-          </div>
-        )}
-
-        <div className="flex flex-row md:flex-col gap-4 px-4 py-4 md:p-5 h-full">
-          <div className="flex-1 flex flex-col justify-start">
-            {post.published_at && (
-              <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin">
-                {new Date(post.published_at).toLocaleDateString("de-DE", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </p>
-            )}
-
-            <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold">
-              {truncateWords(post.title, 12)}
-            </h2>
-
-            {post.og_description && (
-              <p className="md:text-sm text-text line-clamp-3 md:line-clamp-5 md:font-normal">
-                {truncateWords(post.og_description, 120)}
-              </p>
+            {imageSrc && (
+              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0">
+                <Image
+                  src={imageSrc}
+                  overrideSrc={imageSrc}
+                  alt={post.title || "Feature Image"}
+                  fill
+                  className="object-cover rounded-md"
+                  sizes="(max-width: 768px) 6rem, 33vw"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/10">
+                  {isNewest && (
+                    <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+                      Neuster Beitrag
+                    </span>
+                  )}
+                </div>
+              </div>
             )}
           </div>
-          {imageSrc && (
-            <div className="w-24 md:w-full h-24 md:h-auto my-auto relative flex-shrink-0">
-              <Image
-                src={imageSrc}
-                overrideSrc={imageSrc}
-                alt={post.title || "Feature Image"}
-                fill
-                className="object-cover rounded-md"
-                sizes="(max-width: 768px) 6rem, 33vw"
-                loading="lazy"
-                unoptimized={true}
-              />
-            </div>
-          )}
         </div>
       </Link>
     </div>

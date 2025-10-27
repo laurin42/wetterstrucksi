@@ -3,7 +3,6 @@ import { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['http://192.168.178.67:3000', 'https://192.168.178.67:3000' ],
   images: {
-    unoptimized: true,
     remotePatterns: [
 {
   protocol: "https",
@@ -36,6 +35,8 @@ const nextConfig: NextConfig = {
   pathname: "/**"
 },
   ],
+  
+  loader: "default",
 
   },
 };

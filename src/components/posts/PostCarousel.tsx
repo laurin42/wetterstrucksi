@@ -68,68 +68,26 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
   }, [isMobile, emblaApi]);
 
   return (
-    <div className={clsx("relative", className)}>
-      <div ref={emblaRef} className="overflow-hidden cursor-grab md:px-1">
-        <div className="flex">
-          {normalizedPosts.map((post, index) => (
-            <div
-              key={post.id}
-              className={clsx(
-                "flex-shrink-0 px-1",
-                isMobile ? "w-full flex justify-center" : "w-1/3"
-              )}
-            >
-              {isMobile ? (
+    <>
+      {" "}
+      <div className="relative">
+        <div ref={emblaRef} className="overflow-hidden cursor-grab md:px-1">
+          <div className="flex">
+            {normalizedPosts.map((post, index) => (
+              <div
+                key={post.id}
+                className="flex-shrink-0 w-2/3 tablet-xs:w-2/6 tablet-xs:px-1 mx-auto flex justify-center"
+              >
                 <PostCardMobileCarousel
                   post={post}
-                  className="mx-auto"
+                  className="flex-1"
                   isNewest={index === 0}
                 />
-              ) : (
-                <PostCard post={post} isNewest={index === 0} />
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
-      <button
-        onClick={scrollPrev}
-        aria-label="Vorheriger Beitrag"
-        className="absolute md:-left-12 left-0 top-1/2 z-10"
-      >
-        <MdChevronLeft
-          size={48}
-          className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
-        />
-      </button>
-
-      <button
-        onClick={scrollNext}
-        aria-label="Nächster Beitrag"
-        className="absolute md:-right-12 right-0 top-1/2  z-10"
-      >
-        <MdChevronRight
-          size={48}
-          className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
-        />
-      </button>
-
-      {!isMobile && (
-        <div className="flex justify-center mt-8 md:mb-4 space-x-2">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`cursor-pointer w-3 h-3 rounded-full transition-colors duration-300 ${
-                index === selectedIndex
-                  ? "bg-accent"
-                  : "bg-muted hover:bg-accent/60"
-              }`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    </>
   );
 }

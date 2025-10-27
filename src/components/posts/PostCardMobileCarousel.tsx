@@ -38,25 +38,22 @@ export function PostCardMobileCarousel({
       variants={fadeInVariant}
       custom={{ y: 0, duration: 2.0 }}
       className={`
-      mx-2
-      w-[80vw] xs:w-[70vw] sm:w-[66vw]
-      flex-shrink-0
-      rounded-lg
-      overflow-hidden
-      bg-foreground-secondary/44 backdrop-blur-sm
-      shadow-md
-      ${className}
-    `}
+        rounded-lg
+        overflow-hidden
+        bg-foreground-secondary/44 backdrop-blur-sm
+        shadow-md
+        ${className}
+  `}
     >
       <Link
         href={`/posts/${post.slug}`}
         className="
-        group block w-full
-        overflow-hidden transition-all duration-300
-        hover:bg-header-background/60 active:scale-95 active:bg-accent
-      "
+          group block w-full
+          overflow-hidden transition-all duration-300
+          hover:bg-header-background/60 active:scale-95 active:bg-accent
+        "
       >
-        <div className="relative w-full postcard-aspect carousel-padding">
+        <div className="relative w-full xxs:aspect-video xs:aspect-[8/6]">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -71,13 +68,13 @@ export function PostCardMobileCarousel({
           )}
         </div>
 
-        <div className="flex flex-col p-3 gap-1 min-h-0">
+        <div className="flex flex-col px-4 py-6 gap-1 min-h-0">
           <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-1">
             {truncateWords(post.title, 10)}
           </h2>
           {post.og_description && (
-            <p className="text-text line-clamp-3">
-              {truncateWords(post.og_description, 15)}
+            <p className="text-text xxs:line-clamp-3 xs:line-clamp-4">
+              {truncateWords(post.og_description, 100)}
             </p>
           )}
           <span className="mt-2 font-thin text-2xl text-accent-dark tracking-wide hover:underline">
