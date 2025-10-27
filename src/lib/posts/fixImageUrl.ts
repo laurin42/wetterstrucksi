@@ -18,7 +18,7 @@ export function fixImageUrl(url?: string | null): string | null {
   cleanedUrl = cleanedUrl.replace(/^\/+/g, '');
   
  
-  const finalPath = `/cms/content/images/${cleanedUrl}`;
+  const finalPath = `/content/images/${cleanedUrl}`;
 
   let finalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${finalPath}`;
   
