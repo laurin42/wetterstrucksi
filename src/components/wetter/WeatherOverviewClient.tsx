@@ -34,7 +34,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
   };
 
   return (
-    <section className="max-w-4xl md:max-w-6xl mx-auto pt-0 tablet-xs:pt-8 tablet-xs:px-2">
+    <section className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 tablet-xs:px-2">
       <WeatherHero />
       <div className="grid grid-cols-1 max-w-4xl md:max-w-6xl mx-auto">
         {renderPosts("wetter", "Vorhersagen")}

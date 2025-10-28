@@ -12,10 +12,9 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Calendar, SortDesc, ChevronUp, ChevronDown } from "lucide-react";
+import { Calendar, SortDesc } from "lucide-react";
 import { IoCalendar } from "react-icons/io5";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import clsx from "clsx";
 
 interface FilterCallbacks {
   onMonthSelect: (month: string | null) => void;

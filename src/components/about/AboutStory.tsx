@@ -21,7 +21,7 @@ export function AboutStory() {
           variants={fadeInVariant}
           custom={{ y: 0, duration: 1.6 }}
           viewport={{ once: true, amount: 0.1 }}
-          className="w-fit mx-auto text-4xl font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2 mb-16 mt-16"
+          className="w-fit text-4xl font-light mx-auto text-text border-b-[1px] border-text/40 pb-2 mb-24 mt-16"
         >
           Wie alles begann
         </motion.h2>
@@ -45,7 +45,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Später beschäftigte ich mich mit Modellberechnungen der Wettermodelle
           und analysierte diese. So konnte ich mich im Bereich der
@@ -57,7 +57,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit text-3xl mb-2 font-light text-left  text-text border-b-[1px] border-text/40 pb-2"
         >
           Der Start von „Wetterstrucksi“
         </motion.h3>
@@ -78,7 +78,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Durch meine Verbundenheit im Handballverein SG Unterrath in Düsseldorf
           konnte ich von Anfang an auf eine gewisse Reichweite bauen. Aus
@@ -90,10 +90,23 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit  text-3xl mb-2 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Medien & öffentliche Auftritte
         </motion.h3>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          variants={sectionAnimation}
+          viewport={viewportOnce}
+          className="leading-relaxed md:mb-16 mb-8"
+        >
+          2016 porträtierte mich die Rheinische Post erstmals, weitere
+          Interviews mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast
+          folgten. Von September 2022 bis Juli 2024 war ich offizieller
+          Wetterexperte bei Antenne Düsseldorf und versorgte die Region mit
+          Prognosen.
+        </motion.p>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -111,26 +124,13 @@ export function AboutStory() {
             <em>Im Gespräch mit dem WDR</em>
           </div>
         </motion.div>
-        <motion.p
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionAnimation}
-          viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
-        >
-          2016 porträtierte mich die Rheinische Post erstmals, weitere
-          Interviews mit WDR, RP-Online und Auftritte im „Rheinpegel“-Podcast
-          folgten. Von September 2022 bis Juli 2024 war ich offizieller
-          Wetterexperte bei Antenne Düsseldorf und versorgte die Region mit
-          Prognosen.
-        </motion.p>
 
         <motion.h3
           initial="hidden"
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit  text-3xl mb-2 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Studium & persönlicher Weg
         </motion.h3>
@@ -152,7 +152,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Meteorologie wollte ich bewusst nicht studieren – das Hobby soll ein
           Hobby bleiben dürfen.
@@ -163,7 +163,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit  text-3xl mb-2 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Mein Alltag mit dem Wetter
         </motion.h3>
@@ -184,7 +184,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Gerade in einer Zeit, die von Reichweite lebt, lege ich Wert auf einen
           sachlich-nüchternen Ansatz. Dadurch konnte ich mir das Vertrauen
@@ -197,7 +197,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-12 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit  text-3xl mb-2 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Community & Qualität
         </motion.h3>
@@ -206,7 +206,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Der lokale Bezug auf Düsseldorf und die persönliche Auseinandersetzung
           mit den Wetterkarten unterscheidet mich von klassischen Apps oder
@@ -219,7 +219,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="w-fit mx-auto text-3xl mb-6 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
+          className="w-fit  text-3xl mb-2 font-light text-left md:text-center text-text border-b-[1px] border-text/40 pb-2"
         >
           Ausblick
         </motion.h3>
@@ -241,7 +241,7 @@ export function AboutStory() {
           whileInView="visible"
           variants={sectionAnimation}
           viewport={viewportOnce}
-          className="leading-relaxed md:mb-12 mb-8"
+          className="leading-relaxed md:mb-16 mb-8"
         >
           Ich freue mich auf euch – bei gutem wie bei schlechtem Wetter.
         </motion.p>

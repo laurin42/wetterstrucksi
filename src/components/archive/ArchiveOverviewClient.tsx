@@ -61,7 +61,10 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
   });
 
   return (
-    <motion.section ref={archiveRef} className="max-w-4xl md:max-w-6xl mx-auto">
+    <motion.section
+      ref={archiveRef}
+      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12"
+    >
       <ArchiveHero />
       <PostsFilter
         selectedMonth={selectedMonth}
@@ -73,7 +76,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
       />
 
       <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44 pb-4">
-        <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 md:gap-y-2 md:pt-1">
+        <div className="md:col-span-3 grid grid-cols-1">
           {currentPosts.length === 0 ? (
             <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
           ) : (

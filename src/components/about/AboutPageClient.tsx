@@ -7,8 +7,10 @@ import { Contact } from "../Contact";
 
 export default function AboutPageClient() {
   return (
-    <>
-      <AboutHero />
+    <section>
+      <div className="h-screen max-w-6xl flex items-start pt-12 mx-auto">
+        <AboutHero />
+      </div>
       <AboutStory />
 
       <section className="md:bg-foreground-secondary/44 bg-foreground/88 backdrop-blur-md md:mt-2 p-8 max-w-6xl mx-auto">
@@ -19,6 +21,6 @@ export default function AboutPageClient() {
       </section>
 
       <Contact />
-    </>
+    </section>
   );
 }

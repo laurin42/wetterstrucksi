@@ -48,7 +48,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="relative w-full md:max-w-4xl mx-auto p-6">
+    <div className="relative w-full md:max-w-4xl mx-auto p-6 tablet-xs:pt-12">
       <form
         onSubmit={handleSubmit}
         className="bg-foreground-secondary/88 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-accent/10 space-y-8"

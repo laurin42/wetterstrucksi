@@ -33,7 +33,7 @@ export function YearsFilter({ selectedYear, onYearSelect }: YearsFilterProps) {
           onClick={() => onYearSelect(null)}
           className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
             selectedYear === null
-              ? "bg-accent text-text-white/98 border-accent"
+              ? "bg-accent/80 text-text-white/98 border-accent"
               : "hover:bg-muted text-text hover:text-text-muted"
           }`}
         >
@@ -53,7 +53,7 @@ export function YearsFilter({ selectedYear, onYearSelect }: YearsFilterProps) {
             onClick={() => onYearSelect(y)}
             className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
               selectedYear === y
-                ? "bg-accent text-text-white/98"
+                ? "bg-accent/80 text-text-white/98"
                 : "hover:bg-accent/60 text-text hover:text-text-white"
             }`}
           >

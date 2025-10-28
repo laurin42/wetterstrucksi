@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = `url("/images/about/bioHero.webp")`;
+  const backgroundImage = `url("/images/about/bioHero.jpg")`;
 
   const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
     useMotionVariants();
@@ -15,7 +15,7 @@ export default function AboutHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[64vh] flex items-end md:pb-0 rounded-t-md"
+      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end md:pb-0 rounded-2xl"
       style={{
         backgroundImage,
         backgroundSize: "cover",
@@ -27,10 +27,10 @@ export default function AboutHero() {
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/60 z-0 rounded-t-md"
+        className="absolute inset-0 bg-black/60 z-0 rounded-2xl"
       />
 
-      <div className="relative z-10 px-4 md:px-32">
+      <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">
         <motion.h1
           initial="hidden"
           whileInView="visible"
@@ -40,12 +40,13 @@ export default function AboutHero() {
         >
           <em>Über mich</em>
         </motion.h1>
+
         <motion.h2
           initial="hidden"
           whileInView="visible"
           variants={slideInLeftVariant}
           viewport={viewportOnce}
-          className="text-2xl text-text-white font-thin text-left pb-2 mb-4 border-b-[1px] border-text-white/40 md:border-none"
+          className="text-2xl text-text-white font-thin text-left border-b-[1px] border-text-white/40 md:border-none"
         >
           <span className="tracking-wide">Jens Strucks </span>alias
           Wetterstrucksi
