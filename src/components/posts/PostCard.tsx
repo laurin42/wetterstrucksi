@@ -23,16 +23,16 @@ export function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block w-full tablet-xs:pb-4 border-b border-accent/40 py-2 transition duration-240">
+    <div className="block group hover:bg-header-background/40 w-full bg-foreground-secondary/44 tablet-xs:pb-4 border-b border-accent/40 py-2">
       <Link
         href={href}
-        className="block overflow-hidden transition-transform duration-240 hover:scale-[0.99] transform-gpu will-change-transform backface-hidden"
+        className=" block overflow-hidden transition-transform duration-240 backface-hidden "
       >
         <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
           <div className="flex md:pr-8 h-full">
-            <div className="flex-1 flex flex-col justify-start">
+            <div className="flex-1 flex flex-col justify-start group-hover:scale-101 transition delay-150 duration-300 ease-in-out">
               {post.published_at && (
-                <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin">
+                <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                   {new Date(post.published_at).toLocaleDateString("de-DE", {
                     day: "2-digit",
                     month: "short",
@@ -41,18 +41,18 @@ export function PostCard({ post, isNewest }: PostCardProps) {
                 </p>
               )}
 
-              <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold">
+              <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold   ">
                 {truncateWords(post.title, 12)}
               </h2>
 
               {post.og_description && (
-                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
+                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8  ">
                   {truncateWords(post.meta_description, 120)}
                 </p>
               )}
             </div>
             {imageSrc && (
-              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0">
+              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0 group-hover:scale-101 transition delay-150 duration-300 ease-in-out">
                 <Image
                   src={imageSrc}
                   overrideSrc={imageSrc}
