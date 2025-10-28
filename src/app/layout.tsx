@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Wetterstrucksi - Jens Strucks",
+  title: "Wetterstrucksi  |   Jens Strucks",
   description: "Dein Ort für Wetter in Düsseldorf",
 };
 

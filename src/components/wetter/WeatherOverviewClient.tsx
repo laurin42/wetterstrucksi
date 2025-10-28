@@ -4,8 +4,6 @@ import { CollapsibleSectionHeader } from "@/components/ui/CollabsibleSectionHead
 import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import WeatherHero from "./WeatherHero";
-import { PostCarousel } from "../posts/PostCarousel";
-import { LazyRender } from "../LazyRender";
 
 interface WeatherOverviewClientProps {
   posts: {
@@ -24,18 +22,11 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
     return (
       <div>
         <CollapsibleSectionHeader title={title} isContentCollabsible={false} />
-
-        <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
-          <div className="grid grid-cols-1 md:hidden">
+        <div className="bg-foreground-secondary/44">
+          <div className="grid grid-cols-1 tablet-xs:rounded-b-sm ">
             {gridPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
-          </div>
-
-          <div className="hidden md:block">
-            <LazyRender>
-              <PostCarousel posts={posts[key].slice(0, 6)} />
-            </LazyRender>
           </div>
         </div>
       </div>
@@ -43,7 +34,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
   };
 
   return (
-    <section className="max-w-4xl md:max-w-6xl mx-auto">
+    <section className="max-w-4xl md:max-w-6xl mx-auto pt-0 tablet-xs:pt-8 tablet-xs:px-2">
       <WeatherHero />
       <div className="grid grid-cols-1 max-w-4xl md:max-w-6xl mx-auto">
         {renderPosts("wetter", "Vorhersagen")}

@@ -1,7 +1,6 @@
 import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
 import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
-import { SkeletonWrapper } from "@/components/SkeletonWrapper";
 
 export const revalidate = 60;
 
@@ -31,8 +30,8 @@ export default async function ArchiveOverviewPage() {
   ]);
 
   return (
-    <SkeletonWrapper data={allPosts} layoutType="archive" minDuration={200}>
+    <>
       <ArchiveOverviewClient posts={allPosts} />
-    </SkeletonWrapper>
+    </>
   );
 }

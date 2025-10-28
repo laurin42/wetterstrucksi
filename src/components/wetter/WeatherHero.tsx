@@ -11,8 +11,6 @@ export default function WeatherHero() {
   return (
     <motion.section
       variants={fadeInVariant}
-      initial="hidden"
-      animate="visible"
       custom={{ y: 0, duration: 1.2 }}
       className="relative w-full md:rounded-t-sm px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{

@@ -1,6 +1,5 @@
 import HomePageClient from "@/components/home/HomePageClient";
 import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
-import { SkeletonWrapper } from "@/components/SkeletonWrapper";
 
 export default async function Home() {
   let posts = null;
@@ -11,9 +10,5 @@ export default async function Home() {
     posts = null;
   }
 
-  return (
-    <SkeletonWrapper data={posts} minDuration={500} layoutType="home">
-      {posts && <HomePageClient posts={posts} />}
-    </SkeletonWrapper>
-  );
+  return <>{posts && <HomePageClient posts={posts} />}</>;
 }

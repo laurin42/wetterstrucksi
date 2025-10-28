@@ -1,6 +1,5 @@
 import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
 import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
-import { SkeletonWrapper } from "@/components/SkeletonWrapper";
 
 export const revalidate = 300;
 
@@ -40,12 +39,8 @@ export default async function WeatherOverviewPage() {
   };
 
   return (
-    <SkeletonWrapper
-      data={Object.values(posts).flat()}
-      minDuration={200}
-      layoutType="weather"
-    >
+    <>
       <WeatherOverviewClient posts={posts} />
-    </SkeletonWrapper>
+    </>
   );
 }

@@ -38,12 +38,14 @@ export function PostCardMobileCarousel({
       variants={fadeInVariant}
       custom={{ y: 0, duration: 2.0 }}
       className={`
-        rounded-lg
-        overflow-hidden
-        bg-foreground-secondary/44 backdrop-blur-sm
-        shadow-md
-        ${className}
-  `}
+      rounded-lg
+      overflow-hidden
+      bg-foreground-secondary/88 backdrop-blur-sm
+      shadow-md
+      w-full max-w-2xs  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-md
+      mx-auto flex-shrink-0
+      ${className}
+    `}
     >
       <Link
         href={`/posts/${post.slug}`}
@@ -62,16 +64,29 @@ export function PostCardMobileCarousel({
           />
           <div className="absolute inset-0 bg-black/20" />
           {isNewest && (
-            <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+            <span
+              className="absolute 
+            -top-0 -left-0 bg-header-background text-text-white  text-md font-semibold p-2  rounded-br-md"
+            >
               Neuster Beitrag
             </span>
           )}
         </div>
 
         <div className="flex flex-col px-4 py-6 gap-1 min-h-0">
+          {post.published_at && (
+            <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+              {new Date(post.published_at).toLocaleDateString("de-DE", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+          )}
           <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-1">
             {truncateWords(post.title, 10)}
           </h2>
+
           {post.og_description && (
             <p className="text-text xxs:line-clamp-3 xs:line-clamp-4">
               {truncateWords(post.og_description, 100)}
