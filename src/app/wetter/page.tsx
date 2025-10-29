@@ -1,8 +1,6 @@
 import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
 import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
 
-export const revalidate = 300;
-
 export default async function WeatherOverviewPage() {
   const rueckblicke = await getPostsWithTags("rueckblick");
   const updates = await getPostsWithTags([

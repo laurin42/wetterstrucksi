@@ -39,6 +39,7 @@ const nextConfig: NextConfig = {
   loader: "default",
 
   },
+  cacheComponents: true,
 };
 
 export default nextConfig;

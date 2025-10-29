@@ -2,8 +2,6 @@ import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClien
 import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
 
-export const revalidate = 60;
-
 export default async function ArchiveOverviewPage() {
   const allPosts: PostWithMeta[] = await getPostsWithTags([
     "wetter",
