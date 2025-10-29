@@ -83,11 +83,7 @@
 
 .main {
   background: var(--background-gradient);
-  min-height: 100dvh;
-}
-
-body {
-  padding-right: calc(100vw - 100%);
+  min-height: full;
 }
 
 html,

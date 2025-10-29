@@ -23,10 +23,10 @@ export function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 tablet-xs:pb-4 border-b border-accent/40 py-2">
+    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 tablet-xs:pb-4 border-b border-accent/40">
       <Link
         href={href}
-        className="block overflow-hidden transition-transform duration-240"
+        className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
       >
         <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
           <div className="flex md:pr-8 h-full">

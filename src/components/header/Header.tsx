@@ -48,7 +48,7 @@ const Header = forwardRef<HTMLElement>(() => {
   return (
     <header
       className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md
-      h-16"
+      min-h-16 h-16"
     >
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
         <div className="pr-2 md:absolute md:left-16 md:top-1/2 md:-translate-y-1/2 md:p-0">
@@ -63,7 +63,7 @@ const Header = forwardRef<HTMLElement>(() => {
                 alt="wetterstrucksi logo"
                 width={120}
                 height={120}
-                className="h-12 w-auto object-contain"
+                className="h-12 w-auto object-contain block"
                 priority
               />
             </Link>

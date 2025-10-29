@@ -8,6 +8,14 @@ export function useMotionVariants() {
     },
   };
 
+
+    const containerVariantsSmooth: Variants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.16 },
+    },
+  };
+
   const containerVariantsSync: Variants = {
     hidden: {},
     visible: {
@@ -15,6 +23,7 @@ export function useMotionVariants() {
     },
   };
 
+  
   const itemVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
@@ -81,17 +90,12 @@ export function useMotionVariants() {
     };
 
   const viewportOnce = { once: true, amount: 0.4 };
+  const viewportOnceSensitive = { once: true, amount: 0.1 };
 
-  const pulseOnce = {
-    initial: { scale: 1 },
-    animate: {
-      scale: [1, 1.15, 1],
-      transition: { duration: 0.8, ease: "easeInOut", delay: 1.4 },
-    },
-  };
 
   return {
     containerVariants,
+    containerVariantsSmooth,
     containerVariantsSync,
     itemVariants,
     fadeInVariant,
@@ -99,7 +103,7 @@ export function useMotionVariants() {
     sectionAnimation,
     sidebarVariants,
     viewportOnce,
+    viewportOnceSensitive,
     mobileMenuVariants,
-    pulseOnce,
   };
 }

@@ -10,14 +10,14 @@ import {
 export function Contact() {
   const { sectionAnimation, viewportOnce } = useMotionVariants();
   return (
-    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/44 backdrop-blur-sm text-left mx-auto min-h-[94vh] md:min-h-auto md:mt-2">
-      <div className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-12 md:px-32">
+    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/88 backdrop-blur-sm text-left mx-auto min-h-[94vh] tablet-xs:min-h-auto tablet-xs:mt-4">
+      <div className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-24 md:px-40">
         <motion.h2
           variants={sectionAnimation}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="text-3xl font-light text-text tracking-wider mb-6 pb-2 border-b-[1px] border-text/40"
+          className="w-fit text-center text-3xl font-light text-text tracking-wider mb-6 pb-2 border-b-[1px] border-text/40"
         >
           Lasst uns Kontakt aufnehmen
         </motion.h2>

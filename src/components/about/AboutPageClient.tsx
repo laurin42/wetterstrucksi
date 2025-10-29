@@ -8,7 +8,7 @@ import { Contact } from "../Contact";
 export default function AboutPageClient() {
   return (
     <section>
-      <div className="tablet-xs:h-screen max-w-6xl flex items-start tablet-xs:pt-12 mx-auto">
+      <div className="h-[calc(100svh-64px)] max-w-6xl flex items-center mx-auto">
         <AboutHero />
       </div>
       <AboutStory />

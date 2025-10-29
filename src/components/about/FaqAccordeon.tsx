@@ -6,6 +6,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 interface FaqItem {
   question: string;
@@ -17,23 +18,57 @@ interface FaqAccordionProps {
 }
 
 export function FaqAccordion({ items }: FaqAccordionProps) {
+  const { fadeInVariant, viewportOnceSensitive, containerVariantsSmooth } =
+    useMotionVariants();
+
   return (
-    <motion.section className="w-full max-w-6xl mx-auto gap-y-4 px-4 tablet-xs:px-16 bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg">
-      <Accordion type="single" collapsible>
-        {items.map((item, index) => (
-          <AccordionItem key={index} value={`item-${index}`} className=" py-2">
-            <AccordionTrigger
-              className="flex items-center bg-accent-dim/44 md:bg-accent-dim/20 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-accent transition cursor-pointer px-4 py-4 "
-              style={{ textDecoration: "none" }}
-            >
-              {item.question}
-            </AccordionTrigger>
-            <AccordionContent className="px-4 md:mx-0 md:px-8 my-4 py-6 text-base text-muted-foreground rounded-xl rounded-t-none bg-accent/40 md:bg-accent/20  leading-relaxed">
-              {item.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </motion.section>
+    <section className="w-full max-w-6xl mx-auto gap-y-4 px-4 py-8 tablet-xs:p-24 bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg">
+      <motion.h1
+        initial="hidden"
+        animate="visible"
+        viewport={viewportOnceSensitive}
+        variants={fadeInVariant}
+        className="w-fit text-3xl text-text font-thin text-left  tracking-wider"
+      >
+        Eure Fragen?
+      </motion.h1>
+      <motion.h2
+        initial="hidden"
+        animate="visible"
+        viewport={viewportOnceSensitive}
+        variants={fadeInVariant}
+        className="w-fit text-3xl text-text font-thin text-left border-b-[1px] border-text/40 pb-2 mb-8 tracking-wider"
+      >
+        Meine Antworten!
+      </motion.h2>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnceSensitive}
+        variants={containerVariantsSmooth}
+      >
+        <Accordion type="single" collapsible>
+          {items.map((item, index) => (
+            <motion.div key={index} variants={fadeInVariant}>
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className=" py-2"
+              >
+                <AccordionTrigger
+                  className="flex items-center bg-accent-dim/44 md:bg-accent-dim/20 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-accent transition cursor-pointer px-4 py-4 "
+                  style={{ textDecoration: "none" }}
+                >
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="px-4 md:mx-0 md:px-8 my-4 py-6 text-base text-muted-foreground rounded-xl rounded-t-none bg-accent/40 md:bg-accent/20  leading-relaxed">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
+          ))}
+        </Accordion>
+      </motion.div>
+    </section>
   );
 }
