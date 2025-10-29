@@ -15,7 +15,7 @@ export default function AboutHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end md:pb-0 rounded-2xl"
+      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end pb-0 tablet-xs:rounded-lg"
       style={{
         backgroundImage,
         backgroundSize: "cover",
@@ -27,7 +27,7 @@ export default function AboutHero() {
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/60 z-0 rounded-2xl"
+        className="absolute inset-0 bg-black/60 z-0 tablet-xs:rounded-lg"
       />
 
       <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">
@@ -46,10 +46,9 @@ export default function AboutHero() {
           whileInView="visible"
           variants={slideInLeftVariant}
           viewport={viewportOnce}
-          className="text-2xl text-text-white font-thin text-left border-b-[1px] border-text-white/40 md:border-none"
+          className="text-3xl text-text-white font-thin text-left border-b-[1px] tracking-wider border-text-white/40 md:border-none"
         >
-          <span className="tracking-wide">Jens Strucks </span>alias
-          Wetterstrucksi
+          - Jens Strucks -
         </motion.h2>
       </div>
     </motion.div>

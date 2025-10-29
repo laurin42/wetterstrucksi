@@ -48,97 +48,101 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="relative w-full md:max-w-4xl mx-auto p-6 tablet-xs:pt-12">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-foreground-secondary/88 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-accent/10 space-y-8"
-      >
-        <div className="text-center">
-          <div className="flex flex-col justify-center items-center gap-3 mb-3">
-            <Mail className="w-10 h-10 text-accent" />
-            <h1 className="text-3xl font-light text-text">Kontakt aufnehmen</h1>
+    <section className="flex flex-col justify-center h-[calc(100svh-64px)] w-full md:max-w-4xl mx-auto ">
+      <div className="relative p-6 tablet-xs:pt-12">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-foreground-secondary/88 rounded-lg shadow-lg p-8 border border-accent/10 space-y-8"
+        >
+          <div className="text-center">
+            <div className="flex flex-col justify-center items-center gap-3 mb-3">
+              <Mail className="w-10 h-10 text-accent" />
+              <h1 className="text-3xl font-light text-text">
+                Kontakt aufnehmen
+              </h1>
+            </div>
+            <p className="text-text/70 text-sm md:text-base">
+              Ich freue mich auf deine Nachricht und melde mich schnellstmöglich
+              zurück.
+            </p>
           </div>
-          <p className="text-text/70 text-sm md:text-base">
-            Ich freue mich auf deine Nachricht und melde mich schnellstmöglich
-            zurück.
-          </p>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="relative">
+              <input
+                type="text"
+                name="name"
+                placeholder="Dein Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
+              />
+            </div>
+
+            <div className="relative">
+              <input
+                type="email"
+                name="email"
+                placeholder="Deine E-Mail"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
+              />
+            </div>
+          </div>
+
           <div className="relative">
-            <input
-              type="text"
-              name="name"
-              placeholder="Dein Name"
-              value={formData.name}
+            <textarea
+              name="message"
+              placeholder="Deine Nachricht"
+              value={formData.message}
               onChange={handleChange}
               required
+              rows={5}
               className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
-            />
+            ></textarea>
           </div>
 
-          <div className="relative">
-            <input
-              type="email"
-              name="email"
-              placeholder="Deine E-Mail"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
-            />
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="submit-button flex items-center justify-center gap-2 rounded-md cursor-pointer px-6 py-3 bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span>Sende...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  <span>Nachricht abschicken</span>
+                </>
+              )}
+            </button>
           </div>
-        </div>
 
-        <div className="relative">
-          <textarea
-            name="message"
-            placeholder="Deine Nachricht"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={5}
-            className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
-          ></textarea>
-        </div>
-
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="submit-button flex items-center justify-center gap-2 rounded-md cursor-pointer px-6 py-3 bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Sende...</span>
-              </>
-            ) : (
-              <>
-                <Send className="w-5 h-5" />
-                <span>Nachricht abschicken</span>
-              </>
-            )}
-          </button>
-        </div>
-
-        {status && (
-          <div className="flex justify-center mt-4">
-            {status === "success" ? (
-              <div className="flex items-center gap-2 text-green-500">
-                <CheckCircle className="w-5 h-5" />
-                <span>Nachricht erfolgreich gesendet!</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 text-red-500">
-                <XCircle className="w-5 h-5" />
-                <span>Fehler beim Senden. Bitte versuche es erneut.</span>
-              </div>
-            )}
-          </div>
-        )}
-      </form>
-    </div>
+          {status && (
+            <div className="flex justify-center mt-4">
+              {status === "success" ? (
+                <div className="flex items-center gap-2 text-green-500">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Nachricht erfolgreich gesendet!</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 text-red-500">
+                  <XCircle className="w-5 h-5" />
+                  <span>Fehler beim Senden. Bitte versuche es erneut.</span>
+                </div>
+              )}
+            </div>
+          )}
+        </form>
+      </div>
+    </section>
   );
 };
 

@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
 
 interface FaqItem {
   question: string;
@@ -17,7 +18,7 @@ interface FaqAccordionProps {
 
 export function FaqAccordion({ items }: FaqAccordionProps) {
   return (
-    <div className="w-full max-w-5xl mx-auto gap-y-4 px-16">
+    <motion.section className="w-full max-w-6xl mx-auto gap-y-4 px-4 tablet-xs:px-16 bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg">
       <Accordion type="single" collapsible>
         {items.map((item, index) => (
           <AccordionItem key={index} value={`item-${index}`} className=" py-2">
@@ -33,6 +34,6 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
           </AccordionItem>
         ))}
       </Accordion>
-    </div>
+    </motion.section>
   );
 }
