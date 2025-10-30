@@ -1,52 +1,52 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  MdOutlineKeyboardDoubleArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+} from "react-icons/md";
 import { getPostsWithMeta } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
-interface PostNavigationProps {
+interface PostNavigationClientProps {
   slug: string;
   publishedAt: string;
 }
 
-async function getAdjacentPosts(
-  publishedAt: string,
-  currentSlug: string
-): Promise<{ older: PostWithMeta | null; newer: PostWithMeta | null }> {
-  const allPosts = await getPostsWithMeta(9999);
-
-  const sortedPosts = allPosts.sort(
-    (a, b) =>
-      new Date(b.published_at || 0).getTime() -
-      new Date(a.published_at || 0).getTime()
-  );
-
-  const currentIndex = sortedPosts.findIndex((p) => p.slug === currentSlug);
-
-  let nextPost: PostWithMeta | null = null;
-  let prevPost: PostWithMeta | null = null;
-
-  if (currentIndex !== -1) {
-    if (currentIndex < sortedPosts.length - 1) {
-      nextPost = sortedPosts[currentIndex + 1];
-    }
-
-    if (currentIndex > 0) {
-      prevPost = sortedPosts[currentIndex - 1];
-    }
-  }
-
-  return { older: nextPost, newer: prevPost };
-}
-
-export default async function PostNavigation({
+export default function PostNavigation({
   slug,
   publishedAt,
-}: PostNavigationProps) {
-  const { newer: prev, older: next } = await getAdjacentPosts(
-    publishedAt,
-    slug
-  );
+}: PostNavigationClientProps) {
+  const [adjacent, setAdjacent] = useState<{
+    older: PostWithMeta | null;
+    newer: PostWithMeta | null;
+  } | null>(null);
+
+  useEffect(() => {
+    async function fetchAdjacent() {
+      const allPosts = await getPostsWithMeta(9999);
+      const sorted = allPosts.sort(
+        (a, b) =>
+          new Date(b.published_at || 0).getTime() -
+          new Date(a.published_at || 0).getTime()
+      );
+      const currentIndex = sorted.findIndex((p) => p.slug === slug);
+      let nextPost: PostWithMeta | null = null;
+      let prevPost: PostWithMeta | null = null;
+      if (currentIndex !== -1) {
+        if (currentIndex < sorted.length - 1)
+          nextPost = sorted[currentIndex + 1];
+        if (currentIndex > 0) prevPost = sorted[currentIndex - 1];
+      }
+      setAdjacent({ older: nextPost, newer: prevPost });
+    }
+    fetchAdjacent();
+  }, [slug]);
+
+  if (!adjacent) return <p>Loading navigation...</p>;
+
+  const { newer: prev, older: next } = adjacent;
 
   return (
     <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:pb-0 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent ">
@@ -70,6 +70,7 @@ export default async function PostNavigation({
           </span>
         )}
       </div>
+
       <div className="flex justify-end">
         {next ? (
           <Link

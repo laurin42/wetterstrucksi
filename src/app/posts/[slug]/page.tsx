@@ -1,7 +1,7 @@
-import PostNavigation from "@/components/posts/PostNavigation";
-import Post from "@/components/posts/Post";
 import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import PostContentClient from "@/components/posts/PostPageClient";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -24,16 +24,26 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) return <div>Beitrag nicht gefunden</div>;
-
+export default function PostPage({ params }: PostPageProps) {
   return (
     <div>
-      <Post post={post} />
-      <PostNavigation slug={slug} publishedAt={post.published_at} />
+      <Suspense>
+        <PostsContentFetcher params={params} />
+      </Suspense>
     </div>
   );
+}
+
+async function PostsContentFetcher({ params }: PostPageProps) {
+  const { slug } = await params;
+
+  try {
+    const post = await getPostBySlug(slug);
+    if (!post) return <div>Beitrag nicht gefunden</div>;
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+    return <PostContentClient slug="" />;
+  }
+
+  return <PostContentClient slug={slug} />;
 }

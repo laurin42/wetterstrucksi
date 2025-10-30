@@ -1,7 +1,18 @@
 import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
 import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
+import { Suspense } from "react";
 
 export default async function WeatherOverviewPage() {
+  return (
+    <>
+      <Suspense>
+        <WeatherContentFetcher />
+      </Suspense>
+    </>
+  );
+}
+
+async function WeatherContentFetcher() {
   const rueckblicke = await getPostsWithTags("rueckblick");
   const updates = await getPostsWithTags([
     "warnlage",

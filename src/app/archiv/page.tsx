@@ -1,9 +1,20 @@
 import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
 import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
+import { Suspense } from "react";
 
 export default async function ArchiveOverviewPage() {
-  const allPosts: PostWithMeta[] = await getPostsWithTags([
+  return (
+    <>
+      <Suspense>
+        <ArchivePostFetcher />
+      </Suspense>
+    </>
+  );
+}
+
+async function ArchivePostFetcher() {
+  let allPosts: PostWithMeta[] = await getPostsWithTags([
     "wetter",
     "aktuelles-wetter",
     "wetterprognose",
@@ -26,10 +37,5 @@ export default async function ArchiveOverviewPage() {
     "monats-aussichten",
     "studien",
   ]);
-
-  return (
-    <>
-      <ArchiveOverviewClient posts={allPosts} />
-    </>
-  );
+  return <ArchiveOverviewClient posts={allPosts} />;
 }

@@ -5,7 +5,7 @@ import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
 export default function Home() {
   return (
     <main>
-      <Suspense fallback={<div>Loading the main content...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <PostsContentFetcher />
       </Suspense>
     </main>

@@ -1,3 +1,4 @@
+"use cache";
 import GhostContentAPI, { GhostPost, PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { v4 as uuidv4 } from "uuid";
