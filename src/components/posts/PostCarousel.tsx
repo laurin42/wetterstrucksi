@@ -63,22 +63,41 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             </div>
           ))}
         </div>
-        <div className="hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
+        <div className="flex items-center w-1/2 justify-center-safe  mx-auto mt-4">
           <button
             onClick={scrollPrev}
-            className="absolute left-6 tablet-xs:relative group text-text-white/80 "
+            className="relative group text-text-white/80 "
             aria-label="Previous"
           >
             <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-8 tablet-xs:relative group text-text-white/80 "
+            className="relative group text-text-white/80 "
             aria-label="Next"
           >
             <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
           </button>
         </div>
+
+        {/*mobile chevrons                 
+         <div className="flex items-center w-1/2 justify-center-safe  mx-auto mt-4">
+          <button
+            onClick={scrollPrev}
+            className="relative group text-text-white/80 "
+            aria-label="Previous"
+          >
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="relative group text-text-white/80 "
+            aria-label="Next"
+          >
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+          </button>
+        </div>
+        */}
       </div>
     </div>
   );
