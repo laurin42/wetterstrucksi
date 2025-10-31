@@ -83,8 +83,9 @@
 }
 
 .main {
-  background: var(--background-gradient);
+  background: var(--foreground-secondary);
   min-height: full;
+  padding-bottom: 8rem;
 }
 
 html,
