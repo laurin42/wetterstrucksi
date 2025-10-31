@@ -1,11 +1,18 @@
 import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
-import { getPostsWithTags } from "../api/posts/getPostsWithMeta";
+import { getNewestPostsWithTags } from "../api/posts/getPostsWithMeta";
 import { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default async function WeatherOverviewPage() {
   return (
     <>
-      <Suspense>
+      <Suspense
+        fallback={
+          <div className="flex h-screen w-full flex-col justify-center items-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
         <WeatherContentFetcher />
       </Suspense>
     </>
@@ -13,13 +20,13 @@ export default async function WeatherOverviewPage() {
 }
 
 async function WeatherContentFetcher() {
-  const rueckblicke = await getPostsWithTags("rueckblick");
-  const updates = await getPostsWithTags([
+  const rueckblicke = await getNewestPostsWithTags("rueckblick");
+  const updates = await getNewestPostsWithTags([
     "warnlage",
     "warntrend",
     "live-ticker-zu-unwetterlagen",
   ]);
-  const wetter = await getPostsWithTags([
+  const wetter = await getNewestPostsWithTags([
     "wetter",
     "aktuelles-wetter",
     "wetterprognose",
@@ -31,13 +38,13 @@ async function WeatherContentFetcher() {
     "monats-aussichten",
     "astronomisches",
   ]);
-  const presseschau = await getPostsWithTags([
+  const presseschau = await getNewestPostsWithTags([
     "presseschau",
     "studien",
     "spekulatives",
     "situation",
   ]);
-  const privates = await getPostsWithTags(["privates", "allgemein"]);
+  const privates = await getNewestPostsWithTags(["privates", "allgemein"]);
 
   const posts = {
     rueckblicke,

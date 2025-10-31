@@ -59,6 +59,7 @@ export function CarouselPostCard({
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
             className="object-cover object-center transition-transform duration-500 hover:scale-105"
           />

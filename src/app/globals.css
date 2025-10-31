@@ -82,15 +82,10 @@
   --footer: oklch(28.01% 0 0);
 }
 
-.main {
-  background: var(--foreground-secondary);
-  min-height: full;
-  padding-bottom: 8rem;
-}
-
 html,
 body {
   overflow-x: hidden;
+  background: var(--background-gradient);
 }
 @keyframes shineDiagonal {
   0% {

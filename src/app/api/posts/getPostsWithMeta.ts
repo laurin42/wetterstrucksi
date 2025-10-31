@@ -83,7 +83,33 @@ export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> 
   }
 }
 
-export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
+export async function getAllPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
+  const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
+
+  try {
+    const allPosts = await api.posts.browse({
+      include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+      limit: "all",
+      order: "published_at DESC",
+    });
+
+    if (!allPosts) return [];
+
+    const normalized = normalizePosts(allPosts);
+
+    const filtered = normalized
+      .filter(post => post.tags?.some(tag => tags.includes(tag.slug.toLowerCase())))
+      .slice(0, limit);
+
+    return filtered;
+  } catch (error) {
+    console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
+    return [];
+  }
+}
+
+
+export async function getNewestPostsWithTags(tagsToFilter: string | string[], limit = 20): Promise<PostWithMeta[]> {
   const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
 
   try {

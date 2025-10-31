@@ -1,12 +1,19 @@
 import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
-import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
+import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
 import { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default async function ArchiveOverviewPage() {
   return (
     <>
-      <Suspense>
+      <Suspense
+        fallback={
+          <div className="flex h-screen w-full flex-col justify-center items-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
         <ArchivePostFetcher />
       </Suspense>
     </>
@@ -14,7 +21,7 @@ export default async function ArchiveOverviewPage() {
 }
 
 async function ArchivePostFetcher() {
-  let allPosts: PostWithMeta[] = await getPostsWithTags([
+  let allPosts: PostWithMeta[] = await getAllPostsWithTags([
     "wetter",
     "aktuelles-wetter",
     "wetterprognose",

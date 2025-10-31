@@ -2,6 +2,7 @@ import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import PostContentClient from "@/components/posts/PostPageClient";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -27,7 +28,13 @@ export async function generateMetadata({
 export default function PostPage({ params }: PostPageProps) {
   return (
     <div>
-      <Suspense>
+      <Suspense
+        fallback={
+          <div className="flex h-screen w-full flex-col justify-center items-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
         <PostsContentFetcher params={params} />
       </Suspense>
     </div>

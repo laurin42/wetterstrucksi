@@ -10,7 +10,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
         <ScrollToTop />
         <Header />
       </Suspense>
-      <main className="main">{children}</main>
+      <main className="min-h-full bg-background-gradient ">{children}</main>
       <Footer />
     </>
   );

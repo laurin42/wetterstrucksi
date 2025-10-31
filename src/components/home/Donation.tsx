@@ -74,12 +74,10 @@ export default function DonateBox() {
           rel="noopener noreferrer"
           className="
             inline-flex items-center justify-center gap-2
-    bg-accent text-white font-semibold 
-    px-10 py-3 rounded-full hover:bg-accent/80
-    transition-all duration-300 ease-in-out 
-    shadow-md hover:shadow-lg active:scale-[0.98]
-  
-          "
+            bg-accent text-white font-semibold 
+            px-10 py-3 rounded-full hover:bg-accent/80
+            transition-all duration-300 ease-in-out 
+            shadow-md hover:shadow-lg active:scale-[0.98]"
         >
           <span>mit</span>
           <Image
@@ -87,6 +85,7 @@ export default function DonateBox() {
             alt="PayPal Logo"
             width={100}
             height={100}
+            className="h-6 w-auto"
           />{" "}
           <span>bezahlen</span>
         </Link>
