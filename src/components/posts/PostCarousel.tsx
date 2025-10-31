@@ -76,7 +76,7 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             </div>
           ))}
         </div>
-        <div className="hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
+        <div className="hidden landscape:hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
           <button
             onClick={scrollPrev}
             className="absolute left-6 tablet-xs:relative group text-text-white/80 "

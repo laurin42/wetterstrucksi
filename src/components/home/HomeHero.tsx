@@ -27,77 +27,80 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     : undefined;
 
   return (
-    <motion.section
-      className="
-        relative w-full h-[calc(100svh-64px)]
-        flex items-start tablet-xs:items-center justify-center
+    <>
+      <motion.section
+        className="
+        relative w-full h-[calc(100svh-64px)] mobile-horizon:h-[calc(200svh-64px)] tablet-xs:h-[calc(100svh-64px)] landscapeScreen
+        flex items-start  tablet-xs:items-center justify-center 
         bg-cover bg-center
       "
-      style={{ backgroundImage }}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariantsSync}
-    >
-      <div className="absolute inset-0 bg-black/60 z-0" />
+        style={{ backgroundImage }}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariantsSync}
+      >
+        <div className="absolute inset-0 bg-black/60 z-0" />
 
-      <div
-        className="
-          relative flex flex-col md:flex-row items-center justify-center
+        <div
+          className="
+          relative flex flex-col tablet:flex-row  landscapeView items-center justify-center
           max-w-6xl w-full z-10 px-4 tablet-xs:px-16 tablet:px-0 pt-8 tablet-xs:pt-0 mx-auto gap-y-8
         "
-      >
-        <div className="relative z-10 w-full md:w-1/2 flex flex-col md:items-start items-center text-center md:text-left">
-          <motion.h1
-            variants={fadeInVariant}
-            custom={{ y: -40, duration: 1.2 }}
-            className="text-4xl tablet-xs:text-5xl font-thin  text-white"
-          >
-            <motion.em
-              className="font-semibold inline-block"
-              initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 0.8, ease: "easeIn", delay: 1.2 }}
+        >
+          <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2  flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin  text-white">
+            <motion.h1
+              variants={fadeInVariant}
+              custom={{ y: -40, duration: 1.2 }}
             >
-              Dein
-            </motion.em>{" "}
-            Ort für Wetter
-          </motion.h1>
+              <motion.em
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.8, ease: "easeIn", delay: 1.2 }}
+              >
+                Dein
+              </motion.em>{" "}
+              Ort für Wetter
+            </motion.h1>
 
-          <motion.h2
+            <motion.h2
+              initial="hidden"
+              animate="visible"
+              variants={fadeInVariant}
+              custom={{ y: 40, duration: 1.2 }}
+            >
+              <motion.span>in</motion.span>{" "}
+              <motion.em
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                whileInView={{ scale: [1, 1.1, 1] }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeIn", delay: 1.8 }}
+              >
+                Düsseldorf
+              </motion.em>
+            </motion.h2>
+          </div>
+
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeInVariant}
-            custom={{ y: 40, duration: 1.2 }}
-            className="text-4xl tablet-xs:text-5xl font-thin  text-white mt-2"
+            custom={{ y: 0, duration: 1.8 }}
+            className="hidden xxs:flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center"
           >
-            <motion.span>in</motion.span>{" "}
-            <motion.em
-              className="font-semibold inline-block"
-              initial={{ scale: 1 }}
-              whileInView={{ scale: [1, 1.1, 1] }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeIn", delay: 1.8 }}
-            >
-              Düsseldorf
-            </motion.em>
-          </motion.h2>
+            <PostCarousel posts={posts.slice(0, 3)} />
+            {isVacationTime && (
+              <div className="hidden md:block mt-6">
+                <VacationInfo />
+              </div>
+            )}
+          </motion.div>
         </div>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInVariant}
-          custom={{ y: 0, duration: 1.8 }}
-          className="relative z-10 w-full md:w-1/2 flex flex-col items-center"
-        >
-          <PostCarousel posts={posts.slice(0, 3)} />
-          {isVacationTime && (
-            <div className="hidden md:block mt-6">
-              <VacationInfo />
-            </div>
-          )}
-        </motion.div>
-      </div>
-    </motion.section>
+      </motion.section>
+      <motion.section className="flex xxs:hidden h-[calc(100svh-64px)] justify-center items-center ">
+        <PostCarousel posts={posts.slice(0, 3)} />
+      </motion.section>
+    </>
   );
 }

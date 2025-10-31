@@ -3,9 +3,10 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme inline {
-  --breaktpoint-xxxs: 20rem;
+  --breakpoint-xxxs: 20rem;
   --breakpoint-xxs: 22rem;
   --breakpoint-xs: 24rem;
+  --breakpoint-mobile-horizon: 480px;
   --breakpoint-tablet-xs: 768px;
   --breakpoint-tablet-sm: 820px;
   --breakpoint-tablet: 1024px;
@@ -112,4 +113,26 @@ body {
 
 .animate-blink {
   animation: blink 1s step-start infinite;
+}
+
+@media (orientation: landscape) and (min-width: 480px) and (max-width: 968px) {
+  .landscapeScreen {
+    height: 88svh;
+  }
+  .landscapeView {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: items-stretch;
+  }
+  .landscapeCard {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .landscapeCardContainer {
+    width: 1/2;
+  }
+  .landscapeFont {
+    font-size: large;
+  }
 }

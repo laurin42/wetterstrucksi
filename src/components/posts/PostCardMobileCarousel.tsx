@@ -42,7 +42,7 @@ export function PostCardMobileCarousel({
       overflow-hidden
       bg-foreground-secondary/88 backdrop-blur-sm
       shadow-md
-      w-full max-w-2xs  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-md
+      w-full max-w-2xs xxxs:max-w-3xs xxs:max-w-xs xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm landscapeCard
       mx-auto flex-shrink-0
       ${className}
     `}
@@ -66,9 +66,9 @@ export function PostCardMobileCarousel({
           {isNewest && (
             <span
               className="absolute 
-            -top-0 -left-0 bg-header-background text-text-white  text-md font-semibold p-2  rounded-br-md"
+            -top-0 -right-0 bg-header-background text-text-white  text-md font-semibold p-2  rounded-bl-md"
             >
-              Neuster Beitrag
+              Neuester Beitrag
             </span>
           )}
         </div>
