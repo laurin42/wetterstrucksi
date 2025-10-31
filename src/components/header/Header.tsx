@@ -51,7 +51,7 @@ const Header = forwardRef<HTMLElement>(() => {
       min-h-16 h-16"
     >
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
-        <div className="pr-2 md:absolute md:left-16 md:top-1/2 md:-translate-y-1/2 md:p-0">
+        <div className="pr-2 flex-shrink-0">
           {mounted ? (
             <Link href="/">
               <Image
@@ -63,7 +63,7 @@ const Header = forwardRef<HTMLElement>(() => {
                 alt="wetterstrucksi logo"
                 width={120}
                 height={120}
-                className="h-12 w-auto object-contain block"
+                className="h-12 w-auto object-contain block z-0"
                 priority
               />
             </Link>
@@ -77,10 +77,10 @@ const Header = forwardRef<HTMLElement>(() => {
           initial="hidden"
           animate="visible"
           custom={{ y: 0, duration: 0.4 }}
-          className="mx-auto w-full max-w-6xl flex items-center justify-start"
+          className="flex items-center justify-start"
         >
           <Link href="/">
-            <h1 className="text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out">
+            <h1 className="hidden xxs:block text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
               wetterstrucksi.de
             </h1>
           </Link>
@@ -93,7 +93,7 @@ const Header = forwardRef<HTMLElement>(() => {
           custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
-          <nav className="hidden tablet-hidden md:flex items-center space-x-6">
+          <nav className="hidden tablet:flex items-center space-x-6">
             {mainMenu.map((item) => (
               <Link
                 key={item.title}

@@ -8,7 +8,7 @@ import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { PostWithMeta } from "@tryghost/content-api";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
-interface PostCardMobileCarouselProps {
+interface CarouselPostCardProps {
   post: PostWithMeta;
   className?: string;
   isNewest?: boolean;
@@ -21,11 +21,11 @@ function truncateWords(text?: string, maxWords?: number) {
   return words.slice(0, maxWords).join(" ") + "...";
 }
 
-export function PostCardMobileCarousel({
+export function CarouselPostCard({
   post,
   className,
   isNewest,
-}: PostCardMobileCarouselProps) {
+}: CarouselPostCardProps) {
   const feature_image_url = fixImageUrl(post.feature_image);
   const imageSrc =
     feature_image_url || "/images/weatherFeatureImageDefault.webp";
@@ -38,14 +38,14 @@ export function PostCardMobileCarousel({
       variants={fadeInVariant}
       custom={{ y: 0, duration: 2.0 }}
       className={`
-      rounded-lg
-      overflow-hidden
-      bg-foreground-secondary/88 backdrop-blur-sm
-      shadow-md
-      w-full max-w-2xs xxxs:max-w-3xs xxs:max-w-xs xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm landscapeCard
-      mx-auto flex-shrink-0
-      ${className}
-    `}
+        rounded-lg
+        overflow-hidden
+        bg-foreground-secondary/88 backdrop-blur-sm
+        shadow-md
+        w-full max-w-[200px] h-[200px] xxxs:max-w-2xs xxs:max-w-xs xxs:h-auto  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm landscapeCard
+        mx-auto flex-shrink-0
+        ${className}
+      `}
     >
       <Link
         href={`/posts/${post.slug}`}
@@ -55,7 +55,7 @@ export function PostCardMobileCarousel({
           hover:bg-header-background/60 active:scale-95 active:bg-accent
         "
       >
-        <div className="relative w-full xxs:aspect-video xs:aspect-[8/6]">
+        <div className="relative w-full aspect-square landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -64,16 +64,13 @@ export function PostCardMobileCarousel({
           />
           <div className="absolute inset-0 bg-black/20" />
           {isNewest && (
-            <span
-              className="absolute 
-            -top-0 -right-0 bg-header-background text-text-white  text-md font-semibold p-2  rounded-bl-md"
-            >
+            <span className="absolute -top-0 -right-0 bg-header-background text-text-white text-md font-semibold p-1 rounded-bl-lg rounded-tr-lg">
               Neuester Beitrag
             </span>
           )}
         </div>
 
-        <div className="flex flex-col px-4 py-6 gap-1 min-h-0">
+        <div className="flex flex-col px-4 py-6 landscape:py-2  gap-1 min-h-0">
           {post.published_at && (
             <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
               {new Date(post.published_at).toLocaleDateString("de-DE", {

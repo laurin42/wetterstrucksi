@@ -30,7 +30,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     <>
       <motion.section
         className="
-        relative w-full h-[calc(100svh-64px)] mobile-horizon:h-[calc(200svh-64px)] tablet-xs:h-[calc(100svh-64px)] landscapeScreen
+        relative w-full h-[calc(100svh-64px)]  landscapeScreen
         flex items-start  tablet-xs:items-center justify-center 
         bg-cover bg-center
       "
@@ -47,7 +47,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           max-w-6xl w-full z-10 px-4 tablet-xs:px-16 tablet:px-0 pt-8 tablet-xs:pt-0 mx-auto gap-y-8
         "
         >
-          <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2  flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin  text-white">
+          <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin  text-white">
             <motion.h1
               variants={fadeInVariant}
               custom={{ y: -40, duration: 1.2 }}
@@ -87,7 +87,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             animate="visible"
             variants={fadeInVariant}
             custom={{ y: 0, duration: 1.8 }}
-            className="hidden xxs:flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center"
+            className="flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center"
           >
             <PostCarousel posts={posts.slice(0, 3)} />
             {isVacationTime && (
@@ -97,9 +97,6 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             )}
           </motion.div>
         </div>
-      </motion.section>
-      <motion.section className="flex xxs:hidden h-[calc(100svh-64px)] justify-center items-center ">
-        <PostCarousel posts={posts.slice(0, 3)} />
       </motion.section>
     </>
   );

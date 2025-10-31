@@ -1,10 +1,9 @@
 "use client";
 import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
-import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
 import { PostWithMeta } from "@tryghost/content-api";
-import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
+import { CarouselPostCard } from "@/components/posts/CarouselPostCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 interface PostCarouselProps {
@@ -18,16 +17,10 @@ export function PostCarousel({ posts }: PostCarouselProps) {
     [WheelGesturesPlugin()]
   );
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [isMobile, setIsMobile] = useState(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback((api: EmblaCarouselType) => {
-    setSelectedIndex(api.selectedScrollSnap());
-  }, []);
 
   const normalizedPosts = posts.map((post) => ({
     ...post,
@@ -43,14 +36,8 @@ export function PostCarousel({ posts }: PostCarouselProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    setScrollSnaps(emblaApi.scrollSnapList());
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", () => onSelect(emblaApi));
-    emblaApi.on("reInit", () => {
-      setScrollSnaps(emblaApi.scrollSnapList());
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-    });
-  }, [emblaApi, onSelect]);
+    emblaApi.on("reInit", () => {});
+  }, [emblaApi]);
 
   useEffect(() => {
     if (emblaApi) emblaApi.reInit();
@@ -68,7 +55,7 @@ export function PostCarousel({ posts }: PostCarouselProps) {
               key={post.id}
               className="flex-shrink-0 px-4 tablet-xs:px-2 w-full flex justify-center"
             >
-              <PostCardMobileCarousel
+              <CarouselPostCard
                 post={post}
                 className="flex-1"
                 isNewest={index === 0}
@@ -76,7 +63,7 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             </div>
           ))}
         </div>
-        <div className="hidden landscape:hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
+        <div className="hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
           <button
             onClick={scrollPrev}
             className="absolute left-6 tablet-xs:relative group text-text-white/80 "

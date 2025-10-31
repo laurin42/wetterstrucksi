@@ -23,14 +23,14 @@ export function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 tablet-xs:pb-4 border-b border-accent/40">
+    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 border-b border-accent/40">
       <Link
         href={href}
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
       >
         <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
           <div className="flex md:pr-8 h-full">
-            <div className="flex-1 flex flex-col justify-start group-hover:scale-102 transition delay-120 duration-240 ease-in">
+            <div className="flex-1 flex flex-col justify-start group-hover:scale-101 transition delay-120 duration-240 ease-in">
               {post.published_at && (
                 <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                   {new Date(post.published_at).toLocaleDateString("de-DE", {
@@ -52,7 +52,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
               )}
             </div>
             {imageSrc && (
-              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0 group-hover:scale-110 transition delay-120 duration-240 ease-in">
+              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0 group-hover:scale-104 transition delay-120 duration-240 ease-in">
                 <Image
                   src={imageSrc}
                   overrideSrc={imageSrc}

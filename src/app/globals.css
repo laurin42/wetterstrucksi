@@ -54,7 +54,7 @@
     oklch(73.88% 0.0859 223.62 / 0.8) 67%,
     oklch(73.88% 0.0859 223.62 / 0.8)
   );
-  --header-background: oklch(44.32% 0.0686 223.83 / 0.8);
+  --header-background: oklch(44.32% 0.0686 223.83 / 1);
   --footer: oklch(44.32% 0.0686 223.83 / 0.8);
 }
 
@@ -78,7 +78,7 @@
     oklch(24.84% 0 0),
     oklch(24.84% 0 0)
   );
-  --header-background: oklch(44.32% 0.0686 223.83 / 0.8);
+  --header-background: oklch(44.32% 0.0686 223.83 / 1);
   --footer: oklch(28.01% 0 0);
 }
 
@@ -133,6 +133,6 @@ body {
     width: 1/2;
   }
   .landscapeFont {
-    font-size: large;
+    font-size: x-large;
   }
 }
