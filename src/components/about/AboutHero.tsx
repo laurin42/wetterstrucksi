@@ -27,7 +27,7 @@ export default function AboutHero() {
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/60 z-0 tablet-xs:rounded-lg"
+        className="absolute inset-0 bg-gradient-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg"
       />
 
       <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">

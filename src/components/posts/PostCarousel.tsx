@@ -69,31 +69,31 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             className="relative group text-text-white/80 "
             aria-label="Previous"
           >
-            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl landscape:ml-4" />
           </button>
           <button
             onClick={scrollNext}
             className="relative group text-text-white/80 "
             aria-label="Next"
           >
-            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl landscape:mr-4" />
           </button>
         </div>
 
-        <div className="tablet-xs:hidden absolute top-64 xxs:top-64 flex items-center w-full justify-around mx-auto mt-4">
+        <div className="absolute landscape-top-25 tablet-xs:hidden top-30 xs:top-64 flex items-center w-full justify-around mx-auto mt-4">
           <button
             onClick={scrollPrev}
             className="relative group text-text-white/80 "
             aria-label="Previous"
           >
-            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl mr-8 xxs:mr-16" />
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl mr-8 xxxs:mr-12 xxs:mr-16 landscape:mr-0" />
           </button>
           <button
             onClick={scrollNext}
             className="relative group text-text-white/80 "
             aria-label="Next"
           >
-            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl ml-8 xxs:ml-16" />
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl ml-8 xxxs:ml-12 xxs:ml-16 landscape:ml-0" />
           </button>
         </div>
       </div>

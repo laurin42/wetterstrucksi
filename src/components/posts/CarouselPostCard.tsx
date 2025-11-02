@@ -42,7 +42,7 @@ export function CarouselPostCard({
         overflow-hidden
         bg-foreground-secondary/88 backdrop-blur-sm
         shadow-md
-        w-full max-w-[200px] h-[200px] xxxs:max-w-2xs xxs:max-w-xs xxs:h-auto  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm landscapeCard
+        w-full max-w-[200px] xxxs:max-w-[16rem] xxs:max-w-xs xxs:h-auto  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm landscapeCard
         mx-auto flex-shrink-0
         ${className}
       `}
@@ -55,7 +55,7 @@ export function CarouselPostCard({
           hover:bg-header-background/60 active:scale-95 active:bg-accent
         "
       >
-        <div className="relative w-full aspect-square landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
+        <div className="relative w-full aspect-[8/6] landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}
@@ -70,27 +70,32 @@ export function CarouselPostCard({
             </span>
           )}
         </div>
-
-        <div className="flex flex-col px-4 py-6 landscape:py-2  gap-1 min-h-0">
+        <div className="flex flex-col px-4 py-4 landscape:py-2  gap-1 min-h-0">
           {post.published_at && (
-            <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
-              {new Date(post.published_at).toLocaleDateString("de-DE", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })}
-            </p>
+            <div className="hidden xs:block">
+              <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+                {new Date(post.published_at).toLocaleDateString("de-DE", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
           )}
-          <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-1">
-            {truncateWords(post.title, 10)}
-          </h2>
+          <div className="hidden xxs:block">
+            <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-1">
+              {truncateWords(post.title, 10)}
+            </h2>
+          </div>
 
           {post.og_description && (
-            <p className="text-text xxs:line-clamp-3 xs:line-clamp-4">
-              {truncateWords(post.og_description, 100)}
-            </p>
+            <div className="hidden xs:block">
+              <p className="text-text xs:line-clamp-2 sm:line-clamp-4">
+                {truncateWords(post.og_description, 100)}
+              </p>
+            </div>
           )}
-          <span className="mt-2 font-thin text-2xl text-accent-dark tracking-wide hover:underline">
+          <span className="mt-0 xs:mt-2 font-thin text-2xl text-accent-dark tracking-wide hover:underline">
             Weiterlesen »
           </span>
         </div>

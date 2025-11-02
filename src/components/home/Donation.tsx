@@ -20,8 +20,8 @@ export default function DonateBox() {
     <motion.section
       className="
         relative w-full flex flex-col items-center 
-        md:flex-row justify-center 
-        h-[94vh] md:h-[80vh]
+        tablet-xs:flex-row justify-center 
+        h-[94vh] tablet-xs:h-[100vh]
         bg-cover bg-center md:bg-center
       "
       style={{ backgroundImage }}
@@ -35,7 +35,7 @@ export default function DonateBox() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex flex-col items-center mx-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
+        className="flex-col items-center mx-4 landsacpe:py-4 sm:px-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
         <h3 className="font-thin text-3xl tracking-wider pt-2 pb-2 border-b-[1px] border-text/40">
           Deine Spende für mich
@@ -46,7 +46,7 @@ export default function DonateBox() {
           kannst du mir über PayPal gerne eine kleine Spende hinterlassen 🙂
         </p>
 
-        <div className="flex items-center gap-2 mb-6">
+        <div className="flex flex-col items-center gap-2 mb-6">
           <div className="relative">
             <input
               type="number"

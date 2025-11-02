@@ -46,7 +46,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
               </h2>
 
               {post.og_description && (
-                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8  ">
+                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
                   {truncateWords(post.meta_description, 120)}
                 </p>
               )}

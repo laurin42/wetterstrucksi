@@ -28,7 +28,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
 
   return (
     <motion.section
-      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start tablet-xs:items-center justify-center bg-cover bg-center"
+      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start sm:items-center tablet-xs:items-center justify-center bg-cover bg-center"
       initial="hidden"
       animate="visible"
       variants={containerVariantsSync}

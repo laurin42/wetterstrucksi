@@ -32,6 +32,7 @@
 }
 
 :root {
+  --vh: 1vh;
   --background: oklch(90.91% 0.0098 17.34);
   --foreground: oklch(90.79% 0 0);
   --foreground-secondary: oklch(89.23% 0 0 / 0.8);
@@ -84,6 +85,7 @@
 
 html,
 body {
+  height: calc(var(--vh, 1vh) * 100);
   overflow-x: hidden;
   background: var(--background-gradient);
 }
@@ -139,5 +141,15 @@ body {
   }
   .landscape-top-25 {
     top: 25%;
+  }
+  .landscape-no-margin {
+    margin-top: 0;
+  }
+  .landscape-py-8 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+  .landscape-justify-around {
+    justify-content: space-around;
   }
 }

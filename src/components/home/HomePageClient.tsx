@@ -32,7 +32,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   return (
     <>
       <HomeHero posts={normalizedPosts} />
-      <div className="md:max-w-6xl tablet:pt-16 mx-auto pb-16">
+      <div className="md:max-w-6xl tablet:pt-16 mx-auto 0">
         <div key="neusteBeitraege">
           <CollapsibleSectionHeader
             title={"Weitere Beiträge"}
@@ -51,15 +51,15 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           </div>
         </div>
 
-        <div className="md:mt-4">
+        <div className="md:mt-4 landscape-no-margin">
           <AboutShort />
         </div>
 
-        <div className="md:mt-4">
+        <div className="md:mt-4 landscape-no-margin">
           <DonateBox />
         </div>
 
-        <div className="md:mt-4">
+        <div className="md:mt-4 landscape-no-margin">
           <Contact />
         </div>
       </div>

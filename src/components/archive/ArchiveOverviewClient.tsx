@@ -91,10 +91,10 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
         </div>
 
         {visiblePosts.length < filteredPosts.length && (
-          <div className="col-span-3 flex justify-center items-center pt-4 pb-2">
+          <div className="col-span-3 flex justify-center items-center py-4">
             <button
               onClick={loadMore}
-              className="px-4 py-2 rounded-md bg-accent hover:bg-accent/80 transition"
+              className="px-4 py-2 rounded-md text-text-white bg-accent hover:bg-accent/80 transition"
             >
               Mehr laden …
             </button>
