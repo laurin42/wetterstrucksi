@@ -45,7 +45,7 @@ export function PostsFilter({
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0 tablet-xs:rounded-b-lg"
       >
         <FilterHeader
           selectedMonth={selectedMonth}

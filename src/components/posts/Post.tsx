@@ -48,6 +48,11 @@ export default function Post({ post }: PostProps) {
         );
       }
 
+      const oldUrls = ["jensstrucks.blog", "https://jensstrucks.blog"];
+      const isAbspannLink = oldUrls.some((url) =>
+        domNode.attribs.href?.includes(url)
+      );
+
       if (domNode.name === "h3") {
         const children = domNode.children ?? [];
         return (
@@ -66,13 +71,47 @@ export default function Post({ post }: PostProps) {
         );
       }
 
-      if (domNode.name === "a") {
+      if (domNode.name === "p") {
         const children = domNode.children ?? [];
-        return (
-          <a className="underline text-accent leading-relaxed hover:cursor-pointer hover:text-accent-dim hover:no-underline">
-            {domToReact(children as DOMNode[], options)}
-          </a>
-        );
+        const text = domToReact(children as DOMNode[], options);
+
+        if (
+          domNode.children?.some((c) => c.type?.includes("jensstrucks.blog"))
+        ) {
+          return (
+            <p className="leading-relaxed">
+              📎 Teile meine{" "}
+              <a
+                href="https://wetterstrucksi.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-accent"
+              >
+                wetterstrucksi.de
+              </a>
+              , meine{" "}
+              <a
+                href="https://www.facebook.com/WetterstrucksiD"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-accent"
+              >
+                Facebook-Seite
+              </a>{" "}
+              oder mein{" "}
+              <a
+                href="https://www.instagram.com/wetterstrucksiduesseldorf/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-accent"
+              >
+                Instagram-Profil
+              </a>
+            </p>
+          );
+        }
+
+        return <p className="leading-relaxed">{text}</p>;
       }
 
       if (domNode.name === "hr") {
@@ -114,7 +153,7 @@ export default function Post({ post }: PostProps) {
         />
       </Head>
 
-      <section className="max-w-4xl md:max-w-6xl mx-auto">
+      <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-16">
         <article className="p-4 md:px-16 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
           <div className="flex justify-start mb-10">
             <div>

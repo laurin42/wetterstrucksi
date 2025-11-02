@@ -33,17 +33,17 @@ export function Contact() {
           inhaltlich qualitativen Berichte zum Wetter wünsche ich mir, dass ihr
           euch hier wohl fühlt und euch gut und gerne zurechtfindet.
         </motion.p>
-        <div className="flex flex-col items-center justify-around gap-y-12 pt-6">
-          <motion.a
-            variants={sectionAnimation}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            href="/kontakt"
-            className="max-w-xl inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
-          >
-            Schreibt mir
-          </motion.a>
+        <motion.a
+          variants={sectionAnimation}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          href="/kontakt"
+          className="max-w-xl inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+        >
+          Schreibt mir
+        </motion.a>
+        <div className="flex flex-col items-center justify-around gap-y-4 pt-6">
           <motion.p
             variants={sectionAnimation}
             initial="hidden"
@@ -51,7 +51,7 @@ export function Contact() {
             viewport={viewportOnce}
             className="text-2xl font-thin tracking-wide"
           >
-            oder folgt mir auf:
+            oder folgt mir auf
           </motion.p>
           <motion.div
             variants={sectionAnimation}
@@ -61,7 +61,7 @@ export function Contact() {
             className="flex items-center gap-6 text-3xl text-accent"
           >
             <a
-              href="https://www.facebook.com/jensstrucks/"
+              href="https://www.facebook.com/WetterstrucksiD"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -70,7 +70,7 @@ export function Contact() {
               <FaFacebook className="hover:text-accent/80 transition-colors" />
             </a>
             <a
-              href="https://www.instagram.com/jensstrucks/"
+              href="https://www.instagram.com/wetterstrucksiduesseldorf/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

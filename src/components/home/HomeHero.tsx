@@ -40,9 +40,9 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             src={backgroundImage}
             alt="Hintergrundbild"
             fill
-            priority={true}
             sizes="100vw"
             className="object-cover object-center z-0"
+            preload={true}
           />
           <div className="absolute inset-0 bg-black/60 z-10" />
         </>
@@ -58,7 +58,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
               className="font-semibold inline-block"
               initial={{ scale: 1 }}
               animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 0.8, ease: "easeIn", delay: 1.2 }}
+              transition={{ duration: 0.8, ease: "easeIn", delay: 1.8 }}
             >
               Dein
             </motion.em>{" "}
@@ -77,7 +77,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
               initial={{ scale: 1 }}
               whileInView={{ scale: [1, 1.1, 1] }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeIn", delay: 1.8 }}
+              transition={{ duration: 1.2, ease: "easeIn", delay: 2.2 }}
             >
               Düsseldorf
             </motion.em>

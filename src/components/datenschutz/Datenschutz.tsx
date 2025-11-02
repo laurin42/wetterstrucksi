@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 
 export default function Datenschutz() {
   return (
-    <motion.section>
+    <motion.section className="tablet-xs:py-16">
       <motion.div className="flex flex-col gap-y-2 max-w-6xl mx-auto bg-foreground-secondary/44 p-4 md:p-16">
-        <h1 className="text-4xl font-thin tracking-wider pb-2 mb-4 md:mb-8">
+        <h1 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           Datenschutzerklärung
         </h1>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           1. Verantwortlicher
         </h2>
         <p className="max-w-xl">
@@ -33,7 +33,7 @@ export default function Datenschutz() {
           </a>
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           2. Allgemeines zur Datenverarbeitung
         </h2>
         <p>
@@ -43,7 +43,7 @@ export default function Datenschutz() {
           Eine Weitergabe an Dritte erfolgt nicht.
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           3. Server-Log-Dateien
         </h2>
         <p>
@@ -65,7 +65,7 @@ export default function Datenschutz() {
           Speicherung erfolgt für kurze Zeit und wird automatisch gelöscht.
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           4. Eigene API / Beiträge
         </h2>
         <p>
@@ -84,7 +84,7 @@ export default function Datenschutz() {
           ausgewertet oder zu Marketingzwecken gespeichert.
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           6. Kontaktaufnahme
         </h2>
         <p>
@@ -95,7 +95,7 @@ export default function Datenschutz() {
           Aufbewahrungspflichten bestehen.
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           7. Rechte der betroffenen Personen
         </h2>
         <p>Sie haben gemäß DSGVO folgende Rechte:</p>
@@ -108,7 +108,7 @@ export default function Datenschutz() {
           <li>Beschwerderecht bei einer Datenschutzaufsichtsbehörde</li>
         </ul>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           8. Bildnachweise / Credits
         </h2>
         <p>
@@ -117,7 +117,7 @@ export default function Datenschutz() {
           verwendet. Vielen Dank an die jeweiligen Urheber.
         </p>
 
-        <h2 className="text-2xl font-thin tracking-wider border-b border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           9. Änderung dieser Datenschutzerklärung
         </h2>
         <p>

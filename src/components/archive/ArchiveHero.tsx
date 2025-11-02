@@ -22,7 +22,7 @@ export default function ArchiveHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full rounded-t-sm px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
+      className="relative w-full rounded-t-lg px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",

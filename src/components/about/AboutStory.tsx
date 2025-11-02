@@ -14,7 +14,14 @@ export function AboutStory() {
       custom={{ y: 0, duration: 1.6 }}
       className="max-w-6xl mx-auto bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg pt-8 pb-16 px-8 tablet-xs:mb-8 tablet-xs:p-24 space-y-8 h-auto"
     >
-      <ol className="relative border-s border-text/40">
+      <motion.ol
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariant}
+        custom={{ y: 0, duration: 3.0 }}
+        viewport={{ once: false, amount: 0.9 }}
+        className="relative border-s border-text/40"
+      >
         <li className="mb-10 ms-8">
           <div className="absolute w-3 h-3 bg-accent rounded-full mt-1.5 -start-1.5 "></div>
           <time className="mb-1 text-sm font-normal leading-none text-text/80">
@@ -230,7 +237,7 @@ export function AboutStory() {
             In Liebe, Jens
           </motion.p>
         </li>
-      </ol>
+      </motion.ol>
     </motion.section>
   );
 }
