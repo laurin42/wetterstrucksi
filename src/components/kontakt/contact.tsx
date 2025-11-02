@@ -48,11 +48,11 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="flex flex-col w-full md:max-w-4xl mx-auto tablet-xs:pt-12">
+    <section className="flex flex-col w-full md:max-w-4xl mx-auto tablet-xs:pt-12 p-4 rounded-lg">
       <div className="relative">
         <form
           onSubmit={handleSubmit}
-          className="bg-foreground-secondary/88 tablet-xs:rounded-lg shadow-lg p-8 border border-accent/10 space-y-8"
+          className="bg-foreground-secondary/88 rounded-lg shadow-lg p-8 border border-accent/10 space-y-8"
         >
           <div className="text-center">
             <div className="flex flex-col justify-center items-center gap-3 mb-3">

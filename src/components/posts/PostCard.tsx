@@ -23,7 +23,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 ">
+    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 py-2">
       <Link
         href={href}
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
@@ -32,7 +32,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
           <div className="flex md:pr-8 h-full">
             <div className="flex-1 flex flex-col justify-start group-hover:scale-101 transition delay-120 duration-240 ease-in">
               {post.published_at && (
-                <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+                <p className="w-fit border-b-[1px] border-accent/40 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                   {new Date(post.published_at).toLocaleDateString("de-DE", {
                     day: "2-digit",
                     month: "short",
@@ -41,8 +41,8 @@ export function PostCard({ post, isNewest }: PostCardProps) {
                 </p>
               )}
 
-              <h2 className="text-base text-text mb-2 line-clamp-2 md:line-clamp-1 leading-snug md:text-lg font-bold   ">
-                {truncateWords(post.title, 12)}
+              <h2 className="text-base text-text mb-2 line-clamp-3 md:line-clamp-1 leading-snug md:text-lg font-bold">
+                {truncateWords(post.title, 20)}
               </h2>
 
               {post.og_description && (
