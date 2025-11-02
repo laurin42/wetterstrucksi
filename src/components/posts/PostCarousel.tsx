@@ -63,7 +63,7 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             </div>
           ))}
         </div>
-        <div className="flex items-center w-1/2 justify-center-safe  mx-auto mt-4">
+        <div className="hidden tablet-xs:flex absolute top-64 landscape-top-25 items-center w-full justify-between mx-auto mt-4">
           <button
             onClick={scrollPrev}
             className="relative group text-text-white/80 "
@@ -80,24 +80,22 @@ export function PostCarousel({ posts }: PostCarouselProps) {
           </button>
         </div>
 
-        {/*mobile chevrons                 
-         <div className="flex items-center w-1/2 justify-center-safe  mx-auto mt-4">
+        <div className="tablet-xs:hidden absolute top-64 xxs:top-64 flex items-center w-full justify-around mx-auto mt-4">
           <button
             onClick={scrollPrev}
             className="relative group text-text-white/80 "
             aria-label="Previous"
           >
-            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl mr-8 xxs:mr-16" />
           </button>
           <button
             onClick={scrollNext}
             className="relative group text-text-white/80 "
             aria-label="Next"
           >
-            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl ml-8 xxs:ml-16" />
           </button>
         </div>
-        */}
       </div>
     </div>
   );
