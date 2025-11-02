@@ -23,24 +23,26 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
 
   return (
     <section className="w-full max-w-6xl mx-auto gap-y-4 px-4 py-8 tablet-xs:p-24 bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg">
-      <motion.h1
-        initial="hidden"
-        animate="visible"
-        viewport={viewportOnceSensitive}
-        variants={fadeInVariant}
-        className="w-fit text-3xl text-text font-thin text-left  tracking-wider"
-      >
-        Eure Fragen?
-      </motion.h1>
-      <motion.h2
-        initial="hidden"
-        animate="visible"
-        viewport={viewportOnceSensitive}
-        variants={fadeInVariant}
-        className="w-fit text-3xl text-text font-thin text-left border-b-[1px] border-text/40 pb-2 mb-8 tracking-wider"
-      >
-        Meine Antworten!
-      </motion.h2>
+      <div className="flex flex-col items-center text-center">
+        <motion.h1
+          initial="hidden"
+          animate="visible"
+          viewport={viewportOnceSensitive}
+          variants={fadeInVariant}
+          className="w-fit text-3xl text-text font-thin tracking-wider"
+        >
+          Eure Fragen?
+        </motion.h1>
+        <motion.h2
+          initial="hidden"
+          animate="visible"
+          viewport={viewportOnceSensitive}
+          variants={fadeInVariant}
+          className="w-fit text-3xl text-text font-thin border-b-[1px] border-text/40 pb-2 mb-8 tracking-wider"
+        >
+          Meine Antworten!
+        </motion.h2>
+      </div>
       <motion.div
         initial="hidden"
         whileInView="visible"

@@ -16,6 +16,7 @@ interface HomePageClientProps {
 }
 
 export default function HomePageClient({ posts }: HomePageClientProps) {
+  const [visibleCount, setVisibleCount] = useState(6);
   const normalizedPosts = posts.map((post) => ({
     ...post,
     id: post.id || post.uuid || crypto.randomUUID(),
@@ -29,6 +30,10 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
 
   if (!hydrated) return null;
 
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 6);
+  };
+
   return (
     <>
       <HomeHero posts={normalizedPosts} />
@@ -39,15 +44,18 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
             isContentCollabsible={false}
           />
           <>
-            {normalizedPosts.slice(3, 9).map((post) => (
+            {normalizedPosts.slice(3, 3 + visibleCount).map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </>
 
-          <div className="flex py-12 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
-            <Link className="underline text-accent-dark" href="/wetter">
-              Alle Beiträge entdecken »
-            </Link>
+          <div className="flex py-4 items-center justify-center tracking-wider text-lg bg-foreground-secondary/44 backdrop-blur-sm md:transparent">
+            <button
+              onClick={handleLoadMore}
+              className="underline text-accent-dark cursor-pointer hover:text-accent/80"
+            >
+              Mehr Beiträge laden ▾
+            </button>
           </div>
         </div>
 

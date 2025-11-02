@@ -57,7 +57,7 @@ export function PostsFilter({
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0 tablet-xs:rounded-b-lg"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm tablet-xs:rounded-b-lg tablet-xs:mb-2"
       >
         <Accordion
           type="single"

@@ -23,7 +23,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 border-b border-accent/40 last:border-b-0">
+    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 ">
       <Link
         href={href}
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"

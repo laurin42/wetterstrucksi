@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = `url("/images/about/bioHero.jpg")`;
+  const backgroundImage = "/images/about/bioHero.jpg";
 
   const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
     useMotionVariants();
@@ -15,13 +16,27 @@ export default function AboutHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end pb-0 tablet-xs:rounded-lg"
+      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end pb-0"
       style={{
         backgroundImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
+      {backgroundImage && (
+        <>
+          {" "}
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0 tablet-xs:rounded-lg"
+            preload={true}
+          />
+          <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10" />
+        </>
+      )}
       <motion.div
         variants={fadeInVariant}
         initial="hidden"

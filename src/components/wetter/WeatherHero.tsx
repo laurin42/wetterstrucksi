@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function WeatherHero() {
-  const backgroundImage = `url("/images/wetter/weatherHero.webp")`;
+  const backgroundImage = "/images/wetter/weatherHero.webp";
 
   const { fadeInVariant, slideInLeftVariant } = useMotionVariants();
 
@@ -21,12 +22,25 @@ export default function WeatherHero() {
         backgroundPosition: "center",
       }}
     >
+      {backgroundImage && (
+        <>
+          {" "}
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0"
+            preload={true}
+          />
+          <div className="absolute inset-0 bg-black/20 z-10" />
+        </>
+      )}
       <motion.div
         variants={fadeInVariant}
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/66 z-0 md:rounded-t-sm"
       />
 
       <div className="relative z-10">
