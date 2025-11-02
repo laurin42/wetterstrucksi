@@ -34,9 +34,10 @@ export default function AboutHero() {
             className="object-cover object-center z-0 tablet-xs:rounded-lg"
             preload={true}
           />
-          <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10" />
         </>
       )}
+      <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10" />
+
       <motion.div
         variants={fadeInVariant}
         initial="hidden"

@@ -33,9 +33,10 @@ export default function WeatherHero() {
             className="object-cover object-center z-0"
             preload={true}
           />
-          <div className="absolute inset-0 bg-black/20 z-10" />
         </>
       )}
+      <div className="absolute inset-0 bg-black/70 z-10" />
+
       <motion.div
         variants={fadeInVariant}
         initial="hidden"
