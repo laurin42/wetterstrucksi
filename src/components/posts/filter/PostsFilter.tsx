@@ -41,23 +41,24 @@ export function PostsFilter({
 
   return (
     <>
+      {" "}
+      <FilterHeader
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        onToggle={() => {}}
+        onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
+        isOpen={true}
+        mobileOpen={sidebarOpen}
+        onMonthSelect={onMonthSelect}
+        onYearSelect={onYearSelect}
+        onSortChange={onSortChange}
+      />
       <motion.div
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
         className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0 tablet-xs:rounded-b-lg"
       >
-        <FilterHeader
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-          onToggle={() => {}}
-          onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
-          isOpen={true}
-          mobileOpen={sidebarOpen}
-          onMonthSelect={onMonthSelect}
-          onYearSelect={onYearSelect}
-          onSortChange={onSortChange}
-        />
         <Accordion
           type="single"
           collapsible

@@ -77,7 +77,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
         onSortChange={setSortOrder}
       />
 
-      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44 pb-4 tablet-xs:mt-2">
+      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44 pb-4">
         <div className="md:col-span-3 grid grid-cols-1">
           {visiblePosts.length === 0 ? (
             <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
