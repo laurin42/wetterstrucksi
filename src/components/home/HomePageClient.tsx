@@ -32,7 +32,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   return (
     <>
       <HomeHero posts={normalizedPosts} />
-      <div className="md:max-w-6xl tablet:pt-16 mx-auto">
+      <div className="md:max-w-6xl tablet:pt-16 mx-auto pb-16">
         <div key="neusteBeitraege">
           <CollapsibleSectionHeader
             title={"Weitere Beiträge"}
@@ -44,7 +44,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
             ))}
           </>
 
-          <div className="flex py-8 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
+          <div className="flex py-12 items-center justify-center tracking-wider text-lg bg-foreground backdrop-blur-sm md:bg-transparent">
             <Link className="underline text-accent-dark" href="/wetter">
               Alle Beiträge entdecken »
             </Link>

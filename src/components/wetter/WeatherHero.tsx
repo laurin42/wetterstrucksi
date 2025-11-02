@@ -12,7 +12,7 @@ export default function WeatherHero() {
     <motion.section
       variants={fadeInVariant}
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full md:rounded-t-sm px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
+      className="relative w-full md:rounded-t-lg px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",

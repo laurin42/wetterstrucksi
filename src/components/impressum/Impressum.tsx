@@ -5,13 +5,13 @@ import Link from "next/link";
 
 export default function Impressum() {
   return (
-    <motion.section>
+    <motion.section className="tablet-xs:py-16">
       <motion.div className="flex flex-col gap-y-2 max-w-6xl mx-auto bg-foreground-secondary/44 p-4 md:p-16 rounded-t-sm">
-        <h1 className="text-4xl font-thin tracking-wider pb-2 mb-4 md:mb-8">
+        <h1 className="w-fit border-b-[1px] border-text/40 text-4xl font-thin tracking-wider">
           Impressum
         </h1>
         <strong>Angaben gemäß § 5 TMG</strong>
-        <h2 className="text-2xl font-thin tracking-wider border-b-[1px] border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           Kontakt
         </h2>
         <p className="flex flex-col max-w-xs">
@@ -48,7 +48,7 @@ export default function Impressum() {
           Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren
           vor einer Verbraucherschlichtungsstelle teilzunehmen.
         </p>
-        <h2 className="text-2xl font-thin tracking-wider border-b-[1px] border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           Haftung für Inhalte
         </h2>
         <p>
@@ -74,7 +74,7 @@ export default function Impressum() {
           Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
           Rechtsverletzungen werden wir derartige Linksumgehend entfernen.
         </p>
-        <h2 className="text-2xl font-thin tracking-wider border-b-[1px] border-text/40 py-2 mb-4">
+        <h2 className="w-fit text-2xl font-thin tracking-wider border-b-[1px] border-text/40 mt-4 mb-2">
           Urheberrecht
         </h2>
         <p>

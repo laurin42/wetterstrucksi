@@ -22,14 +22,14 @@ export default function DonateBox() {
         relative w-full flex flex-col items-center 
         md:flex-row justify-center 
         h-[94vh] md:h-[80vh]
-        bg-cover bg-center md:bg-center md:rounded-sm
+        bg-cover bg-center md:bg-center
       "
       style={{ backgroundImage }}
       initial="hidden"
       whileInView="visible"
       variants={sectionAnimation}
     >
-      <div className="absolute inset-0 bg-black/44 z-0 md:rounded-sm" />
+      <div className="absolute inset-0 bg-black/44 z-0 " />
 
       <motion.div
         initial="hidden"
@@ -37,7 +37,7 @@ export default function DonateBox() {
         variants={sectionAnimation}
         className="flex flex-col items-center mx-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
-        <h3 className="font-thin text-3xl tracking-wider pb-2 border-b-[1px] border-text/40">
+        <h3 className="font-thin text-3xl tracking-wider pt-2 pb-2 border-b-[1px] border-text/40">
           Deine Spende für mich
         </h3>
 

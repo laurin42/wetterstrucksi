@@ -63,20 +63,37 @@ export function PostCarousel({ posts }: PostCarouselProps) {
             </div>
           ))}
         </div>
-        <div className="hidden tablet-xs:flex absolute w-full top-74 justify-between mt-4">
+        <div className="hidden tablet-xs:flex absolute top-64 landscape-top-25 items-center w-full justify-between mx-auto mt-4">
           <button
             onClick={scrollPrev}
-            className="absolute left-6 tablet-xs:relative group text-text-white/80 "
+            className="relative group text-text-white/80 "
             aria-label="Previous"
           >
             <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-8 tablet-xs:relative group text-text-white/80 "
+            className="relative group text-text-white/80 "
             aria-label="Next"
           >
             <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl" />
+          </button>
+        </div>
+
+        <div className="tablet-xs:hidden absolute top-64 xxs:top-64 flex items-center w-full justify-around mx-auto mt-4">
+          <button
+            onClick={scrollPrev}
+            className="relative group text-text-white/80 "
+            aria-label="Previous"
+          >
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl mr-8 xxs:mr-16" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="relative group text-text-white/80 "
+            aria-label="Next"
+          >
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl ml-8 xxs:ml-16" />
           </button>
         </div>
       </div>

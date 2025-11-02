@@ -20,7 +20,7 @@ export function AboutShort() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-12 md:px-32"
+        className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-12 md:px-40"
       >
         <h2 className="text-4xl font-thin tracking-wider text-left text-text pb-2 border-b-[1px] border-text/40">
           Über wetterstrucksi.de
@@ -50,7 +50,7 @@ export function AboutShort() {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
             href="/about"
           >
-            Mehr erfahren »
+            mehr über mich erfahren »
           </Link>
         </motion.div>
       </motion.div>
