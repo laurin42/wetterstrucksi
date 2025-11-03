@@ -21,9 +21,9 @@ export default function DonateBox() {
       className="
         relative w-full flex flex-col items-center 
         tablet-xs:flex-row justify-center 
-        h-[94vh] tablet-xs:h-[100vh]
+        h-[92svh]
         bg-cover bg-center md:bg-center
-      "
+        "
       style={{ backgroundImage }}
       initial="hidden"
       whileInView="visible"
@@ -35,13 +35,13 @@ export default function DonateBox() {
         initial="hidden"
         whileInView="visible"
         variants={sectionAnimation}
-        className="flex-col items-center mx-4 landsacpe:py-4 sm:px-8 md:mx-0 justify-center xs:pt-2 p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
+        className="flex-col items-center mx-8 md:mx-0  landsacpe:py-4 sm:px-8 justify-center p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
-        <h3 className="font-thin text-3xl tracking-wider pt-2 pb-2 border-b-[1px] border-text/40">
+        <h2 className="w-fit mx-auto text-balance font-thin text-3xl tracking-wider pt-2 pb-4 tablet-xs:pb-2 border-b-[1px] border-text/40">
           Deine Spende für mich
-        </h3>
+        </h2>
 
-        <p className="text-md text-left mb-4 max-w-md pt-4 px-4 pb-4 md:px-8 md:pb-8 font-normal">
+        <p className="text-md text-balance mb-4 max-w-md pt-4 px-4 pb-4 md:px-8 md:pb-8 font-normal">
           Wenn dir meine Wetterseite gefällt und du sie unterstützen möchtest,
           kannst du mir über PayPal gerne eine kleine Spende hinterlassen 🙂
         </p>
@@ -74,8 +74,8 @@ export default function DonateBox() {
           rel="noopener noreferrer"
           className="
             inline-flex items-center justify-center gap-2
-            bg-accent text-white font-semibold 
-            px-10 py-3 rounded-full hover:bg-accent/80
+            bg-background-paypal text-white font-semibold 
+            px-10 py-3 rounded-full hover:bg-background-paypal/80
             transition-all duration-300 ease-in-out 
             shadow-md hover:shadow-lg active:scale-[0.98]"
         >

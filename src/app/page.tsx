@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import Image from "next/image";
-import HomePageClient from "@/components/home/HomePageClient";
+import HomePageClient from "@/components/ui/HomePageClient";
 import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function Home() {
   return (

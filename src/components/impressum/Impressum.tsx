@@ -15,7 +15,7 @@ export default function Impressum() {
           Kontakt
         </h2>
         <p className="flex flex-col max-w-xs">
-          Jens Strucks Pestalozzistraße 3 52134 Herzogenrath{" "}
+          Jens Strucks Möschepfad 16 52134 Herzogenrath{" "}
         </p>
         <p>Telefon: +49 (0) 152 24 14 38 26 </p>
         <p>E-Mail: kontakt@wetterstrucksi.de</p>

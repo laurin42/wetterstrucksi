@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from "react";
 import Header from "@/components/header/Header";
 import Footer from "./footer/Footer";
-import { ScrollToTop } from "./ScrollToTop";
+import { ScrollToTop } from "./ui/ScrollToTop";
 
 export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (

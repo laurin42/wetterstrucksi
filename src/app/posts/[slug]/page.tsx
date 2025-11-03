@@ -2,7 +2,7 @@ import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import PostContentClient from "@/components/posts/PostPageClient";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;

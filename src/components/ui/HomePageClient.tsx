@@ -5,11 +5,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
-import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
+import { CollapsibleSectionHeader } from "./CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
-import { AboutShort } from "../about/AboutShort";
-import DonateBox from "./Donation";
-import { Contact } from "../Contact";
+import { AboutShort } from "../home/AboutShort";
+import DonateBox from "../home/Donation";
+import { ContactCta } from "./ContactCta";
 
 interface HomePageClientProps {
   posts: PostWithMeta[];
@@ -59,16 +59,16 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
           </div>
         </div>
 
-        <div className="md:mt-4 landscape-no-margin">
+        <div className="md:mt-8 landscape-no-margin">
           <AboutShort />
         </div>
 
-        <div className="md:mt-4 landscape-no-margin">
+        <div className="md:mt-8 landscape-no-margin">
           <DonateBox />
         </div>
 
-        <div className="md:mt-4 landscape-no-margin">
-          <Contact />
+        <div className="md:mt-8 landscape-no-margin">
+          <ContactCta />
         </div>
       </div>
     </>

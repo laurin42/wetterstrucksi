@@ -1,7 +1,7 @@
 import { WeatherOverviewClient } from "@/components/wetter/WeatherOverviewClient";
 import { getNewestPostsWithTags } from "../api/posts/getPostsWithMeta";
 import { Suspense } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default async function WeatherOverviewPage() {
   return (

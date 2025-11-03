@@ -3,7 +3,7 @@ import AboutHero from "./AboutHero";
 import { AboutStory } from "./AboutStory";
 import { FaqAccordion } from "@/components/about/FaqAccordeon";
 import { faqItems } from "@/lib/faq";
-import { Contact } from "../Contact";
+import { ContactCta } from "../ui/ContactCta";
 
 export default function AboutPageClient() {
   return (
@@ -15,7 +15,7 @@ export default function AboutPageClient() {
 
       <FaqAccordion items={faqItems} />
 
-      <Contact />
+      <ContactCta />
     </section>
   );
 }

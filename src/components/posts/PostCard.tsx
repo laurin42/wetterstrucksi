@@ -62,7 +62,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
                   sizes="(max-width: 768px) 6rem, 33vw"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/10">
+                <div className="absolute inset-0 rounded-md bg-black/10">
                   {isNewest && (
                     <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
                       Neuster Beitrag

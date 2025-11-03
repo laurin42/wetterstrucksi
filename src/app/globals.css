@@ -25,6 +25,7 @@
   --color-card-transparent: var(--card-transparent);
   --color-text-white: var(--text-white);
   --color-text-white-transparent: var(--text-white-transparent);
+  --color-background-paypal: var(--background-paypal);
   --bg: var(--background-gradient);
   --animate-shineDiagonal: shineDiagonal 1s linear forwards;
   --color-header-background: var(--header-background);
@@ -47,6 +48,7 @@
   --accent-dark: oklch(27.59% 0.0374 221.8);
   --card: oklch(86.89% 0 0);
   --card-transparent: oklch(39.95% 0.0396 250.51 / 0.4);
+  --background-paypal: oklch(82.796% 0.16668 108.423 / 0.9);
   --background-gradient: linear-gradient(
     to bottom,
     oklch(73.61% 0.0814 227.25 / 0.8),

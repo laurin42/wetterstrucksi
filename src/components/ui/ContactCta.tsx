@@ -7,10 +7,10 @@ import {
   FaLinkedin,
 } from "react-icons/fa6";
 
-export function Contact() {
+export function ContactCta() {
   const { sectionAnimation, viewportOnce } = useMotionVariants();
   return (
-    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/88 backdrop-blur-sm text-left mx-auto min-h-[94vh] tablet-xs:min-h-auto tablet-xs:mt-4 landscape-no-margin">
+    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/88 backdrop-blur-sm  text-center mx-auto min-h-[94vh] tablet-xs:min-h-auto tablet-xs:mt-4 landscape-no-margin">
       <div className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-24 md:px-40">
         <motion.h2
           variants={sectionAnimation}
@@ -26,7 +26,7 @@ export function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="leading-relaxed"
+          className="leading-relaxed text-balance"
         >
           Mir ist eine übersichtliche und strukturierte Reise durch die
           verschiedenen Bereiche meine Homepage sehr wichtig. Neben den

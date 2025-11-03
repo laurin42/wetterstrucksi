@@ -1,8 +1,8 @@
-import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
+import { ArchiveOverviewClient } from "@/components/archiv/ArchiveOverviewClient";
 import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
 import { Suspense } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default async function ArchiveOverviewPage() {
   return (
