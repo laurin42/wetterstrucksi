@@ -11,7 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/Accordion";
+} from "@/components/ui/accordion";
 import { Calendar, SortDesc } from "lucide-react";
 import { IoCalendar } from "react-icons/io5";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";

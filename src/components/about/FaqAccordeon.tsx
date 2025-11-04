@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/Accordion";
+} from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
