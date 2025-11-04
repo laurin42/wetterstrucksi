@@ -35,7 +35,6 @@ export default function HomeHero({ posts }: HomeHeroProps) {
     >
       {backgroundImage && (
         <>
-          {" "}
           <Image
             src={backgroundImage}
             alt="Hintergrundbild"
@@ -63,7 +62,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                 type: "spring",
                 stiffness: 150,
                 damping: 14,
-                delay: 1.0,
+                delay: 1.6,
               }}
             >
               Dein
@@ -85,7 +84,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                 type: "spring",
                 stiffness: 150,
                 damping: 14,
-                delay: 1.4,
+                delay: 2.0,
               }}
             >
               Düsseldorf

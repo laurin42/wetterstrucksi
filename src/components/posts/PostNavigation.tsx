@@ -8,6 +8,7 @@ import {
 } from "react-icons/md";
 import { getPostsWithMeta } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface PostNavigationClientProps {
   slug: string;
@@ -44,12 +45,17 @@ export default function PostNavigation({
     fetchAdjacent();
   }, [slug]);
 
-  if (!adjacent) return <p>Loading navigation...</p>;
+  if (!adjacent)
+    return (
+      <div className="h-full py-16">
+        <LoadingSpinner />
+      </div>
+    );
 
   const { newer: prev, older: next } = adjacent;
 
   return (
-    <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent pb-24 tablet-xs:pb-16">
+    <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent pb-16">
       <div className="flex justify-start">
         {prev ? (
           <Link

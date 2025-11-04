@@ -6,6 +6,7 @@ import Head from "next/head";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
 import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface PostProps {
   post: PostWithMeta;
@@ -56,7 +57,7 @@ export default function Post({ post }: PostProps) {
       if (domNode.name === "h3") {
         const children = domNode.children ?? [];
         return (
-          <h3 className="text-3xl font-light leading-relaxed my-2 md:mt-8">
+          <h3 className="text-3xl font-light mb-6 md:mt-8 text-balance">
             {domToReact(children as DOMNode[], options)}
           </h3>
         );
@@ -154,15 +155,15 @@ export default function Post({ post }: PostProps) {
       </Head>
 
       <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-16">
-        <article className="p-4 md:px-16 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
-          <div className="flex justify-start mb-10">
+        <article className="p-8 tablet-xs:px-32 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
+          <div className="flex justify-start tablet-xs:mb-16 mb-0">
             <div>
               {formattedDate && (
                 <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground">
                   {formattedDate}
                 </p>
               )}
-              <h1 className="tracking-wide text-4xl md:text-5xl font-light">
+              <h1 className="tracking-wide text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b-[1px] border-text/40">
                 {post.title}
               </h1>
             </div>
@@ -184,9 +185,7 @@ export default function Post({ post }: PostProps) {
             {typeof post.html === "string" && post.html.trim().length > 0 ? (
               parse(post.html, options)
             ) : (
-              <p className="italic text-muted-foreground">
-                Kein Inhalt verfügbar.
-              </p>
+              <LoadingSpinner />
             )}
 
             <div className="clear-both" />

@@ -76,7 +76,7 @@ export function CarouselPostCard({
         <div className="flex flex-col px-4 py-4 landscape:py-2  gap-1 min-h-0">
           {post.published_at && (
             <div className="hidden xs:block">
-              <p className="text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+              <p className="w-fit border-b-[1px] border-header-background/80 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                 {new Date(post.published_at).toLocaleDateString("de-DE", {
                   day: "2-digit",
                   month: "short",

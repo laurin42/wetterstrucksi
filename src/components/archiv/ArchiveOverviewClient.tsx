@@ -65,7 +65,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
   return (
     <motion.section
       ref={archiveRef}
-      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 pb-24"
+      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 tablet:pb-24 pb-0"
     >
       <ArchiveHero />
       <PostsFilter
