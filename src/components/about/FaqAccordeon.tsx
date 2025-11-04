@@ -22,7 +22,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
     useMotionVariants();
 
   return (
-    <section className="w-full max-w-6xl mx-auto gap-y-4 px-4 py-8 tablet-xs:p-24 bg-foreground-secondary/88 tablet-xs:rounded-lg tablet-xs:shadow-lg">
+    <section className="w-full max-w-6xl mx-auto gap-y-4 py-8 px-4 tablet-xs:py-8 tablet-xs:px-16 bg-foreground-secondary/44 tablet-xs:rounded-lg tablet-xs:shadow-lg">
       <div className="flex flex-col items-center text-center">
         <motion.h1
           initial="hidden"

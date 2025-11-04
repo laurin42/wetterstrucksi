@@ -1,9 +1,10 @@
 "use client";
 import AboutHero from "./AboutHero";
-import { AboutStory } from "./AboutStory";
+import { AboutStoryDesktop } from "./AboutStoryDesktop";
+import { AboutStoryMobile } from "./AboutStoryMobile";
 import { FaqAccordion } from "@/components/about/FaqAccordeon";
 import { faqItems } from "@/lib/faq";
-import { ContactCta } from "../ui/ContactCta";
+import { ContactCta } from "../kontakt/ContactCta";
 
 export default function AboutPageClient() {
   return (
@@ -11,8 +12,12 @@ export default function AboutPageClient() {
       <div className="h-[calc(100svh-64px)] max-w-6xl flex items-center mx-auto ">
         <AboutHero />
       </div>
-      <AboutStory />
-
+      <div className="hidden tablet-xs:block">
+        <AboutStoryDesktop />
+      </div>
+      <div className="block tablet-xs:hidden">
+        <AboutStoryMobile />
+      </div>
       <FaqAccordion items={faqItems} />
 
       <ContactCta />

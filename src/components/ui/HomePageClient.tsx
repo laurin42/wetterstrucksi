@@ -9,7 +9,7 @@ import { CollapsibleSectionHeader } from "./CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
 import { AboutShort } from "../home/AboutShort";
 import DonateBox from "../home/Donation";
-import { ContactCta } from "./ContactCta";
+import { ContactCta } from "../kontakt/ContactCta";
 
 interface HomePageClientProps {
   posts: PostWithMeta[];

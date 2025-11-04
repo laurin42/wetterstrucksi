@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
-export function AboutStory() {
+export function AboutStoryDesktop() {
   const { sectionAnimation, viewportOnce, fadeInVariant } = useMotionVariants();
 
   return (
@@ -244,7 +244,7 @@ export function AboutStory() {
           </ol>
         </div>
       </motion.ol>
-      <div className="mt-32 relative flex flex-col w-full justify-center items-center text-center text-balance p-16">
+      <div className="mt-32 relative flex flex-col w-full justify-center items-center text-center font-light text-lg text-balance p-16">
         <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-accent rounded-xs"></div>
         <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-accent rounded-xs"></div>
 
