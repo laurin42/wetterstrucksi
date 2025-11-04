@@ -38,6 +38,9 @@ export function CarouselPostCard({
       variants={fadeInVariant}
       custom={{ y: 0, duration: 2.0 }}
       className={`
+        group
+        active:scale-98
+        transition-all duration-300
         rounded-lg
         overflow-hidden
         bg-foreground-secondary/88 backdrop-blur-sm
@@ -50,9 +53,9 @@ export function CarouselPostCard({
       <Link
         href={`/posts/${post.slug}`}
         className="
-          group block w-full
+          group block w-full h-full pb-2
           overflow-hidden transition-all duration-300
-          hover:bg-header-background/60 active:scale-95 active:bg-accent
+          hover:bg-header-background/60 active:bg-accent
         "
       >
         <div className="relative w-full aspect-[8/6] landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
@@ -83,8 +86,8 @@ export function CarouselPostCard({
             </div>
           )}
           <div className="hidden xxs:block">
-            <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-1">
-              {truncateWords(post.title, 10)}
+            <h2 className="text-lg sm:text-base font-semibold text-text line-clamp-2">
+              {truncateWords(post.title, 16)}
             </h2>
           </div>
 
@@ -95,7 +98,7 @@ export function CarouselPostCard({
               </p>
             </div>
           )}
-          <span className="mt-0 xs:mt-2 font-thin text-2xl text-accent-dark tracking-wide hover:underline">
+          <span className="group mt-0 xs:mt-2 font-thin text-2xl text-accent-dark hover:text-text-white/60 tracking-wide hover:scale-101 transition-all duration-160 ease-in-out">
             Weiterlesen »
           </span>
         </div>

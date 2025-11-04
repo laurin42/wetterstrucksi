@@ -39,9 +39,9 @@ export function ContactCta() {
           whileInView="visible"
           viewport={viewportOnce}
           href="/kontakt"
-          className="max-w-xl inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+          className="inline-flex items-center gap-4 px-6 py-3 rounded-md bg-transparent border-[1px] border-accent/40 text-text/80 text-base md:text-lg font-semibold hover:bg-accent/80 active:bg-accent/80 transition-colors"
         >
-          Schreibt mir
+          Schreib mir eine Nachricht
         </motion.a>
         <div className="flex flex-col items-center justify-around gap-y-4 pt-6">
           <motion.p
@@ -51,7 +51,7 @@ export function ContactCta() {
             viewport={viewportOnce}
             className="text-2xl font-thin tracking-wide"
           >
-            oder folgt mir auf
+            und folge mir auf
           </motion.p>
           <motion.div
             variants={sectionAnimation}

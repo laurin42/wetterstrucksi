@@ -30,9 +30,9 @@ export function PostCard({ post, isNewest }: PostCardProps) {
       >
         <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
           <div className="flex md:pr-8 h-full">
-            <div className="flex-1 flex flex-col justify-start group-hover:scale-101 transition delay-120 duration-240 ease-in">
+            <div className="... will-change-transform transition-all duration-300 ease-out group-hover:translate-y-[-2px] group-hover:opacity-90">
               {post.published_at && (
-                <p className="w-fit border-b-[1px] border-accent/40 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+                <p className="w-fit border-b-[1px] border-header-background/60 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                   {new Date(post.published_at).toLocaleDateString("de-DE", {
                     day: "2-digit",
                     month: "short",
@@ -52,7 +52,7 @@ export function PostCard({ post, isNewest }: PostCardProps) {
               )}
             </div>
             {imageSrc && (
-              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0 group-hover:scale-104 transition delay-120 duration-240 ease-in">
+              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative flex-shrink-0 group-hover:scale-104 transition duration-300 ease-in">
                 <Image
                   src={imageSrc}
                   overrideSrc={imageSrc}

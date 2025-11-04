@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
-import { CollapsibleSectionHeader } from "./CollabsibleSectionHeader";
+import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { PostCard } from "@/components/posts/PostCard";
 import { AboutShort } from "../home/AboutShort";
 import DonateBox from "../home/Donation";
@@ -37,7 +35,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
   return (
     <>
       <HomeHero posts={normalizedPosts} />
-      <div className="md:max-w-6xl tablet:py-16 mx-auto 0">
+      <div className="md:max-w-6xl tablet:pt-16 pb-24 mx-auto 0">
         <div key="neusteBeitraege">
           <CollapsibleSectionHeader
             title={"Weitere Beiträge"}

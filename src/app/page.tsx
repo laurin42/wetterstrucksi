@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Image from "next/image";
-import HomePageClient from "@/components/ui/HomePageClient";
+import HomePageClient from "@/components/home/HomePageClient";
 import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 

@@ -133,7 +133,7 @@ export function AboutStoryDesktop() {
               <div className="p-8 mr-24 text-balance bg-foreground-secondary/44 rounded-md">
                 <time className="mb-1 text-sm font-normal leading-none text-text/80">
                   <time className="mb-1 text-sm font-normal leading-none text-text/80">
-                    2016 — 2024
+                    2016 – 2024
                   </time>
                 </time>
                 <motion.h2

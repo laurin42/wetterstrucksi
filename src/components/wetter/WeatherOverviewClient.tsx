@@ -38,7 +38,7 @@ export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
       <WeatherHero />
       <div className="grid grid-cols-1 tablet-xs:gap-y-2 max-w-4xl md:max-w-6xl mx-auto">
         {renderPosts("wetter", "Vorhersagen")}
-        {renderPosts("updates", "Updates")}
+        {renderPosts("updates", "Updates & Warnungen")}
         {renderPosts("rueckblicke", "Rückblicke")}
         {renderPosts("presseschau", "Presseschau & Studien")}
         {renderPosts("privates", "Privates")}

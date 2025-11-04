@@ -7,7 +7,7 @@ import { PostWithMeta } from "@tryghost/content-api";
 import ArchiveHero from "./ArchiveHero";
 import { PostsFilter } from "../posts/filter/PostsFilter";
 import { useUniquePosts } from "@/lib/posts/useUniquePosts";
-import { usePaginationHandler } from "@/lib/useScrollToTop";
+import { FaArrowDownLong } from "react-icons/fa6";
 
 type SortOrder = "newest" | "oldest";
 
@@ -65,7 +65,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
   return (
     <motion.section
       ref={archiveRef}
-      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 tablet-xs:pb-16"
+      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 pb-24"
     >
       <ArchiveHero />
       <PostsFilter
@@ -77,7 +77,7 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
         onSortChange={setSortOrder}
       />
 
-      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44 pb-4">
+      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44">
         <div className="md:col-span-3 grid grid-cols-1">
           {visiblePosts.length === 0 ? (
             <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
@@ -91,12 +91,12 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
         </div>
 
         {visiblePosts.length < filteredPosts.length && (
-          <div className="col-span-3 flex justify-center items-center py-4">
+          <div className="col-span-3 flex bg-foreground-secondary/44 justify-center items-center py-6">
             <button
               onClick={loadMore}
-              className="px-4 py-2 rounded-md text-text-white bg-accent hover:bg-accent/80 transition"
+              className="underline text-accent-dark cursor-pointer hover:text-accent/80"
             >
-              Mehr laden …
+              Mehr Beiträge laden ▾
             </button>
           </div>
         )}

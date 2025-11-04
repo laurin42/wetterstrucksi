@@ -5,6 +5,7 @@ import Post from "@/components/posts/Post";
 import { useEffect, useState } from "react";
 import { getPostBySlug } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface PostContentClientProps {
   slug: string;
@@ -20,8 +21,19 @@ export default function PostContentClient({ slug }: PostContentClientProps) {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  if (loading) return <p>Loading...</p>;
-  if (!post) return <p>Beitrag nicht gefunden</p>;
+  if (loading)
+    return (
+      <div className="h-[100svh]">
+        <LoadingSpinner />
+      </div>
+    );
+  if (!post)
+    return (
+      <div>
+        Ups, ein Fehler ist aufgetreten. Versuche es gleich nochmal oder
+        kontaktiere den Administrator
+      </div>
+    );
 
   return (
     <>

@@ -69,7 +69,7 @@ export function AboutStoryMobile() {
         <div className="relative flex p-8 text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
-              2005
+              2010
             </time>
             <motion.h2
               initial="hidden"
@@ -111,7 +111,7 @@ export function AboutStoryMobile() {
         <div className="relative flex p-8 text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
-              2005
+              2016 – 2024
             </time>
             <motion.h2
               initial="hidden"
@@ -159,7 +159,7 @@ export function AboutStoryMobile() {
         <div className="relative flex p-8 text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
-              2005
+              Aktuell & Ausblick
             </time>
             <motion.h2
               initial="hidden"

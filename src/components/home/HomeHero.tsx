@@ -51,14 +51,20 @@ export default function HomeHero({ posts }: HomeHeroProps) {
       <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-8 tablet-xs:pt-0 mx-auto gap-y-8">
         <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <motion.h1
-            variants={fadeInVariant}
-            custom={{ y: -40, duration: 1.2 }}
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
             <motion.em
               className="font-semibold inline-block"
               initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 0.8, ease: "easeIn", delay: 1.8 }}
+              animate={{ scale: 1.05 }}
+              transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 14,
+                delay: 1.0,
+              }}
             >
               Dein
             </motion.em>{" "}
@@ -66,18 +72,21 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           </motion.h1>
 
           <motion.h2
-            initial="hidden"
-            animate="visible"
-            variants={fadeInVariant}
-            custom={{ y: 40, duration: 1.2 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
           >
-            <motion.span>in</motion.span>{" "}
+            in{" "}
             <motion.em
               className="font-semibold inline-block"
               initial={{ scale: 1 }}
-              whileInView={{ scale: [1, 1.1, 1] }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeIn", delay: 2.2 }}
+              animate={{ scale: 1.05 }}
+              transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 14,
+                delay: 1.4,
+              }}
             >
               Düsseldorf
             </motion.em>
