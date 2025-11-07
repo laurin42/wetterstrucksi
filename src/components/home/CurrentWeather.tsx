@@ -1,7 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import {
+  WiThermometer,
+  WiDaySunny,
+  WiDaySunnyOvercast,
+  WiCloud,
+  WiRainMix,
+  WiShowers,
+  WiSleet,
+  WiRain,
+  WiFog,
+  WiStrongWind,
+  WiStormShowers,
+} from "react-icons/wi";
+import { BsCloudSnow } from "react-icons/bs";
+import { TbWind, TbWindsock } from "react-icons/tb";
+import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { motion } from "framer-motion";
 
 type WeatherData = {
   current: {
@@ -12,10 +29,57 @@ type WeatherData = {
     time: string;
   };
   daily: {
+    weather_code: number[];
     sunrise: string[];
     sunset: string[];
   };
 };
+
+function getWeatherDescription(code: number) {
+  if (code == 0) return { icon: <WiDaySunny />, text: "Sonnig" };
+  if (code >= 1 && code <= 3)
+    return { icon: <WiDaySunnyOvercast />, text: "Klar bis leicht bewölkt" };
+  if (code >= 4 && code <= 9) return { icon: <WiCloud />, text: "Bewölkt" };
+  if (code >= 10 && code <= 19)
+    return { icon: <WiRainMix />, text: "Neblig / leichter Regen" };
+  if (code >= 20 && code <= 29)
+    return { icon: <WiShowers />, text: "Leichter Regen" };
+  if (code >= 30 && code <= 39)
+    return { icon: <WiStrongWind />, text: "Stürmisch" };
+  if (code >= 40 && code <= 49) return { icon: <WiFog />, text: "Nebel" };
+  if (code >= 50 && code <= 59)
+    return { icon: <WiSleet />, text: "Sprühregen" };
+  if (code >= 60 && code <= 69) return { icon: <WiRain />, text: "Regen" };
+  if (code >= 70 && code <= 79)
+    return { icon: <BsCloudSnow />, text: "Schneefall" };
+  if (code >= 80 && code <= 89) return { icon: <WiShowers />, text: "Schauer" };
+  if (code >= 90 && code <= 99)
+    return { icon: <WiStormShowers />, text: "Gewitter" };
+  return { icon: "❓", text: "Unbekannt" };
+}
+
+function degreesToCompass(deg: number) {
+  const directions = [
+    "N",
+    "NNO",
+    "NO",
+    "ONO",
+    "O",
+    "OSO",
+    "SO",
+    "SSO",
+    "S",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
+  ];
+  const index = Math.round(deg / 22.5) % 16;
+  return directions[index];
+}
 
 export default function CurrentWeather() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -28,7 +92,7 @@ export default function CurrentWeather() {
         const data: WeatherData = await res.json();
         setWeather(data);
       } catch (error) {
-        console.error("Fehler beim laden", error);
+        console.error("Fehler beim Laden", error);
       } finally {
         setLoading(false);
       }
@@ -38,14 +102,67 @@ export default function CurrentWeather() {
 
   if (loading || !weather || !weather.current) return <LoadingSpinner />;
 
+  const codeRaw = weather.daily.weather_code?.[0] ?? -1;
+  const code = Number(codeRaw);
+  const { text: weatherText, icon: weatherIcon } = getWeatherDescription(code);
+
   return (
-    <div>
-      <p>{weather.current.temperature_2m}</p>
-      <p>{weather.current.rain}</p>
-      <p>{weather.current.wind_direction_10m}</p>
-      <p>{weather.current.wind_speed_10m}</p>
-      <p>{weather.daily.sunrise}</p>
-      <p>{weather.daily.sunset}</p>
+    <div className="w-full text-center text-sm text-text-white/80 bg-transparent backdrop-blur-2xl rounded-lg md:text-base ">
+      <div className="py-1 px-4  bg-header-background/80  rounded-t-lg">
+        <h2 className="flex flex-row items-center text-lg gap-x-2">
+          Aktuell{" "}
+          <span className="flex flex-row items-center font-thin tablet-xs:hidden">
+            {weatherText} <span className="text-3xl px-2">{weatherIcon}</span>
+          </span>
+        </h2>
+      </div>
+      <div className="grid grid-cols-3 grid-rows-2 border-t border-text/32">
+        <div className="flex flex-col items-center justify-center gap-1  py-2  tablet-xs:py-3 border-r border-b border-text/16">
+          <div className="text-3xl md:text-4xl">{weatherIcon}</div>
+          <span className="text-balance w-full px-2 text-center ">
+            {weatherText}
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-b border-text/16">
+          <WiThermometer className="text-3xl md:text-4xl" />
+          <span>{weather.current.temperature_2m}°C</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-b border-text/16">
+          <TbWind className="text-3xl md:text-4xl" />
+          <span>{weather.current.wind_speed_10m} km/h</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-text/16">
+          <TbWindsock className="text-3xl md:text-4xl" />
+          <span>{degreesToCompass(weather.current.wind_direction_10m)}</span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-text/16">
+          <FiSunrise className="text-3xl md:text-4xl" />
+          <span>
+            {weather.daily.sunrise?.[0]
+              ? new Date(weather.daily.sunrise[0]).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "n/a"}
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3">
+          <FiSunset className="text-3xl md:text-4xl" />
+          <span>
+            {weather.daily.sunset?.[0]
+              ? new Date(weather.daily.sunset[0]).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "n/a"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

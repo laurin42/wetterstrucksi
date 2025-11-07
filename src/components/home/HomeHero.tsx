@@ -10,7 +10,7 @@ import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
 import CurrentWeather from "./CurrentWeather";
-
+import CurrentWeatherMobile from "./CurrentWeatherMobile";
 interface HomeHeroProps {
   posts: PostWithMeta[];
 }
@@ -48,52 +48,58 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         </>
       )}
 
-      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-8 tablet-xs:pt-0 mx-auto gap-y-8">
-        <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
-          <motion.h1
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          >
-            <motion.em
-              className="font-semibold inline-block"
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.05 }}
-              transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 14,
-                delay: 1.6,
-              }}
+      <div className="z-11 absolute tablet-xs:hidden w-full backdrop-blur py-2">
+        <CurrentWeatherMobile />
+      </div>
+      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 xxxs:pt-16 pt-32 tablet-xs:pt-0 mx-auto gap-y-2">
+        <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col gap-y-8  items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              Dein
-            </motion.em>{" "}
-            Ort für Wetter
-          </motion.h1>
+              <motion.em
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                animate={{ scale: 1.05 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 14,
+                  delay: 1.6,
+                }}
+              >
+                Dein
+              </motion.em>{" "}
+              Ort für Wetter
+            </motion.h1>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-          >
-            in{" "}
-            <motion.em
-              className="font-semibold inline-block"
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.05 }}
-              transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 14,
-                delay: 2.0,
-              }}
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
             >
-              Düsseldorf
-            </motion.em>
-          </motion.h2>
+              in{" "}
+              <motion.em
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                animate={{ scale: 1.05 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 14,
+                  delay: 2.0,
+                }}
+              >
+                Düsseldorf
+              </motion.em>
+            </motion.h2>
+          </div>
+          <div className="hidden tablet-xs:block px-6 w-full">
+            <CurrentWeather />
+          </div>
         </div>
-
-        <CurrentWeather />
 
         <motion.div
           initial="hidden"

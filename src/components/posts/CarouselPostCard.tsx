@@ -41,7 +41,7 @@ export function CarouselPostCard({
         group
         active:scale-98
         transition-all duration-300
-        rounded-lg
+        rounded-b-lg tablet-xs:rounded-lg
         overflow-hidden
         bg-foreground-secondary/88 backdrop-blur-sm
         shadow-md
