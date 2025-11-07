@@ -66,7 +66,7 @@ export default function Post({ post }: PostProps) {
       if (domNode.name === "p") {
         const children = domNode.children ?? [];
         return (
-          <p className="leading-relaxed">
+          <p className="leading-relaxed pb-4">
             {domToReact(children as DOMNode[], options)}
           </p>
         );
