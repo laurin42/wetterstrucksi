@@ -9,6 +9,7 @@ import { useIsVacationTime } from "@/lib/useIsVacationTime";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
+import CurrentWeather from "./CurrentWeather";
 
 interface HomeHeroProps {
   posts: PostWithMeta[];
@@ -91,6 +92,8 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             </motion.em>
           </motion.h2>
         </div>
+
+        <CurrentWeather />
 
         <motion.div
           initial="hidden"
