@@ -46,10 +46,10 @@
     "@types/react-dom": "19.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "next-sitemap": "^4.2.3",
     "oklchme": "^1.0.2",
     "tailwindcss": "^4.1.11",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
   }
-
 }
