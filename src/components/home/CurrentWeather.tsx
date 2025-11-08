@@ -15,6 +15,8 @@ import {
   WiStormShowers,
 } from "react-icons/wi";
 import { BsCloudSnow } from "react-icons/bs";
+import { SiDrizzle } from "react-icons/si";
+
 import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -48,7 +50,7 @@ function getWeatherDescription(code: number) {
     return { icon: <WiStrongWind />, text: "Stürmisch" };
   if (code >= 40 && code <= 49) return { icon: <WiFog />, text: "Nebel" };
   if (code >= 50 && code <= 59)
-    return { icon: <WiSleet />, text: "Sprühregen" };
+    return { icon: <SiDrizzle />, text: "Nebel/Sprühregen" };
   if (code >= 60 && code <= 69) return { icon: <WiRain />, text: "Regen" };
   if (code >= 70 && code <= 79)
     return { icon: <BsCloudSnow />, text: "Schneefall" };
@@ -107,16 +109,17 @@ export default function CurrentWeather() {
   const { text: weatherText, icon: weatherIcon } = getWeatherDescription(code);
 
   return (
-    <div className="w-full text-center text-sm text-text-white/80 bg-transparent backdrop-blur-xs rounded-lg md:text-base ">
-      <div className="py-1 px-4  bg-header-background/100  rounded-t-lg">
-        <h2 className="flex flex-row items-center font-semibold text-lg gap-x-2">
+    <div className="w-full text-center text-sm text-text-white/80 bg-foreground-secondary/20 rounded-lg md:text-base font-semibold">
+      <div className="py-1 px-4  rounded-t-lg border-b border-text/32 ">
+        <h2 className="flex flex-row items-center justify-center font-semibold text-lg gap-x-2">
           Aktuell{" "}
           <span className="flex flex-row items-center font-thin tablet-xs:hidden">
             {weatherText} <span className="text-3xl">{weatherIcon}</span>
           </span>
         </h2>
       </div>
-      <div className="grid grid-cols-2 grid-rows-3 text-xs md:text-sm  border-text/32">
+
+      <div className="grid grid-cols-2 grid-rows-3 text-sm  border-text/32 ">
         <div className="flex flex-col items-center justify-center border-r border-b border-text/16 py-1 h-14">
           <div className="text-xl md:text-2xl">{weatherIcon}</div>
           <span className="truncate text-center">{weatherText}</span>
