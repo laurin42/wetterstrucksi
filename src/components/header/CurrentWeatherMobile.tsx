@@ -14,6 +14,8 @@ import {
   WiStrongWind,
   WiStormShowers,
 } from "react-icons/wi";
+import { SiDrizzle } from "react-icons/si";
+
 import { BsCloudSnow } from "react-icons/bs";
 import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
@@ -48,7 +50,7 @@ function getWeatherDescription(code: number) {
     return { icon: <WiStrongWind />, text: "Stürmisch" };
   if (code >= 40 && code <= 49) return { icon: <WiFog />, text: "Nebel" };
   if (code >= 50 && code <= 59)
-    return { icon: <WiSleet />, text: "Sprühregen" };
+    return { icon: <SiDrizzle />, text: "Sprühregen/Nebel" };
   if (code >= 60 && code <= 69) return { icon: <WiRain />, text: "Regen" };
   if (code >= 70 && code <= 79)
     return { icon: <BsCloudSnow />, text: "Schneefall" };
@@ -81,7 +83,13 @@ function degreesToCompass(deg: number) {
 }
 
 function WeatherGroup({ items }: { items: any[] }) {
-  return <div className="flex justify-center gap-8">{items}</div>;
+  return (
+    <div className="flex justify-center gap-8">
+      {items.map((item, i) => (
+        <div key={i}>{item}</div>
+      ))}
+    </div>
+  );
 }
 
 export default function CurrentWeatherMobile() {
@@ -106,7 +114,7 @@ export default function CurrentWeatherMobile() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev === 0 ? 1 : 0));
+      setIndex((prev) => (prev + 1) % 3);
     }, 8000);
     return () => clearInterval(interval);
   }, []);
@@ -158,17 +166,22 @@ export default function CurrentWeatherMobile() {
     </div>,
   ];
 
-  const groups = [items.slice(0, 2), items.slice(2, 4), items.slice(4, 6)];
+  const groups = [
+    items.slice(0, 2),
+    items.slice(2, 4),
+    items.slice(4, 5),
+    items.slice(5, 6),
+  ];
 
   return (
-    <div className="w-full overflow-hidden text-text-white">
+    <div className="flex tablet:hidden w-full overflow-hidden text-text-white justify-center items-center py-2">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 0, opacity: 0 }}
-          transition={{ duration: 3.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.0 }}
         >
           <WeatherGroup items={groups[index]} />
         </motion.div>

@@ -58,7 +58,7 @@ export function CarouselPostCard({
           hover:bg-header-background/60 active:bg-accent
         "
       >
-        <div className="relative w-full aspect-[8/6] landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
+        <div className="relative w-full aspect-[5/6] landscape:aspect-square xxs:aspect-video xs:aspect-[8/6]">
           <Image
             src={imageSrc}
             alt={post.title || "Feature Image"}

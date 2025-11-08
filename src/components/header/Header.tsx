@@ -48,7 +48,7 @@ const Header = forwardRef<HTMLElement>(() => {
   return (
     <header
       className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md
-      min-h-16 h-16"
+    min-h-16 h-16"
     >
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
         <div className="pr-2 flex-shrink-0">

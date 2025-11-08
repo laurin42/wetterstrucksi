@@ -107,59 +107,53 @@ export default function CurrentWeather() {
   const { text: weatherText, icon: weatherIcon } = getWeatherDescription(code);
 
   return (
-    <div className="w-full text-center text-sm text-text-white/80 bg-transparent backdrop-blur-2xl rounded-lg md:text-base ">
-      <div className="py-1 px-4  bg-header-background/80  rounded-t-lg">
-        <h2 className="flex flex-row items-center text-lg gap-x-2">
+    <div className="w-full text-center text-sm text-text-white/80 bg-transparent backdrop-blur-xs rounded-lg md:text-base ">
+      <div className="py-1 px-4  bg-header-background/100  rounded-t-lg">
+        <h2 className="flex flex-row items-center font-semibold text-lg gap-x-2">
           Aktuell{" "}
           <span className="flex flex-row items-center font-thin tablet-xs:hidden">
-            {weatherText} <span className="text-3xl px-2">{weatherIcon}</span>
+            {weatherText} <span className="text-3xl">{weatherIcon}</span>
           </span>
         </h2>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 border-t border-text/32">
-        <div className="flex flex-col items-center justify-center gap-1  py-2  tablet-xs:py-3 border-r border-b border-text/16">
-          <div className="text-3xl md:text-4xl">{weatherIcon}</div>
-          <span className="text-balance w-full px-2 text-center ">
-            {weatherText}
-          </span>
+      <div className="grid grid-cols-2 grid-rows-3 text-xs md:text-sm  border-text/32">
+        <div className="flex flex-col items-center justify-center border-r border-b border-text/16 py-1 h-14">
+          <div className="text-xl md:text-2xl">{weatherIcon}</div>
+          <span className="truncate text-center">{weatherText}</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-b border-text/16">
-          <WiThermometer className="text-3xl md:text-4xl" />
+        <div className="flex flex-col items-center justify-center  border-b border-text/16 py-1 h-14">
+          <WiThermometer className="text-xl md:text-2xl" />
           <span>{weather.current.temperature_2m}°C</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-b border-text/16">
-          <TbWind className="text-3xl md:text-4xl" />
+        <div className="flex flex-col items-center justify-center border-b border-r border-text/16 py-1 h-14">
+          <TbWind className="text-xl md:text-2xl" />
           <span>{weather.current.wind_speed_10m} km/h</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-text/16">
-          <TbWindsock className="text-3xl md:text-4xl" />
+        <div className="flex flex-col items-center justify-center  border-b border-text/16 py-1 h-14">
+          <TbWindsock className="text-xl md:text-2xl" />
           <span>{degreesToCompass(weather.current.wind_direction_10m)}</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3 border-r border-text/16">
-          <FiSunrise className="text-3xl md:text-4xl" />
+        <div className="flex flex-col items-center justify-center border-r  border-text/16 py-1 h-14">
+          <FiSunrise className="text-xl md:text-2xl" />
           <span>
-            {weather.daily.sunrise?.[0]
-              ? new Date(weather.daily.sunrise[0]).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
-              : "n/a"}
+            {new Date(weather.daily.sunrise[0]).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </span>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-1  py-0 tablet-xs:py-3">
-          <FiSunset className="text-3xl md:text-4xl" />
+        <div className="flex flex-col items-center justify-center py-1 h-14">
+          <FiSunset className="text-xl md:text-2xl" />
           <span>
-            {weather.daily.sunset?.[0]
-              ? new Date(weather.daily.sunset[0]).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
-              : "n/a"}
+            {new Date(weather.daily.sunset[0]).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </span>
         </div>
       </div>
