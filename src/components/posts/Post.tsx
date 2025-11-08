@@ -76,39 +76,97 @@ export default function Post({ post }: PostProps) {
         const children = domNode.children ?? [];
         const text = domToReact(children as DOMNode[], options);
 
+        // Spezieller Abspann-Block
         if (
           domNode.children?.some((c) => c.type?.includes("jensstrucks.blog"))
         ) {
           return (
-            <p className="leading-relaxed">
-              📎 Teile meine{" "}
-              <a
-                href="https://wetterstrucksi.de"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                wetterstrucksi.de
-              </a>
-              , meine{" "}
-              <a
-                href="https://www.facebook.com/WetterstrucksiD"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                Facebook-Seite
-              </a>{" "}
-              oder mein{" "}
-              <a
-                href="https://www.instagram.com/wetterstrucksiduesseldorf/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                Instagram-Profil
-              </a>
-            </p>
+            <div className="space-y-4 leading-relaxed text-text-white">
+              <p className="font-semibold text-lg">Abspann:</p>
+
+              <p>
+                Vielen Dank, dass du bis zum Schluss dabei warst – das bedeutet
+                mir echt viel! Ich hoffe, der Beitrag hat dir gefallen und dir
+                einen echten Mehrwert geboten.
+              </p>
+
+              <p>
+                Die Erstellung solcher Wetterberichte kostet mich täglich rund
+                eine Stunde Arbeit – Recherche, Schreiben, Grafiken und
+                Postproduktion inklusive.
+              </p>
+
+              <p>
+                Wenn du meine Arbeit unterstützen möchtest, freue ich mich über
+                deine Hilfe – ganz egal in welcher Form:
+              </p>
+
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  📎 Teile meine{" "}
+                  <a
+                    href="https://wetterstrucksi.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    wetterstrucksi.de
+                  </a>
+                  , meine{" "}
+                  <a
+                    href="https://www.facebook.com/WetterstrucksiD"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Facebook-Seite
+                  </a>{" "}
+                  oder mein{" "}
+                  <a
+                    href="https://www.instagram.com/wetterstrucksiduesseldorf/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Instagram-Profil
+                  </a>
+                </li>
+                <li>
+                  📲 Die neuesten Beiträge aufs Handy über meinen WhatsApp-Kanal
+                </li>
+                <li>
+                  🎧 Höre und empfehle meinen Wetter-Podcast auf{" "}
+                  <a
+                    href="https://open.spotify.com/show/your-podcast-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Spotify
+                  </a>{" "}
+                  oder meinen eigenen Podcast
+                </li>
+                <li>
+                  💰 Unterstütze mich finanziell – jeder Beitrag hilft, egal wie
+                  klein:
+                  <ul className="list-none pl-4">
+                    <li>• PayPal</li>
+                    <li>
+                      • Banküberweisung:
+                      <br />
+                      Kontoinhaber: Jens Strucks
+                      <br />
+                      IBAN: DE71 3905 0000 1077 4740 45
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <p>
+                Danke für deinen Support und bis zum nächsten Wetter-Update! 🍀
+                Jens
+              </p>
+            </div>
           );
         }
 
