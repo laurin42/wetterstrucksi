@@ -37,7 +37,7 @@ export default function DonateBox() {
         variants={sectionAnimation}
         className="flex-col items-center mx-8 md:mx-0  landsacpe:py-4 sm:px-8 justify-center p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
       >
-        <h2 className="w-fit mx-auto text-balance font-thin text-3xl tracking-wider pt-2 pb-4 tablet-xs:pb-2 border-b-[1px] border-text/40">
+        <h2 className="w-fit mx-auto text-balance font-thin text-3xl tracking-wider pt-2 pb-4 tablet-xs:pb-2 border-b border-text/40">
           Deine Spende für mich
         </h2>
 

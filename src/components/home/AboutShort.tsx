@@ -48,7 +48,7 @@ export function AboutShort() {
           className="pt-16"
         >
           <Link
-            className="inline-flex items-center gap-4 px-6 py-3 rounded-md bg-transparent border-b border-accent/40 text-text/80 text-base md:text-lg font-semibold hover:bg-accent/80 active:bg-accent/80 transition-colors"
+            className="inline-flex items-center gap-4 px-6 py-3 rounded-md bg-transparent border border-accent/40 text-text/80 text-base md:text-lg font-semibold hover:bg-accent/80 active:bg-accent/80 transition-colors"
             href="/about"
           >
             Hier mehr über mich erfahren
