@@ -29,7 +29,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
 
   return (
     <motion.section
-      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start sm:items-center tablet-xs:items-center justify-center bg-cover bg-center"
+      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start  sm:items-center tablet-xs:items-center justify-center bg-cover bg-center"
       initial="hidden"
       animate="visible"
       variants={containerVariantsSync}
@@ -48,7 +48,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         </>
       )}
 
-      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-16 tablet-xs:pt-0 mx-auto gap-y-2">
+      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-16 landscape:pt-0 tablet-xs:pt-0 mx-auto gap-y-2">
         <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col tablet:flex-row md:flex-col gap-y-8  items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <div>
             <motion.h1
@@ -64,7 +64,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                   type: "spring",
                   stiffness: 150,
                   damping: 14,
-                  delay: 1.6,
+                  delay: 2.0,
                 }}
               >
                 Dein
@@ -86,7 +86,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                   type: "spring",
                   stiffness: 150,
                   damping: 14,
-                  delay: 2.0,
+                  delay: 2.6,
                 }}
               >
                 Düsseldorf

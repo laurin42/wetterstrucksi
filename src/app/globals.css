@@ -131,8 +131,8 @@ body {
   .landscapeView {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: items-stretch;
+    justify-content: center;
+    align-items: center;
   }
   .landscapeCard {
     max-width: 200px;

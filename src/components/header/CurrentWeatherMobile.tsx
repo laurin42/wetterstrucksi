@@ -26,6 +26,7 @@ import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
+import useSWR from "swr";
 
 type WeatherData = {
   latitude: number;
@@ -139,45 +140,39 @@ function WeatherGroup({ items }: { items: any[] }) {
   );
 }
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function CurrentWeatherMobile() {
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: weather, error } = useSWR<WeatherData>(
+    "/api/weather",
+    fetcher,
+    {
+      refreshInterval: 10 * 60 * 1000,
+    }
+  );
+
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    async function fetchWeather() {
-      try {
-        const res = await fetch("/api/weather");
-        const data: WeatherData = await res.json();
-        setWeather(data);
-      } catch (error) {
-        console.error("Fehler beim Laden", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchWeather();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % 4);
-    }, 8000);
+    const interval = setInterval(
+      () => setIndex((prev) => (prev + 1) % 4),
+      8000
+    );
     return () => clearInterval(interval);
   }, []);
 
-  if (loading || !weather || !weather.current) return <LoadingSpinner />;
+  if (!weather && !error) return <LoadingSpinner />;
 
-  const code = Number(weather.current.weather_code);
+  const code = Number(weather?.current.weather_code);
   const { text: weatherText, icon: weatherIcon } = getWeatherDescription(
     code,
-    weather.current.is_day
+    weather?.current.is_day || 1
   );
 
   const items = [
     <div className="flex items-center gap-1 px-4">
       <WiThermometer className="text-2xl" />
-      <span>{weather.current.temperature_2m}°C</span>
+      <span className="text-sm">{weather?.current.temperature_2m}°C</span>
     </div>,
     <div className="flex items-center text-2xl gap-1 px-4">
       {weatherIcon}
@@ -185,19 +180,19 @@ export default function CurrentWeatherMobile() {
     </div>,
     <div className="flex items-center gap-1 px-4">
       <TbWind className="text-2xl" />
-      <span>{weather.current.wind_speed_10m} km/h</span>
+      <span className="text-sm">{weather?.current.wind_speed_10m} km/h</span>
     </div>,
     <div className="flex items-center gap-1 px-4">
       <TbWindsock className="text-2xl" />
-      <span>
-        Windrichtung: {degreesToCompass(weather.current.wind_direction_10m)}
+      <span className="text-sm">
+        {degreesToCompass(weather?.current.wind_direction_10m ?? 0)}
       </span>
     </div>,
     <div className="flex items-center gap-1 px-4">
       <FiSunrise className="text-2xl" />
-      Sonnenaufgang
-      <span>
-        {new Date(weather.daily.sunrise[0]).toLocaleTimeString([], {
+      <span className="text-sm">
+        Sonnenaufgang:
+        {new Date(weather?.daily.sunrise[0] ?? "").toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
         })}
@@ -205,9 +200,9 @@ export default function CurrentWeatherMobile() {
     </div>,
     <div className="flex items-center gap-1 px-4">
       <FiSunset className="text-2xl" />
-      Sonnenuntergang
-      <span>
-        {new Date(weather.daily.sunset[0]).toLocaleTimeString([], {
+      <span className="text-sm">
+        Sonnenuntergang:
+        {new Date(weather?.daily.sunset[0] ?? "").toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
         })}
@@ -223,7 +218,7 @@ export default function CurrentWeatherMobile() {
   ];
 
   return (
-    <div className="flex tablet:hidden w-full bg-header-background overflow-hidden text-text-white justify-center items-center py-2">
+    <div className="flex tablet:hidden w-full bg-header-background/40 backdrop-blur-xs overflow-hidden text-text-white justify-center items-center py-1">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}

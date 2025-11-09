@@ -95,8 +95,8 @@ export function CarouselPostCard({
           </div>
 
           {post.og_description && (
-            <div className="hidden xs:block">
-              <p className="text-text xs:line-clamp-2 sm:line-clamp-4">
+            <div className="hidden xxs:block">
+              <p className="text-text line-clamp-2 xxs:line-clamp-3 xs:line-clamp-2 sm:line-clamp-4">
                 {truncateWords(post.og_description, 100)}
               </p>
               <div className="pt-4 pb-4 tablet-xs:pb-8 tablet-xs:pt-2">
