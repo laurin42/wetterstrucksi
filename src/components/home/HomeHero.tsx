@@ -103,7 +103,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           animate="visible"
           variants={fadeInVariant}
           custom={{ y: 0, duration: 1.8 }}
-          className="flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center"
+          className="flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center pt-4"
         >
           <PostCarousel posts={posts.slice(0, 3)} />
           {isVacationTime && (

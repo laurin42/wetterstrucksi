@@ -3,6 +3,7 @@
 import { ReactNode, Suspense } from "react";
 import Footer from "./footer/Footer";
 import dynamic from "next/dynamic";
+import { ScrollToTop } from "./ui/ScrollToTop";
 
 const Header = dynamic(() => import("@/components/header/Header"), {
   ssr: false,
@@ -16,6 +17,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
       <Suspense fallback={null}>
+        <ScrollToTop />
         <Header />
         <HomeCurrentWeather />
       </Suspense>

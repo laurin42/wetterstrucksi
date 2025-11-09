@@ -51,7 +51,7 @@ const Header = forwardRef<HTMLElement>(() => {
     min-h-16 h-16"
     >
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
-        <div className="pr-2 flex-shrink-0">
+        <div className="pr-2 shrink-0">
           {mounted ? (
             <Link href="/">
               <Image

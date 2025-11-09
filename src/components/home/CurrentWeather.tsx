@@ -4,59 +4,105 @@ import { useState, useEffect } from "react";
 import {
   WiThermometer,
   WiDaySunny,
+  WiNightClear,
   WiDaySunnyOvercast,
-  WiCloud,
-  WiRainMix,
-  WiShowers,
-  WiSleet,
-  WiRain,
+  WiNightAltPartlyCloudy,
+  WiCloudy,
   WiFog,
-  WiStrongWind,
-  WiStormShowers,
+  WiDayRain,
+  WiNightAltRain,
+  WiDayShowers,
+  WiNightAltShowers,
+  WiDaySnow,
+  WiNightAltSnow,
+  WiDayThunderstorm,
+  WiNightAltThunderstorm,
+  WiSleet,
 } from "react-icons/wi";
-import { BsCloudSnow } from "react-icons/bs";
+
 import { SiDrizzle } from "react-icons/si";
 
 import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { motion } from "framer-motion";
 
 type WeatherData = {
+  latitude: number;
+  longitude: number;
+  generationtime_ms: number;
+  utc_offset_seconds: number;
+  timezone: string;
+  timezone_abbreviation: string;
+  elevation: number;
+
+  current_units: {
+    time: string;
+    interval: string;
+    temperature_2m: string;
+    rain: string;
+    weather_code: string;
+    wind_speed_10m: string;
+    wind_direction_10m: string;
+    is_day: string;
+  };
+
   current: {
+    time: string;
+    interval: number;
     temperature_2m: number;
+    rain: number;
+    weather_code: number;
     wind_speed_10m: number;
     wind_direction_10m: number;
-    rain: number;
-    time: string;
+    is_day: number;
   };
+
+  daily_units: {
+    time: string;
+    sunrise: string;
+    sunset: string;
+    uv_index_max: string;
+  };
+
   daily: {
-    weather_code: number[];
+    time: string[];
     sunrise: string[];
     sunset: string[];
+    uv_index_max: number[];
   };
 };
 
-function getWeatherDescription(code: number) {
-  if (code == 0) return { icon: <WiDaySunny />, text: "Sonnig" };
+function getWeatherDescription(code: number, isDay: number) {
+  const day = isDay === 1;
+
+  const sun = <WiDaySunny />;
+  const moon = <WiNightClear />;
+  const partlyCloudy = day ? (
+    <WiDaySunnyOvercast />
+  ) : (
+    <WiNightAltPartlyCloudy />
+  );
+  const cloudy = <WiCloudy />;
+  const fog = <WiFog />;
+  const drizzle = <SiDrizzle />;
+  const rain = day ? <WiDayRain /> : <WiNightAltRain />;
+  const showers = day ? <WiDayShowers /> : <WiNightAltShowers />;
+  const snow = day ? <WiDaySnow /> : <WiNightAltSnow />;
+  const thunderstorm = day ? <WiDayThunderstorm /> : <WiNightAltThunderstorm />;
+  if (code === 0)
+    return { icon: day ? sun : moon, text: day ? "Sonnig" : "Klar" };
   if (code >= 1 && code <= 3)
-    return { icon: <WiDaySunnyOvercast />, text: "Klar bis leicht bewölkt" };
-  if (code >= 4 && code <= 9) return { icon: <WiCloud />, text: "Bewölkt" };
-  if (code >= 10 && code <= 19)
-    return { icon: <WiRainMix />, text: "Neblig / leichter Regen" };
-  if (code >= 20 && code <= 29)
-    return { icon: <WiShowers />, text: "Leichter Regen" };
-  if (code >= 30 && code <= 39)
-    return { icon: <WiStrongWind />, text: "Stürmisch" };
-  if (code >= 40 && code <= 49) return { icon: <WiFog />, text: "Nebel" };
-  if (code >= 50 && code <= 59)
-    return { icon: <SiDrizzle />, text: "Nebel/Sprühregen" };
-  if (code >= 60 && code <= 69) return { icon: <WiRain />, text: "Regen" };
-  if (code >= 70 && code <= 79)
-    return { icon: <BsCloudSnow />, text: "Schneefall" };
-  if (code >= 80 && code <= 89) return { icon: <WiShowers />, text: "Schauer" };
-  if (code >= 90 && code <= 99)
-    return { icon: <WiStormShowers />, text: "Gewitter" };
+    return { icon: partlyCloudy, text: "Leicht bewölkt" };
+  if (code === 45 || code === 48) return { icon: fog, text: "Nebel" };
+  if (code >= 51 && code <= 57) return { icon: drizzle, text: "Sprühregen" };
+  if (code >= 61 && code <= 65) return { icon: rain, text: "Regen" };
+  if (code >= 66 && code <= 67)
+    return { icon: <WiSleet />, text: "Gefrierender Regen" };
+  if (code >= 71 && code <= 77) return { icon: snow, text: "Schnee" };
+  if (code >= 80 && code <= 82) return { icon: showers, text: "Regenschauer" };
+  if (code >= 85 && code <= 86) return { icon: snow, text: "Schneeschauer" };
+  if (code >= 95 && code <= 99) return { icon: thunderstorm, text: "Gewitter" };
+
   return { icon: "❓", text: "Unbekannt" };
 }
 
@@ -104,13 +150,15 @@ export default function CurrentWeather() {
 
   if (loading || !weather || !weather.current) return <LoadingSpinner />;
 
-  const codeRaw = weather.daily.weather_code?.[0] ?? -1;
-  const code = Number(codeRaw);
-  const { text: weatherText, icon: weatherIcon } = getWeatherDescription(code);
+  const code = Number(weather.current.weather_code);
+  const { text: weatherText, icon: weatherIcon } = getWeatherDescription(
+    code,
+    weather.current.is_day
+  );
 
   return (
-    <div className="w-full text-center text-sm text-text-white/80 bg-foreground-secondary/20 rounded-lg md:text-base font-semibold">
-      <div className="py-1 px-4  rounded-t-lg border-b border-text/32 ">
+    <div className="w-full text-center text-sm text-text-white/80 bg-header-background/40 backdrop-blur-xs rounded-lg md:text-base font-semibold">
+      <div className="py-1 px-4  rounded-t-lg border-b  ">
         <h2 className="flex flex-row items-center justify-center font-semibold text-lg gap-x-2">
           Aktuell{" "}
           <span className="flex flex-row items-center font-thin tablet-xs:hidden">
@@ -119,28 +167,28 @@ export default function CurrentWeather() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 grid-rows-3 text-sm  border-text/32 ">
-        <div className="flex flex-col items-center justify-center border-r border-b border-text/16 py-1 h-14">
+      <div className="grid grid-cols-2 grid-rows-3 text-sm  ">
+        <div className="flex flex-col items-center justify-center border-r border-b border-text-white/60 py-1 h-14">
           <div className="text-xl md:text-2xl">{weatherIcon}</div>
           <span className="truncate text-center">{weatherText}</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center  border-b border-text/16 py-1 h-14">
+        <div className="flex flex-col items-center justify-center  border-b border-text-white/60 py-1 h-14">
           <WiThermometer className="text-xl md:text-2xl" />
           <span>{weather.current.temperature_2m}°C</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center border-b border-r border-text/16 py-1 h-14">
+        <div className="flex flex-col items-center justify-center border-b border-r border-text-white/60 py-1 h-14">
           <TbWind className="text-xl md:text-2xl" />
           <span>{weather.current.wind_speed_10m} km/h</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center  border-b border-text/16 py-1 h-14">
+        <div className="flex flex-col items-center justify-center  border-b border-text-white/60 py-1 h-14">
           <TbWindsock className="text-xl md:text-2xl" />
           <span>{degreesToCompass(weather.current.wind_direction_10m)}</span>
         </div>
 
-        <div className="flex flex-col items-center justify-center border-r  border-text/16 py-1 h-14">
+        <div className="flex flex-col items-center justify-center border-r  border-text-white/60 py-1 h-14">
           <FiSunrise className="text-xl md:text-2xl" />
           <span>
             {new Date(weather.daily.sunrise[0]).toLocaleTimeString([], {

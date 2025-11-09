@@ -221,7 +221,7 @@ export default function Post({ post }: PostProps) {
                   {formattedDate}
                 </p>
               )}
-              <h1 className="tracking-wide text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b-[1px] border-text/40">
+              <h1 className="tracking-wide text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b border-text/40">
                 {post.title}
               </h1>
             </div>
