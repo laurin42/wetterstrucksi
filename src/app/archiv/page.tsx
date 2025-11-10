@@ -1,12 +1,11 @@
 import { ArchiveOverviewClient } from "@/components/archiv/ArchiveOverviewClient";
 import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
-import { PostWithMeta } from "@tryghost/content-api";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default async function ArchiveOverviewPage() {
   return (
-    <>
+    <main>
       <Suspense
         fallback={
           <div className="flex h-screen w-full flex-col justify-center items-center">
@@ -16,12 +15,12 @@ export default async function ArchiveOverviewPage() {
       >
         <ArchivePostFetcher />
       </Suspense>
-    </>
+    </main>
   );
 }
 
 async function ArchivePostFetcher() {
-  let allPosts: PostWithMeta[] = await getAllPostsWithTags([
+  const allPosts = await getAllPostsWithTags([
     "wetter",
     "aktuelles-wetter",
     "wetterprognose",
@@ -40,9 +39,8 @@ async function ArchivePostFetcher() {
     "allgemein",
     "astronomisches",
     "live-ticker-zu-unwetterlagen",
-    "mittelfrist",
-    "monats-aussichten",
     "studien",
   ]);
+
   return <ArchiveOverviewClient posts={allPosts} />;
 }

@@ -26,7 +26,7 @@ import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
-import useSWR from "swr";
+import { useWeather } from "../WeatherContext";
 
 type WeatherData = {
   latitude: number;
@@ -140,16 +140,8 @@ function WeatherGroup({ items }: { items: any[] }) {
   );
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function CurrentWeatherMobile() {
-  const { data: weather, error } = useSWR<WeatherData>(
-    "/api/weather",
-    fetcher,
-    {
-      refreshInterval: 10 * 60 * 1000,
-    }
-  );
+  const { data: weather, error } = useWeather();
 
   const [index, setIndex] = useState(0);
 
@@ -170,7 +162,7 @@ export default function CurrentWeatherMobile() {
   );
 
   const items = [
-    <div className="flex items-center gap-1 px-4">
+    <div className="flex items-center gap-1 px-4 animate-fade-in">
       <WiThermometer className="text-2xl" />
       <span className="text-sm">{weather?.current.temperature_2m}°C</span>
     </div>,

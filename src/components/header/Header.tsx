@@ -47,7 +47,7 @@ const Header = forwardRef<HTMLElement>(() => {
 
   return (
     <header
-      className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md
+      className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text shadow-md
     min-h-16 h-16"
     >
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
@@ -64,7 +64,7 @@ const Header = forwardRef<HTMLElement>(() => {
                 width={120}
                 height={120}
                 className="h-12 w-auto object-contain block z-0"
-                priority
+                priority={true}
               />
             </Link>
           ) : (
@@ -73,10 +73,9 @@ const Header = forwardRef<HTMLElement>(() => {
         </div>
 
         <motion.div
-          variants={fadeInVariant}
-          initial="hidden"
-          animate="visible"
-          custom={{ y: 0, duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 2.6, ease: "easeOut" }}
           className="flex items-center justify-start"
         >
           <Link href="/">

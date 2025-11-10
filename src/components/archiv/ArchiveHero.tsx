@@ -41,7 +41,7 @@ export default function ArchiveHero() {
             fill
             sizes="100vw"
             className="object-cover object-center z-0"
-            preload={true}
+            priority={true}
           />
         </>
       )}

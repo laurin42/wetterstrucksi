@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { WeatherProvider } from "@/components/WeatherContext";
 
 export const metadata: Metadata = {
   title: "Wetterstrucksi  |   Jens Strucks",
@@ -28,7 +29,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <WeatherProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </WeatherProvider>
         </ThemeProvider>
       </body>
     </html>

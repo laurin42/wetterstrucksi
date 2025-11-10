@@ -69,7 +69,11 @@ const ContactForm = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="relative">
+              <label htmlFor="name" className="sr-only">
+                Dein Name
+              </label>
               <input
+                id="name"
                 type="text"
                 name="name"
                 placeholder="Dein Name"
@@ -81,7 +85,11 @@ const ContactForm = () => {
             </div>
 
             <div className="relative">
+              <label htmlFor="email" className="sr-only">
+                Deine E-Mail
+              </label>
               <input
+                id="email"
                 type="email"
                 name="email"
                 placeholder="Deine E-Mail"
@@ -94,7 +102,11 @@ const ContactForm = () => {
           </div>
 
           <div className="relative">
+            <label htmlFor="message" className="sr-only">
+              Deine Nachricht
+            </label>
             <textarea
+              id="message"
               name="message"
               placeholder="Deine Nachricht"
               value={formData.message}

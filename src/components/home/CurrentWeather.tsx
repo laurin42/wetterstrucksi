@@ -26,7 +26,7 @@ import { TbWind, TbWindsock } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
-import useSWR from "swr";
+import { useWeather } from "../WeatherContext";
 
 type WeatherData = {
   latitude: number;
@@ -131,16 +131,17 @@ function degreesToCompass(deg: number) {
   return directions[index];
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function CurrentWeather() {
-  const { data: weather, error } = useSWR<WeatherData>(
-    "/api/weather",
-    fetcher,
-    {
-      refreshInterval: 10 * 60 * 1000,
-    }
-  );
+  const { data: weather, error } = useWeather();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setIndex((prev) => (prev + 1) % 4),
+      8000
+    );
+    return () => clearInterval(interval);
+  }, []);
 
   if (!weather && !error) return <LoadingSpinner />;
 

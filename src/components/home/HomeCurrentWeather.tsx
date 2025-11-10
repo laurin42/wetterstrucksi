@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const CurrentWeatherMobile = dynamic(
   () => import("../header/CurrentWeatherMobile"),
-  { ssr: false }
+  { ssr: false, loading: () => null }
 );
 
 export default function HomeCurrentWeather() {

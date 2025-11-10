@@ -32,7 +32,7 @@ export default function AboutHero() {
             fill
             sizes="100vw"
             className="object-cover object-center z-0 tablet-xs:rounded-lg"
-            preload={true}
+            priority={true}
           />
         </>
       )}
@@ -43,7 +43,7 @@ export default function AboutHero() {
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-gradient-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg"
+        className="absolute inset-0 bg-linear-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg"
       />
 
       <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">
@@ -62,7 +62,7 @@ export default function AboutHero() {
           whileInView="visible"
           variants={slideInLeftVariant}
           viewport={viewportOnce}
-          className="text-3xl text-text-white font-thin text-left border-b-[1px] tracking-wider border-text-white/40 md:border-none"
+          className="text-3xl text-text-white font-thin text-left border-b tracking-wider border-text-white/40 md:border-none"
         >
           - Jens Strucks -
         </motion.h2>

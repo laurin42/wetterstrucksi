@@ -236,6 +236,7 @@ export default function Post({ post }: PostProps) {
                   width={800}
                   height={800}
                   className="object-contain rounded-md w-full h-auto"
+                  priority={true}
                 />
               </div>
             )}

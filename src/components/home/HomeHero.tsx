@@ -10,7 +10,6 @@ import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
 import CurrentWeather from "./CurrentWeather";
-import CurrentWeatherMobile from "../header/CurrentWeatherMobile";
 interface HomeHeroProps {
   posts: PostWithMeta[];
 }
@@ -52,9 +51,9 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col tablet:flex-row md:flex-col gap-y-8  items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <div>
             <motion.h1
-              initial={{ opacity: 0, y: -40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 1.6, ease: "easeOut" }}
             >
               <motion.em
                 className="font-semibold inline-block"
@@ -64,7 +63,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                   type: "spring",
                   stiffness: 150,
                   damping: 14,
-                  delay: 2.0,
+                  delay: 2.4,
                 }}
               >
                 Dein
@@ -73,9 +72,9 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             </motion.h1>
 
             <motion.h2
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
             >
               in{" "}
               <motion.em
@@ -86,7 +85,7 @@ export default function HomeHero({ posts }: HomeHeroProps) {
                   type: "spring",
                   stiffness: 150,
                   damping: 14,
-                  delay: 2.6,
+                  delay: 2.8,
                 }}
               >
                 Düsseldorf

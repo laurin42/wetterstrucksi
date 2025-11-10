@@ -1,13 +1,21 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  Suspense,
+  lazy,
+} from "react";
 import { motion } from "framer-motion";
-import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import ArchiveHero from "./ArchiveHero";
 import { PostsFilter } from "../posts/filter/PostsFilter";
 import { useUniquePosts } from "@/lib/posts/useUniquePosts";
 import { FaArrowDownLong } from "react-icons/fa6";
+
+const PostCard = lazy(() => import("../posts/PostCard"));
 
 type SortOrder = "newest" | "oldest";
 
@@ -15,7 +23,31 @@ interface ArchiveOverviewClientProps {
   posts: PostWithMeta[];
 }
 
-export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
+function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
+  return (
+    <>
+      {posts.length === 0 ? (
+        <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
+      ) : (
+        posts.map((post, idx) => (
+          <motion.div key={`${post.id}-${idx}`} className="flex flex-col">
+            <Suspense
+              fallback={<div className="h-48 w-full animate-pulse bg-muted" />}
+            >
+              <PostCard post={post} />
+            </Suspense>
+          </motion.div>
+        ))
+      )}
+    </>
+  );
+}
+
+const MemoizedVisiblePosts = React.memo(VisiblePosts);
+
+export const ArchiveOverviewClient = ({
+  posts,
+}: ArchiveOverviewClientProps) => {
   const allPosts = useUniquePosts(posts);
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
@@ -79,28 +111,20 @@ export function ArchiveOverviewClient({ posts }: ArchiveOverviewClientProps) {
 
       <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44">
         <div className="md:col-span-3 grid grid-cols-1">
-          {visiblePosts.length === 0 ? (
-            <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
-          ) : (
-            visiblePosts.map((post, idx) => (
-              <motion.div key={`${post.id}-${idx}`} className="flex flex-col">
-                <PostCard post={post} />
-              </motion.div>
-            ))
-          )}
+          <MemoizedVisiblePosts posts={visiblePosts} />
         </div>
 
         {visiblePosts.length < filteredPosts.length && (
           <div className="col-span-3 flex bg-foreground-secondary/44 justify-center items-center py-6">
             <button
               onClick={loadMore}
-              className="underline text-accent-dark cursor-pointer hover:text-accent/80"
+              className="underline text-accent-dark cursor-pointer hover:text-accent/80 flex items-center gap-2"
             >
-              Mehr Beiträge laden ▾
+              Mehr Beiträge laden <FaArrowDownLong />
             </button>
           </div>
         )}
       </motion.section>
     </motion.section>
   );
-}
+};
