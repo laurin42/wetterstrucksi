@@ -107,7 +107,7 @@ function getWeatherDescription(code: number, isDay: number) {
   if (code >= 20 && code <= 29)
     return { icon: rain, text: "Leichter bis mäßiger Niederschlag" };
   if (code >= 30 && code <= 39) return { icon: snow, text: "Schneewehen" };
-  if (code >= 40 && code <= 54) return { icon: fog, text: "Stark bewölkt" };
+  if (code >= 40 && code <= 54) return { icon: fog, text: "Bewölkt" };
   if (code >= 55 && code <= 59) return { icon: drizzle, text: "Sprühregen" };
   if (code >= 60 && code <= 70) return { icon: rain, text: "Regen" };
   if (code >= 70 && code <= 79) return { icon: snow, text: "Schnee" };

@@ -52,6 +52,7 @@ export default function DonateBox() {
               type="number"
               value={amount}
               min="1"
+              aria-label="Spendenbetrag in Euro"
               onChange={(e) => setAmount(e.target.value)}
               className="
                 w-24 md:w-32 text-center px-3 py-2 rounded-md 

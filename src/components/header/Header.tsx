@@ -10,7 +10,6 @@ import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
 import { mainMenu } from "@/data/navigation";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import { useIsMobile } from "@/lib/useIsMobile";
 
 const Header = forwardRef<HTMLElement>(() => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -21,10 +20,7 @@ const Header = forwardRef<HTMLElement>(() => {
   const pathname = usePathname();
 
   const [menuOpen, setMenuOpen] = useState(false);
-
   const { fadeInVariant, mobileMenuVariants } = useMotionVariants();
-
-  const isMobile = useIsMobile();
 
   const menuLinkClasses =
     "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:cursor-pointer hover:text-accent transition-colors duration-300 ease-in-out";
@@ -46,10 +42,7 @@ const Header = forwardRef<HTMLElement>(() => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <header
-      className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text shadow-md
-    min-h-16 h-16"
-    >
+    <header className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text shadow-md min-h-16 h-16">
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
         <div className="pr-2 shrink-0">
           {mounted ? (
@@ -121,13 +114,15 @@ const Header = forwardRef<HTMLElement>(() => {
               )}
             </span>
           </button>
-          {isMobile && (
+
+          <div className="flex tablet:hidden">
             <button onClick={toggleMenu} aria-label="Menü öffnen/schließen">
               {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
             </button>
-          )}
+          </div>
         </motion.div>
       </section>
+
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -145,7 +140,6 @@ const Header = forwardRef<HTMLElement>(() => {
               {mainMenu.map((item) => (
                 <motion.div key={item.title} variants={fadeInVariant}>
                   <Link
-                    key={item.title}
                     href={item.href}
                     className={menuLinkClasses}
                     onClick={() => setMenuOpen(false)}
