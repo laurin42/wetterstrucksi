@@ -53,7 +53,7 @@ export function PostCarousel({ posts }: PostCarouselProps) {
           {normalizedPosts.map((post, index) => (
             <div
               key={post.id}
-              className="flex-shrink-0 px-4 tablet-xs:px-2 w-full flex justify-center"
+              className="shrink-0 px-4 tablet-xs:px-2 w-full flex justify-center"
             >
               <CarouselPostCard
                 post={post}

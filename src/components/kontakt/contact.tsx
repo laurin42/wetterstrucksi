@@ -69,7 +69,10 @@ const ContactForm = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="relative">
-              <label htmlFor="name" className="sr-only">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-text mb-1"
+              >
                 Dein Name
               </label>
               <input
@@ -80,12 +83,16 @@ const ContactForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                aria-label="Dein Name"
                 className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
               />
             </div>
 
             <div className="relative">
-              <label htmlFor="email" className="sr-only">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-text mb-1"
+              >
                 Deine E-Mail
               </label>
               <input
@@ -96,13 +103,17 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                aria-label="Deine E-Mail"
                 className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
               />
             </div>
           </div>
 
           <div className="relative">
-            <label htmlFor="message" className="sr-only">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-text mb-1"
+            >
               Deine Nachricht
             </label>
             <textarea
@@ -113,6 +124,7 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               rows={5}
+              aria-label="Deine Nachricht"
               className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
             ></textarea>
           </div>

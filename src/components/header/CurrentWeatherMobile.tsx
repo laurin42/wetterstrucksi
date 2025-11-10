@@ -91,18 +91,28 @@ function getWeatherDescription(code: number, isDay: number) {
   const showers = day ? <WiDayShowers /> : <WiNightAltShowers />;
   const snow = day ? <WiDaySnow /> : <WiNightAltSnow />;
   const thunderstorm = day ? <WiDayThunderstorm /> : <WiNightAltThunderstorm />;
+  const sleet = <WiSleet />;
+
   if (code === 0)
     return { icon: day ? sun : moon, text: day ? "Sonnig" : "Klar" };
   if (code >= 1 && code <= 3)
     return { icon: partlyCloudy, text: "Leicht bewölkt" };
-  if (code === 45 || code === 48) return { icon: fog, text: "Nebel" };
-  if (code >= 51 && code <= 57) return { icon: drizzle, text: "Sprühregen" };
-  if (code >= 61 && code <= 65) return { icon: rain, text: "Regen" };
-  if (code >= 66 && code <= 67)
-    return { icon: <WiSleet />, text: "Gefrierender Regen" };
-  if (code >= 71 && code <= 77) return { icon: snow, text: "Schnee" };
-  if (code >= 80 && code <= 82) return { icon: showers, text: "Regenschauer" };
-  if (code >= 85 && code <= 86) return { icon: snow, text: "Schneeschauer" };
+  if (code >= 4 && code <= 5) return { icon: fog, text: "Dunst" };
+  if (code >= 6 && code <= 9) return { icon: fog, text: "Nebel" };
+  if (code >= 10 && code <= 12) return { icon: fog, text: "Nebel" };
+  if (code >= 13 && code <= 16)
+    return { icon: drizzle, text: "Niederschlag möglich" };
+  if (code >= 17 && code <= 19)
+    return { icon: thunderstorm, text: "Gewitter/Böen" };
+  if (code >= 20 && code <= 29)
+    return { icon: rain, text: "Leichter bis mäßiger Niederschlag" };
+  if (code >= 30 && code <= 39) return { icon: snow, text: "Schneewehen" };
+  if (code >= 40 && code <= 54) return { icon: fog, text: "Stark bewölkt" };
+  if (code >= 55 && code <= 59) return { icon: drizzle, text: "Sprühregen" };
+  if (code >= 60 && code <= 70) return { icon: rain, text: "Regen" };
+  if (code >= 70 && code <= 79) return { icon: snow, text: "Schnee" };
+  if (code >= 80 && code <= 95)
+    return { icon: showers, text: "Regenschauer / Schneeschauer" };
   if (code >= 95 && code <= 99) return { icon: thunderstorm, text: "Gewitter" };
 
   return { icon: "❓", text: "Unbekannt" };

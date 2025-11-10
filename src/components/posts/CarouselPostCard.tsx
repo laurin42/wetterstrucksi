@@ -45,7 +45,7 @@ export function CarouselPostCard({
         overflow-hidden
         bg-foreground-secondary/88 backdrop-blur-sm
         shadow-md
-        w-full max-w-[200px] xxxs:max-w-[16rem] xxs:max-w-xs xxs:h-auto  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm 
+        w-full max-w-[200px] xxxs:max-w-[16rem] xxs:max-w-xs xxs:max-h-auto  xs:max-w-xs sm:max-w-sm tablet-xs:max-w-xs tablet:max-w-sm 
         max-h-30/32
         landscapeCard
         mx-auto shrink-0
