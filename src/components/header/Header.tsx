@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState, forwardRef } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -76,10 +74,9 @@ const Header = forwardRef<HTMLElement>(() => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 2.6, ease: "easeOut" }}
-          className="flex items-center justify-start"
         >
           <Link href="/">
-            <h1 className="hidden xxs:block text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
+            <h1 className="hidden xxs:block text-md tablet-xs:text-2xl font-md tracking-wide tablet-xs:font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
               wetterstrucksi.de
             </h1>
           </Link>
@@ -92,7 +89,7 @@ const Header = forwardRef<HTMLElement>(() => {
           custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
-          <nav className="hidden tablet:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-6">
             {mainMenu.map((item) => (
               <Link
                 key={item.title}

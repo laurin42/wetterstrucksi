@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { motion } from "framer-motion";
 import { PostWithMeta } from "@tryghost/content-api";
-import ArchiveHero from "./ArchiveHero";
+import ArchiveHero from "./WetterblogHero";
 import { PostsFilter } from "../posts/filter/PostsFilter";
 import { useUniquePosts } from "@/lib/posts/useUniquePosts";
 import { FaArrowDownLong } from "react-icons/fa6";
@@ -19,7 +19,7 @@ const PostCard = lazy(() => import("../posts/PostCard"));
 
 type SortOrder = "newest" | "oldest";
 
-interface ArchiveOverviewClientProps {
+interface WetterblogClientProps {
   posts: PostWithMeta[];
 }
 
@@ -45,9 +45,7 @@ function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
 
 const MemoizedVisiblePosts = React.memo(VisiblePosts);
 
-export const ArchiveOverviewClient = ({
-  posts,
-}: ArchiveOverviewClientProps) => {
+export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
   const allPosts = useUniquePosts(posts);
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);

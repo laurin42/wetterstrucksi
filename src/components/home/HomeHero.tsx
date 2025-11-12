@@ -1,15 +1,11 @@
-"use client";
-
 import Image from "next/image";
-import { easeIn, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { useIsVacationTime } from "@/lib/useIsVacationTime";
-import { PostCarousel } from "../posts/PostCarousel";
+import { NewestPostCard } from "../posts/NewestPostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
-import CurrentWeather from "./CurrentWeather";
 interface HomeHeroProps {
   posts: PostWithMeta[];
 }
@@ -17,7 +13,6 @@ interface HomeHeroProps {
 export default function HomeHero({ posts }: HomeHeroProps) {
   const { theme } = useTheme();
   const mounted = useMounted();
-  const { containerVariantsSync, fadeInVariant } = useMotionVariants();
   const isVacationTime = useIsVacationTime();
 
   const backgroundImage = mounted
@@ -26,13 +21,13 @@ export default function HomeHero({ posts }: HomeHeroProps) {
       : "/images/home/homeHeroLight.webp"
     : undefined;
 
+  const normalizedPosts = posts.map((posts) => ({
+    ...posts,
+    id: posts.id || posts.uuid || crypto.randomUUID(),
+  }));
+
   return (
-    <motion.section
-      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start  sm:items-center tablet-xs:items-center justify-center bg-cover bg-center"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariantsSync}
-    >
+    <section className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start  sm:items-center tablet-xs:items-center justify-center bg-cover bg-center">
       {backgroundImage && (
         <>
           <Image
@@ -47,64 +42,36 @@ export default function HomeHero({ posts }: HomeHeroProps) {
         </>
       )}
 
-      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-16 landscape:pt-0 tablet-xs:pt-0 mx-auto gap-y-2">
-        <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col tablet:flex-row md:flex-col gap-y-8  items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
-          <div>
-            <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 1.6, ease: "easeOut" }}
-            >
-              <motion.em
-                className="font-semibold inline-block"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.05 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 14,
-                  delay: 2.4,
-                }}
-              >
-                Dein
-              </motion.em>{" "}
-              Ort für Wetter
-            </motion.h1>
+      <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto gap-y-8">
+        <div className="relative w-full flex flex-col items-center text-balance text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1.6, ease: "easeOut" }}
+          >
+            <em className="font-semibold tracking-wide">Dein</em> Ort für Wetter
+          </motion.h1>
 
-            <motion.h2
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
-            >
-              in{" "}
-              <motion.em
-                className="font-semibold inline-block"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.05 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 14,
-                  delay: 2.8,
-                }}
-              >
-                Düsseldorf
-              </motion.em>
-            </motion.h2>
-          </div>
-          <div className="hidden tablet:block w-full px-16">
-            <CurrentWeather />
-          </div>{" "}
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
+          >
+            in <em className="font-semibold tracking-wide">Düsseldorf</em>
+          </motion.h2>
         </div>
 
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInVariant}
-          custom={{ y: 0, duration: 1.8 }}
-          className="flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center pt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeIn", delay: 2.0 }}
+          className="w-full flex flex-col items-center z-0 p-4"
         >
-          <PostCarousel posts={posts.slice(0, 3)} />
+          {normalizedPosts.slice(0, 1).map((post) => (
+            <div key={post.id} className="w-full flex justify-center shrink-0">
+              <NewestPostCard post={post} className="flex-1" />
+            </div>
+          ))}
           {isVacationTime && (
             <div className="hidden md:block mt-6">
               <VacationInfo />
@@ -112,6 +79,6 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           )}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

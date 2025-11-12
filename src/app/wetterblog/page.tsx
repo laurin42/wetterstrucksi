@@ -1,9 +1,9 @@
-import { ArchiveOverviewClient } from "@/components/archiv/ArchiveOverviewClient";
+import { WetterblogClient } from "@/components/wetterblog/WetterblogClient";
 import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
-export default async function ArchiveOverviewPage() {
+export default async function WetterblogPage() {
   return (
     <main>
       <Suspense
@@ -13,13 +13,13 @@ export default async function ArchiveOverviewPage() {
           </div>
         }
       >
-        <ArchivePostFetcher />
+        <WetterblogPostFetcher />
       </Suspense>
     </main>
   );
 }
 
-async function ArchivePostFetcher() {
+async function WetterblogPostFetcher() {
   const allPosts = await getAllPostsWithTags([
     "wetter",
     "aktuelles-wetter",
@@ -42,5 +42,5 @@ async function ArchivePostFetcher() {
     "studien",
   ]);
 
-  return <ArchiveOverviewClient posts={allPosts} />;
+  return <WetterblogClient posts={allPosts} />;
 }
