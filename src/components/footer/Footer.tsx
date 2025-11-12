@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full mx-auto text-text py-6 bg-footer flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="w-full mx-auto text-text py-6  flex flex-col md:flex-row justify-between items-center gap-6">
       <section className="flex flex-col md:flex-row md:w-6xl md:mx-auto">
-        <div className="w-full flex justify-center md:justify-start flex-row gap-4 text-text-white md:gap-6 items-center">
+        <div className="w-full flex justify-center md:justify-start flex-row gap-4 md:gap-6 items-center">
           <Link
             href="/impressum"
             className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
@@ -22,7 +22,7 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div className="w-full justify-end items-center flex flex-col md:flex-row gap-x-2 text-sm text-text-white">
+        <div className="w-full justify-end items-center flex flex-col md:flex-row gap-x-2 text-sm">
           <p>
             © 2025{" "}
             <Link

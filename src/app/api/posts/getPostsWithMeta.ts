@@ -44,7 +44,7 @@ function normalizePosts(posts: GhostPost[] | undefined | null): PostWithMeta[] {
 }
 
 export const getPostsWithMeta = cache(async (limit = 24): Promise<PostWithMeta[]> => {
-
+  "use cache"
   const posts = await api.posts.browse({ 
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
     limit,
@@ -72,7 +72,7 @@ export async function getPostsPage(page: number, limit = 24): Promise<PostWithMe
   return merged;
 }
 
-export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> {
+export const getPostBySlug = cache(async (slug: string) => {
   try {
     const post = await api.posts.read({ slug }, { include: ["tags", "authors"] });
     const normalized = normalizePosts([post]);
@@ -81,9 +81,9 @@ export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> 
     console.error(`Error fetching post with slug ${slug}`, error);
     return null;
   }
-}
+});
 
-export async function getAllPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
+export async function getAllPostsWithTags(tagsToFilter: string | string[], limit =9000): Promise<PostWithMeta[]> {
   const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
 
   try {

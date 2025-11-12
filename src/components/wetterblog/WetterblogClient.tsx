@@ -1,21 +1,14 @@
 "use client";
 
-import React, {
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-  Suspense,
-  lazy,
-} from "react";
+import React, { useState, useMemo, useRef, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import { PostWithMeta } from "@tryghost/content-api";
 import ArchiveHero from "./WetterblogHero";
 import { PostsFilter } from "../posts/filter/PostsFilter";
 import { useUniquePosts } from "@/lib/posts/useUniquePosts";
 import { FaArrowDownLong } from "react-icons/fa6";
-
-const PostCard = lazy(() => import("../posts/PostCard"));
+import PostCard from "../posts/PostCard";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 type SortOrder = "newest" | "oldest";
 
@@ -24,21 +17,27 @@ interface WetterblogClientProps {
 }
 
 function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
+  if (posts.length === 0) {
+    return (
+      <div className="h-svh w-100% flex justify-center items-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <>
-      {posts.length === 0 ? (
-        <p className="text-muted-foreground">Keine Beiträge gefunden.</p>
-      ) : (
-        posts.map((post, idx) => (
-          <motion.div key={`${post.id}-${idx}`} className="flex flex-col">
-            <Suspense
-              fallback={<div className="h-48 w-full animate-pulse bg-muted" />}
-            >
-              <PostCard post={post} />
-            </Suspense>
-          </motion.div>
-        ))
-      )}
+      {posts.map((post, idx) => (
+        <motion.div
+          key={`${post.id}-${idx}`}
+          className="flex flex-col"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <PostCard post={post} />
+        </motion.div>
+      ))}
     </>
   );
 }
@@ -47,13 +46,15 @@ const MemoizedVisiblePosts = React.memo(VisiblePosts);
 
 export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
   const allPosts = useUniquePosts(posts);
+
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
   const [visiblePosts, setVisiblePosts] = useState<PostWithMeta[]>([]);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerLoad = 9;
+
+  const postsPerLoad = 6;
+  const archiveRef = useRef<HTMLDivElement>(null);
 
   const filteredPosts = useMemo(() => {
     return allPosts
@@ -61,7 +62,7 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
         const postDate = new Date(post.published_at);
         const matchMonth =
           selectedMonth !== null
-            ? postDate.getMonth().toString() === selectedMonth
+            ? (postDate.getMonth() + 1).toString() === selectedMonth
             : true;
         const matchYear =
           selectedYear !== null
@@ -82,20 +83,29 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
     setCurrentPage(1);
   }, [filteredPosts]);
 
-  const loadMore = () => {
+  const loadMore = async () => {
     const nextPosts = filteredPosts.slice(
       visiblePosts.length,
       visiblePosts.length + postsPerLoad
     );
-    setVisiblePosts((prev) => [...prev, ...nextPosts]);
-  };
 
-  const archiveRef = useRef<HTMLDivElement>(null);
+    if (nextPosts.length < postsPerLoad) {
+      const res = await fetch(
+        `/api/posts?page=${currentPage + 1}&limit=${postsPerLoad}`
+      );
+      const morePosts: PostWithMeta[] = await res.json();
+
+      setVisiblePosts((prev) => useUniquePosts([...prev, ...morePosts]));
+    }
+
+    setVisiblePosts((prev) => useUniquePosts([...prev, ...nextPosts]));
+    setCurrentPage((prev) => prev + 1);
+  };
 
   return (
     <motion.section
       ref={archiveRef}
-      className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 tablet:pb-24 pb-0"
+      className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:my-16 tablet-xs:p-2 tablet-xs:border border-white/16 tablet-xs:rounded-lg shadow md"
     >
       <ArchiveHero />
       <PostsFilter
@@ -107,13 +117,13 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
         onSortChange={setSortOrder}
       />
 
-      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/44">
+      <motion.section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/32 tablet-xs:rounded-md tablet-xs:border-none border-t border-text/16">
         <div className="md:col-span-3 grid grid-cols-1">
           <MemoizedVisiblePosts posts={visiblePosts} />
         </div>
 
         {visiblePosts.length < filteredPosts.length && (
-          <div className="col-span-3 flex bg-foreground-secondary/44 justify-center items-center py-6">
+          <div className="col-span-3 flex justify-center items-center py-6">
             <button
               onClick={loadMore}
               className="underline text-accent-dark cursor-pointer hover:text-accent/80 flex items-center gap-2"

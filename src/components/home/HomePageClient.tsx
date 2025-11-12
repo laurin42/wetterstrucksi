@@ -1,35 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect } from "react";
 import HomeHero from "@/components/home/HomeHero";
 import { PostWithMeta } from "@tryghost/content-api";
-import { CollapsibleSectionHeader } from "../ui/CollabsibleSectionHeader";
 import { AboutShort } from "../home/AboutShort";
 import DonateBox from "../home/Donation";
 import { ContactCta } from "../kontakt/ContactCta";
-
-const PostCard = lazy(() => import("../posts/PostCard"));
 
 interface HomePageClientProps {
   posts: PostWithMeta[];
 }
 
-const VisiblePosts = React.memo(({ posts }: { posts: PostWithMeta[] }) => (
-  <>
-    {posts.map((post) => (
-      <Suspense
-        key={post.id}
-        fallback={<div className="h-48 w-full animate-pulse bg-muted mb-4" />}
-      >
-        <PostCard post={post} />
-      </Suspense>
-    ))}
-  </>
-));
-
 export default function HomePageClient({ posts }: HomePageClientProps) {
-  const [visibleCount, setVisibleCount] = useState(6);
-
   const normalizedPosts = posts.map((post) => ({
     ...post,
     id: post.id || post.uuid || crypto.randomUUID(),
@@ -43,47 +25,12 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
 
   if (!hydrated) return null;
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6);
-  };
-
   return (
     <>
       <HomeHero posts={normalizedPosts} />
-
-      <div className="md:max-w-6xl tablet:pt-16 tablet-xs:pb-24 mx-auto">
-        <div key="neusteBeitraege">
-          <CollapsibleSectionHeader
-            title="Weitere Beiträge"
-            isContentCollabsible={false}
-          />
-
-          <VisiblePosts posts={normalizedPosts.slice(3, 3 + visibleCount)} />
-
-          {normalizedPosts.length > visibleCount && (
-            <div className="flex py-4 items-center justify-center tracking-wider text-lg bg-foreground-secondary/44 backdrop-blur-sm md:transparent">
-              <button
-                onClick={handleLoadMore}
-                className="underline text-accent-dark cursor-pointer hover:text-accent/80"
-              >
-                Mehr Beiträge laden ▾
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div className="md:mt-8 landscape-no-margin">
-          <AboutShort />
-        </div>
-
-        <div className="md:mt-8 landscape-no-margin">
-          <DonateBox />
-        </div>
-
-        <div className="md:mt-8 landscape-no-margin">
-          <ContactCta />
-        </div>
-      </div>
+      <AboutShort />
+      <DonateBox />
+      <ContactCta />
     </>
   );
 }

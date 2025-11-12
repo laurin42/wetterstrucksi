@@ -37,12 +37,14 @@ export default function HomeHero({ posts }: HomeHeroProps) {
             sizes="100vw"
             className="object-cover object-center z-0"
             preload={true}
+            placeholder="blur"
+            blurDataURL={backgroundImage}
           />
           <div className="absolute inset-0 bg-black/60 z-10" />
         </>
       )}
 
-      <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto gap-y-8">
+      <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto px-8 tablet-xs:px-16 gap-y-8">
         <div className="relative w-full flex flex-col items-center text-balance text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <motion.h1
             initial={{ opacity: 0 }}
@@ -67,16 +69,16 @@ export default function HomeHero({ posts }: HomeHeroProps) {
           transition={{ duration: 1.2, ease: "easeIn", delay: 2.0 }}
           className="w-full flex flex-col items-center z-0 p-4"
         >
+          {isVacationTime && (
+            <div className=" mb-6 w-full">
+              <VacationInfo />
+            </div>
+          )}
           {normalizedPosts.slice(0, 1).map((post) => (
             <div key={post.id} className="w-full flex justify-center shrink-0">
               <NewestPostCard post={post} className="flex-1" />
             </div>
           ))}
-          {isVacationTime && (
-            <div className="hidden md:block mt-6">
-              <VacationInfo />
-            </div>
-          )}
         </motion.div>
       </div>
     </section>

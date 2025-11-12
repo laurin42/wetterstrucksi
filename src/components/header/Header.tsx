@@ -76,7 +76,7 @@ const Header = forwardRef<HTMLElement>(() => {
           transition={{ delay: 0.4, duration: 2.6, ease: "easeOut" }}
         >
           <Link href="/">
-            <h1 className="hidden xxs:block text-md tablet-xs:text-2xl font-md tracking-wide tablet-xs:font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
+            <h1 className="hidden xxs:block text-2xl tablet-xs:text-2xl font-thin tracking-wide tablet-xs:font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
               wetterstrucksi.de
             </h1>
           </Link>
@@ -89,7 +89,7 @@ const Header = forwardRef<HTMLElement>(() => {
           custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
-          <nav className="hidden lg:flex items-center space-x-6">
+          <nav className="hidden xl:flex space-x-6">
             {mainMenu.map((item) => (
               <Link
                 key={item.title}

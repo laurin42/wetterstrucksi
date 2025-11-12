@@ -1,65 +1,58 @@
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import { motion } from "framer-motion";
 import {
   FaFacebook,
   FaInstagram,
   FaXTwitter,
   FaLinkedin,
 } from "react-icons/fa6";
+import { Send } from "lucide-react";
 
 export function ContactCta() {
-  const { sectionAnimation, viewportOnce } = useMotionVariants();
   return (
-    <section className="flex flex-col max-w-6xl justify-center bg-foreground-secondary/44 backdrop-blur-sm tablet-xs:rounded-lg tablet-xs:shadow-lg text-center mx-auto min-h-[94vh] tablet-xs:min-h-auto tablet-xs:mt-4 landscape-no-margin">
-      <div className="flex flex-col items-center mx-8 md:mx-0 justify-center gap-y-8 py-4 md:py-24 md:px-40">
-        <motion.h2
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="w-fit text-center text-3xl font-light text-text tracking-wider pb-2 border-b-[1px] border-text/40"
-        >
+    <section
+      className="relative w-full h-svh flex flex-col items-center 
+      justify-center bg-foreground-secondary/44
+      "
+    >
+      <div className="max-w-4xl flex flex-col items-center justify-center px-16 text-left tablet-xs:text-center tablet-xs:text-balance">
+        <h2 className="text-4xl font-thin tracking-wider text-left text-text pb-2 mb-8 border-b border-text/40">
           Lasst uns Kontakt aufnehmen
-        </motion.h2>
-        <motion.p
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="leading-relaxed text-balance"
-        >
+        </h2>
+        <p className="leading-relaxed pb-8">
           Mir ist eine übersichtliche und strukturierte Reise durch die
           verschiedenen Bereiche meine Homepage sehr wichtig. Neben den
           inhaltlich qualitativen Berichte zum Wetter wünsche ich mir, dass ihr
           euch hier wohl fühlt und euch gut und gerne zurechtfindet.
-        </motion.p>
-        <motion.a
-          variants={sectionAnimation}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
+        </p>
+        <a
           href="/kontakt"
-          className="inline-flex items-center gap-4 px-6 py-3 rounded-md bg-transparent border-[1px] border-accent/40 text-text/80 text-base md:text-lg font-semibold hover:bg-accent/80 active:bg-accent/80 transition-colors"
+          className="
+              group relative inline-flex items-center justify-center w-full tablet-xs:w-2/6
+              py-6 rounded-md bg-foreground-secondary/16 
+              shadow-sm border border-white/32 text-text/80 text-base md:text-lg font-semibold 
+              hover:bg-header-background/32  active:bg-accent/80 
+              transition-colors overflow-hidden
+            "
         >
-          Schreib mir eine Nachricht
-        </motion.a>
-        <div className="flex flex-col items-center justify-around gap-y-4 pt-6">
-          <motion.p
-            variants={sectionAnimation}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            className="text-2xl font-thin tracking-wide"
+          <span
+            className="
+                absolute inset-0 flex items-center justify-center 
+                transition-all duration-300 group-hover:opacity-0 group-hover:translate-y-[-10%]
+              "
           >
-            und folge mir auf
-          </motion.p>
-          <motion.div
-            variants={sectionAnimation}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            className="flex items-center gap-6 text-3xl text-accent"
-          >
+            Schreib mir
+          </span>
+
+          <Send
+            className="
+                absolute inset-0 m-auto opacity-0 translate-y-[20%] 
+                transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0
+              "
+          />
+        </a>
+
+        <div className="flex flex-col items-center justify-around gap-y-4 pt-8">
+          <p className="text-2xl font-thin">und folge mir auf</p>
+          <div className="flex items-center gap-6 text-3xl text-accent">
             <a
               href="https://www.facebook.com/WetterstrucksiD"
               target="_blank"
@@ -97,7 +90,7 @@ export function ContactCta() {
             >
               <FaLinkedin className="hover:text-accent/80 transition-colors" />
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

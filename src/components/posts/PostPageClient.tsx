@@ -23,7 +23,7 @@ export default function PostContentClient({ slug }: PostContentClientProps) {
 
   if (loading)
     return (
-      <div className="h-[100svh]">
+      <div className="h-svh">
         <LoadingSpinner />
       </div>
     );

@@ -17,18 +17,13 @@ function truncateWords(text?: string, maxWords?: number) {
   return words.slice(0, maxWords).join(" ") + "...";
 }
 
-export function NewestPostCard({
-  post,
-  className,
-  isNewest,
-  isLast,
-}: NewestPostCard) {
+export function NewestPostCard({ post, className }: NewestPostCard) {
   return (
     <div
       className={`
        border border-white/32 rounded-lg
         overflow-hidden
-        bg-black/16 transition-all duration-1000
+        bg-accent-secondary transition-all duration-1000
         shadow-2xl
         w-full h-auto
         landscapeCard
@@ -60,8 +55,8 @@ export function NewestPostCard({
               <h2 className="text-lg font-semibold">
                 {truncateWords(post.title, 16)}
               </h2>
-              <p className=" border-t border-white/32 pt-2">
-                {truncateWords(post.og_description, 32)}
+              <p className="border-t border-white/32 pt-2 line-clamp-6 tablet-xs:line-clamp-0">
+                {post.og_description}
               </p>
             </>
           )}
