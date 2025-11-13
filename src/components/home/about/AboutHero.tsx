@@ -16,7 +16,7 @@ export default function AboutHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end pb-0"
+      className="relative mx-auto max-w-5xl h-svh tablet-xs:h-96 flex items-end"
       style={{
         backgroundImage,
         backgroundSize: "cover",
@@ -30,7 +30,7 @@ export default function AboutHero() {
             src={backgroundImage}
             alt="Hintergrundbild"
             fill
-            sizes="100vw"
+            sizes="100vw 100vh"
             className="object-cover object-center z-0 tablet-xs:rounded-lg"
             priority={true}
           />

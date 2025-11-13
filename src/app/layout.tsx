@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import LayoutWrapper from "@/components/LayoutWrapper";
+import { Suspense } from "react";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { WeatherProvider } from "@/components/WeatherContext";
@@ -17,10 +20,7 @@ export default function RootLayout({
   return (
     <html lang="de" className="h-full" suppressHydrationWarning>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="md:bg-background sm:bg-foreground h-full">
         <ThemeProvider
@@ -30,7 +30,17 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <WeatherProvider>
-            <LayoutWrapper>{children}</LayoutWrapper>
+            <Suspense fallback={null}>
+              <ScrollToTop />
+            </Suspense>
+            <Suspense fallback={<div className="h-16" />}>
+              <Header />
+            </Suspense>
+
+            <main className="min-h-full bg-background-gradient">
+              {children}
+            </main>
+            <Footer />
           </WeatherProvider>
         </ThemeProvider>
       </body>

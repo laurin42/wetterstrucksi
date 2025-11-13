@@ -40,7 +40,7 @@ export default function ArchiveHero() {
         </h1>
         <h2 className="text-xl font-thin text-left flex items-center pt-1">
           <MdOutlineKeyboardDoubleArrowRight />
-          <em>Stöbere durch alle Beiträge</em>
+          <em>Hier findest Du alle Beiträge</em>
         </h2>
       </div>
     </section>

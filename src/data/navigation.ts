@@ -13,11 +13,6 @@ export const mainMenu = [
     ],
   },
   {
-    title: "Über mich",
-    href: "/about",
-    subItems: [],
-  },
-  {
     title: "Kontakt",
     href: "/kontakt",
     subItems: [],

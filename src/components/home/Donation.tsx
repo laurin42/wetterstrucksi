@@ -12,13 +12,24 @@ export default function DonateBox() {
     "https://www.paypal.com/paypalme/jstrucks";
 
   return (
-    <section className="relative w-full h-svh flex flex-col items-center justify-center tablet-xs:flex-row">
-      <div className="flex-col max-w-4xl mx-8 p-8 tablet-xs:px-16 items-center justify-center text-text text-left tablet-xs:text-center text-balance  bg-foreground-secondary/16 z-20 rounded-lg border border-white/32 shadow-md">
+    <section className="relative w-full h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
+      <div className="absolute right-0 bottom-0 opacity-80">
+        <Image
+          src="/images/donationInfo/donationHero.png"
+          alt="Donation Hero"
+          width={600}
+          height={600}
+          className="hidden tablet-xs:block object-contain"
+          priority
+        />
+      </div>
+
+      <div className="flex-col max-w-lg tablet-xs:p-16 mx-8 p-8 tablet-xs:mx-0 items-center justify-center text-left tablet-xs:text-center text-balance bg-foreground-secondary/16 z-20 rounded-lg border border-white/32 shadow-md">
         <h2 className="text-4xl w-fit font-thin mx-auto tracking-wider text-text pb-2 mb-4 border-b border-text/40">
           Deine Spende für mich
         </h2>
 
-        <p className="text-balance pb-8">
+        <p className="text-balance pb-8 text-lg font-thin ">
           Wenn dir meine Wetterseite gefällt und du sie unterstützen möchtest,
           kannst du mir über PayPal gerne eine kleine Spende hinterlassen 🙂
         </p>
@@ -52,7 +63,7 @@ export default function DonateBox() {
           className="
             inline-flex items-center justify-center gap-2
             bg-background-paypal text-white font-semibold 
-            px-10 py-3 rounded-full hover:bg-background-paypal/80
+            px-12 py-3 rounded-full hover:bg-background-paypal/80
             transition-all duration-300 ease-in-out 
             shadow-md hover:shadow-lg active:scale-[0.98]"
         >
@@ -60,12 +71,12 @@ export default function DonateBox() {
           <Image
             src="/images/donationInfo/payPalLogo.svg"
             alt="PayPal Logo"
-            width={100}
-            height={100}
-            className="h-6 w-auto"
+            width={50}
+            height={50}
+            className="h-4 w-fit"
             priority
           />{" "}
-          <span>bezahlen</span>
+          <span>spenden</span>
         </Link>
       </div>
     </section>
