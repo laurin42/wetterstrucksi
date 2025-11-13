@@ -45,7 +45,11 @@ export function ThemeAndMenu() {
           ))}
         </nav>
 
-        <button onClick={toggleTheme} aria-label="Theme wechseln">
+        <button
+          onClick={toggleTheme}
+          aria-label="Theme wechseln"
+          className="cursor-pointer"
+        >
           {mounted ? (
             displayTheme === "dark" ? (
               <MdLightMode size={28} />

@@ -15,9 +15,9 @@ export default async function Header() {
   const weather = await getWeather();
 
   return (
-    <header className="sticky top-0 left-0 right-0 w-full z-50 bg-foreground text-text shadow-md h-16 flex items-center justify-between">
+    <header className="sticky top-0 left-0 right-0 w-full z-50 bg-foreground text-text shadow-md h-16 flex items-center justify-between tablet-xs:px-4 px-2">
       <div className="flex flex-row items-center gap-2 tablet-xs:text-2xl font-semibold tracking-wide">
-        <Link className="flex flex-row items-center" href="/">
+        <Link className="flex flex-row items-center gap-2" href="/">
           <Image
             src="/images/logo/wetterstrucksiLogoLight.webp"
             alt="Logo"
