@@ -3,21 +3,31 @@ import Link from "next/link";
 import { ThemeAndMenu } from "./ThemeAndMenu";
 import { WeatherClient } from "../WeatherClient";
 
-async function getWeather() {
-  const res = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m&timezone=Europe%2FBerlin",
-    { next: { revalidate: 600 } }
+async function getWeatherData() {
+  const response = await fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=51.2217&longitude=6.7762&daily=sunrise,sunset&current=weather_code,temperature_2m,is_day&timezone=Europe%2FBerlin",
+    {
+      next: { revalidate: 600 },
+    }
   );
-  return res.json();
+  if (!response.ok) {
+    console.error("failed to fetch:", response.statusText);
+    return null;
+  }
+
+  const data = await response.json();
+  return data;
 }
 
 export default async function Header() {
-  const weather = await getWeather();
-
+  const initialData = await getWeatherData();
   return (
     <header className="sticky top-0 left-0 right-0 w-full z-50 bg-foreground text-text shadow-md h-16 flex items-center justify-between tablet-xs:px-4 px-2">
-      <div className="flex flex-row items-center gap-2 tablet-xs:text-2xl font-semibold tracking-wide">
-        <Link className="flex flex-row items-center gap-2" href="/">
+      <div className="flex flex-row items-center gap-2 tablet-xs:text-2xl font-semibold leading-relaxed">
+        <Link
+          className="flex flex-row items-center gap-2 tracking-widest hover:text-header-background transition-colors duration-300"
+          href="/"
+        >
           <Image
             src="/images/logo/wetterstrucksiLogoLight.webp"
             alt="Logo"
@@ -25,11 +35,11 @@ export default async function Header() {
             height={120}
             className="h-12 w-auto"
           />
-          Wetterstrucksi.de
         </Link>
-        <WeatherClient initialTemp={weather.current.temperature_2m} />
-      </div>
+        <h1>Wetterstrucksi.de</h1>
 
+        <WeatherClient initialData={initialData} />
+      </div>
       <ThemeAndMenu />
     </header>
   );

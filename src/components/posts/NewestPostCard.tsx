@@ -21,13 +21,14 @@ export function NewestPostCard({ post, className }: NewestPostCard) {
   return (
     <div
       className={`
-       border border-white/32 rounded-lg
+        border border-white/32 rounded-lg
         overflow-hidden
-        bg-accent-secondary transition-all duration-1000
+        bg-header-background/66 transition-all duration-1000
         shadow-2xl
         w-full h-auto
         landscapeCard
         shrink-0
+        mx-8
         }
 
         ${className}
@@ -38,10 +39,10 @@ export function NewestPostCard({ post, className }: NewestPostCard) {
         className="
           group block w-full h-full
           overflow-hidden transition-color duration-300
-          hover:bg-header-background/32 active:bg-accent
+          hover:bg-header-background/66 active:bg-header-background/74
         "
       >
-        <div className="flex flex-col justify-between p-4 gap-1.5 text-text-white text-balance">
+        <div className="flex flex-col justify-between p-4 gap-1.5 text-text-white">
           {post.published_at && post.og_description && post.og_description && (
             <>
               {" "}

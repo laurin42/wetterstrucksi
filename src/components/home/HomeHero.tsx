@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
 import { useIsVacationTime } from "@/lib/useIsVacationTime";
 import { NewestPostCard } from "../posts/NewestPostCard";
@@ -10,8 +9,6 @@ import { weatherCodeToImage } from "@/lib/weatherImages/weatherImages";
 interface HomeHeroProps {
   posts: PostWithMeta[];
   currentWeatherCode: number;
-  isNightTime?: boolean;
-  isWinter?: boolean;
   isVacationTime?: boolean;
 }
 

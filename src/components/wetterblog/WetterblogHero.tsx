@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
-export default function ArchiveHero() {
-  const backgroundImage = "/images/wetter/weatherHero.webp";
+export default function WeatherBlogHero() {
+  const backgroundImage = "/images/wetterblog/weatherHero.webp";
 
   return (
     <section

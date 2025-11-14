@@ -94,6 +94,14 @@ body {
   }
 }
 
+.weather-icon {
+  filter: brightness(0);
+}
+
+.dark .weather-icon {
+  filter: brightness(0) invert(1);
+}
+
 @keyframes blink {
   0%,
   50% {

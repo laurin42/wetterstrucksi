@@ -9,7 +9,7 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
   return (
     <section className="relative w-full min-h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
       <div className="max-w-4xl p-16">
-        <div className="absolute left-16 bottom-8 opacity-80">
+        <div className="absolute left-4 bottom-8 opacity-80">
           <Image
             src="/images/about/logoAlternative.png"
             alt="Logo Alternative"

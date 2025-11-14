@@ -1,30 +1,41 @@
 export const weatherCodeToImage: Record<number, string> = {
-  0: "/images/weather/sunny.webp",
-  1: "/images/weather/partlyCloudy.webp",
-  2: "/images/weather/cloudy.webp",
-  3: "/images/home/homeHeroDark.webp",
-  45: "/images/weather/fog.webp",
-  48: "/images/weather/fog.webp",
-  51: "/images/weather/drizzle.webp",
-  53: "/images/weather/drizzle.webp",
-  55: "/images/weather/drizzle.webp",
-  56: "/images/weather/freezingDrizzle.webp",
-  57: "/images/weather/freezingDrizzle.webp",
-  61: "/images/weather/rain.webp",
-  63: "/images/weather/rain.webp",
-  65: "/images/weather/rainHeavy.webp",
-  66: "/images/weather/freezingRain.webp",
-  67: "/images/weather/freezingRainHeavy.webp",
-  71: "/images/weather/snow.webp",
-  73: "/images/weather/snow.webp",
-  75: "/images/weather/snowHeavy.webp",
-  77: "/images/weather/snowGrains.webp",
-  80: "/images/weather/rainShowers.webp",
-  81: "/images/weather/rainShowers.webp",
-  82: "/images/weather/rainShowersHeavy.webp",
-  85: "/images/weather/snowShowers.webp",
-  86: "/images/weather/snowShowersHeavy.webp",
-  95: "/images/weather/thunderstorm.webp",
-  96: "/images/weather/thunderstormHail.webp",
-  99: "/images/weather/thunderstormHailHeavy.webp",
+  0: "/images/weatherImages/clear.webp",
+
+  1: "/images/weatherImages/clear.webp",
+  2: "/images/weatherImages/partlyCloudy.webp",
+  3: "/images/weatherImages/cloudy.webp",
+
+  45: "/images/weatherImages/fog.webp",
+  48: "/images/weatherImages/fog.webp",
+
+  51: "/images/weatherImages/drizzle.webp",
+  53: "/images/weatherImages/drizzle.webp",
+  55: "/images/weatherImages/drizzle.webp",
+
+  56: "/images/weatherImages/drizzle.webp",
+  57: "/images/weatherImages/drizzle.webp",
+
+  61: "/images/weatherImages/rain.webp",
+  63: "/images/weatherImages/rain.webp",
+  65: "/images/weatherImages/heavyRain.webp",
+
+  66: "/images/weatherImages/freezingRain.webp",
+  67: "/images/weatherImages/freezingRain.webp",
+
+  71: "/images/weatherImages/snow.webp",
+  73: "/images/weatherImages/snow.webp",
+  75: "/images/weatherImages/snow.webp",
+
+  77: "/images/weatherImages/snow.webp",
+
+  80: "/images/weatherImages/rainShowers.webp",
+  81: "/images/weatherImages/rainShowers.webp",
+  82: "/images/weatherImages/rainShowers.webp",
+
+  85: "/images/weatherImages/snowShowers.webp",
+  86: "/images/weatherImages/snowShowers.webp",
+
+  95: "/images/weatherImages/thunderstorm.webp",
+  96: "/images/weatherImages/thunderstorm.webp",
+  99: "/images/weatherImages/thunderstorm.webp",
 };

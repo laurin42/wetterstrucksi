@@ -20,7 +20,7 @@ export function ThemeAndMenu() {
   const isMobile = useIsMobile();
 
   const menuLinkClasses =
-    "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:text-accent transition-colors duration-300 ease-in-out";
+    "flex flex-row items-center gap-4 justify-center text-text text-2xl font-thin bg-transparent hover:text-accent transition-colors duration-300 ease-in-out";
 
   useEffect(() => setMenuOpen(false), [pathname]);
   useEffect(() => {
@@ -36,7 +36,7 @@ export function ThemeAndMenu() {
 
   return (
     <>
-      <div className="absolute right-4 md:right-8 flex items-center space-x-4 z-50">
+      <div className="absolute right-4 md:right-8 flex items-center justify-center space-x-4 z-50">
         <nav className="hidden xl:flex space-x-6">
           {mainMenu.map((item) => (
             <a key={item.title} href={item.href} className={menuLinkClasses}>
@@ -48,13 +48,13 @@ export function ThemeAndMenu() {
         <button
           onClick={toggleTheme}
           aria-label="Theme wechseln"
-          className="cursor-pointer"
+          className="hidden tablet-xs:block cursor-pointer hover:text-header-background transition-color duration-300"
         >
           {mounted ? (
             displayTheme === "dark" ? (
-              <MdLightMode size={28} />
+              <MdLightMode size={32} />
             ) : (
-              <MdDarkMode size={28} />
+              <MdDarkMode size={32} />
             )
           ) : null}
         </button>
@@ -69,11 +69,30 @@ export function ThemeAndMenu() {
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/30"
+            className="fixed inset-0 z-40 bg-black/80"
             onClick={() => setMenuOpen(false)}
           />
 
           <nav className="fixed top-16 left-0 w-full bg-foreground text-text z-50 p-8 flex flex-col space-y-4 md:hidden shadow-md">
+            <button
+              onClick={toggleTheme}
+              aria-label="Theme wechseln"
+              className="cursor-pointer hover:text-header-background text-xl font-thin transition-color duration-300 px-4 py-2 mb-4 border-b"
+            >
+              {mounted ? (
+                displayTheme === "dark" ? (
+                  <p className="flex flex-row justify-between items-center">
+                    Heller Modus
+                    <MdLightMode size={32} />
+                  </p>
+                ) : (
+                  <p className="flex flex-row justify-between items-center">
+                    Dunkler Modus
+                    <MdDarkMode size={32} />
+                  </p>
+                )
+              ) : null}
+            </button>
             {mainMenu.map((item) => (
               <Link
                 key={item.title}
