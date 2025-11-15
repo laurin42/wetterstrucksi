@@ -34,9 +34,9 @@ export function SortFilter({ sortOrder, onSortChange }: SortFilterProps) {
         >
           <button
             onClick={() => onSortChange(option.key as "newest" | "oldest")}
-            className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
+            className={`w-full text-center px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
               sortOrder === option.key
-                ? "bg-accent text-text-white/98"
+                ? "bg-accent/80 text-text-white/98"
                 : "hover:bg-accent/60 text-text hover:text-text-white"
             }`}
           >

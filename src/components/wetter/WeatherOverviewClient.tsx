@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense, lazy, memo } from "react";
 import { CollapsibleSectionHeader } from "@/components/ui/CollabsibleSectionHeader";
-import { PostCard } from "@/components/posts/PostCard";
 import { PostWithMeta } from "@tryghost/content-api";
-import WeatherHero from "./WeatherHero";
-import { PostCarousel } from "../posts/PostCarousel";
-import { LazyRender } from "../LazyRender";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
+const WeatherHero = lazy(() => import("./WeatherHero"));
+const PostCard = lazy(() => import("@/components/posts/PostCard"));
 
 interface WeatherOverviewClientProps {
   posts: {
@@ -17,40 +18,45 @@ interface WeatherOverviewClientProps {
   };
 }
 
-export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
-  const renderPosts = (key: keyof typeof posts, title: string) => {
-    const gridPosts = posts[key].slice(0, 3);
+const PostsGrid = memo(
+  ({ posts, title }: { posts: PostWithMeta[]; title: string }) => {
+    const gridPosts = posts.slice(0, 3);
 
     return (
       <div>
         <CollapsibleSectionHeader title={title} isContentCollabsible={false} />
-
-        <div className="bg-foreground-secondary/44 md:pb-4 md:pt-2 md:mb-2">
-          <div className="grid grid-cols-1 md:hidden">
+        <div className="bg-foreground-secondary/44">
+          <div className="grid grid-cols-1">
             {gridPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <Suspense
+                key={post.id}
+                fallback={
+                  <div className="h-24 w-full animate-pulse bg-muted" />
+                }
+              >
+                <PostCard post={post} />
+              </Suspense>
             ))}
-          </div>
-
-          <div className="hidden md:block">
-            <LazyRender>
-              <PostCarousel posts={posts[key].slice(0, 6)} />
-            </LazyRender>
           </div>
         </div>
       </div>
     );
-  };
+  }
+);
 
+export function WeatherOverviewClient({ posts }: WeatherOverviewClientProps) {
   return (
-    <section className="max-w-4xl md:max-w-6xl mx-auto">
-      <WeatherHero />
-      <div className="grid grid-cols-1 max-w-4xl md:max-w-6xl mx-auto">
-        {renderPosts("wetter", "Vorhersagen")}
-        {renderPosts("updates", "Updates")}
-        {renderPosts("rueckblicke", "Rückblicke")}
-        {renderPosts("presseschau", "Presseschau & Studien")}
-        {renderPosts("privates", "Privates")}
+    <section className="max-w-4xl md:max-w-6xl mx-auto tablet:pt-12 tablet-xs:px-2 tablet-xs:pb-16">
+      <Suspense fallback={<LoadingSpinner />}>
+        <WeatherHero />
+      </Suspense>
+
+      <div className="grid grid-cols-1 tablet-xs:gap-y-2 max-w-4xl md:max-w-6xl mx-auto">
+        <PostsGrid posts={posts.wetter} title="Vorhersagen" />
+        <PostsGrid posts={posts.updates} title="Updates & Warnungen" />
+        <PostsGrid posts={posts.rueckblicke} title="Rückblicke" />
+        <PostsGrid posts={posts.presseschau} title="Presseschau & Studien" />
+        <PostsGrid posts={posts.privates} title="Privates" />
       </div>
     </section>
   );

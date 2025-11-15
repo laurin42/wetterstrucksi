@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = `url("/images/about/bioHero.webp")`;
+  const backgroundImage = "/images/about/bioHero.jpg";
 
   const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
     useMotionVariants();
@@ -15,22 +16,37 @@ export default function AboutHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative max-w-6xl md:mx-auto h-[calc(100svh-64px)] md:h-[64vh] flex items-end md:pb-0 rounded-t-md"
+      className="relative w-full h-[calc(100svh-64px)] md:h-[74dvh] flex items-end pb-0"
       style={{
         backgroundImage,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
+      {backgroundImage && (
+        <>
+          {" "}
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0 tablet-xs:rounded-lg"
+            priority={true}
+          />
+        </>
+      )}
+      <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10" />
+
       <motion.div
         variants={fadeInVariant}
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/60 z-0 rounded-t-md"
+        className="absolute inset-0 bg-linear-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg"
       />
 
-      <div className="relative z-10 px-4 md:px-32">
+      <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">
         <motion.h1
           initial="hidden"
           whileInView="visible"
@@ -40,15 +56,15 @@ export default function AboutHero() {
         >
           <em>Über mich</em>
         </motion.h1>
+
         <motion.h2
           initial="hidden"
           whileInView="visible"
           variants={slideInLeftVariant}
           viewport={viewportOnce}
-          className="text-2xl text-text-white font-thin text-left pb-2 mb-4 border-b-[1px] border-text-white/40 md:border-none"
+          className="text-3xl text-text-white font-thin text-left border-b tracking-wider border-text-white/40 md:border-none"
         >
-          <span className="tracking-wide">Jens Strucks </span>alias
-          Wetterstrucksi
+          - Jens Strucks -
         </motion.h2>
       </div>
     </motion.div>

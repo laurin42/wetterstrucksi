@@ -1,44 +1,26 @@
 "use client";
 import useEmblaCarousel from "embla-carousel-react";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
-import type { EmblaCarouselType } from "embla-carousel";
 import { useCallback, useEffect, useState } from "react";
 import { PostWithMeta } from "@tryghost/content-api";
-import { PostCard } from "@/components/posts/PostCard";
-import { PostCardMobileCarousel } from "@/components/posts/PostCardMobileCarousel";
+import { CarouselPostCard } from "@/components/posts/CarouselPostCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import clsx from "clsx";
 
 interface PostCarouselProps {
   posts: PostWithMeta[];
-  className?: string;
   isNewest?: boolean;
 }
 
-export function PostCarousel({ posts, className }: PostCarouselProps) {
+export function PostCarousel({ posts }: PostCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: "start",
-      dragFree: false,
-    },
+    { loop: true, align: "start", dragFree: false },
     [WheelGesturesPlugin()]
   );
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [isMobile, setIsMobile] = useState(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-  const scrollTo = useCallback(
-    (index: number) => emblaApi?.scrollTo(index),
-    [emblaApi]
-  );
-
-  const onSelect = useCallback((api: EmblaCarouselType) => {
-    setSelectedIndex(api.selectedScrollSnap());
-  }, []);
 
   const normalizedPosts = posts.map((post) => ({
     ...post,
@@ -54,82 +36,67 @@ export function PostCarousel({ posts, className }: PostCarouselProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    setScrollSnaps(emblaApi.scrollSnapList());
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", () => onSelect(emblaApi));
-    emblaApi.on("reInit", () => {
-      setScrollSnaps(emblaApi.scrollSnapList());
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-    });
-  }, [emblaApi, onSelect]);
+    emblaApi.on("reInit", () => {});
+  }, [emblaApi]);
 
   useEffect(() => {
     if (emblaApi) emblaApi.reInit();
   }, [isMobile, emblaApi]);
 
   return (
-    <div className={clsx("relative", className)}>
-      <div ref={emblaRef} className="overflow-hidden cursor-grab md:px-1">
-        <div className="flex">
+    <div className="relative flex flex-col items-center">
+      <div
+        ref={emblaRef}
+        className="overflow-hidden cursor-grab md:px-1 w-full"
+      >
+        <div className="flex touch-pan-y">
           {normalizedPosts.map((post, index) => (
             <div
               key={post.id}
-              className={clsx(
-                "flex-shrink-0 px-1",
-                isMobile ? "w-full flex justify-center" : "w-1/3"
-              )}
+              className="shrink-0 px-4 tablet-xs:px-2 w-full flex justify-center"
             >
-              {isMobile ? (
-                <PostCardMobileCarousel
-                  post={post}
-                  className="mx-auto"
-                  isNewest={index === 0}
-                />
-              ) : (
-                <PostCard post={post} isNewest={index === 0} />
-              )}
+              <CarouselPostCard
+                post={post}
+                className="flex-1"
+                isNewest={index === 0}
+              />
             </div>
           ))}
         </div>
-      </div>
-
-      <button
-        onClick={scrollPrev}
-        aria-label="Vorheriger Beitrag"
-        className="absolute md:-left-12 left-0 top-1/2 z-10"
-      >
-        <MdChevronLeft
-          size={48}
-          className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
-        />
-      </button>
-
-      <button
-        onClick={scrollNext}
-        aria-label="Nächster Beitrag"
-        className="absolute md:-right-12 right-0 top-1/2  z-10"
-      >
-        <MdChevronRight
-          size={48}
-          className="text-text-white-transparent hover:text-accent/40 hover:cursor-pointer hover:scale-110 transition duration-300"
-        />
-      </button>
-
-      {!isMobile && (
-        <div className="flex justify-center mt-8 md:mb-4 space-x-2">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`cursor-pointer w-3 h-3 rounded-full transition-colors duration-300 ${
-                index === selectedIndex
-                  ? "bg-accent"
-                  : "bg-muted hover:bg-accent/60"
-              }`}
-            />
-          ))}
+        <div className="hidden tablet-xs:flex absolute top-64 landscape-top-25 items-center w-full justify-between mx-auto mt-4">
+          <button
+            onClick={scrollPrev}
+            className="relative group text-text-white/80 "
+            aria-label="Previous"
+          >
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl landscape:ml-4" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="relative group text-text-white/80 "
+            aria-label="Next"
+          >
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl landscape:mr-4" />
+          </button>
         </div>
-      )}
+
+        <div className="absolute landscape-top-25 tablet-xs:hidden top-30 xs:top-64 flex items-center w-full justify-around mx-auto mt-4">
+          <button
+            onClick={scrollPrev}
+            className="relative group text-text-white/80 "
+            aria-label="Previous"
+          >
+            <MdChevronLeft className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl mr-8 xxxs:mr-12 xxs:mr-16 landscape:mr-0" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="relative group text-text-white/80 "
+            aria-label="Next"
+          >
+            <MdChevronRight className="group-hover:text-header-background active:text-header-background cursor-pointer hover:scale-140 transition-transform duration-300 text-6xl ml-8 xxxs:ml-12 xxs:ml-16 landscape:ml-0" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

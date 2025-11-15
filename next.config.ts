@@ -3,7 +3,6 @@ import { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['http://192.168.178.67:3000', 'https://192.168.178.67:3000' ],
   images: {
-    unoptimized: true,
     remotePatterns: [
 {
   protocol: "https",
@@ -36,8 +35,17 @@ const nextConfig: NextConfig = {
   pathname: "/**"
 },
   ],
+  
+  loader: "default",
 
   },
+  cacheComponents: true,
 };
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer(nextConfig)
 
 export default nextConfig;

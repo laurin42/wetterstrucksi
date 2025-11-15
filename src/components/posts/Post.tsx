@@ -6,6 +6,7 @@ import Head from "next/head";
 import parse, { DOMNode, Element, domToReact } from "html-react-parser";
 import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 interface PostProps {
   post: PostWithMeta;
@@ -48,10 +49,15 @@ export default function Post({ post }: PostProps) {
         );
       }
 
+      const oldUrls = ["jensstrucks.blog", "https://jensstrucks.blog"];
+      const isAbspannLink = oldUrls.some((url) =>
+        domNode.attribs.href?.includes(url)
+      );
+
       if (domNode.name === "h3") {
         const children = domNode.children ?? [];
         return (
-          <h3 className="text-3xl font-light leading-relaxed my-2 md:mt-8">
+          <h3 className="text-3xl font-light mb-6 md:mt-8 text-balance">
             {domToReact(children as DOMNode[], options)}
           </h3>
         );
@@ -60,19 +66,111 @@ export default function Post({ post }: PostProps) {
       if (domNode.name === "p") {
         const children = domNode.children ?? [];
         return (
-          <p className="leading-relaxed">
+          <p className="leading-relaxed pb-4">
             {domToReact(children as DOMNode[], options)}
           </p>
         );
       }
 
-      if (domNode.name === "a") {
+      if (domNode.name === "p") {
         const children = domNode.children ?? [];
-        return (
-          <a className="underline text-accent leading-relaxed hover:cursor-pointer hover:text-accent-dim hover:no-underline">
-            {domToReact(children as DOMNode[], options)}
-          </a>
-        );
+        const text = domToReact(children as DOMNode[], options);
+
+        // Spezieller Abspann-Block
+        if (
+          domNode.children?.some((c) => c.type?.includes("jensstrucks.blog"))
+        ) {
+          return (
+            <div className="space-y-4 leading-relaxed text-text-white">
+              <p className="font-semibold text-lg">Abspann:</p>
+
+              <p>
+                Vielen Dank, dass du bis zum Schluss dabei warst – das bedeutet
+                mir echt viel! Ich hoffe, der Beitrag hat dir gefallen und dir
+                einen echten Mehrwert geboten.
+              </p>
+
+              <p>
+                Die Erstellung solcher Wetterberichte kostet mich täglich rund
+                eine Stunde Arbeit – Recherche, Schreiben, Grafiken und
+                Postproduktion inklusive.
+              </p>
+
+              <p>
+                Wenn du meine Arbeit unterstützen möchtest, freue ich mich über
+                deine Hilfe – ganz egal in welcher Form:
+              </p>
+
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  📎 Teile meine{" "}
+                  <a
+                    href="https://wetterstrucksi.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    wetterstrucksi.de
+                  </a>
+                  , meine{" "}
+                  <a
+                    href="https://www.facebook.com/WetterstrucksiD"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Facebook-Seite
+                  </a>{" "}
+                  oder mein{" "}
+                  <a
+                    href="https://www.instagram.com/wetterstrucksiduesseldorf/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Instagram-Profil
+                  </a>
+                </li>
+                <li>
+                  📲 Die neuesten Beiträge aufs Handy über meinen WhatsApp-Kanal
+                </li>
+                <li>
+                  🎧 Höre und empfehle meinen Wetter-Podcast auf{" "}
+                  <a
+                    href="https://open.spotify.com/show/your-podcast-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-accent"
+                  >
+                    Spotify
+                  </a>{" "}
+                  oder meinen eigenen Podcast
+                </li>
+                <li>
+                  💰 Unterstütze mich finanziell – jeder Beitrag hilft, egal wie
+                  klein:
+                  <ul className="list-none pl-4">
+                    <li>• PayPal</li>
+                    <li>
+                      • Banküberweisung:
+                      <br />
+                      Kontoinhaber: Jens Strucks
+                      <br />
+                      IBAN: DE71 3905 0000 1077 4740 45
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <p>
+                Danke für deinen Support und bis zum nächsten Wetter-Update! 🍀
+                Jens
+              </p>
+            </div>
+          );
+        }
+
+        return <p className="leading-relaxed">{text}</p>;
       }
 
       if (domNode.name === "hr") {
@@ -114,16 +212,16 @@ export default function Post({ post }: PostProps) {
         />
       </Head>
 
-      <section className="max-w-4xl md:max-w-6xl mx-auto">
-        <article className="p-4 md:px-16 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
-          <div className="flex justify-start mb-10">
+      <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-16">
+        <article className="p-8 tablet-xs:px-32 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
+          <div className="flex justify-start tablet-xs:mb-16 mb-0">
             <div>
               {formattedDate && (
                 <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground">
                   {formattedDate}
                 </p>
               )}
-              <h1 className="tracking-wide text-4xl md:text-5xl font-light">
+              <h1 className="tracking-wide text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b border-text/40">
                 {post.title}
               </h1>
             </div>
@@ -138,6 +236,7 @@ export default function Post({ post }: PostProps) {
                   width={800}
                   height={800}
                   className="object-contain rounded-md w-full h-auto"
+                  priority={true}
                 />
               </div>
             )}
@@ -145,9 +244,7 @@ export default function Post({ post }: PostProps) {
             {typeof post.html === "string" && post.html.trim().length > 0 ? (
               parse(post.html, options)
             ) : (
-              <p className="italic text-muted-foreground">
-                Kein Inhalt verfügbar.
-              </p>
+              <LoadingSpinner />
             )}
 
             <div className="clear-both" />

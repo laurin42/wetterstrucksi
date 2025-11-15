@@ -1,14 +1,27 @@
 "use client";
 
-import { ReactNode } from "react";
-import Header from "@/components/header/Header";
+import { ReactNode, Suspense } from "react";
 import Footer from "./footer/Footer";
+import dynamic from "next/dynamic";
+import { ScrollToTop } from "./ui/ScrollToTop";
+
+const Header = dynamic(() => import("@/components/header/Header"), {
+  ssr: false,
+});
+const HomeCurrentWeather = dynamic(
+  () => import("../components/home/HomeCurrentWeather"),
+  { ssr: false }
+);
 
 export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
     <>
-      <Header />
-      <main className="main md:pt-8 md:pb-8">{children}</main>
+      <Suspense fallback={null}>
+        <ScrollToTop />
+        <Header />
+        <HomeCurrentWeather />
+      </Suspense>
+      <main className="min-h-full bg-background-gradient">{children}</main>
       <Footer />
     </>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
@@ -10,8 +11,8 @@ export default function ArchiveHero() {
   const mounted = useMounted();
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/archiv/archiveHeroDark.webp")`
-      : `url("/images/archiv/archiveHeroLight.webp")`
+      ? "/images/archiv/archiveHeroDark.webp"
+      : "/images/archiv/archiveHeroLight.webp"
     : undefined;
 
   const { slideInLeftVariant, fadeInVariant } = useMotionVariants();
@@ -22,7 +23,7 @@ export default function ArchiveHero() {
       initial="hidden"
       animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full rounded-t-sm px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
+      className="relative w-full rounded-t-lg px-4 py-8 h-auto md:px-8 md:pt-8 md:pb-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",
@@ -31,12 +32,26 @@ export default function ArchiveHero() {
         backgroundPosition: "center",
       }}
     >
+      {backgroundImage && (
+        <>
+          {" "}
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0"
+            priority={true}
+          />
+        </>
+      )}
+      <div className="absolute inset-0 bg-black/70 z-10" />
+
       <motion.div
         variants={fadeInVariant}
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/72 z-0 rounded-t-sm"
       />
 
       <div className="relative z-10">

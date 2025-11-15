@@ -1,6 +1,10 @@
-import GhostContentAPI, {  PostWithMeta } from "@tryghost/content-api";
+"use cache";
+import GhostContentAPI, { GhostPost, PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { v4 as uuidv4 } from "uuid";
+import { GhostTag } from "@tryghost/admin-api";
+import { cache } from "react";
+
 
 const api = new GhostContentAPI({
   url: process.env.NEXT_PUBLIC_GHOST_API_URL as string,
@@ -8,16 +12,12 @@ const api = new GhostContentAPI({
   version: "v5.0",
 });
 
-const cache: { [key: string]: { posts: PostWithMeta[]; timestamp: number } } = {};
 
 
+function normalizePosts(posts: GhostPost[] | undefined | null): PostWithMeta[] {
+  if (!posts || !Array.isArray(posts)) return [];
 
-function normalizePosts(posts: PostWithMeta[] | undefined | null): PostWithMeta[] {
-    if (!posts || !Array.isArray(posts)) {
-        return [];
-    }
-
-    return posts.map((post) => {
+  return posts.map((post) => {
     const uniqueId = post.id || post.uuid || uuidv4();
 
     return {
@@ -30,46 +30,36 @@ function normalizePosts(posts: PostWithMeta[] | undefined | null): PostWithMeta[
         null,
       og_image: fixImageUrl(post.og_image) || null,
       twitter_image: fixImageUrl(post.twitter_image) || null,
+      meta_title: post.meta_title ?? undefined,
+      meta_description: post.meta_description ?? undefined,
       tags:
-        post.tags?.map((tag) => ({
+        post.tags?.map((tag: GhostTag) => ({
           id: tag.id,
           name: tag.name,
           slug: tag.slug.toLowerCase(),
         })) ?? [],
+      authors: post.authors ?? [],
     };
   });
 }
 
+export const getPostsWithMeta = cache(async (limit = 24): Promise<PostWithMeta[]> => {
 
-export async function getPostsWithMeta(limit = 24): Promise<PostWithMeta[]> {
-  const cacheKey = `latest-${limit}`;
-  const now = Date.now();
-
-  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
-    return cache[cacheKey].posts;
-  }
-
-  const posts = await api.posts.browse({
+  const posts = await api.posts.browse({ 
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
     limit,
     order: "published_at DESC",
   });
 
   const merged = normalizePosts(posts);
-  cache[cacheKey] = { posts: merged, timestamp: now };
   return merged;
-}
+});
 
-export async function getPostsPage(
-  page: number,
-  limit = 24
-): Promise<PostWithMeta[]> {
-  const cacheKey = `page-${page}-${limit}`;
-  const now = Date.now();
 
-  if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
-    return cache[cacheKey].posts;
-  }
+
+export async function getPostsPage(page: number, limit = 24): Promise<PostWithMeta[]> {
+
+
 
   const posts = await api.posts.browse({
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
@@ -79,68 +69,67 @@ export async function getPostsPage(
   });
 
   const merged = normalizePosts(posts);
-  cache[cacheKey] = { posts: merged, timestamp: now };
   return merged;
 }
 
-
-
 export async function getPostBySlug(slug: string): Promise<PostWithMeta | null> {
-
   try {
-    const post = await api.posts.read({
-      slug: slug,}, {
-      include: ["tags", "authors"]
-    });
+    const post = await api.posts.read({ slug }, { include: ["tags", "authors"] });
     const normalized = normalizePosts([post]);
     return normalized.length > 0 ? normalized[0] : null;
   } catch (error) {
     console.error(`Error fetching post with slug ${slug}`, error);
     return null;
   }
+}
 
+export async function getAllPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
+  const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
 
+  try {
+    const allPosts = await api.posts.browse({
+      include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+      limit: "all",
+      order: "published_at DESC",
+    });
+
+    if (!allPosts) return [];
+
+    const normalized = normalizePosts(allPosts);
+
+    const filtered = normalized
+      .filter(post => post.tags?.some(tag => tags.includes(tag.slug.toLowerCase())))
+      .slice(0, limit);
+
+    return filtered;
+  } catch (error) {
+    console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
+    return [];
+  }
 }
 
 
-export async function getPostsWithTags(tagsToFilter: string | string[], limit = 1000): Promise<PostWithMeta[]> {
-    const tags = Array.isArray(tagsToFilter)
-        ? tagsToFilter.map(t => t.toLowerCase())
-        : [tagsToFilter.toLowerCase()];
+export async function getNewestPostsWithTags(tagsToFilter: string | string[], limit = 20): Promise<PostWithMeta[]> {
+  const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
 
-    const cacheKey = `tags-${tags.join(",")}-${limit}`;
-    const now = Date.now();
+  try {
+    const allPosts = await api.posts.browse({
+      include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+      limit: "all",
+      order: "published_at DESC",
+    });
 
-    if (cache[cacheKey] && now - cache[cacheKey].timestamp < 60_000) {
-        return cache[cacheKey].posts;
-    }
+    if (!allPosts) return [];
 
-    try {
-        const allPosts = await api.posts.browse({
-            include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
-            limit: "all",
-            order: "published_at DESC",
-        });
+    const normalized = normalizePosts(allPosts);
 
-        if (!allPosts) {
-            console.warn("Ghost API returned no posts (null/undefined). Returning empty array.");
-            return [];
-        }
+    const filtered = normalized
+      .filter(post => post.tags?.some(tag => tags.includes(tag.slug.toLowerCase())))
+      .slice(0, limit);
 
-        const normalized = normalizePosts(allPosts);
-
-        const filtered = normalized
-            .filter(post =>
-                post.tags?.some(tag => tags.includes(tag.slug.toLowerCase()))
-            )
-            .slice(0, limit);
-
-        cache[cacheKey] = { posts: filtered, timestamp: now };
-        return filtered;
-        
-    } catch (error) {
-        console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
-        return []; 
-    }
+    return filtered;
+  } catch (error) {
+    console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
+    return [];
+  }
 }
-

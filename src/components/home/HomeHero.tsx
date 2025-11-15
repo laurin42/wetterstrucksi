@@ -1,15 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { easeIn, motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import { useIsMobile } from "@/lib/useIsMobile";
 import { useIsVacationTime } from "@/lib/useIsVacationTime";
 import { PostCarousel } from "../posts/PostCarousel";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
-
+import CurrentWeather from "./CurrentWeather";
 interface HomeHeroProps {
   posts: PostWithMeta[];
 }
@@ -18,78 +18,100 @@ export default function HomeHero({ posts }: HomeHeroProps) {
   const { theme } = useTheme();
   const mounted = useMounted();
   const { containerVariantsSync, fadeInVariant } = useMotionVariants();
+  const isVacationTime = useIsVacationTime();
 
   const backgroundImage = mounted
     ? theme === "dark"
-      ? `url("/images/home/homeHeroDark.webp")`
-      : `url("/images/home/homeHeroLight.webp")`
+      ? "/images/home/homeHeroDark.webp"
+      : "/images/home/homeHeroLight.webp"
     : undefined;
 
-  const isMobile = useIsMobile();
-
-  const isVacationTime = useIsVacationTime();
-
   return (
-    <>
-      <motion.section
-        className="
-    relative w-full flex flex-col items-center 
-    md:flex-row md:justify-between 
-    px-0 pt-8 md:pb-8 md:px-8 rounded-t-sm md:mb-2
-    h-[calc(100svh-64px)] md:h-auto
-    bg-cover bg-center
-  "
-        style={{ backgroundImage }}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariantsSync}
-      >
-        <div className="absolute inset-0 bg-black/60 z-0 rounded-t-sm" />
+    <motion.section
+      className="relative w-full h-[calc(100svh-64px)] landscapeScreen flex items-start  sm:items-center tablet-xs:items-center justify-center bg-cover bg-center"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariantsSync}
+    >
+      {backgroundImage && (
+        <>
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0"
+            preload={true}
+          />
+          <div className="absolute inset-0 bg-black/60 z-10" />
+        </>
+      )}
 
-        <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
-          <motion.h1
-            variants={fadeInVariant}
-            custom={{ y: 40, duration: 1.6 }}
-            className="text-4xl font-thin md:font-semibold text-white"
-          >
-            <motion.em
-              variants={fadeInVariant}
-              custom={{ y: 40, duration: 1.6 }}
-              className="font-semibold"
+      <div className="relative flex flex-col tablet:flex-row landscapeView items-center justify-center max-w-6xl w-full z-20 px-4 tablet-xs:px-16 tablet:px-0 pt-16 landscape:pt-0 tablet-xs:pt-0 mx-auto gap-y-2">
+        <div className="relative z-10 w-full md:w-1/2 landscape:w-1/2 xxs:pb-0 flex flex-col tablet:flex-row md:flex-col gap-y-8  items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
+          <div>
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 1.6, ease: "easeOut" }}
             >
-              Dein
-            </motion.em>{" "}
-            Ort für Wetter
-          </motion.h1>
-          <div className="relative z-10 md:max-w-6/8 text-center md:text-left">
+              <motion.em
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                animate={{ scale: 1.05 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 14,
+                  delay: 2.4,
+                }}
+              >
+                Dein
+              </motion.em>{" "}
+              Ort für Wetter
+            </motion.h1>
+
             <motion.h2
-              variants={fadeInVariant}
-              custom={{ y: -40, duration: 1.6 }}
-              className="text-4xl font-thin md:font-semibold text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 1.6 }}
             >
               in{" "}
               <motion.em
-                variants={fadeInVariant}
-                custom={{ y: -40, duration: 1.6 }}
-                className="font-semibold"
+                className="font-semibold inline-block"
+                initial={{ scale: 1 }}
+                animate={{ scale: 1.05 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 14,
+                  delay: 2.8,
+                }}
               >
                 Düsseldorf
               </motion.em>
             </motion.h2>
           </div>
+          <div className="hidden tablet:block w-full px-16">
+            <CurrentWeather />
+          </div>{" "}
         </div>
 
-        <div className="md:hidden w-full relative z-10 pt-8 carousel-padding">
-          {isMobile && (
-            <div className="">
-              <PostCarousel posts={posts.slice(0, 3)} />
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInVariant}
+          custom={{ y: 0, duration: 1.8 }}
+          className="flex z-0 w-full md:w-1/2 landscape:w-1/2 flex-col items-center pt-4"
+        >
+          <PostCarousel posts={posts.slice(0, 3)} />
+          {isVacationTime && (
+            <div className="hidden md:block mt-6">
+              <VacationInfo />
             </div>
           )}
-        </div>
-        <div className="hidden md:block">
-          {isVacationTime && <VacationInfo />}
-        </div>
-      </motion.section>
-    </>
+        </motion.div>
+      </div>
+    </motion.section>
   );
 }

@@ -1,12 +1,26 @@
-import { ArchiveOverviewClient } from "@/components/archive/ArchiveOverviewClient";
-import { getPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
-import { PostWithMeta } from "@tryghost/content-api";
-import { SkeletonWrapper } from "@/components/SkeletonWrapper";
-
-export const revalidate = 60;
+import { ArchiveOverviewClient } from "@/components/archiv/ArchiveOverviewClient";
+import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
+import { Suspense } from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default async function ArchiveOverviewPage() {
-  const allPosts: PostWithMeta[] = await getPostsWithTags([
+  return (
+    <main>
+      <Suspense
+        fallback={
+          <div className="flex h-screen w-full flex-col justify-center items-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <ArchivePostFetcher />
+      </Suspense>
+    </main>
+  );
+}
+
+async function ArchivePostFetcher() {
+  const allPosts = await getAllPostsWithTags([
     "wetter",
     "aktuelles-wetter",
     "wetterprognose",
@@ -25,14 +39,8 @@ export default async function ArchiveOverviewPage() {
     "allgemein",
     "astronomisches",
     "live-ticker-zu-unwetterlagen",
-    "mittelfrist",
-    "monats-aussichten",
     "studien",
   ]);
 
-  return (
-    <SkeletonWrapper data={allPosts} layoutType="archive" minDuration={200}>
-      <ArchiveOverviewClient posts={allPosts} />
-    </SkeletonWrapper>
-  );
+  return <ArchiveOverviewClient posts={allPosts} />;
 }

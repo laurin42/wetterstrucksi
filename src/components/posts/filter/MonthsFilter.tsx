@@ -49,7 +49,7 @@ export function MonthsFilter({
           onClick={() => onMonthSelect(null)}
           className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
             selectedMonth === null
-              ? "bg-accent text-text-white/98"
+              ? "bg-accent/80 text-text-white/98"
               : "hover:bg-accent/60 text-text hover:text-text-white"
           }`}
         >
@@ -70,7 +70,7 @@ export function MonthsFilter({
             onClick={() => onMonthSelect(m.value)}
             className={`w-full text-left px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer ${
               selectedMonth === m.value
-                ? "bg-accent text-text-white/98"
+                ? "bg-accent/80 text-text-white/98"
                 : "hover:bg-accent/60 text-text hover:text-text-white"
             }`}
           >

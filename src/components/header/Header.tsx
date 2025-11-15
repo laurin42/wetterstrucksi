@@ -10,7 +10,6 @@ import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
 import { mainMenu } from "@/data/navigation";
 import { useMounted } from "@/lib/useMounted";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import { useIsMobile } from "@/lib/useIsMobile";
 
 const Header = forwardRef<HTMLElement>(() => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -21,10 +20,7 @@ const Header = forwardRef<HTMLElement>(() => {
   const pathname = usePathname();
 
   const [menuOpen, setMenuOpen] = useState(false);
-
   const { fadeInVariant, mobileMenuVariants } = useMotionVariants();
-
-  const isMobile = useIsMobile();
 
   const menuLinkClasses =
     "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:cursor-pointer hover:text-accent transition-colors duration-300 ease-in-out";
@@ -46,12 +42,9 @@ const Header = forwardRef<HTMLElement>(() => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <header
-      className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text transition-transform duration-300 shadow-md
-      h-16"
-    >
+    <header className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text shadow-md min-h-16 h-16">
       <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
-        <div className="pr-2 md:absolute md:left-16 md:top-1/2 md:-translate-y-1/2 md:p-0">
+        <div className="pr-2 shrink-0">
           {mounted ? (
             <Link href="/">
               <Image
@@ -63,8 +56,8 @@ const Header = forwardRef<HTMLElement>(() => {
                 alt="wetterstrucksi logo"
                 width={120}
                 height={120}
-                className="h-12 w-auto object-contain"
-                priority
+                className="h-12 w-auto object-contain block z-0"
+                priority={true}
               />
             </Link>
           ) : (
@@ -73,14 +66,13 @@ const Header = forwardRef<HTMLElement>(() => {
         </div>
 
         <motion.div
-          variants={fadeInVariant}
-          initial="hidden"
-          animate="visible"
-          custom={{ y: 0, duration: 0.4 }}
-          className="mx-auto w-full max-w-6xl flex items-center justify-start"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 2.6, ease: "easeOut" }}
+          className="flex items-center justify-start"
         >
           <Link href="/">
-            <h1 className="text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out">
+            <h1 className="hidden xxs:block text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
               wetterstrucksi.de
             </h1>
           </Link>
@@ -93,7 +85,7 @@ const Header = forwardRef<HTMLElement>(() => {
           custom={{ y: 0, duration: 0.4 }}
           className="absolute right-4 md:right-8 flex items-center space-x-4"
         >
-          <nav className="hidden tablet-hidden md:flex items-center space-x-6">
+          <nav className="hidden tablet:flex items-center space-x-6">
             {mainMenu.map((item) => (
               <Link
                 key={item.title}
@@ -122,13 +114,15 @@ const Header = forwardRef<HTMLElement>(() => {
               )}
             </span>
           </button>
-          {isMobile && (
+
+          <div className="flex tablet:hidden">
             <button onClick={toggleMenu} aria-label="Menü öffnen/schließen">
               {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
             </button>
-          )}
+          </div>
         </motion.div>
       </section>
+
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -146,7 +140,6 @@ const Header = forwardRef<HTMLElement>(() => {
               {mainMenu.map((item) => (
                 <motion.div key={item.title} variants={fadeInVariant}>
                   <Link
-                    key={item.title}
                     href={item.href}
                     className={menuLinkClasses}
                     onClick={() => setMenuOpen(false)}

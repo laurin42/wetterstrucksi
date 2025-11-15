@@ -4,7 +4,15 @@ export function useMotionVariants() {
   const containerVariants: Variants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.15 },
+      transition: { staggerChildren: 0.5 },
+    },
+  };
+
+
+    const containerVariantsSmooth: Variants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.16 },
     },
   };
 
@@ -14,6 +22,12 @@ export function useMotionVariants() {
       transition: { staggerChildren: 0.0 },
     },
   };
+
+  
+  const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
 
   const fadeInVariant: Variants = {
   hidden: (custom: { y?: number } = {}) => ({
@@ -76,15 +90,20 @@ export function useMotionVariants() {
     };
 
   const viewportOnce = { once: true, amount: 0.4 };
+  const viewportOnceSensitive = { once: true, amount: 0.1 };
+
 
   return {
     containerVariants,
+    containerVariantsSmooth,
     containerVariantsSync,
+    itemVariants,
     fadeInVariant,
     slideInLeftVariant,
     sectionAnimation,
     sidebarVariants,
     viewportOnce,
+    viewportOnceSensitive,
     mobileMenuVariants,
   };
 }

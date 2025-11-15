@@ -1,19 +1,34 @@
+import { Suspense } from "react";
+import Image from "next/image";
 import HomePageClient from "@/components/home/HomePageClient";
 import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
-import { SkeletonWrapper } from "@/components/SkeletonWrapper";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
-export default async function Home() {
+export default function Home() {
+  return (
+    <main>
+      <Suspense
+        fallback={
+          <div className="flex h-screen w-full flex-col justify-center items-center">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <PostsContentFetcher />
+      </Suspense>
+    </main>
+  );
+}
+
+async function PostsContentFetcher() {
   let posts = null;
 
   try {
     posts = await getPostsWithMeta();
-  } catch {
-    posts = null;
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+    return <HomePageClient posts={[]} />;
   }
 
-  return (
-    <SkeletonWrapper data={posts} minDuration={500} layoutType="home">
-      {posts && <HomePageClient posts={posts} />}
-    </SkeletonWrapper>
-  );
+  return <HomePageClient posts={posts ?? []} />;
 }

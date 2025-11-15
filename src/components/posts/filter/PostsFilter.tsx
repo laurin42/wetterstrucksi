@@ -12,10 +12,9 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Calendar, SortDesc, ChevronUp, ChevronDown } from "lucide-react";
+import { Calendar, SortDesc } from "lucide-react";
 import { IoCalendar } from "react-icons/io5";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
-import clsx from "clsx";
 
 interface FilterCallbacks {
   onMonthSelect: (month: string | null) => void;
@@ -42,11 +41,23 @@ export function PostsFilter({
 
   return (
     <>
+      {" "}
+      <FilterHeader
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        onToggle={() => {}}
+        onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
+        isOpen={true}
+        mobileOpen={sidebarOpen}
+        onMonthSelect={onMonthSelect}
+        onYearSelect={onYearSelect}
+        onSortChange={onSortChange}
+      />
       <motion.div
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm md:mb-0"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm tablet-xs:rounded-b-lg tablet-xs:mb-2"
       >
         <Accordion
           type="single"
@@ -95,17 +106,6 @@ export function PostsFilter({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-        <FilterHeader
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-          onToggle={() => {}}
-          onFilterToggle={() => setSidebarOpen(!sidebarOpen)}
-          isOpen={true}
-          mobileOpen={sidebarOpen}
-          onMonthSelect={onMonthSelect}
-          onYearSelect={onYearSelect}
-          onSortChange={onSortChange}
-        />
       </motion.div>
     </>
   );

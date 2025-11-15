@@ -1,20 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function WeatherHero() {
-  const backgroundImage = `url("/images/wetter/weatherHero.webp")`;
+  const backgroundImage = "/images/wetter/weatherHero.webp";
 
   const { fadeInVariant, slideInLeftVariant } = useMotionVariants();
 
   return (
     <motion.section
       variants={fadeInVariant}
-      initial="hidden"
-      animate="visible"
       custom={{ y: 0, duration: 1.2 }}
-      className="relative w-full md:rounded-t-sm px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
+      className="relative w-full md:rounded-t-lg px-4 py-8 md:px-8 flex flex-col justify-center md:mb-2 overflow-hidden"
       style={{
         minHeight: "80px",
         height: "auto",
@@ -23,12 +22,26 @@ export default function WeatherHero() {
         backgroundPosition: "center",
       }}
     >
+      {backgroundImage && (
+        <>
+          {" "}
+          <Image
+            src={backgroundImage}
+            alt="Hintergrundbild"
+            fill
+            sizes="100vw"
+            className="object-cover object-center z-0"
+            priority={true}
+          />
+        </>
+      )}
+      <div className="absolute inset-0 bg-black/70 z-10" />
+
       <motion.div
         variants={fadeInVariant}
         initial="hidden"
         animate="visible"
         custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-black/66 z-0 md:rounded-t-sm"
       />
 
       <div className="relative z-10">

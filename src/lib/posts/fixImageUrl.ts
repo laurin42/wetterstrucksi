@@ -9,8 +9,6 @@ export function fixImageUrl(url?: string | null): string | null {
   cleanedUrl = cleanedUrl.replace("wp-content", "");
   cleanedUrl = cleanedUrl.replace("uploads", "");
 
-
-
   cleanedUrl = cleanedUrl.replace(/^\/+/, '').replace(/\/+$/, '');
 
   if (!cleanedUrl.startsWith('cms/')) {
