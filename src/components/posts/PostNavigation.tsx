@@ -55,7 +55,7 @@ export default function PostNavigation({
   const { newer: prev, older: next } = adjacent;
 
   return (
-    <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent pb-16">
+    <div className="grid grid-cols-2 gap-4 px-4 py-4 md:pt-6 md:px-0 max-w-6xl mx-auto bg-foreground-secondary/40 md:bg-transparent tablet-xs:pb-16">
       <div className="flex justify-start">
         {prev ? (
           <Link

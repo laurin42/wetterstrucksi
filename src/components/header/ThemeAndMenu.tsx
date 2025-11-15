@@ -73,20 +73,20 @@ export function ThemeAndMenu() {
             onClick={() => setMenuOpen(false)}
           />
 
-          <nav className="fixed top-16 left-0 w-full bg-foreground text-text z-50 p-8 flex flex-col space-y-4  shadow-md">
+          <nav className="fixed top-16 left-0 w-full bg-foreground text-text z-50 p-4 flex flex-col space-y-4  shadow-md">
             <button
               onClick={toggleTheme}
               aria-label="Theme wechseln"
-              className="cursor-pointer hover:text-header-background text-xl font-thin transition-color duration-300 px-4 py-2 mb-4 border-b"
+              className="cursor-pointer hover:text-header-background text-xl font-thin transition-color duration-300 px-4 pb-2 mb-4 border-b"
             >
               {mounted ? (
                 displayTheme === "dark" ? (
                   <p className="flex flex-col justify-center items-center">
-                    <MdLightMode size={32} />- Heller Modus -
+                    <MdLightMode size={32} />- Dunkler Modus -
                   </p>
                 ) : (
                   <p className="flex flex-col justify-center items-center">
-                    <MdDarkMode size={32} />- Dunkler Modus -
+                    <MdDarkMode size={32} />- Heller Modus -
                   </p>
                 )
               ) : null}

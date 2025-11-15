@@ -29,7 +29,7 @@ export function WeatherClient({ initialData }: WeatherClientProps) {
   }
 
   const code = weatherData.current.weather_code;
-  const isNight = weatherData.current.is_day === 1;
+  const isNight = weatherData.current.is_day === 0;
 
   const iconPath =
     (isNight && weatherIconsNight[code]) ||

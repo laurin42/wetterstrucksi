@@ -59,6 +59,7 @@ export function PostsFilter({
         onMonthSelect={onMonthSelect}
         onYearSelect={onYearSelect}
         onSortChange={onSortChange}
+        onCategorySelect={onCategorySelect}
       />
 
       <motion.div

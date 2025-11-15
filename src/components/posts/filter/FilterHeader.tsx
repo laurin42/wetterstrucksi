@@ -12,6 +12,7 @@ interface FilterHeaderProps {
   onMonthSelect: (month: string | null) => void;
   onYearSelect: (year: number | null) => void;
   onSortChange: (order: "newest" | "oldest") => void;
+  onCategorySelect: (category: string | null) => void;
 }
 
 const monthLabels = [
@@ -39,6 +40,7 @@ export function FilterHeader({
   onMonthSelect,
   onSortChange,
   onYearSelect,
+  onCategorySelect,
 }: FilterHeaderProps) {
   const title =
     selectedMonth || selectedYear
@@ -60,6 +62,7 @@ export function FilterHeader({
       onMonthSelect={onMonthSelect}
       onYearSelect={onYearSelect}
       onSortChange={onSortChange}
+      onCategorySelect={onCategorySelect}
     />
   );
 }

@@ -17,6 +17,7 @@ interface CollapsibleSectionHeaderProps {
   onMonthSelect?: (month: string | null) => void;
   onYearSelect?: (year: number | null) => void;
   onSortChange?: (order: "newest" | "oldest") => void;
+  onCategorySelect?: (category: string | null) => void;
 }
 
 export function CollapsibleSectionHeader({
@@ -29,6 +30,7 @@ export function CollapsibleSectionHeader({
   onMonthSelect,
   onYearSelect,
   onSortChange,
+  onCategorySelect,
 }: CollapsibleSectionHeaderProps) {
   const { fadeInVariant } = useMotionVariants();
 
@@ -39,11 +41,12 @@ export function CollapsibleSectionHeader({
       </span>
 
       <div className="flex justify-end">
-        {onMonthSelect && onYearSelect && onSortChange && (
+        {onMonthSelect && onYearSelect && onSortChange && onCategorySelect && (
           <ResetFilter
             onMonthSelect={onMonthSelect}
             onYearSelect={onYearSelect}
             onSortChange={onSortChange}
+            onCategorySelect={onCategorySelect}
           />
         )}
         {onFilterToggle && (

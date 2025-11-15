@@ -216,7 +216,7 @@ export default function Post({ post }: PostProps) {
           <div className="flex justify-start tablet-xs:mb-16 mb-0">
             <div>
               {formattedDate && (
-                <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground">
+                <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground pb-2">
                   {formattedDate}
                 </p>
               )}

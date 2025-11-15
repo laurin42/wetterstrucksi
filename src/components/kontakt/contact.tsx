@@ -133,7 +133,7 @@ const ContactForm = () => {
               opacity-100 translate-y-0
               group-hover:opacity-0 group-hover:-translate-y-full"
               >
-                Schreib mir eine Nachricht
+                Abschicken
               </span>
 
               <Send

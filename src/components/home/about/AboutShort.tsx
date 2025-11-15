@@ -9,7 +9,7 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
   return (
     <section className="relative w-full min-h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
       <div className="max-w-4xl p-16">
-        <div className="absolute left-0 h-54 w-54 tablet-xs:w-58 tablet-xs:h-58 tablet:w-62 tablet:h-62 sm:bottom-0 tablet-xs:bottom-40 opacity-80">
+        <div className="absolute left-0 h-54 w-54 tablet-xs:w-58 tablet-xs:h-58 tablet:w-62 tablet:h-62 sm:bottom-4 md:bottom-8 opacity-80">
           <Image
             src="/images/about/logoAlternative.webp"
             alt="Logo Alternative"
@@ -56,7 +56,7 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
               absolute inset-0 flex items-center justify-center 
               transition-all duration-700 ease-in-out
               opacity-100 translate-y-0
-              group-hover:opacity-0 group-hover:-translate-y-full
+              group-hover:opacity-0 group-hover:-translate-y-full group-active:hidden
             "
             >
               Erfahre hier mehr über mich
@@ -67,7 +67,7 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
             translate-y-full transition-all duration-400 ease-in-out
             group-hover:opacity-100 group-hover:translate-y-0
             group-active:scale-108 group-active:shadow-none
-            group-active:border-transparent group-active:bg-transparent "
+            group-active:border-transparent group-active:bg-transparent group-active:hidden"
             />
           </button>
         </div>
