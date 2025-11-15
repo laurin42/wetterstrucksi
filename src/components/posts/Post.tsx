@@ -76,7 +76,6 @@ export default function Post({ post }: PostProps) {
         const children = domNode.children ?? [];
         const text = domToReact(children as DOMNode[], options);
 
-        // Spezieller Abspann-Block
         if (
           domNode.children?.some((c) => c.type?.includes("jensstrucks.blog"))
         ) {
@@ -212,8 +211,8 @@ export default function Post({ post }: PostProps) {
         />
       </Head>
 
-      <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-16">
-        <article className="p-8 tablet-xs:px-32 bg-foreground-secondary/40 max-w-6xl mx-auto text-text">
+      <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-8">
+        <article className="tablet-xs:rounded-lg border border-white/32 shadow-sm shadow-header-background p-8 max-w-6xl mx-auto text-text">
           <div className="flex justify-start tablet-xs:mb-16 mb-0">
             <div>
               {formattedDate && (
@@ -221,7 +220,7 @@ export default function Post({ post }: PostProps) {
                   {formattedDate}
                 </p>
               )}
-              <h1 className="tracking-wide text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b border-text/40">
+              <h1 className="tracking-wide  w-fit text-4xl md:text-5xl font-light mb-4 tablet-xs:mb-0 pb-2 text-balance border-b border-text/40">
                 {post.title}
               </h1>
             </div>

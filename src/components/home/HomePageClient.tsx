@@ -45,6 +45,7 @@ export default function HomePageClient({ posts }: HomePageClientProps) {
       <HomeHero
         posts={posts}
         isVacationTime={false}
+        currentWeatherData={weatherData.current}
         currentWeatherCode={weatherData.current.weather_code}
       />
 

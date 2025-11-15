@@ -25,14 +25,12 @@ export default function WeatherBlogHero() {
             alt="Hintergrundbild"
             fill
             sizes="100vw"
-            className="object-cover object-center z-0"
+            className="object-cover object-center z-0 opacity-0 animate-fade-in"
             priority={true}
           />
+          <div className="absolute inset-0 bg-black/44 z-10 opacity-0 animate-fade-in" />
         </>
       )}
-      <div className="absolute inset-0 bg-black/44 z-10" />
-
-      <div />
 
       <div className="relative z-10 text-text-white ">
         <h1 className="text-3xl font-thin md:text-5xl tracking-wide border-b w-fit leading-relaxed">

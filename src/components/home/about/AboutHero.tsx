@@ -1,22 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function AboutHero() {
-  const backgroundImage = "/images/about/bioHero.jpg";
-
-  const { sectionAnimation, slideInLeftVariant, viewportOnce, fadeInVariant } =
-    useMotionVariants();
+  const backgroundImage = "/images/about/bioHero.webp";
 
   return (
-    <motion.div
-      variants={fadeInVariant}
-      initial="hidden"
-      animate="visible"
-      custom={{ y: 0, duration: 1.2 }}
-      className="relative mx-auto max-w-5xl h-svh tablet-xs:h-96 flex items-end"
+    <div
+      className="relative mx-auto max-w-5xl h-svh tablet-xs:h-116 flex items-end"
       style={{
         backgroundImage,
         backgroundSize: "cover",
@@ -31,42 +22,23 @@ export default function AboutHero() {
             alt="Hintergrundbild"
             fill
             sizes="100vw 100vh"
-            className="object-cover object-center z-0 tablet-xs:rounded-lg"
+            className="object-cover object-center z-0 tablet-xs:rounded-lg opacity-0 animate-fade-in"
             priority={true}
           />
+          <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10 opacity-0 animate-fade-in" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg opacity-0 animate-fade-in" />
         </>
       )}
-      <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10" />
-
-      <motion.div
-        variants={fadeInVariant}
-        initial="hidden"
-        animate="visible"
-        custom={{ y: 0, duration: 1.6 }}
-        className="absolute inset-0 bg-linear-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg"
-      />
 
       <div className="flex flex-col z-10 mx-auto justify-center items-center w-full pb-8">
-        <motion.h1
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionAnimation}
-          viewport={viewportOnce}
-          className="text-5xl mb-1 md:text-5xl font-thin text-text-white tracking-wide"
-        >
+        <h1 className="text-5xl mb-1 md:text-5xl font-thin text-text-white tracking-wide">
           <em>Über mich</em>
-        </motion.h1>
+        </h1>
 
-        <motion.h2
-          initial="hidden"
-          whileInView="visible"
-          variants={slideInLeftVariant}
-          viewport={viewportOnce}
-          className="text-3xl text-text-white font-thin text-left border-b tracking-wider border-text-white/40 md:border-none"
-        >
+        <h2 className="text-3xl text-text-white font-thin text-left border-b tracking-wider border-text-white/40 md:border-none">
           - Jens Strucks -
-        </motion.h2>
+        </h2>
       </div>
-    </motion.div>
+    </div>
   );
 }

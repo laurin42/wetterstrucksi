@@ -15,6 +15,33 @@ interface WetterblogClientProps {
   posts: PostWithMeta[];
 }
 
+const categoryMap: Record<string, string> = {
+  "aktuelles-wetter": "Updates & Warnlage",
+  situation: "Updates & Warnlage",
+  "live-ticker-zu-unwetterlagen": "Updates & Warnlage",
+  warnlage: "Updates & Warnlage",
+  warntrend: "Updates & Warnlage",
+
+  aussichten: "Aussichten",
+  wetteraussichten: "Aussichten",
+  wetterprognose: "Aussichten",
+  "wetter-kurz-und-kompakt": "Aussichten",
+  "monats-aussichten": "Aussichten",
+  mittelfrist: "Aussichten",
+
+  rueckblick: "Rückblick",
+
+  studien: "Wissenschaft",
+  astronomisches: "Wissenschaft",
+  wetter: "Wissenschaft",
+
+  allgemein: "Allgemein",
+  spekulatives: "Allgemein",
+  biowetter: "Allgemein",
+  presseschau: "Allgemein",
+  privates: "Privates",
+};
+
 function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
   if (posts.length === 0) {
     return (
@@ -45,6 +72,7 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
   const [visiblePosts, setVisiblePosts] = useState<PostWithMeta[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const postsPerLoad = 6;
   const archiveRef = useRef<HTMLDivElement>(null);
@@ -53,22 +81,47 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
     return allPosts
       .filter((post) => {
         const postDate = new Date(post.published_at);
+
         const matchMonth =
           selectedMonth !== null
             ? (postDate.getMonth() + 1).toString() === selectedMonth
             : true;
+
         const matchYear =
           selectedYear !== null
             ? postDate.getFullYear() === selectedYear
             : true;
-        return matchMonth && matchYear;
+
+        const matchCategory =
+          selectedCategory !== null
+            ? post.tags?.some(
+                (tag) => categoryMap[tag.slug] === selectedCategory
+              )
+            : true;
+
+        return matchMonth && matchYear && matchCategory;
       })
       .sort((a, b) => {
         const timeA = new Date(a.published_at).getTime();
         const timeB = new Date(b.published_at).getTime();
         return sortOrder === "newest" ? timeB - timeA : timeA - timeB;
       });
-  }, [allPosts, selectedMonth, selectedYear, sortOrder]);
+  }, [allPosts, selectedMonth, selectedYear, selectedCategory, sortOrder]);
+
+  const categories = useMemo(() => {
+    const unique = new Set<string>();
+
+    allPosts.forEach((post) => {
+      post.tags?.forEach((tag) => {
+        const group = categoryMap[tag.slug];
+        if (group) {
+          unique.add(group);
+        }
+      });
+    });
+
+    return Array.from(unique);
+  }, [allPosts]);
 
   useEffect(() => {
     const initialPosts = filteredPosts.slice(0, postsPerLoad);
@@ -103,10 +156,13 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
   return (
     <section
       ref={archiveRef}
-      className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:my-16 tablet-xs:p-2 tablet-xs:border border-white/16 tablet-xs:rounded-lg shadow md"
+      className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:my-8 tablet-xs:p-2 tablet-xs:border border-white/16 tablet-xs:rounded-lg shadow md"
     >
       <WeatherBlogHero />
       <PostsFilter
+        categories={categories}
+        selectedCategories={selectedCategory}
+        onCategorySelect={setSelectedCategory}
         selectedMonth={selectedMonth}
         onMonthSelect={setSelectedMonth}
         selectedYear={selectedYear}
@@ -116,7 +172,7 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
       />
 
       <section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/32 tablet-xs:rounded-md tablet-xs:border-none border-t border-text/16">
-        <div className="md:col-span-3 grid grid-cols-1">
+        <div className="md:col-span-3 grid grid-cols-1 pt-2 tablet-xs:pt-0">
           <MemoizedVisiblePosts posts={visiblePosts} />
         </div>
 

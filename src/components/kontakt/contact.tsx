@@ -48,11 +48,11 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="flex flex-col w-full md:max-w-4xl mx-auto tablet-xs:pt-12 p-4 rounded-lg">
+    <section className="flex flex-col w-full md:max-w-4xl mx-auto tablet-xs:pt-8 p-4 rounded-lg">
       <div className="relative">
         <form
           onSubmit={handleSubmit}
-          className="bg-foreground-secondary/88 rounded-lg shadow-lg p-8 border border-accent/10 space-y-8"
+          className="tablet-xs:rounded-lg tablet-xs:shadow-sm shadow-header-background p-8 tablet-xs:border border-white/32 space-y-8"
         >
           <div className="text-center">
             <div className="flex flex-col justify-center items-center gap-3 mb-3">
@@ -80,7 +80,7 @@ const ContactForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
+                className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
               />
             </div>
 
@@ -96,7 +96,7 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
+                className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full rounded-md p-4 bg-accent-dim/40 border border-transparent focus:border-accent focus:ring-0 outline-none"
+              className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
             ></textarea>
           </div>
 
@@ -121,19 +121,28 @@ const ContactForm = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="submit-button flex items-center justify-center gap-2 rounded-md cursor-pointer px-6 py-3 bg-accent text-text-white text-base md:text-lg font-semibold hover:bg-accent/80 transition-colors"
+              className="group cursor-pointer relative inline-flex items-center justify-center w-full tablet-xs:w-3/6
+            py-6 rounded-md bg-foreground-secondary/16 
+            shadow-sm border border-white/32 text-text/80 text-base md:text-lg font-semibold 
+            hover:shadow-none hover:border-transparent hover:bg-transparent active:scale-116
+            transition-all duration-300 ease-in-out overflow-hidden"
             >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Sende...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  <span>Nachricht abschicken</span>
-                </>
-              )}
+              <span
+                className="absolute inset-0 flex items-center justify-center 
+              transition-all duration-700 ease-in-out
+              opacity-100 translate-y-0
+              group-hover:opacity-0 group-hover:-translate-y-full"
+              >
+                Schreib mir eine Nachricht
+              </span>
+
+              <Send
+                size={40}
+                className="absolute inset-0 m-auto text-header-background
+              opacity-0 translate-y-full
+              transition-all duration-400 ease-in-out
+              group-hover:opacity-100 group-hover:translate-y-0 group-active:scale-108 group-active:shadow-none group-active:border-transparent group-active:bg-transparent"
+              />
             </button>
           </div>
 

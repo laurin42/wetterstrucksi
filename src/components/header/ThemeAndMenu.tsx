@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
 import { mainMenu } from "@/data/navigation";
 import { useMounted } from "@/lib/useMounted";
-import { useIsMobile } from "@/lib/useIsMobile";
 
 export function ThemeAndMenu() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -17,7 +16,6 @@ export function ThemeAndMenu() {
   const mounted = useMounted();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
 
   const menuLinkClasses =
     "flex flex-row items-center gap-4 justify-center text-text text-2xl font-thin bg-transparent hover:text-accent transition-colors duration-300 ease-in-out";
@@ -37,7 +35,7 @@ export function ThemeAndMenu() {
   return (
     <>
       <div className="absolute right-4 md:right-8 flex items-center justify-center space-x-4 z-50">
-        <nav className="hidden xl:flex space-x-6">
+        <nav className="hidden tablet-sm:flex space-x-6">
           {mainMenu.map((item) => (
             <a key={item.title} href={item.href} className={menuLinkClasses}>
               {item.title}
@@ -48,7 +46,7 @@ export function ThemeAndMenu() {
         <button
           onClick={toggleTheme}
           aria-label="Theme wechseln"
-          className="hidden tablet-xs:block cursor-pointer hover:text-header-background transition-color duration-300"
+          className="hidden tablet-sm:block cursor-pointer hover:text-header-background transition-color duration-300"
         >
           {mounted ? (
             displayTheme === "dark" ? (
@@ -59,21 +57,23 @@ export function ThemeAndMenu() {
           ) : null}
         </button>
 
-        {isMobile && (
-          <button onClick={toggleMenu} aria-label="Menü öffnen/schließen">
-            {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
-          </button>
-        )}
+        <button
+          className="tablet-sm:hidden"
+          onClick={toggleMenu}
+          aria-label="Menü öffnen/schließen"
+        >
+          {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
+        </button>
       </div>
 
       {menuOpen && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/80"
+            className="fixed inset-0 top-16 z-40 bg-black/32"
             onClick={() => setMenuOpen(false)}
           />
 
-          <nav className="fixed top-16 left-0 w-full bg-foreground text-text z-50 p-8 flex flex-col space-y-4 md:hidden shadow-md">
+          <nav className="fixed top-16 left-0 w-full bg-foreground text-text z-50 p-8 flex flex-col space-y-4  shadow-md">
             <button
               onClick={toggleTheme}
               aria-label="Theme wechseln"
@@ -81,14 +81,12 @@ export function ThemeAndMenu() {
             >
               {mounted ? (
                 displayTheme === "dark" ? (
-                  <p className="flex flex-row justify-between items-center">
-                    Heller Modus
-                    <MdLightMode size={32} />
+                  <p className="flex flex-col justify-center items-center">
+                    <MdLightMode size={32} />- Heller Modus -
                   </p>
                 ) : (
-                  <p className="flex flex-row justify-between items-center">
-                    Dunkler Modus
-                    <MdDarkMode size={32} />
+                  <p className="flex flex-col justify-center items-center">
+                    <MdDarkMode size={32} />- Dunkler Modus -
                   </p>
                 )
               ) : null}

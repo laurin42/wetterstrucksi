@@ -25,7 +25,7 @@ export default function DonateBox() {
       </div>
 
       <div className="flex-col max-w-lg tablet-xs:p-16 mx-8 p-8 tablet-xs:mx-0 items-center justify-center text-left tablet-xs:text-center text-balance bg-foreground-secondary/16 z-20 rounded-lg border border-white/32 shadow-md">
-        <h2 className="text-4xl w-fit font-thin mx-auto tracking-wider text-text pb-2 mb-4 border-b border-text/40">
+        <h2 className="text-4xl w-fit font-thin mx-auto tracking-wider text-text pb-2 mb-8 border-b border-text/40">
           Deine Spende für mich
         </h2>
 
