@@ -7,7 +7,7 @@ import { faqItems } from "@/lib/faq";
 export default function AboutPage() {
   return (
     <section>
-      <div className="max-w-5xl h-full mx-auto tablet-xs:shadow-md shadow-accent/16 tablet-xs:border border-white/32 tablet-xs:rounded-md tablet-xs:my-16 tablet-xs:p-4">
+      <div className="max-w-5xl h-full mx-auto md:shadow-xs shadow-header-background/32 tablet-xs:border border-white/32 tablet-xs:rounded-md tablet-xs:my-16 tablet-xs:p-4">
         <AboutHero />
         <div className="hidden tablet-xs:block my-8">
           <AboutStoryDesktop />

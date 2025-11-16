@@ -61,11 +61,11 @@ export function AboutStoryDesktop() {
               key={index}
               className={`relative flex ${
                 isStart ? "justify-start" : "justify-end"
-              } first:mt-0 first:pt-16 -mt-32`}
+              } first:mt-0 first:pt-0 -mt-32`}
             >
-              <div className="mt-32 absolute z-0 top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2 bg-text/30 pointer-events-none"></div>
+              <div className="mt-32 absolute z-0 -top-24 bottom-24 left-1/2 w-0.5 -translate-x-1/2 bg-text/30 pointer-events-none"></div>
               {/* Timeline circle */}
-              <div className="absolute z-0 w-5 h-5 top-32 left-1/2 bg-header-background rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+              <div className="absolute z-0 w-5 h-5 top-8 left-1/2 bg-header-background rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
               <div className={`w-1/2`}>
                 <div
