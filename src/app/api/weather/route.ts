@@ -13,7 +13,7 @@ export async function GET() {
   }
 
   const response = await fetch(
-    'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=sunrise,sunset,uv_index_max&current=temperature_2m,rain,weather_code,wind_speed_10m,wind_direction_10m,is_day&timezone=Europe%2FBerlin'
+    'https://api.open-meteo.com/v1/forecast?latitude=51.2217&longitude=6.7762&daily=sunrise,sunset&current=temperature_2m,weather_code,is_day&timezone=Europe%2FBerlin'
   )
   const data = await response.json()
 

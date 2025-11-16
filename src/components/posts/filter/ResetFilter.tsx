@@ -7,17 +7,20 @@ interface ResetFilterProps {
   onMonthSelect: (month: string | null) => void;
   onYearSelect: (year: number | null) => void;
   onSortChange: (order: "newest" | "oldest") => void;
+  onCategorySelect: (category: string | null) => void;
 }
 
 export function ResetFilter({
   onMonthSelect,
   onYearSelect,
   onSortChange,
+  onCategorySelect,
 }: ResetFilterProps) {
   const handleReset = () => {
     onMonthSelect(null);
     onYearSelect(null);
     onSortChange("newest");
+    onCategorySelect(null);
   };
 
   return (

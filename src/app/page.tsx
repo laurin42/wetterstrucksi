@@ -1,22 +1,19 @@
 import { Suspense } from "react";
-import Image from "next/image";
 import HomePageClient from "@/components/home/HomePageClient";
 import { getPostsWithMeta } from "./api/posts/getPostsWithMeta";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 export default function Home() {
   return (
-    <main>
-      <Suspense
-        fallback={
-          <div className="flex h-screen w-full flex-col justify-center items-center">
-            <LoadingSpinner />
-          </div>
-        }
-      >
-        <PostsContentFetcher />
-      </Suspense>
-    </main>
+    <Suspense
+      fallback={
+        <div className="flex h-screen w-full flex-col justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      }
+    >
+      <PostsContentFetcher />
+    </Suspense>
   );
 }
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
@@ -23,16 +22,16 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
-    <div className="block group hover:bg-header-background/40 transition duration-240 w-full bg-foreground-secondary/44 py-2">
+    <div className="block group hover:bg-header-background/40 border border-transparent hover:border hover:border-text/32 transition duration-240 w-full bg-transparent rounded-sm ">
       <Link
         href={href}
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
       >
         <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
           <div className="flex md:pr-8 h-full">
-            <div className="... will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90">
+            <div className="... pr-4 will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90">
               {post.published_at && (
-                <p className="w-fit border-b border-header-background/60 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
+                <p className="w-fit border-b border-text/32 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
                   {new Date(post.published_at).toLocaleDateString("de-DE", {
                     day: "2-digit",
                     month: "short",
@@ -41,8 +40,8 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
                 </p>
               )}
 
-              <h2 className="text-base text-text mb-2 line-clamp-3 md:line-clamp-1 leading-snug md:text-lg font-bold">
-                {truncateWords(post.title, 20)}
+              <h2 className="text-base text-text mb-2  leading-snug md:text-lg font-bold">
+                {post.title}
               </h2>
 
               {post.og_description && (
@@ -52,7 +51,7 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
               )}
             </div>
             {imageSrc && (
-              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative shrink-0 group-hover:scale-104 transition duration-300 ease-in">
+              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative shrink-0 transition duration-300 ease-in">
                 <Image
                   src={imageSrc}
                   overrideSrc={imageSrc}

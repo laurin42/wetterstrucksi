@@ -30,7 +30,7 @@ export function SortFilter({ sortOrder, onSortChange }: SortFilterProps) {
             hidden: { opacity: 0, x: -5 },
             visible: { opacity: 1, x: 0 },
           }}
-          className="flex-shrink-0"
+          className="shrink-0"
         >
           <button
             onClick={() => onSortChange(option.key as "newest" | "oldest")}

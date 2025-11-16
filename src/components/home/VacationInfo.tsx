@@ -9,9 +9,9 @@ export default function VacationInfo() {
       initial="hidden"
       whileInView="visible"
       variants={sectionAnimation}
-      className="flex flex-col items-center mx-8 md:mx-0 justify-center py-4 px-8  text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
+      className="flex flex-col items-center mx-8 md:mx-0 justify-center py-4 px-8  text-text-white text-center bg-header-background/74 z-1  shadow-md border border-white/32"
     >
-      <p className="font-thin text-2xl tracking-wider pb-2 border-b-[1px] border-text/40">
+      <p className="font-thin text-2xl tracking-wider pb-2 border-b border-white/32">
         Urlaubszeiten:
       </p>
       <div className="pt-2 items-start">

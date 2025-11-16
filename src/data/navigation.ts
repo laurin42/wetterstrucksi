@@ -1,22 +1,16 @@
 export const mainMenu = [
+
   {
-    title: "Wetter",
-    href: "/wetter",
+    title: "Startseite",
+    href:"/",
+    subitems: []
+  },
+  {
+    title: "Wetterblog",
+    href: "/wetterblog",
     subItems: [
 
     ],
-  },
-  {
-    title: "Archiv",
-    href: "/archiv",
-    subItems: [
-
-    ],
-  },
-  {
-    title: "Über mich",
-    href: "/about",
-    subItems: [],
   },
   {
     title: "Kontakt",

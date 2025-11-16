@@ -1,169 +1,46 @@
-"use client";
-
-import { useEffect, useState, forwardRef } from "react";
-import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { MdLightMode, MdDarkMode, MdMenu, MdClose } from "react-icons/md";
-import { mainMenu } from "@/data/navigation";
-import { useMounted } from "@/lib/useMounted";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
+import { ThemeAndMenu } from "./ThemeAndMenu";
+import { WeatherClient } from "../WeatherClient";
 
-const Header = forwardRef<HTMLElement>(() => {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [displayTheme, setDisplayTheme] = useState<
-    "light" | "dark" | undefined
-  >();
-  const mounted = useMounted();
-  const pathname = usePathname();
+async function getWeatherData() {
+  const response = await fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=51.2217&longitude=6.7762&daily=sunrise,sunset&current=weather_code,temperature_2m,is_day&timezone=Europe%2FBerlin",
+    {
+      next: { revalidate: 600 },
+    }
+  );
+  if (!response.ok) {
+    console.error("failed to fetch:", response.statusText);
+    return null;
+  }
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { fadeInVariant, mobileMenuVariants } = useMotionVariants();
+  const data = await response.json();
+  return data;
+}
 
-  const menuLinkClasses =
-    "inline-flex items-center px-4 py-2 text-text text-3xl font-thin bg-transparent hover:cursor-pointer hover:text-accent transition-colors duration-300 ease-in-out";
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (mounted) setDisplayTheme(resolvedTheme as "light" | "dark" | undefined);
-  }, [resolvedTheme, mounted]);
-
-  const toggleTheme = () => {
-    const next: "light" | "dark" = displayTheme === "dark" ? "light" : "dark";
-    setDisplayTheme(next);
-    setTheme(next);
-  };
-
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
-
+export default async function Header() {
+  const initialData = await getWeatherData();
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-foreground text-text shadow-md min-h-16 h-16">
-      <section className="flex items-center h-full px-2 md:px-8 lg:px-16 relative">
-        <div className="pr-2 shrink-0">
-          {mounted ? (
-            <Link href="/">
-              <Image
-                src={
-                  displayTheme === "dark"
-                    ? "/images/logo/wetterstrucksiLogoDark.webp"
-                    : "/images/logo/wetterstrucksiLogoLight.webp"
-                }
-                alt="wetterstrucksi logo"
-                width={120}
-                height={120}
-                className="h-12 w-auto object-contain block z-0"
-                priority={true}
-              />
-            </Link>
-          ) : (
-            <div className="h-12 w-[120px]" />
-          )}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 2.6, ease: "easeOut" }}
-          className="flex items-center justify-start"
+    <header className="sticky top-0 left-0 right-0 w-full z-50 bg-foreground text-text shadow-md h-16 flex items-center justify-between tablet-xs:px-4 px-2">
+      <div className="flex flex-row items-center gap-2 text-md md:text-xl font-semibold leading-relaxed">
+        <Link
+          className="flex flex-row items-center gap-2 tracking-widest hover:text-header-background transition-colors duration-300"
+          href="/"
         >
-          <Link href="/">
-            <h1 className="hidden xxs:block text-xl md:text-2xl font-semibold hover:text-accent transition-colors duration-300 ease-in-out z-10">
-              wetterstrucksi.de
-            </h1>
-          </Link>
-        </motion.div>
+          <Image
+            src="/images/logo/wetterstrucksiLogoLight.webp"
+            alt="Logo"
+            width={120}
+            height={120}
+            className="h-12 w-auto"
+          />
+          <h1>Wetterstrucksi.de</h1>
+        </Link>
 
-        <motion.div
-          variants={fadeInVariant}
-          initial="hidden"
-          animate="visible"
-          custom={{ y: 0, duration: 0.4 }}
-          className="absolute right-4 md:right-8 flex items-center space-x-4"
-        >
-          <nav className="hidden tablet:flex items-center space-x-6">
-            {mainMenu.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className={menuLinkClasses}
-              >
-                {item.title}
-              </Link>
-            ))}
-          </nav>
-
-          <button
-            onClick={toggleTheme}
-            aria-label="Theme wechseln"
-            className="transition-colors duration-300 cursor-pointer hover:text-accent"
-          >
-            <span
-              className={`${
-                mounted ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-300`}
-            >
-              {displayTheme === "dark" ? (
-                <MdLightMode size={28} />
-              ) : (
-                <MdDarkMode size={28} />
-              )}
-            </span>
-          </button>
-
-          <div className="flex tablet:hidden">
-            <button onClick={toggleMenu} aria-label="Menü öffnen/schließen">
-              {menuOpen ? <MdClose size={36} /> : <MdMenu size={36} />}
-            </button>
-          </div>
-        </motion.div>
-      </section>
-
-      <AnimatePresence>
-        {menuOpen && (
-          <>
-            <div
-              className="fixed inset-0 z-40"
-              onClick={() => setMenuOpen(false)}
-            />
-            <motion.nav
-              initial="closed"
-              animate="open"
-              variants={mobileMenuVariants}
-              exit="closed"
-              className="absolute top-[61px] left-0 w-full bg-foreground text-text z-50 p-8 md:p-4 flex flex-col space-y-4 md:hidden shadow-md"
-            >
-              {mainMenu.map((item) => (
-                <motion.div key={item.title} variants={fadeInVariant}>
-                  <Link
-                    href={item.href}
-                    className={menuLinkClasses}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.title}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div variants={fadeInVariant}>
-                <Link
-                  href="/impressum"
-                  onClick={() => setMenuOpen(false)}
-                  className={menuLinkClasses}
-                >
-                  Impressum
-                </Link>
-              </motion.div>
-            </motion.nav>
-          </>
-        )}
-      </AnimatePresence>
+        <WeatherClient initialData={initialData} />
+      </div>
+      <ThemeAndMenu />
     </header>
   );
-});
-
-Header.displayName = "Header";
-export default Header;
+}

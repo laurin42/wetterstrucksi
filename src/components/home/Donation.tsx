@@ -3,8 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
 export default function DonateBox() {
   const [amount, setAmount] = useState("5");
@@ -13,40 +11,30 @@ export default function DonateBox() {
     process.env.NEXT_PUBLIC_PAYPAL_LINK ||
     "https://www.paypal.com/paypalme/jstrucks";
 
-  const backgroundImage = `url("/images/donationInfo/donationHeroLight.webp")`;
-  const { sectionAnimation } = useMotionVariants();
-
   return (
-    <motion.section
-      className="
-        relative w-full flex flex-col items-center 
-        tablet-xs:flex-row justify-center 
-        h-[92svh]
-        bg-cover bg-center md:bg-center
-        "
-      style={{ backgroundImage }}
-      initial="hidden"
-      whileInView="visible"
-      variants={sectionAnimation}
-    >
-      <div className="absolute inset-0 bg-black/44 z-0 " />
+    <section className="relative w-full h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
+      <div className="absolute right-0 bottom-0 opacity-80">
+        <Image
+          src="/images/donationInfo/donationHero.png"
+          alt="Donation Hero"
+          width={600}
+          height={600}
+          className="hidden tablet-xs:block object-contain"
+          priority
+        />
+      </div>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        variants={sectionAnimation}
-        className="flex-col items-center mx-8 md:mx-0  landsacpe:py-4 sm:px-8 justify-center p-8 text-text text-center bg-foreground-secondary/44 z-1 rounded-sm backdrop-blur-sm"
-      >
-        <h2 className="w-fit mx-auto text-balance font-thin text-3xl tracking-wider pt-2 pb-4 tablet-xs:pb-2 border-b border-text/40">
+      <div className="flex-col max-w-lg tablet-xs:p-16 mx-8 p-8 tablet-xs:mx-0 items-center justify-center text-left tablet-xs:text-center text-balance bg-foreground-secondary/16 z-20 rounded-lg border border-white/32 shadow-md">
+        <h2 className="text-4xl w-fit font-thin mx-auto tracking-wider text-text pb-2 mb-8 border-b border-text/40">
           Deine Spende für mich
         </h2>
 
-        <p className="text-md text-balance mb-4 max-w-md pt-4 px-4 pb-4 md:px-8 md:pb-8 font-normal">
+        <p className="text-balance pb-8 text-lg font-thin ">
           Wenn dir meine Wetterseite gefällt und du sie unterstützen möchtest,
           kannst du mir über PayPal gerne eine kleine Spende hinterlassen 🙂
         </p>
 
-        <div className="flex flex-col items-center gap-2 mb-6">
+        <div className="flex flex-col items-center pb-4">
           <div className="relative">
             <input
               type="number"
@@ -76,7 +64,7 @@ export default function DonateBox() {
           className="
             inline-flex items-center justify-center gap-2
             bg-background-paypal text-white font-semibold 
-            px-10 py-3 rounded-full hover:bg-background-paypal/80
+            px-12 py-3 rounded-full hover:bg-background-paypal/80
             transition-all duration-300 ease-in-out 
             shadow-md hover:shadow-lg active:scale-[0.98]"
         >
@@ -84,14 +72,14 @@ export default function DonateBox() {
           <Image
             src="/images/donationInfo/payPalLogo.svg"
             alt="PayPal Logo"
-            width={100}
-            height={100}
-            className="h-6 w-auto"
-            priority={true}
+            width={50}
+            height={50}
+            className="h-4 w-fit"
+            priority
           />{" "}
-          <span>bezahlen</span>
+          <span>spenden</span>
         </Link>
-      </motion.div>
-    </motion.section>
+      </div>
+    </section>
   );
 }

@@ -17,6 +17,7 @@ interface CollapsibleSectionHeaderProps {
   onMonthSelect?: (month: string | null) => void;
   onYearSelect?: (year: number | null) => void;
   onSortChange?: (order: "newest" | "oldest") => void;
+  onCategorySelect?: (category: string | null) => void;
 }
 
 export function CollapsibleSectionHeader({
@@ -29,21 +30,23 @@ export function CollapsibleSectionHeader({
   onMonthSelect,
   onYearSelect,
   onSortChange,
+  onCategorySelect,
 }: CollapsibleSectionHeaderProps) {
   const { fadeInVariant } = useMotionVariants();
 
   return (
-    <div className="px-4 pr-5 md:px-8 py-2 bg-gradient-to-tr from-header-background/80 via-header-background/70 to-header-background/60 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
+    <div className="px-4 pr-5 md:px-8 py-2 bg-header-background/80 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
       <span className="text-xl md:text-2xl font-semibold tracking-wide">
         {title}
       </span>
 
       <div className="flex justify-end">
-        {onMonthSelect && onYearSelect && onSortChange && (
+        {onMonthSelect && onYearSelect && onSortChange && onCategorySelect && (
           <ResetFilter
             onMonthSelect={onMonthSelect}
             onYearSelect={onYearSelect}
             onSortChange={onSortChange}
+            onCategorySelect={onCategorySelect}
           />
         )}
         {onFilterToggle && (
