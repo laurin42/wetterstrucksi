@@ -27,50 +27,53 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
         href={href}
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
       >
-        <div className="flex flex-col px-4 md:pl-8 py-2 md:py-4 h-full">
-          <div className="flex md:pr-8 h-full">
-            <div className="... pr-4 will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90">
-              {post.published_at && (
-                <p className="w-fit border-b border-text/32 text-xs text-text-foreground mb-1 font-semibold md:font-thin  ">
-                  {new Date(post.published_at).toLocaleDateString("de-DE", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
-              )}
+        <div className="flex p-4 h-full">
+          <div className="flex-1 will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90">
+            {post.published_at && (
+              <p className="w-fit border-b border-text/32 text-xs text-text-foreground mb-1 font-semibold md:font-thin">
+                {new Date(post.published_at).toLocaleDateString("de-DE", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+            )}
 
-              <h2 className="text-base text-text mb-2  leading-snug md:text-lg font-bold">
-                {post.title}
-              </h2>
+            <h2 className="text-base text-text mb-2 leading-snug md:text-lg font-bold">
+              {post.title}
+            </h2>
 
-              {post.og_description && (
-                <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
-                  {truncateWords(post.meta_description, 120)}
-                </p>
-              )}
-            </div>
-            {imageSrc && (
-              <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative shrink-0 transition duration-300 ease-in">
-                <Image
-                  src={imageSrc}
-                  overrideSrc={imageSrc}
-                  alt={post.title || "Feature Image"}
-                  fill
-                  className="object-cover rounded-md"
-                  sizes="(max-width: 768px) 6rem, 33vw"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 rounded-md bg-black/10">
-                  {isNewest && (
-                    <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
-                      Neuster Beitrag
-                    </span>
-                  )}
-                </div>
-              </div>
+            {post.og_description && (
+              <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
+                {truncateWords(post.meta_description, 120)}
+              </p>
+            )}
+
+            {!post.published_at && !post.title && !post.og_description && (
+              <div className="min-h-16"></div>
             )}
           </div>
+
+          {imageSrc && (
+            <div className="w-24 h-24 tablet-xs:w-32 tablet-xs:h-32 md:w-42 md:h-42 my-auto relative shrink-0 transition duration-300 ease-in">
+              <Image
+                src={imageSrc}
+                overrideSrc={imageSrc}
+                alt={post.title || "Feature Image"}
+                fill
+                className="object-cover rounded-md"
+                sizes="(max-width: 768px) 6rem, 33vw"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 rounded-md bg-black/10">
+                {isNewest && (
+                  <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
+                    Neuster Beitrag
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </Link>
     </div>
