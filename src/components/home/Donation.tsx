@@ -15,7 +15,7 @@ export default function DonateBox() {
     <section className="relative w-full h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
       <div className="absolute right-0 bottom-0 opacity-80">
         <Image
-          src="/images/donationInfo/donationhero.png"
+          src="/images/donationInfo/DonationHero.png"
           alt="DonationHero"
           width={600}
           height={600}
