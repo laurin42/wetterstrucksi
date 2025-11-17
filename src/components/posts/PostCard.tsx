@@ -6,7 +6,6 @@ import { PostWithMeta } from "@tryghost/content-api";
 interface PostCardProps {
   post: PostWithMeta;
   className?: string;
-  isNewest?: boolean;
 }
 
 function truncateWords(text?: string, maxWords?: number) {
@@ -16,7 +15,7 @@ function truncateWords(text?: string, maxWords?: number) {
   return words.slice(0, maxWords).join(" ") + "...";
 }
 
-export default function PostCard({ post, isNewest }: PostCardProps) {
+export default function PostCard({ post }: PostCardProps) {
   const href = post.slug ? `/posts/${post.slug}` : "#";
 
   const imageSrc = fixImageUrl(post.feature_image);
@@ -28,7 +27,7 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
         className="block overflow-hidden transition-transform duration-240 active:bg-accent/20"
       >
         <div className="flex p-4 h-full">
-          <div className="flex-1 will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90">
+          <div className="flex-1 will-change-transform transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:opacity-90 pr-4">
             {post.published_at && (
               <p className="w-fit border-b border-text/32 text-xs text-text-foreground mb-1 font-semibold md:font-thin">
                 {new Date(post.published_at).toLocaleDateString("de-DE", {
@@ -65,13 +64,7 @@ export default function PostCard({ post, isNewest }: PostCardProps) {
                 sizes="(max-width: 768px) 6rem, 33vw"
                 loading="lazy"
               />
-              <div className="absolute inset-0 rounded-md bg-black/10">
-                {isNewest && (
-                  <span className="absolute top-0 left-0 bg-accent text-text-white text-xs font-semibold px-2 py-1 rounded-br-md">
-                    Neuster Beitrag
-                  </span>
-                )}
-              </div>
+              <div className="absolute inset-0 rounded-md bg-black/10"></div>
             </div>
           )}
         </div>
