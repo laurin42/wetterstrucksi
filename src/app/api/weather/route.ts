@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 let cache: { data: any; timestamp: number } | null = null
-const CACHE_DURATION = 10 * 60 * 10000
+const CACHE_DURATION = 10 * 60 * 1000
 
 export async function GET() {
     console.log("=== /api/weather GET called ===", new Date().toISOString());
@@ -13,7 +13,7 @@ export async function GET() {
   }
 
   const response = await fetch(
-    'https://api.open-meteo.com/v1/forecast?latitude=51.2217&longitude=6.7762&daily=sunrise,sunset&current=temperature_2m,weather_code,is_day&timezone=Europe%2FBerlin'
+    'https://api.open-meteo.com/v1/forecast?latitude=51.2217&longitude=6.7762&current=is_day,weather_code,temperature_2m&timezone=Europe%2FBerlin'
   )
   const data = await response.json()
 
