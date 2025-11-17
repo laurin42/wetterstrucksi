@@ -9,10 +9,11 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
   return (
     <section className="relative w-full min-h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
       <div className="max-w-4xl p-16">
-        <div className="absolute left-0 h-54 w-54 tablet-xs:w-58 tablet-xs:h-58 tablet:w-62 tablet:h-62 sm:bottom-4 md:bottom-8 opacity-80">
+        <div className="absolute left-0 h-32 w-32 tablet-xs:w-42 tablet-xs:h-42 tablet:w-54 tablet:h-54 sm:bottom-4 md:bottom-8 opacity-80">
           <Image
             src="/images/about/logoAlternative.webp"
             alt="Logo Alternative"
+            sizes="(max-width: 640px) 14rem, (max-width: 768px) 15rem, (max-width: 1024px) 16rem, 17rem"
             fill
             priority
             className="hidden tablet-xs:block object-contain"

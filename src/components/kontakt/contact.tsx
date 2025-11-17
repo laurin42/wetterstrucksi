@@ -61,7 +61,7 @@ const ContactForm = () => {
                 Kontakt aufnehmen
               </h1>
             </div>
-            <p className="text-text/70 text-sm md:text-base">
+            <p className="text-text text-sm md:text-base">
               Ich freue mich auf deine Nachricht und melde mich schnellstmöglich
               zurück.
             </p>
@@ -71,7 +71,7 @@ const ContactForm = () => {
             <div className="relative">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-text mb-1"
+                className="block text-sm font-medium text-text mb-1 sr-only"
               >
                 Dein Name
               </label>
@@ -83,14 +83,14 @@ const ContactForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
+                className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
               />
             </div>
 
             <div className="relative">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-text mb-1"
+                className="block text-sm font-medium text-text mb-1 sr-only"
               >
                 Deine E-Mail
               </label>
@@ -102,7 +102,7 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
+                className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
               />
             </div>
           </div>
@@ -110,7 +110,7 @@ const ContactForm = () => {
           <div className="relative">
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-text mb-1"
+              className="block text-sm font-medium text-text mb-1 sr-only"
             >
               Deine Nachricht
             </label>
@@ -122,7 +122,7 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               rows={5}
-              className="w-full rounded-md p-4 bg-header-background/32 border border-transparent focus:border-accent focus:ring-0 outline-none"
+              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
             ></textarea>
           </div>
 
@@ -132,7 +132,7 @@ const ContactForm = () => {
               disabled={isLoading}
               className="group cursor-pointer relative inline-flex items-center justify-center w-full tablet-xs:w-3/6
             py-6 rounded-md bg-foreground-secondary/16 
-            shadow-sm border border-white/32 text-text/80 text-base md:text-lg font-semibold 
+            shadow-sm border border-white/32 text-text text-base md:text-lg font-semibold 
             hover:shadow-none hover:border-transparent hover:bg-transparent active:scale-116
             transition-all duration-300 ease-in-out overflow-hidden"
             >
@@ -156,14 +156,14 @@ const ContactForm = () => {
           </div>
 
           {status && (
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4 rounded-lg border border-white/32 py-2 px-4 bg-foreground-secondary/32">
               {status === "success" ? (
-                <div className="flex items-center gap-2 text-green-500">
+                <div className="flex items-center gap-2 text-green-700">
                   <CheckCircle className="w-5 h-5" />
                   <span>Nachricht erfolgreich gesendet!</span>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 text-red-500">
+                <div className="flex items-center gap-2 text-red-700">
                   <XCircle className="w-5 h-5" />
                   <span>Fehler beim Senden. Bitte versuche es erneut.</span>
                 </div>
