@@ -2,6 +2,8 @@ import { WetterblogClient } from "@/components/wetterblog/WetterblogClient";
 import { getAllPostsWithTags } from "@/app/api/posts/getPostsWithMeta";
 import { PostWithMeta } from "@tryghost/content-api";
 
+export const revalidate = 60;
+
 export default async function WetterblogPage() {
   let posts: PostWithMeta[] = [];
 

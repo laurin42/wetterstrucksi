@@ -1,4 +1,3 @@
-"use cache";
 import GhostContentAPI, { GhostPost, PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import { v4 as uuidv4 } from "uuid";
@@ -44,7 +43,6 @@ function normalizePosts(posts: GhostPost[] | undefined | null): PostWithMeta[] {
 }
 
 export const getPostsWithMeta = cache(async (limit = 24): Promise<PostWithMeta[]> => {
-  "use cache"
   const posts = await api.posts.browse({ 
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
     limit,

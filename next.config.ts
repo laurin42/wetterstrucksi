@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
   loader: "default",
 
   },
-  cacheComponents: true,
+  cacheComponents: false,
 };
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

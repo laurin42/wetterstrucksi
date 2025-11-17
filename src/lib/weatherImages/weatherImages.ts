@@ -3,7 +3,7 @@ export const weatherCodeToImage: Record<number, string> = {
 
   1: "/images/weatherImages/clear.webp",
   2: "/images/weatherImages/partlyCloudy.webp",
-  3: "/images/weatherImages/partlyCloudy.webp",
+  3: "/images/weatherImages/cloudy.webp",
 
   45: "/images/weatherImages/fog.webp",
   48: "/images/weatherImages/fog.webp",
@@ -17,7 +17,7 @@ export const weatherCodeToImage: Record<number, string> = {
 
   61: "/images/weatherImages/rain.webp",
   63: "/images/weatherImages/rain.webp",
-  65: "/images/weatherImages/heavyRain.webp",
+  65: "/images/weatherImages/rain.webp",
 
   66: "/images/weatherImages/freezingRain.webp",
   67: "/images/weatherImages/freezingRain.webp",

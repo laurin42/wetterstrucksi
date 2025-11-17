@@ -68,11 +68,9 @@ export default function HomeHero({
             src={backgroundImage}
             alt="Hintergrundbild"
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 1200px, 1920px"
             className="object-cover object-center z-0 opacity-0 animate-fade-in animation-delay-02"
-            preload={true}
-            placeholder="blur"
-            blurDataURL={backgroundImage}
+            priority
           />
           <div className="absolute inset-0 bg-black/60 z-10 opacity-0 animate-fade-in animation-delay-02" />
         </>
