@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -36,8 +38,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: "Form submitted successfully!" });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
+    const message = error instanceof Error ? error.message : "Internal Server Error";
     return NextResponse.json(
       { error: "Failed to submit form", details: message },
       { status: 500 }
