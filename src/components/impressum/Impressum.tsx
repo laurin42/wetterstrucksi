@@ -46,14 +46,8 @@ export default function Impressum() {
           EU-Streitschlichtung
         </h2>
         <p>
-          Die Europäische Kommission stellt eine{" "}
-          <Link
-            href="https://consumer-redress.ec.europa.eu/index_de"
-            target="_blank"
-            className="underline text-accent"
-          >
-            Plattform
-          </Link>{" "}
+          Die Europäische Kommission stellt eine Plattform
+          <em>(https://consumer-redress.ec.europa.eu/index_de)</em>
           zur Online-Streitbeilegung (OS) bereit. Unsere E-Mail-Adresse finden
           Sie oben im Impressum.
         </p>
