@@ -26,7 +26,7 @@ export default function Footer() {
           <p>
             © 2025{" "}
             <Link
-              href="/about"
+              href="/home"
               className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
             >
               Jens Strucks
