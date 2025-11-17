@@ -13,6 +13,7 @@ interface FilterHeaderProps {
   onYearSelect: (year: number | null) => void;
   onSortChange: (order: "newest" | "oldest") => void;
   onCategorySelect: (category: string | null) => void;
+  selectedCategory: string | null;
 }
 
 const monthLabels = [
@@ -41,15 +42,32 @@ export function FilterHeader({
   onSortChange,
   onYearSelect,
   onCategorySelect,
+  selectedCategory,
 }: FilterHeaderProps) {
-  const title =
-    selectedMonth || selectedYear
-      ? `Beiträge${
-          selectedMonth !== null
-            ? ` im ${monthLabels[parseInt(selectedMonth, 10)]}`
-            : ""
-        }${selectedYear !== null ? ` ${selectedYear}` : ""}`
-      : "Alle Beiträge";
+  const allPostsTitle = "Alle Beiträge";
+
+  const categoryString = selectedCategory?.trim();
+  const hasCategory = categoryString && categoryString !== "null";
+
+  const monthIndex =
+    selectedMonth !== null ? parseInt(selectedMonth, 10) : null;
+  let monthLabel = "";
+  if (
+    monthIndex !== null &&
+    monthIndex >= 0 &&
+    monthIndex < monthLabels.length
+  ) {
+    monthLabel = ` im ${monthLabels[monthIndex]}`;
+  }
+
+  const yearLabel = selectedYear !== null ? ` ${selectedYear}` : "";
+
+  let title = "";
+  if (hasCategory) {
+    title = `${categoryString}${monthLabel}${yearLabel}`;
+  } else {
+    title = `${allPostsTitle}${monthLabel}${yearLabel}`;
+  }
 
   return (
     <CollapsibleSectionHeader

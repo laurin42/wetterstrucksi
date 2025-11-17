@@ -18,33 +18,31 @@ import { IoCalendar } from "react-icons/io5";
 import { TbCategory } from "react-icons/tb";
 import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 
-interface FilterCallbacks {
-  onMonthSelect: (month: string | null) => void;
-  onYearSelect: (year: number | null) => void;
-  onSortChange: (order: "newest" | "oldest") => void;
-  onCategorySelect: (category: string | null) => void;
-}
-
-interface PostsFilterProps extends FilterCallbacks {
+interface PostsFilterProps {
+  categories: string[];
   selectedMonth: string | null;
   selectedYear: number | null;
   sortOrder: "newest" | "oldest";
-  selectedCategories: string | null;
-  categories: string[];
+  onMonthSelect: (month: string | null) => void;
+  onYearSelect: (year: number | null) => void;
+  onSortChange: (order: "newest" | "oldest") => void;
+  selectedCategory: string | null;
+  onCategorySelect: (category: string | null) => void;
 }
 
 export function PostsFilter({
-  selectedMonth,
-  onMonthSelect,
-  selectedYear,
-  onYearSelect,
-  sortOrder,
-  onSortChange,
-  selectedCategories,
-  onCategorySelect,
   categories,
+  selectedMonth,
+  selectedYear,
+  sortOrder,
+  onMonthSelect,
+  onYearSelect,
+  onSortChange,
+  selectedCategory,
+  onCategorySelect,
 }: PostsFilterProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
   const { sidebarVariants } = useMotionVariants();
 
   return (
@@ -59,6 +57,7 @@ export function PostsFilter({
         onMonthSelect={onMonthSelect}
         onYearSelect={onYearSelect}
         onSortChange={onSortChange}
+        selectedCategory={selectedCategory}
         onCategorySelect={onCategorySelect}
       />
 
@@ -66,7 +65,7 @@ export function PostsFilter({
         initial="closed"
         animate={sidebarOpen ? "open" : "closed"}
         variants={sidebarVariants}
-        className="overflow-hidden bg-foreground-secondary shadow-inner-sm tablet-xs:rounded-b-lg  tablet-xs:mb-2"
+        className="overflow-hidden bg-foreground-secondary shadow-inner-sm tablet-xs:rounded-b-lg tablet-xs:mb-2"
       >
         <Accordion
           type="single"
@@ -80,11 +79,10 @@ export function PostsFilter({
                 <span>Kategorie auswählen</span>
               </div>
             </AccordionTrigger>
-
             <AccordionContent>
               <CategoryFilter
-                categories={categories ?? []}
-                selectedCategory={selectedCategories}
+                categories={categories}
+                selectedCategory={selectedCategory}
                 onCategorySelect={onCategorySelect}
               />
             </AccordionContent>

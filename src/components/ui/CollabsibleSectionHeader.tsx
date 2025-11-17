@@ -35,7 +35,7 @@ export function CollapsibleSectionHeader({
   const { fadeInVariant } = useMotionVariants();
 
   return (
-    <div className="px-4 pr-5 md:px-8 py-2 bg-header-background/80 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
+    <div className="px-2 tablet-xs:px-6 py-2 bg-header-background/80 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
       <span className="text-xl md:text-2xl font-semibold tracking-wide">
         {title}
       </span>
@@ -51,17 +51,19 @@ export function CollapsibleSectionHeader({
         )}
         {onFilterToggle && (
           <motion.button
+            aria-label={mobileOpen ? "Filter schließen" : "Filter öffnen"}
             onClick={(e) => {
               e.stopPropagation();
               onFilterToggle();
             }}
-            className="flex items-center gap-2 cursor-pointer py-1 rounded-full"
+            className="flex items-center gap-2 cursor-pointer p-3 min-h-11 min-w-11 rounded-full"
             variants={fadeInVariant}
             initial="hidden"
             animate="visible"
           >
             <motion.div
               key={mobileOpen ? "up" : "down"}
+              aria-label={isOpen ? "Bereich schließen" : "Bereich öffnen"}
               initial={{ rotate: mobileOpen ? -180 : 180 }}
               animate={{ rotate: mobileOpen ? 0 : 0 }}
               transition={{ duration: 0.3 }}
@@ -84,7 +86,7 @@ export function CollapsibleSectionHeader({
         {isContentCollabsible && (
           <motion.button
             onClick={onToggle}
-            className="p-1 rounded-full hover:bg-accent-dim transition-colors"
+            className="p-3 min-h-11 min-w-11 rounded-full hover:bg-accent-dim transition-colors"
             variants={fadeInVariant}
             initial="hidden"
             animate="visible"

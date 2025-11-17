@@ -1,3 +1,5 @@
+// WetterblogClient.tsx
+
 "use client";
 
 import React, { useState, useMemo, useRef, useEffect, memo } from "react";
@@ -46,18 +48,20 @@ function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
   if (posts.length === 0) {
     return (
       <div className="h-svh w-100% flex justify-center items-center">
-        <LoadingSpinner />
+                <LoadingSpinner />     {" "}
       </div>
     );
   }
 
   return (
     <>
+           {" "}
       {posts.map((post, idx) => (
         <div key={`${post.id}-${idx}`} className="flex flex-col">
-          <PostCard post={post} />
+                    <PostCard post={post} />       {" "}
         </div>
       ))}
+         {" "}
     </>
   );
 }
@@ -158,10 +162,11 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
       ref={archiveRef}
       className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:my-8 tablet-xs:p-2 tablet-xs:border border-white/16 tablet-xs:rounded-lg shadow md"
     >
-      <WeatherBlogHero />
+            <WeatherBlogHero />
+           {" "}
       <PostsFilter
         categories={categories}
-        selectedCategories={selectedCategory}
+        selectedCategory={selectedCategory}
         onCategorySelect={setSelectedCategory}
         selectedMonth={selectedMonth}
         onMonthSelect={setSelectedMonth}
@@ -170,23 +175,28 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
         sortOrder={sortOrder}
         onSortChange={setSortOrder}
       />
-
+           {" "}
       <section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/32 tablet-xs:rounded-md tablet-xs:border-none border-t border-text/16">
+               {" "}
         <div className="md:col-span-3 grid grid-cols-1 pt-2 tablet-xs:pt-0">
-          <MemoizedVisiblePosts posts={visiblePosts} />
+                    <MemoizedVisiblePosts posts={visiblePosts} />       {" "}
         </div>
-
+               {" "}
         {visiblePosts.length < filteredPosts.length && (
           <div className="col-span-3 flex justify-center items-center py-6">
+                       {" "}
             <button
               onClick={loadMore}
               className="underline text-accent-dark cursor-pointer hover:text-accent/80 flex items-center gap-2"
             >
-              Mehr Beiträge laden <FaArrowDownLong />
+                            Mehr Beiträge laden <FaArrowDownLong />           {" "}
             </button>
+                     {" "}
           </div>
         )}
+             {" "}
       </section>
+         {" "}
     </section>
   );
 };
