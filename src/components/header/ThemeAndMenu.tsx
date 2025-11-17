@@ -82,11 +82,11 @@ export function ThemeAndMenu() {
               {mounted ? (
                 displayTheme === "dark" ? (
                   <p className="flex flex-col justify-center items-center">
-                    <MdLightMode size={32} />- Dunkler Modus -
+                    <MdDarkMode size={32} />- Dunkler Modus -
                   </p>
                 ) : (
                   <p className="flex flex-col justify-center items-center">
-                    <MdDarkMode size={32} />- Heller Modus -
+                    <MdLightMode size={32} />- Heller Modus -
                   </p>
                 )
               ) : null}
