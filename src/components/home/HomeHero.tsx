@@ -68,7 +68,7 @@ export default function HomeHero({
             src={backgroundImage}
             alt="Hintergrundbild"
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 1200px, 1920px"
+            sizes="1200px, 1920px"
             className="object-cover object-center z-0 opacity-0 animate-fade-in animation-delay-02"
             priority
           />
