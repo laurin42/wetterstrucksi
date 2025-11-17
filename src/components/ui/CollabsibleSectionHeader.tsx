@@ -35,7 +35,7 @@ export function CollapsibleSectionHeader({
   const { fadeInVariant } = useMotionVariants();
 
   return (
-    <div className="px-2 tablet-xs:px-6 py-2 bg-header-background/80 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
+    <div className="pr-2 pl-4 tablet-xs:px-6 py-2 bg-header-background/80 text-text-white shadow-sm backdrop-blur-sm flex items-center justify-between select-none tablet-xs:rounded-t-sm">
       <span className="text-xl md:text-2xl text-text-white font-semibold tracking-wide">
         {title}
       </span>

@@ -161,7 +161,7 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
       <WeatherBlogHero />
       <PostsFilter
         categories={categories}
-        selectedCategory={selectedCategory} // <-- DIESE ZEILE IST DIE KORREKTUR
+        selectedCategory={selectedCategory}
         onCategorySelect={setSelectedCategory}
         selectedMonth={selectedMonth}
         onMonthSelect={setSelectedMonth}
