@@ -8,8 +8,8 @@ import { Send } from "lucide-react";
 
 export function ContactCta() {
   return (
-    <section className="relative w-full h-svh flex justify-center items-center">
-      <div className="max-w-3xl w-full flex flex-col items-start first:items-center px-16 tablet-xs:px-16 gap-6">
+    <section className="relative w-full min-h-svh flex justify-center items-center my-8">
+      <div className="max-w-3xl w-full flex flex-col items-start first:items-center px-4 xs:px-16 tablet-xs:px-16 gap-6">
         <h2 className="text-4xl font-thin tracking-wider text-left text-text pb-2 mb-8 border-b border-text/40">
           Lasst uns Kontakt aufnehmen
         </h2>

@@ -25,10 +25,10 @@ export function NewestPostCard({ post, className }: NewestPostCard) {
         overflow-hidden
         bg-header-background/66 transition-all duration-1000
         shadow-2xl
-        w-full h-auto
+        w-full h-auto 
         landscapeCard
         shrink-0
-        mx-8
+        xs:mx-8
         }
 
         ${className}
@@ -56,7 +56,7 @@ export function NewestPostCard({ post, className }: NewestPostCard) {
               <h2 className="text-lg font-semibold">
                 {truncateWords(post.title, 16)}
               </h2>
-              <p className="border-t border-white/32 pt-2 line-clamp-6 tablet-xs:line-clamp-0">
+              <p className="hidden xxs:block border-t border-white/32 pt-2 line-clamp-6 tablet-xs:line-clamp-0">
                 {post.og_description}
               </p>
             </>

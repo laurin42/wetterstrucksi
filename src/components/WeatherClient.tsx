@@ -37,7 +37,7 @@ export function WeatherClient({ initialData }: WeatherClientProps) {
     "/icons/weather/unknown.svg";
 
   return (
-    <div className="flex items-center xs:gap-2 tablet-xs:gap-4 text-md font-thin text-text border-l-2 border-text/32 px-2 tablet-xs:px-4">
+    <div className="flex items-center gap-1 xs:gap-2 tablet-xs:gap-4 text-md font-thin text-text border-l-2 border-text/32 px-2 tablet-xs:px-4">
       {Math.round(weatherData.current.temperature_2m)}°C
       <img
         src={iconPath}

@@ -33,7 +33,7 @@ export default async function Header() {
             alt="Logo"
             width={120}
             height={120}
-            className="h-12 w-auto"
+            className="h-8 xxs:h-12 w-auto"
             loading="eager"
           />
           <h1 className="">Wetterstrucksi.de</h1>

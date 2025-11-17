@@ -79,7 +79,7 @@ export default function HomeHero({
       )}
 
       <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto px-8 tablet-xs:px-16 gap-y-8">
-        <div className="relative w-full flex flex-col items-center text-balance text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
+        <div className="relative w-full flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <h1 className="opacity-0 animate-fade-in animation-delay-04">
             <em className="font-semibold tracking-wide">Dein</em> Ort für Wetter
           </h1>

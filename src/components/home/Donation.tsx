@@ -12,7 +12,7 @@ export default function DonateBox() {
     "https://www.paypal.com/paypalme/jstrucks";
 
   return (
-    <section className="relative w-full h-svh flex flex-col items-center justify-center bg-foreground-secondary/44">
+    <section className="relative w-full min-h-svh py-8 xxs:py-0 flex flex-col items-center justify-center bg-foreground-secondary/44">
       <div className="absolute right-0 bottom-0 opacity-80">
         <Image
           src="/images/donationInfo/DonationHero.png"
