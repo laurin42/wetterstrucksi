@@ -34,7 +34,7 @@ export function ThemeAndMenu() {
 
   return (
     <>
-      <div className="absolute right-4 md:right-8 flex items-center justify-center space-x-4 z-50">
+      <div className="absolute right-4 md:right-2 flex items-center justify-center space-x-4 z-50">
         <nav className="hidden tablet-sm:flex space-x-6">
           {mainMenu.map((item) => (
             <a key={item.title} href={item.href} className={menuLinkClasses}>
