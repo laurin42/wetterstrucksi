@@ -56,6 +56,12 @@ export function AboutStoryDesktop() {
       <div className="relative border-text/40 text-lg font-thin">
         {timelineItems.map((item, index) => {
           const isStart = item.align === "start";
+
+          const isLast = index === timelineItems.length - 1;
+          const lineClass = isLast
+            ? "bg-gradient-to-b from-text/30 via-text/30 via-80% to-text/0"
+            : "bg-text/32";
+
           return (
             <div
               key={index}
@@ -63,7 +69,13 @@ export function AboutStoryDesktop() {
                 isStart ? "justify-start" : "justify-end"
               } first:mt-0 first:pt-0 -mt-32`}
             >
-              <div className="mt-32 absolute z-0 -top-24 bottom-24 left-1/2 w-0.5 -translate-x-1/2 bg-text/30 pointer-events-none"></div>
+              <div
+                className={`
+            mt-32 absolute z-0 top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2 pointer-events-none
+            ${lineClass}
+          `}
+              ></div>
+
               {/* Timeline circle */}
               <div className="absolute z-0 w-5 h-5 top-8 left-1/2 bg-header-background rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
