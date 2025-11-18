@@ -30,66 +30,73 @@ function normalizePosts(posts: GhostPost[]): PostWithMeta[] {
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
+
   const page = Number(url.searchParams.get("page") || 1);
   const limit = Number(url.searchParams.get("limit") || 50);
   const selectedCategoryDisplayName = url.searchParams.get("category");
   const selectedMonth = url.searchParams.get("month");
-  const selectedYear = url.searchParams.get("year");
+  let selectedYear = url.searchParams.get("year");
+
+  if (selectedMonth && !selectedYear) {
+    selectedYear = String(new Date().getFullYear()); 
+  }
+
+  const sortOrder = url.searchParams.get("order") || "newest";
+  const orderParam = sortOrder === "oldest" ? "published_at ASC" : "published_at DESC";
 
   const filterParts: string[] = [];
+
   if (selectedCategoryDisplayName) {
     const tagSlugs = getSlugsByCategoryDisplayName(selectedCategoryDisplayName);
     if (tagSlugs.length > 0) {
-            filterParts.push(`tag:[${tagSlugs.join(',')}]`); 
-        }
+      filterParts.push(`tag:[${tagSlugs.join(",")}]`);
     }
-
-    if (selectedYear && selectedMonth) {
-      const startOfMonth = `${selectedYear}-${selectedMonth.padStart(2, '0')}-01`;
-      let nextMonth = parseInt(selectedMonth) + 1;
-      let nextYear = parseInt(selectedYear);
-      if (nextMonth > 12) {
-          nextMonth = 1;
-          nextYear += 1;
-      }
-      const startOfNextMonth = `${nextYear}-${String(nextMonth).padStart(2, '0')}-01`;
-
-      filterParts.push(`published_at:>'${startOfMonth}'`);
-      filterParts.push(`published_at:<'${startOfNextMonth}'`);
-  } else if (selectedYear) {
-      const startOfYear = `${selectedYear}-01-01`;
-      const endOfYear = `${parseInt(selectedYear) + 1}-01-01`;
-      
-      filterParts.push(`published_at:>'${startOfYear}'`);
-      filterParts.push(`published_at:<'${endOfYear}'`);
   }
 
-  const ghostFilter = filterParts.join('+');
+  if (selectedYear && selectedMonth) {
+    const startOfMonth = `${selectedYear}-${String(Number(selectedMonth)).padStart(2, "0")}-01`;
+    let nextMonth = Number(selectedMonth) + 1;
+    let nextYear = Number(selectedYear);
 
-  const posts: GhostPost[] = await api.posts.browse({
+    if (nextMonth > 12) {
+      nextMonth = 1;
+      nextYear++;
+    }
+
+    const startOfNextMonth = `${nextYear}-${String(nextMonth).padStart(2, "0")}-01`;
+
+    filterParts.push(`published_at:>='${startOfMonth}'`);
+    filterParts.push(`published_at:<'${startOfNextMonth}'`);
+  }
+  else if (selectedYear) {
+    const startOfYear = `${selectedYear}-01-01`;
+    const endOfYear = `${Number(selectedYear) + 1}-01-01`;
+
+    filterParts.push(`published_at:>='${startOfYear}'`);
+    filterParts.push(`published_at:<'${endOfYear}'`);
+  }
+
+  const ghostFilter = filterParts.join("+") || undefined;
+
+  const ghostPage = await api.posts.browse({
     include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
     page,
     limit,
-    order: "published_at DESC",
+    order: orderParam,
     filter: ghostFilter,
   });
 
-  const postsResponse = await api.posts.browse({
- include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
-    page,
-    limit,
-    order: "published_at DESC",
-    filter: ghostFilter,});
-  const totalPosts = postsResponse.meta?.pagination?.total || 0; 
-    const pageData = postsResponse.meta?.pagination?.page || 1;
-    const totalPages = postsResponse.meta?.pagination?.pages || 1;
+  let posts = ghostPage;
+  let total = ghostPage.meta?.pagination?.total || 0;
+  let totalPages = ghostPage.meta?.pagination?.pages || 1;
+  let currentPage = ghostPage.meta?.pagination?.page || 1;
 
   const normalized = normalizePosts(posts);
 
   return NextResponse.json({
-      posts: normalized,
-      total: totalPosts,
-      page: pageData,
-      pages: totalPages,
-    });
+    posts: normalized,
+    total,
+    page: currentPage,
+    pages: totalPages,
+  });
 }

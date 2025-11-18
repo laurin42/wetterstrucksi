@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useEffect, memo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { PostWithMeta } from "@tryghost/content-api";
 import WeatherBlogHero from "./WetterblogHero";
 import { PostsFilter } from "../posts/filter/PostsFilter";
-import { useUniquePosts } from "@/lib/posts/useUniquePosts";
 import { FaArrowDownLong } from "react-icons/fa6";
 import PostCard from "../posts/PostCard";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { categoryMap } from "@/lib/posts/categoryMap";
 
 type SortOrder = "newest" | "oldest";
 
@@ -28,7 +26,7 @@ function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
   if (posts.length === 0) {
     return (
       <div className="h-svh w-100% flex justify-center items-center">
-        <LoadingSpinner />
+        <p>Keine Beiträge gefunden</p>
       </div>
     );
   }
@@ -50,8 +48,6 @@ export const WetterblogClient = ({
   posts,
   initialCategories,
 }: WetterblogClientProps) => {
-  const allPosts = useUniquePosts(posts);
-
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
@@ -69,26 +65,20 @@ export const WetterblogClient = ({
     const params = new URLSearchParams({
       page: (currentPage + 1).toString(),
       limit: postsPerLoad.toString(),
+      order: sortOrder === "newest" ? "published_at DESC" : "published_at ASC",
     });
 
-    if (selectedCategory) {
-      params.append("category", selectedCategory);
-    }
-    if (selectedMonth) {
-      params.append("month", selectedMonth);
-    }
-    if (selectedYear) {
-      params.append("year", selectedYear.toString());
-    }
+    if (selectedCategory) params.append("category", selectedCategory);
+    if (selectedMonth) params.append("month", selectedMonth);
+    if (selectedYear) params.append("year", selectedYear.toString());
 
     const res = await fetch(`/api/posts?${params.toString()}`);
     const result: PostsApiResponse = await res.json();
-    let updatedPosts = [...visiblePosts, ...result.posts];
-    const dedupedPosts = Array.from(
-      new Map(updatedPosts.map((p) => [p.id, p])).values()
-    );
 
-    setVisiblePosts(dedupedPosts);
+    const merged = [...visiblePosts, ...result.posts];
+    const deduped = Array.from(new Map(merged.map((p) => [p.id, p])).values());
+
+    setVisiblePosts(deduped);
     setCurrentPage((prev) => prev + 1);
   };
 
@@ -100,6 +90,7 @@ export const WetterblogClient = ({
         order:
           sortOrder === "newest" ? "published_at DESC" : "published_at ASC",
       });
+
       if (selectedCategory) params.append("category", selectedCategory);
       if (selectedMonth) params.append("month", selectedMonth);
       if (selectedYear) params.append("year", selectedYear.toString());

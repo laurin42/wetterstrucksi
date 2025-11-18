@@ -8,18 +8,18 @@ interface MonthsFilterProps {
 }
 
 const months = [
-  { value: "0", label: "Januar" },
-  { value: "1", label: "Februar" },
-  { value: "2", label: "März" },
-  { value: "3", label: "April" },
-  { value: "4", label: "Mai" },
-  { value: "5", label: "Juni" },
-  { value: "6", label: "Juli" },
-  { value: "7", label: "August" },
-  { value: "8", label: "September" },
-  { value: "9", label: "Oktober" },
-  { value: "10", label: "November" },
-  { value: "11", label: "Dezember" },
+  { value: "01", label: "Januar" },
+  { value: "02", label: "Februar" },
+  { value: "03", label: "März" },
+  { value: "04", label: "April" },
+  { value: "05", label: "Mai" },
+  { value: "06", label: "Juni" },
+  { value: "07", label: "Juli" },
+  { value: "08", label: "August" },
+  { value: "09", label: "September" },
+  { value: "10", label: "Oktober" },
+  { value: "11", label: "November" },
+  { value: "12", label: "Dezember" },
 ];
 
 export function MonthsFilter({
