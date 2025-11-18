@@ -3,6 +3,8 @@ export function fixImageUrl(url?: string | null): string | null {
 
   let cleanedUrl = url.trim();
 
+  cleanedUrl = cleanedUrl.replace(/\/size\/w\d+\//, '/');
+
   cleanedUrl = cleanedUrl.replace(/^https?:\/\/(cms\.)?wetterstrucksi\.de\/?/, '');
 
   cleanedUrl = cleanedUrl.replace("jensstrucks-blog", "");
