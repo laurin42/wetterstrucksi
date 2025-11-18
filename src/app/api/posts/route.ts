@@ -41,8 +41,8 @@ export async function GET(req: Request) {
     selectedYear = String(new Date().getFullYear()); 
   }
 
-  const sortOrder = url.searchParams.get("order") || "newest";
-  const orderParam = sortOrder === "oldest" ? "published_at ASC" : "published_at DESC";
+ const sortOrder = url.searchParams.get("order") || "newest"; 
+const orderParam = sortOrder === "oldest" ? "published_at ASC" : "published_at DESC";
 
   const filterParts: string[] = [];
 

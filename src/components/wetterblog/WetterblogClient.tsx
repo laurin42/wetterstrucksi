@@ -65,7 +65,7 @@ export const WetterblogClient = ({
     const params = new URLSearchParams({
       page: (currentPage + 1).toString(),
       limit: postsPerLoad.toString(),
-      order: sortOrder === "newest" ? "published_at DESC" : "published_at ASC",
+      order: sortOrder,
     });
 
     if (selectedCategory) params.append("category", selectedCategory);
@@ -87,8 +87,7 @@ export const WetterblogClient = ({
       const params = new URLSearchParams({
         page: "1",
         limit: postsPerLoad.toString(),
-        order:
-          sortOrder === "newest" ? "published_at DESC" : "published_at ASC",
+        order: sortOrder,
       });
 
       if (selectedCategory) params.append("category", selectedCategory);
