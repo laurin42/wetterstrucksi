@@ -22,9 +22,6 @@ export function NewestPostCard({ post, className }: NewestPostCard) {
     post.custom_excerpt ||
     post.plaintext;
 
-  console.log("DEBUG POST:", post);
-  console.log("DESC PICKED:", desc);
-
   return (
     <div
       className={`

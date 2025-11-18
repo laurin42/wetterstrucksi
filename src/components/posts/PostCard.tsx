@@ -18,6 +18,12 @@ function truncateWords(text?: string, maxWords?: number) {
 export default function PostCard({ post }: PostCardProps) {
   const href = post.slug ? `/posts/${post.slug}` : "#";
 
+  const desc =
+    post.og_description ||
+    post.meta_description ||
+    post.custom_excerpt ||
+    post.plaintext;
+
   const imageSrc = fixImageUrl(post.feature_image);
 
   return (
@@ -42,9 +48,9 @@ export default function PostCard({ post }: PostCardProps) {
               {post.title}
             </h2>
 
-            {post.og_description && (
+            {desc && (
               <p className="md:text-sm text-text line-clamp-3 md:line-clamp-8 md:font-normal tablet-xs:max-w-6/8">
-                {truncateWords(post.meta_description, 120)}
+                {truncateWords(desc, 120)}
               </p>
             )}
 
