@@ -29,23 +29,17 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
       <div>
         <Accordion type="single" collapsible>
           {items.map((item, index) => (
-            <div key={index}>
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className=" py-2"
+            <AccordionItem value={`item-${index}`} className=" py-2">
+              <AccordionTrigger
+                className="flex items-center bg-header-background/32 md:bg-header-background/44 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
+                style={{ textDecoration: "none" }}
               >
-                <AccordionTrigger
-                  className="flex items-center bg-header-background/32 md:bg-header-background/44 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
-                  style={{ textDecoration: "none" }}
-                >
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-4 md:mx-0 md:px-8 my-4 py-6 text-base text-text/80 rounded-xl rounded-t-none bg-accent/40 md:bg-accent/80  leading-relaxed">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            </div>
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className="px-4 md:mx-0 md:px-8 my-4 py-6 text-base text-text/80 rounded-xl rounded-t-none bg-accent/40 md:bg-accent/80  leading-relaxed">
+                {item.answer}
+              </AccordionContent>
+            </AccordionItem>
           ))}
         </Accordion>
       </div>

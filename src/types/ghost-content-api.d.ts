@@ -99,16 +99,36 @@ export interface GhostAuthor {
     published_at?: string;
   }
 
+
+export interface GhostPagination {
+  page: number;
+  limit: number;
+  pages: number;
+  total: number;
+  next: number | null;
+  prev: number | null;
+}
+
+export interface GhostMeta {
+  pagination: GhostPagination;
+}
+
+
+
+export type BrowseResponse<T> = T[] & {
+    meta?: GhostMeta;
+};
+
   export default class GhostContentAPI {
     constructor(options: GhostContentAPIOptions);
 
     posts: {
-      browse(options?: Record<string, unknown>): Promise<GhostPost[]>;
+      browse(options?: Record<string, unknown>): Promise<BrowseResponse<GhostPost>>;
       read(data: { id?: string; slug?: string }, options?: Record<string, unknown>): Promise<GhostPost>;
     };
 
     pages: {
-      browse(options?: Record<string, unknown>): Promise<GhostPage[]>;
+      browse(options?: Record<string, unknown>): Promise<BrowseResponse<GhostPost>>;
       read(data: { id?: string; slug?: string }, options?: Record<string, unknown>): Promise<GhostPage>;
     };
 

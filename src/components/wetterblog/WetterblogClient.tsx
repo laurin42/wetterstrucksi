@@ -8,39 +8,21 @@ import { useUniquePosts } from "@/lib/posts/useUniquePosts";
 import { FaArrowDownLong } from "react-icons/fa6";
 import PostCard from "../posts/PostCard";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { categoryMap } from "@/lib/posts/categoryMap";
 
 type SortOrder = "newest" | "oldest";
 
 interface WetterblogClientProps {
   posts: PostWithMeta[];
+  initialCategories: string[];
 }
 
-const categoryMap: Record<string, string> = {
-  "aktuelles-wetter": "Updates & Warnlage",
-  situation: "Updates & Warnlage",
-  "live-ticker-zu-unwetterlagen": "Updates & Warnlage",
-  warnlage: "Updates & Warnlage",
-  warntrend: "Updates & Warnlage",
-
-  aussichten: "Aussichten",
-  wetteraussichten: "Aussichten",
-  wetterprognose: "Aussichten",
-  "wetter-kurz-und-kompakt": "Aussichten",
-  "monats-aussichten": "Aussichten",
-  mittelfrist: "Aussichten",
-
-  rueckblick: "Rückblick",
-
-  studien: "Wissenschaft",
-  astronomisches: "Wissenschaft",
-  wetter: "Wissenschaft",
-
-  allgemein: "Allgemein",
-  spekulatives: "Allgemein",
-  biowetter: "Allgemein",
-  presseschau: "Allgemein",
-  privates: "Privates",
-};
+interface PostsApiResponse {
+  posts: PostWithMeta[];
+  total: number;
+  page: number;
+  pages: number;
+}
 
 function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
   if (posts.length === 0) {
@@ -64,7 +46,10 @@ function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
 
 const MemoizedVisiblePosts = React.memo(VisiblePosts);
 
-export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
+export const WetterblogClient = ({
+  posts,
+  initialCategories,
+}: WetterblogClientProps) => {
   const allPosts = useUniquePosts(posts);
 
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
@@ -73,78 +58,32 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
   const [visiblePosts, setVisiblePosts] = useState<PostWithMeta[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [totalPostsCount, setTotalPostsCount] = useState(posts.length);
 
   const postsPerLoad = 6;
   const archiveRef = useRef<HTMLDivElement>(null);
 
-  const filteredPosts = useMemo(() => {
-    return allPosts
-      .filter((post) => {
-        const postDate = new Date(post.published_at);
-
-        const matchMonth =
-          selectedMonth !== null
-            ? (postDate.getMonth() + 1).toString() === selectedMonth
-            : true;
-
-        const matchYear =
-          selectedYear !== null
-            ? postDate.getFullYear() === selectedYear
-            : true;
-
-        const matchCategory =
-          selectedCategory !== null
-            ? post.tags?.some(
-                (tag) => categoryMap[tag.slug] === selectedCategory
-              )
-            : true;
-
-        return matchMonth && matchYear && matchCategory;
-      })
-      .sort((a, b) => {
-        const timeA = new Date(a.published_at).getTime();
-        const timeB = new Date(b.published_at).getTime();
-        return sortOrder === "newest" ? timeB - timeA : timeA - timeB;
-      });
-  }, [allPosts, selectedMonth, selectedYear, selectedCategory, sortOrder]);
-
-  const categories = useMemo(() => {
-    const unique = new Set<string>();
-
-    allPosts.forEach((post) => {
-      post.tags?.forEach((tag) => {
-        const group = categoryMap[tag.slug];
-        if (group) {
-          unique.add(group);
-        }
-      });
-    });
-
-    return Array.from(unique);
-  }, [allPosts]);
-
-  useEffect(() => {
-    const initialPosts = filteredPosts.slice(0, postsPerLoad);
-    setVisiblePosts(initialPosts);
-    setCurrentPage(1);
-  }, [filteredPosts]);
+  const categories = initialCategories;
 
   const loadMore = async () => {
-    const nextPosts = filteredPosts.slice(
-      visiblePosts.length,
-      visiblePosts.length + postsPerLoad
-    );
+    const params = new URLSearchParams({
+      page: (currentPage + 1).toString(),
+      limit: postsPerLoad.toString(),
+    });
 
-    let updatedPosts = [...visiblePosts, ...nextPosts];
-
-    if (nextPosts.length < postsPerLoad) {
-      const res = await fetch(
-        `/api/posts?page=${currentPage + 1}&limit=${postsPerLoad}`
-      );
-      const morePosts: PostWithMeta[] = await res.json();
-      updatedPosts = [...updatedPosts, ...morePosts];
+    if (selectedCategory) {
+      params.append("category", selectedCategory);
+    }
+    if (selectedMonth) {
+      params.append("month", selectedMonth);
+    }
+    if (selectedYear) {
+      params.append("year", selectedYear.toString());
     }
 
+    const res = await fetch(`/api/posts?${params.toString()}`);
+    const result: PostsApiResponse = await res.json();
+    let updatedPosts = [...visiblePosts, ...result.posts];
     const dedupedPosts = Array.from(
       new Map(updatedPosts.map((p) => [p.id, p])).values()
     );
@@ -152,6 +91,29 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
     setVisiblePosts(dedupedPosts);
     setCurrentPage((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    const loadFilteredInitialPosts = async () => {
+      const params = new URLSearchParams({
+        page: "1",
+        limit: postsPerLoad.toString(),
+        order:
+          sortOrder === "newest" ? "published_at DESC" : "published_at ASC",
+      });
+      if (selectedCategory) params.append("category", selectedCategory);
+      if (selectedMonth) params.append("month", selectedMonth);
+      if (selectedYear) params.append("year", selectedYear.toString());
+
+      const res = await fetch(`/api/posts?${params.toString()}`);
+      const result: PostsApiResponse = await res.json();
+
+      setVisiblePosts(result.posts);
+      setCurrentPage(1);
+      setTotalPostsCount(result.total);
+    };
+
+    loadFilteredInitialPosts();
+  }, [selectedMonth, selectedYear, selectedCategory, sortOrder]);
 
   return (
     <section
@@ -176,7 +138,7 @@ export const WetterblogClient = ({ posts }: WetterblogClientProps) => {
           <MemoizedVisiblePosts posts={visiblePosts} />
         </div>
 
-        {visiblePosts.length < filteredPosts.length && (
+        {visiblePosts.length < totalPostsCount && (
           <div className="col-span-3 flex justify-center items-center py-6">
             <button
               onClick={loadMore}

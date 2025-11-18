@@ -81,29 +81,25 @@ export const getPostBySlug = cache(async (slug: string) => {
   }
 });
 
-export async function getAllPostsWithTags(tagsToFilter: string | string[], limit =9000): Promise<PostWithMeta[]> {
-  const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
+export async function getAllPostsWithTags(tagsToFilter: string | string[], limit = 9000): Promise<PostWithMeta[]> {
+    const tags = Array.isArray(tagsToFilter) ? tagsToFilter.map(t => t.toLowerCase()) : [tagsToFilter.toLowerCase()];
+    const filterString = `tag:${tags.join('+')}`; 
 
-  try {
-    const allPosts = await api.posts.browse({
-      include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
-      limit: "all",
-      order: "published_at DESC",
-    });
+    try {
+        const posts = await api.posts.browse({
+            include: ["tags", "authors", "feature_image", "og_image", "twitter_image"],
+            limit: limit === 9000 ? "all" : limit, 
+            order: "published_at DESC",
+            filter: filterString, 
+        });
 
-    if (!allPosts) return [];
+        if (!posts) return [];
 
-    const normalized = normalizePosts(allPosts);
-
-    const filtered = normalized
-      .filter(post => post.tags?.some(tag => tags.includes(tag.slug.toLowerCase())))
-      .slice(0, limit);
-
-    return filtered;
-  } catch (error) {
-    console.error(`Error fetching posts for tags: ${tags.join(", ")}`, error);
-    return [];
-  }
+        const normalized = normalizePosts(posts);
+        return normalized;
+    } catch (error) {
+        return [];
+    }
 }
 
 
