@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMotionVariants } from "@/lib/animation/useMotionVariants";
 import { RxReset } from "react-icons/rx";
 
 interface ResetFilterProps {
@@ -23,8 +24,15 @@ export function ResetFilter({
     onCategorySelect(null);
   };
 
+  const { fadeInVariant } = useMotionVariants();
+
   return (
-    <motion.div className="flex">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={fadeInVariant}
+      className="flex"
+    >
       <button
         onClick={handleReset}
         className="text-text-white hover:text-accent-dim pr-3 my-auto cursor-pointer"
