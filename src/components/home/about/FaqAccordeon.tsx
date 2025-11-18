@@ -36,7 +36,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                 className=" py-2"
               >
                 <AccordionTrigger
-                  className="flex items-center bg-accent-dim/44 md:bg-header-background/44 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
+                  className="flex items-center bg-header-background/32 md:bg-header-background/44 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
                   style={{ textDecoration: "none" }}
                 >
                   {item.question}

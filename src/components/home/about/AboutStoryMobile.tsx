@@ -4,7 +4,7 @@ export function AboutStoryMobile() {
   return (
     <section className="max-w-6xl mx-auto pt-8 pb-16 px-8 tablet-xs:mb-8 tablet-xs:p-24 space-y-8 h-auto">
       <ol className="relative border-text/40">
-        <div className="relative flex p-8 text-balance">
+        <div className="relative flex p-8 text-balance text-text text-lg font-thin">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
               2005
@@ -29,7 +29,7 @@ export function AboutStoryMobile() {
           </li>
         </div>
 
-        <div className="relative flex p-8 text-balance">
+        <div className="relative flex p-8 text-text text-lg font-thin text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
               2010
@@ -53,7 +53,7 @@ export function AboutStoryMobile() {
           </li>
         </div>
 
-        <div className="relative flex p-8 text-balance">
+        <div className="relative flex p-8 text-text text-lg font-thin text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
               2016 – 2024
@@ -83,7 +83,7 @@ export function AboutStoryMobile() {
           </li>
         </div>
 
-        <div className="relative flex p-8 text-balance">
+        <div className="relative flex p-8 text-text text-lg font-thin text-balance">
           <li>
             <time className="mb-1 text-sm font-normal leading-none text-text/80">
               Aktuell & Ausblick
@@ -114,7 +114,7 @@ export function AboutStoryMobile() {
           </li>
         </div>
       </ol>
-      <div className="flex relative flex-col w-full justify-center text-center text-lg font-thin items-center text-balance p-8">
+      <div className="flex relative flex-col w-full justify-center text-center text-xl font-thin items-center text-balance p-8">
         <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-accent rounded-xs"></div>
         <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-accent rounded-xs"></div>
         <p className="leading-relaxed">

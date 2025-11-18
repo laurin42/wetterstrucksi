@@ -21,8 +21,8 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
         </div>
 
         <div className="flex flex-col justify-center w-full items-center">
-          <div className="max-w-3xl text-left flex flex-col text-lg font-thin items-start first:items-center last:items-center gap-4">
-            <h2 className="text-4xl font-thin tracking-wider text-text pb-2 mb-8 border-b border-text/40">
+          <div className="max-w-3xl flex flex-col text-left text-text text-lg font-thin items-start first:items-center last:items-center gap-4">
+            <h2 className="text-4xl font-thin tracking-wider pb-2 mb-8 border-b border-text/40">
               Über wetterstrucksi.de
             </h2>
 
