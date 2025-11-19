@@ -29,9 +29,13 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
       <div>
         <Accordion type="single" collapsible>
           {items.map((item, index) => (
-            <AccordionItem value={`item-${index}`} className=" py-2">
+            <AccordionItem
+              value={`item-${index}`}
+              key={`faq-item-${index}`}
+              className="py-2"
+            >
               <AccordionTrigger
-                className="flex items-center bg-header-background/32 md:bg-header-background/44 justify-between text-lg font-medium text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
+                className="flex items-center bg-header-background/32 md:bg-header-background/44 justify-between text-lg font-thin text-text rounded-xl rounded-b-none hover:text-text/80 transition cursor-pointer px-4 py-4 "
                 style={{ textDecoration: "none" }}
               >
                 {item.question}

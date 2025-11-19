@@ -23,7 +23,7 @@ export default function AboutHero() {
             fill
             sizes="100vw 100vh"
             className="object-cover object-center z-0 tablet-xs:rounded-lg opacity-0 animate-fade-in"
-            priority={true}
+            preload={true}
           />
           <div className="absolute inset-0 bg-black/20 tablet-xs:rounded-lg z-10 opacity-0 animate-fade-in" />
           <div className="absolute inset-0 bg-linear-to-t from-black/80 from-0% via-black/50 via-20% to-transparent to-33% z-0 tablet-xs:rounded-lg opacity-0 animate-fade-in" />

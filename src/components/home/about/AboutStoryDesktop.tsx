@@ -53,7 +53,7 @@ const timelineItems: TimelineItem[] = [
 export function AboutStoryDesktop() {
   return (
     <section className="max-w-6xl mx-auto pt-8 pb-8 tablet-xs:mb-8 space-y-8 h-auto">
-      <div className="relative border-text/40 text-lg font-thin">
+      <div className="relative border-text/40 text-md font-thin">
         {timelineItems.map((item, index) => {
           const isStart = item.align === "start";
 
@@ -71,7 +71,7 @@ export function AboutStoryDesktop() {
             >
               <div
                 className={`
-            mt-32 absolute z-0 top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2 pointer-events-none
+            mt-8 absolute z-0 top-0 bottom-24 left-1/2 w-0.5 -translate-x-1/2 pointer-events-none
             ${lineClass}
           `}
               ></div>
