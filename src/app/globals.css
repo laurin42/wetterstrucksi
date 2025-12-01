@@ -26,7 +26,7 @@
   --color-text-white: var(--text-white);
   --color-text-white-transparent: var(--text-white-transparent);
   --color-background-paypal: var(--background-paypal);
-  --bg: var(--background-gradient);
+  --color-background-gradient: var(--background-gradient);
   --animate-shineDiagonal: shineDiagonal 1s linear forwards;
   --color-header-background: var(--header-background);
   --color-footer: var(--footer);

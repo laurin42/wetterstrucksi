@@ -2,6 +2,7 @@
 
 import React, { useState, FormEvent } from "react";
 import { Mail, Send, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -51,16 +52,21 @@ const ContactForm = () => {
     <section className="flex flex-col w-full h-svh md:max-w-4xl mx-auto tablet-xs:pt-8 p-4 rounded-lg">
       <form
         onSubmit={handleSubmit}
-        className="tablet-xs:rounded-lg tablet-xs:shadow-sm shadow-header-background p-8 tablet-xs:border border-white/32 space-y-8"
+        className="tablet-xs:rounded-lg tablet-xs:shadow-sm bg-background-gradient shadow-header-background p-8 tablet-xs:border border-white/32 space-y-8"
       >
         <div className="text-center">
           <div className="flex flex-col justify-center items-center gap-3 mb-3">
-            <Mail className="w-10 h-10 text-accent" />
-            <h1 className="text-3xl font-light text-text">Kontakt aufnehmen</h1>
+            <h1 className="text-4xl font-light text-text flex">
+              <Mail className="w-12 h-12 text-accent" />
+              <span className="border-b-2 border-accent mx-1 mb-3">
+                Kontakt
+              </span>
+            </h1>
           </div>
-          <p className="text-text text-sm md:text-base">
-            Ich freue mich auf deine Nachricht und melde mich schnellstmöglich
-            zurück.
+          <p className="text-text text-md text-left sm:text-base">
+            Ich freue mich über deine Nachricht – sei es eine Frage, Anregung,
+            Lob oder konstruktive Kritik. Melde dich gerne, ich antworte so
+            schnell wie möglich!
           </p>
         </div>
 
@@ -80,7 +86,7 @@ const ContactForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
+              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
             />
           </div>
 
@@ -99,7 +105,7 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
+              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
             />
           </div>
         </div>
@@ -119,37 +125,53 @@ const ContactForm = () => {
             onChange={handleChange}
             required
             rows={5}
-            className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent focus:ring-0 outline-none placeholder:text-text/80"
+            className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
           ></textarea>
         </div>
 
         <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="group cursor-pointer relative inline-flex items-center justify-center w-full tablet-xs:w-3/6
-            py-6 rounded-md bg-foreground-secondary/16 
-            shadow-sm border border-white/32 text-text text-base md:text-lg font-semibold 
-            hover:shadow-none hover:border-transparent hover:bg-transparent active:scale-116
-            transition-all duration-300 ease-in-out overflow-hidden"
-          >
-            <span
-              className="absolute inset-0 flex items-center justify-center 
-              transition-all duration-700 ease-in-out
-              opacity-100 translate-y-0
-              group-hover:opacity-0 group-hover:-translate-y-full"
+          {!isLoading ? (
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="
+                group relative inline-flex items-center justify-center 
+                w-full tablet-xs:w-3/6 py-6 rounded-md 
+                bg-foreground-secondary/16 shadow-sm border border-white/32 
+                text-text text-base md:text-lg font-semibold 
+                hover:shadow-none hover:border-transparent hover:bg-transparent cursor-pointer
+                active:scale-116 transition-all duration-300 ease-in-out overflow-hidden
+              "
             >
-              Abschicken
-            </span>
+              <span
+                className="
+          absolute inset-0 flex items-center justify-center 
+          transition-all duration-700 ease-in-out
+          opacity-100 translate-y-0
+          group-hover:opacity-0 group-hover:-translate-y-full
+        "
+              >
+                Abschicken
+              </span>
 
-            <Send
-              size={40}
-              className="absolute inset-0 m-auto text-header-background
-              opacity-0 translate-y-full
-              transition-all duration-400 ease-in-out
-              group-hover:opacity-100 group-hover:translate-y-0 group-active:scale-108 group-active:shadow-none group-active:border-transparent group-active:bg-transparent"
-            />
-          </button>
+              <Send
+                size={40}
+                className="
+          absolute inset-0 m-auto text-header-background
+          opacity-0 translate-y-full
+          transition-all duration-400 ease-in-out
+          group-hover:opacity-100 
+          group-hover:translate-y-0 
+          group-active:scale-108 
+          group-active:shadow-none 
+          group-active:border-transparent 
+          group-active:bg-transparent
+        "
+              />
+            </button>
+          ) : (
+            <LoadingSpinner />
+          )}
         </div>
 
         {status && (
