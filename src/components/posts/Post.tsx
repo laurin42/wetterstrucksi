@@ -100,12 +100,6 @@ export default function Post({ post }: PostProps) {
         />
         <meta property="og:image" content={metaImage} />
         <meta property="og:image:alt" content={post.title} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          property="fb:app_id"
-          content={process.env.NEXT_PUBLIC_FB_APP_ID || ""}
-        />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
