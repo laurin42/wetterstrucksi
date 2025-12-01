@@ -22,7 +22,21 @@ interface PostsApiResponse {
   pages: number;
 }
 
-function VisiblePosts({ posts }: { posts: PostWithMeta[] }) {
+function VisiblePosts({
+  posts,
+  isLoading,
+}: {
+  posts: PostWithMeta[];
+  isLoading: boolean;
+}) {
+  if (isLoading) {
+    return (
+      <div className="h-svh w-100% flex justify-center items-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   if (posts.length === 0) {
     return (
       <div className="h-svh w-100% flex justify-center items-center">
@@ -55,13 +69,14 @@ export const WetterblogClient = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [totalPostsCount, setTotalPostsCount] = useState(posts.length);
+  const [isLoading, setIsLoading] = useState(false);
 
   const postsPerLoad = 6;
   const archiveRef = useRef<HTMLDivElement>(null);
 
   const categories = initialCategories;
-
   const loadMore = async () => {
+    setIsLoading(true);
     const params = new URLSearchParams({
       page: (currentPage + 1).toString(),
       limit: postsPerLoad.toString(),
@@ -80,10 +95,12 @@ export const WetterblogClient = ({
 
     setVisiblePosts(deduped);
     setCurrentPage((prev) => prev + 1);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     const loadFilteredInitialPosts = async () => {
+      setIsLoading(true);
       const params = new URLSearchParams({
         page: "1",
         limit: postsPerLoad.toString(),
@@ -100,6 +117,7 @@ export const WetterblogClient = ({
       setVisiblePosts(result.posts);
       setCurrentPage(1);
       setTotalPostsCount(result.total);
+      setIsLoading(false);
     };
 
     loadFilteredInitialPosts();
@@ -125,7 +143,7 @@ export const WetterblogClient = ({
 
       <section className="grid grid-cols-1 md:grid-cols-3 bg-foreground-secondary/32 tablet-xs:rounded-md tablet-xs:border-none border-t border-text/16">
         <div className="md:col-span-3 grid grid-cols-1 pt-2 tablet-xs:pt-0">
-          <MemoizedVisiblePosts posts={visiblePosts} />
+          <MemoizedVisiblePosts posts={visiblePosts} isLoading={isLoading} />
         </div>
 
         {visiblePosts.length < totalPostsCount && (
