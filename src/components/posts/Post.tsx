@@ -112,7 +112,7 @@ export default function Post({ post }: PostProps) {
       </Head>
 
       <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-8">
-        <article className="tablet-xs:rounded-lg border border-white/32 bg-foreground-secondary/16 shadow-sm shadow-header-background p-8 max-w-6xl mx-auto text-text">
+        <article className="tablet-xs:rounded-lg border border-white/32 bg-foreground-secondary/64 shadow-sm shadow-header-background p-8 max-w-6xl mx-auto text-text">
           <div className="flex justify-start tablet-xs:mb-16 mb-0">
             <div>
               {formattedDate && (

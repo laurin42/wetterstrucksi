@@ -52,7 +52,7 @@ const ContactForm = () => {
     <section className="flex flex-col w-full h-svh md:max-w-4xl mx-auto tablet-xs:pt-8 p-4 rounded-lg">
       <form
         onSubmit={handleSubmit}
-        className="tablet-xs:rounded-lg tablet-xs:shadow-sm bg-background-gradient shadow-header-background p-8 tablet-xs:border border-white/32 space-y-8"
+        className="rounded-lg shadow-sm bg-foreground-secondary/32 shadow-header-background p-8 border border-white/32 space-y-8"
       >
         <div className="text-center">
           <div className="flex flex-col justify-center items-center gap-3 mb-3">
@@ -86,7 +86,7 @@ const ContactForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
+              className="w-full rounded-md p-4 bg-foreground-secondary border border-text-white/32 focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
             />
           </div>
 
@@ -105,7 +105,7 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
+              className="w-full rounded-md p-4 bg-foreground-secondary border border-text-white/32 focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
             />
           </div>
         </div>
@@ -125,7 +125,7 @@ const ContactForm = () => {
             onChange={handleChange}
             required
             rows={5}
-            className="w-full rounded-md p-4 bg-foreground-secondary/32 border border-transparent focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
+            className="w-full rounded-md p-4 bg-foreground-secondary border border-text-white/32 focus:border-accent/32 focus:ring-0 outline-none placeholder:text-text/80"
           ></textarea>
         </div>
 
