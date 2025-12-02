@@ -35,7 +35,11 @@ export default function Footer() {
           <span className="hidden md:block">|</span>
           <p>
             Webdesign & Umsetzung:{" "}
-            <Link href="https://www.laurinschmidt.dev" target="_blank">
+            <Link
+              href="https://www.laurinschmidt.dev"
+              target="_blank"
+              className="hover:text-accent-dark hover:scale-[1.01] transition-all duration-200"
+            >
               Laurin Schmidt
             </Link>
           </p>
