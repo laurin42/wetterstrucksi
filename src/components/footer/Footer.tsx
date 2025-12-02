@@ -33,7 +33,12 @@ export default function Footer() {
             </Link>{" "}
           </p>
           <span className="hidden md:block">|</span>
-          <p>Webdesign & Umsetzung: Laurin Schmidt</p>
+          <p>
+            Webdesign & Umsetzung:{" "}
+            <Link href="https://www.laurinschmidt.dev" target="_blank">
+              Laurin Schmidt
+            </Link>
+          </p>
         </div>
       </section>
     </footer>
