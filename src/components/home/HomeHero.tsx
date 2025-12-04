@@ -72,10 +72,15 @@ export default function HomeHero({
             className="object-cover object-center z-0 opacity-0 animate-fade-in animation-delay-02"
             priority
           />
+
           <div className="absolute inset-0 bg-black/60 z-10 opacity-0 animate-fade-in animation-delay-02" />
         </>
       )}
-
+      {isVacationTime && (
+        <div className="absolute top-0 tablet:relative block tablet:hidden z-100 w-full">
+          <VacationInfo />
+        </div>
+      )}
       <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto px-8 tablet-xs:px-16 gap-y-8">
         <div className="relative w-full flex flex-col items-center text-center text-4xl landscapeFont tablet-xs:text-5xl font-thin text-white">
           <h1 className="opacity-0 animate-fade-in animation-delay-04">
@@ -85,11 +90,10 @@ export default function HomeHero({
           <h2 className="opacity-0 animate-fade-in animation-delay-08">
             in <em className="font-semibold tracking-wide">Düsseldorf</em>
           </h2>
-        </div>
-
-        <div className="w-full flex flex-col items-center z-0 p-4 opacity-0 animate-fade-in animation-delay-12">
+        </div>{" "}
+        <div className="w-full flex flex-col items-center z-0 p-4 opacity-0 animate-fade-in animation-delay-12 gap-2">
           {isVacationTime && (
-            <div className="mb-6 w-full">
+            <div className="hidden tablet:block z-100 w-full">
               <VacationInfo />
             </div>
           )}

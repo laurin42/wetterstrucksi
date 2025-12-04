@@ -6,7 +6,7 @@ export function useIsVacationTime(): boolean {
     const [isVacation, setIsVacation] = useState(false);
 
     const vacationStartMonth = 11;
-    const vacationStartDay = 5;
+    const vacationStartDay = 10;
     const vacationEndMonth = 0;
     const vacationEndDay = 8;
 

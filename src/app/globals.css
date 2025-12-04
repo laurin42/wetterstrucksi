@@ -143,6 +143,20 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 14s linear infinite;
+}
+
 .animate-bubble {
   animation: floatBubble 4s ease-in-out infinite;
 }
