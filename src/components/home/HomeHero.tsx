@@ -5,6 +5,7 @@ import { NewestPostCard } from "../posts/NewestPostCard";
 import { PostWithMeta } from "@tryghost/content-api";
 import VacationInfo from "./VacationInfo";
 import { weatherCodeToImage } from "@/lib/weatherImages/weatherImages";
+import VacationInfoHeader from "../VacationInfoHeader";
 
 interface HomeHeroProps {
   posts: PostWithMeta[];
@@ -77,8 +78,8 @@ export default function HomeHero({
         </>
       )}
       {isVacationTime && (
-        <div className="absolute top-0 tablet:relative block tablet:hidden z-100 w-full">
-          <VacationInfo />
+        <div className="fixed top-16 tablet:relative block tablet:hidden z-10 w-full">
+          <VacationInfoHeader />
         </div>
       )}
       <div className="max-w-6xl h-full relative flex flex-col tablet:flex-row landscapeView items-center justify-center z-20 mx-auto px-8 tablet-xs:px-16 gap-y-8">

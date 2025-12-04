@@ -7,6 +7,8 @@ import parse, { DOMNode, Element, domToReact } from "html-react-parser";
 import { PostWithMeta } from "@tryghost/content-api";
 import { fixImageUrl } from "@/lib/posts/fixImageUrl";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { useIsVacationTime } from "@/lib/useIsVacationTime";
+import VacationInfoHeader from "@/components/VacationInfoHeader";
 
 interface PostProps {
   post: PostWithMeta;
@@ -14,6 +16,8 @@ interface PostProps {
 
 export default function Post({ post }: PostProps) {
   const [formattedDate, setFormattedDate] = useState("");
+
+  const isVacationTime = useIsVacationTime();
 
   useEffect(() => {
     if (post.published_at) {
@@ -112,8 +116,13 @@ export default function Post({ post }: PostProps) {
       </Head>
 
       <section className="max-w-4xl md:max-w-6xl mx-auto tablet-xs:pt-8">
+        {isVacationTime && (
+          <div className="fixed top-16 w-full">
+            <VacationInfoHeader />
+          </div>
+        )}
         <article className="tablet-xs:rounded-lg border border-white/32 bg-foreground-secondary/64 shadow-sm shadow-header-background p-8 max-w-6xl mx-auto text-text">
-          <div className="flex justify-start tablet-xs:mb-16 mb-0">
+          <div className="flex justify-start tablet-xs:mb-16 mb-0 pt-4">
             <div>
               {formattedDate && (
                 <p className="text-sm font-semibold md:font-thin md:text-lg text-muted-foreground pb-2">
