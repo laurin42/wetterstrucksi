@@ -69,16 +69,14 @@ export function AboutStoryMobile() {
               ich offizieller Wetterexperte bei Antenne Düsseldorf und versorgte
               die Region mit Prognosen.
             </p>
-            <div className="pb-8">
-              <div className="mx-auto mt-2 aspect-video rounded-md max-w-2xl h-5xl md:max-h-3xl">
-                <video
-                  src="/videos/wdrInterview.mp4"
-                  title="Interview WDR"
-                  controls
-                  className="w-full h-full mb-1"
-                />
-                <em>Im Gespräch mit dem WDR</em>
-              </div>
+            <div className="mx-auto mt-2 aspect-video rounded-md max-w-2xl h-5xl md:max-h-3xl">
+              <video
+                src="/videos/wdrInterview.mp4"
+                title="Interview WDR"
+                controls
+                className="w-full h-full mb-1"
+              />
+              <em>Im Gespräch mit dem WDR</em>
             </div>
           </li>
         </div>

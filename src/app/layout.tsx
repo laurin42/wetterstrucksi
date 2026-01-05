@@ -18,16 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="de"
-      className="h-full"
-      data-scroll-behavior="smooth"
-      suppressHydrationWarning
-    >
+    <html lang="de" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="md:bg-background sm:bg-foreground h-full">
+      <body className="md:bg-background sm:bg-foreground min-h-dvh">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

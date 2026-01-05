@@ -17,7 +17,7 @@ interface FaqAccordionProps {
 
 export function FaqAccordion({ items }: FaqAccordionProps) {
   return (
-    <section className="w-full max-w-5xl mx-auto gap-y-4 py-16 px-4 tablet-xs:py-16 tablet-xs:px-16 tablet-xs:rounded-lg border border-white/32 shadow-xs shadow-header-background/16 tablet-xs:shadow-lg">
+    <section className="w-full max-w-5xl mx-auto gap-y-4 py-16 px-4 tablet-xs:py-16 tablet-xs:px-16 tablet-xs:rounded-lg sm:border border-white/32 sm:shadow-xs shadow-header-background/16 tablet-xs:shadow-lg">
       <div className="flex flex-col items-center text-center ">
         <h1 className="w-fit text-3xl text-text font-thin tracking-wider">
           Eure Fragen?
