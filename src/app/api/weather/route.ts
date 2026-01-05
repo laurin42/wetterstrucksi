@@ -4,8 +4,6 @@ let cache: { data: any; timestamp: number } | null = null
 const CACHE_DURATION = 10 * 60 * 10000
 
 export async function GET() {
-    console.log("=== /api/weather GET called ===", new Date().toISOString());
-  console.trace();
   const now = Date.now()
 
   if (cache && now - cache.timestamp < CACHE_DURATION) {

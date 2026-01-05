@@ -15,6 +15,7 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
             alt="Logo Alternative"
             fill
             priority
+            sizes="(max-width: 768px) 250px, 250px"
             className="hidden tablet-xs:block object-contain"
           />
         </div>
