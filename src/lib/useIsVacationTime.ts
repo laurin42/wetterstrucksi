@@ -8,7 +8,7 @@ export function useIsVacationTime(): boolean {
     const vacationStartMonth = 11;
     const vacationStartDay = 10;
     const vacationEndMonth = 0;
-    const vacationEndDay = 8;
+    const vacationEndDay = 4;
 
     useEffect(() => {
         const today = new Date();
