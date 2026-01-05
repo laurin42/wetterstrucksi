@@ -16,7 +16,6 @@ export function AboutShort({ onShowMore }: AboutShortProps) {
             sizes="(max-width: 640px) 14rem, (max-width: 768px) 15rem, (max-width: 1024px) 16rem, 17rem"
             fill
             priority
-            sizes="(max-width: 768px) 250px, 250px"
             className="hidden tablet-xs:block object-contain"
           />
         </div>
